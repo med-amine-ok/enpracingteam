@@ -115,6 +115,7 @@ class AlumniProfile(models.Model):
 # ---------- Organization ----------
 
 class Role(models.Model):
+    code = models.SlugField(max_length=100, unique=True, null=True, blank=True)
     name = models.CharField(max_length=150)
     role_type = models.CharField(max_length=30, choices=MemberRoleType.choices)
     scope = models.CharField(max_length=20, choices=RoleScope.choices)
@@ -132,6 +133,7 @@ class Role(models.Model):
 
 
 class OrgUnit(models.Model):
+    code = models.SlugField(max_length=100, unique=True, null=True, blank=True)
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=30, choices=OrgUnitType.choices)
     parent = models.ForeignKey(
