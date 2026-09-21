@@ -25,9 +25,10 @@ class MembershipSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
+    memberships = MembershipSerializer(many=True, read_only=True)
     class Meta:
         model = Member
-        fields = ["id", "first_name", "last_name", "email", "phone", "skill", "status", "join_date"]
+        fields = ["id", "first_name", "last_name", "email", "phone", "facebook_url", "skill", "status", "join_date"]
         read_only_fields = ["id"]
 
 
@@ -43,26 +44,10 @@ class MemberCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Member
-        fields = ["id", "first_name", "last_name", "email", "phone", "skill",
+        fields = ["id", "first_name", "last_name", "email", "phone", "facebook_url", "skill",
                   "status", "join_date", "password"]
         read_only_fields = ["id"]
 
     def create(self, validated_data):
         password = validated_data.pop("password")
         return Member.objects.create_user(password=password, **validated_data)
-
-class BureauMembershipSerializer(serializers.ModelSerializer):
-    org_unit = serializers.CharField(source="org_unit.name")
-    role = serializers.CharField(source="role.name")
-
-    class Meta:
-        model = Membership
-        fields = ["org_unit", "role"]
-
-
-class BureauMemberSerializer(serializers.ModelSerializer):
-    bureau_memberships = BureauMembershipSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Member
-        fields = ["id", "first_name", "last_name", "email", "bureau_memberships"]

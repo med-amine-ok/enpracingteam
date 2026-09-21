@@ -65,10 +65,12 @@ class MemberManager(BaseUserManager):
 
 
 class Member(AbstractBaseUser, PermissionsMixin):
+    code = models.SlugField(max_length=100, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=50, blank=True)
+    facebook_url = models.URLField(max_length=500, blank=True)
     skill = models.CharField(max_length=255, blank=True)
     status = models.CharField(
         max_length=20, choices=MemberStatus.choices, default=MemberStatus.ACTIVE
@@ -123,11 +125,6 @@ class Role(models.Model):
     can_be_project_manager = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    @property
-    def in_executive_bureau(self):
-        """Derived from role_type: admin and head_of_department are bureau members."""
-        return self.role_type in (MemberRoleType.ADMIN, MemberRoleType.HEAD_OF_DEPARTMENT)
-
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=["name", "scope"], name="uq_role_name_scope"),
@@ -159,6 +156,16 @@ class OrgUnit(models.Model):
 
     def __str__(self):
         return self.name
+    def descendant_ids(self):
+        """This unit's id plus the ids of every unit below it in the tree."""
+        ids = [self.pk]
+        frontier = [self.pk]
+        while frontier:
+            frontier = list(
+                OrgUnit.objects.filter(parent_id__in=frontier).values_list("pk", flat=True)
+            )
+            ids.extend(frontier)
+        return ids
 
 
 class Membership(models.Model):

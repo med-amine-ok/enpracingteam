@@ -1,14 +1,12 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from django.db.models import Prefetch
+
 from .models import Member, Membership, OrgUnit
 
 from .serializers import (
     MemberCreateSerializer,
     MemberDetailSerializer,
-    MemberSerializer,
     OrgUnitSerializer,
-    BureauMemberSerializer ,
 )
 
 
@@ -29,10 +27,16 @@ class MeView(generics.RetrieveAPIView):
 
 
 class MemberListCreateView(generics.ListCreateAPIView):
-    queryset = Member.objects.order_by("last_name", "first_name")
+    queryset = (
+        Member.objects
+        .prefetch_related("memberships__role", "memberships__org_unit")
+        .order_by("last_name", "first_name")
+    )
 
     def get_serializer_class(self):
-        return MemberCreateSerializer if self.request.method == "POST" else MemberSerializer
+        if self.request.method == "POST":
+            return MemberCreateSerializer
+        return MemberDetailSerializer
 
     def get_permissions(self):
         # Any logged-in member can list. Only staff can create.
@@ -40,19 +44,35 @@ class MemberListCreateView(generics.ListCreateAPIView):
             return [IsAdminUser()]
         return [IsAuthenticated()]
 
+
+class MemberDetailView(generics.RetrieveAPIView):
+    queryset = (
+        Member.objects
+        .prefetch_related(
+            "memberships__role",
+            "memberships__org_unit",
+        )
+    )
+    serializer_class = MemberDetailSerializer
+    permission_classes = [IsAuthenticated]
+
+
 class ExecutiveBureauView(generics.ListAPIView):
-    """Everyone holding an active membership in a bureau role."""
-    serializer_class = BureauMemberSerializer
+    """Members with an explicit active membership in the Executive Bureau org unit."""
+    serializer_class = MemberDetailSerializer
     pagination_class = None
 
     def get_queryset(self):
-        active = Membership.objects.filter(
-            end_date__isnull=True,
-            role__role_type__in=["admin", "head_of_department"],
-        ).select_related("role", "org_unit")
+        bureau = OrgUnit.objects.filter(code="executive-bureau").first()
+        if bureau is None:
+            return Member.objects.none()
         return (
-            Member.objects.filter(memberships__in=active)
+            Member.objects
+            .filter(
+                memberships__org_unit=bureau,
+                memberships__end_date__isnull=True,
+            )
             .distinct()
-            .prefetch_related(Prefetch("memberships", queryset=active, to_attr="bureau_memberships"))
+            .prefetch_related("memberships__role", "memberships__org_unit")
             .order_by("last_name", "first_name")
         )
