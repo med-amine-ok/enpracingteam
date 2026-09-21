@@ -24,8 +24,8 @@ def role(code, name, scope, role_type, leadership=False, pm=False, aliases=()):
 # ------------------------------------------------------------------
 ROLES = [
     # --- Governing bodies (admins; refine titles when known) ---
-    role("board-member", "Board Member", CLUB, ADMIN, leadership=True),
-    role("executive-bureau-member", "Executive Bureau Member", CLUB, ADMIN, leadership=True),
+    role("board-member", "Board Member", CLUB, ADMIN, leadership=True), # generic membre de conseil d administration 
+    role("executive-bureau-member", "Executive Bureau Member", CLUB, ADMIN, leadership=True), # generic membre bureau executifs 
 
     # --- Club departments: leadership ---
     role("project-manager", "Project Manager", CLUB, HEAD, leadership=True, pm=True),
@@ -56,7 +56,7 @@ ROLES = [
 
     # --- Formula Student technical departments: leadership ---
     role("fs-lead", "Lead", FS, HEAD, leadership=True),  # generic
-    role("suspension-steering-lead-engineer", "Suspension & Steering Lead Engineer", FS, HEAD,leadership=True),
+    role("suspension-steering-lead-engineer", "Suspension & Steering Lead Engineer", FS, HEAD, leadership=True),
     role("chassis-ergonomics-lead-engineer", "Chassis & Ergonomics Lead Engineer", FS, HEAD, leadership=True),
     role("powertrain-lead-engineer", "Powertrain Lead Engineer", FS, HEAD, leadership=True),
     role("aerodynamics-lead-engineer", "Aerodynamics Lead Engineer", FS, HEAD, leadership=True),
@@ -71,7 +71,8 @@ ROLES = [
     role("electronics-engineer", "Electronics Engineer", FS, MEMBER),
 ]
 
-FIELDS = ["code", "name", "scope", "role_type", "is_leadership", "can_be_project_manager"]
+FIELDS = ["code", "name", "scope", "role_type", "is_leadership",
+          "can_be_project_manager"]
 
 
 class Command(BaseCommand):

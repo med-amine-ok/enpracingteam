@@ -123,6 +123,11 @@ class Role(models.Model):
     can_be_project_manager = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def in_executive_bureau(self):
+        """Derived from role_type: admin and head_of_department are bureau members."""
+        return self.role_type in (MemberRoleType.ADMIN, MemberRoleType.HEAD_OF_DEPARTMENT)
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=["name", "scope"], name="uq_role_name_scope"),
