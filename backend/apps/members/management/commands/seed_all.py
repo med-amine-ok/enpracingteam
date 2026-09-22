@@ -5,7 +5,7 @@ from django.db.models import Count, Q
 
 from apps.members.models import Member, MemberRoleType, Membership, OrgUnit, Role
 
-SEEDS = ["seed_org_units", "seed_roles", "seed_members"]
+SEEDS = ["seed_org_units", "seed_roles", "seed_members", "sync_group"]
 
 
 class Command(BaseCommand):

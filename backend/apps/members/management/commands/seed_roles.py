@@ -24,8 +24,8 @@ def role(code, name, scope, role_type, leadership=False, pm=False, aliases=()):
 # ------------------------------------------------------------------
 ROLES = [
     # --- Governing bodies (admins; refine titles when known) ---
-    role("board-member", "Board Member", CLUB, ADMIN, leadership=True), # generic membre de conseil d administration 
-    role("executive-bureau-member", "Executive Bureau Member", CLUB, ADMIN, leadership=True), # generic membre bureau executifs 
+    role("board-member", "Board Member", CLUB, ADMIN, leadership=True), # membre de conseil d administration 
+    role("executive-bureau-member", "Executive Bureau Member", CLUB, ADMIN, leadership=True), # membre bureau executifs 
 
     # --- Club departments: leadership ---
     role("project-manager", "Project Manager", CLUB, HEAD, leadership=True, pm=True),
@@ -35,7 +35,6 @@ ROLES = [
     role("operations-lead", "Operations Lead", CLUB, HEAD, leadership=True),
     role("lead-journalist", "Lead Journalist", CLUB, HEAD, leadership=True),
     role("head-of-production", "Head of Production", CLUB, HEAD, leadership=True),
-    role("club-head", "Head", CLUB, HEAD, leadership=True),  # generic
 
     # --- Club departments: functional titles ---
     role("training-coordinator", "Training Coordinator", CLUB, MEMBER,
@@ -46,7 +45,7 @@ ROLES = [
     role("logistics-coordinator", "Logistics Coordinator", CLUB, MEMBER),
     role("business-projects-member", "Business Projects Member", CLUB, MEMBER,
          aliases=["Buisness projects Member ", "Buisness projects Member"]),
-    role("club-member", "Member", CLUB, MEMBER),  # generic
+
 
     # --- Formula Student team leadership ---
     role("team-lead", "Team Lead", FS, ADMIN, leadership=True),
@@ -55,7 +54,6 @@ ROLES = [
     role("team-manager", "Team Manager", FS, ADMIN, leadership=True),
 
     # --- Formula Student technical departments: leadership ---
-    role("fs-lead", "Lead", FS, HEAD, leadership=True),  # generic
     role("suspension-steering-lead-engineer", "Suspension & Steering Lead Engineer", FS, HEAD, leadership=True),
     role("chassis-ergonomics-lead-engineer", "Chassis & Ergonomics Lead Engineer", FS, HEAD, leadership=True),
     role("powertrain-lead-engineer", "Powertrain Lead Engineer", FS, HEAD, leadership=True),
@@ -63,7 +61,6 @@ ROLES = [
     role("electronics-lead-engineer", "Electronics Lead Engineer", FS, HEAD, leadership=True),
 
     # --- Formula Student technical departments: members ---
-    role("fs-member", "Member", FS, MEMBER),  # generic
     role("suspension-steering-engineer", "Suspension & Steering Engineer", FS, MEMBER),
     role("chassis-ergonomics-engineer", "Chassis & Ergonomics Engineer", FS, MEMBER),
     role("powertrain-engineer", "Powertrain Engineer", FS, MEMBER),

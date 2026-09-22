@@ -106,7 +106,7 @@ class OrgUnitFilter(admin.SimpleListFilter):
 class MembershipAdmin(admin.ModelAdmin):
     list_display = ("member", "org_unit", "role", "role_type", "scope", "member_level",
                     "is_primary", "start_date", "end_date")
-    list_filter = (OrgUnitFilter, "role", "role__role_type", "role__scope", "member_level", "is_primary")
+    list_filter = (OrgUnitFilter, "role__role_type", "role__scope", "role", "member_level", "is_primary")
     search_fields = ("member__email", "member__first_name", "member__last_name")
     autocomplete_fields = ("member", "org_unit", "role")
     list_select_related = ("member", "org_unit", "role")
@@ -118,6 +118,17 @@ class MembershipAdmin(admin.ModelAdmin):
     @admin.display(description="Scope")
     def scope(self, obj):
         return obj.role.scope
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser or request.user.groups.filter(name="Admins").exists():
+            return qs
+        if request.user.groups.filter(name="Department Heads").exists():
+            unit_ids = request.user.memberships.filter(
+                end_date__isnull=True, role__role_type="head_of_department"
+            ).values_list("org_unit_id", flat=True)
+            return qs.filter(org_unit_id__in=unit_ids)
+        return qs.none()
 
 
 @admin.register(AlumniProfile)
