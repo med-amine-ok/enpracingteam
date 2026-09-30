@@ -34,12 +34,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "corsheaders",
     "rest_framework",
     "apps.members",
     "apps.projects",
     "apps.subsystems",
     "apps.tasks",
+    "apps.communication",
+    "apps.documents",
+    "apps.purchasing",
+    "apps.inventory",
+    "apps.equipment",
+    "apps.finance",
+    "apps.reporting",
+    "apps.telemetry",
 ]
 
 
