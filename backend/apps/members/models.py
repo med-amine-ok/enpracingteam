@@ -176,6 +176,11 @@ class Membership(models.Model):
         OrgUnit, on_delete=models.PROTECT, related_name="memberships"
     )
     role = models.ForeignKey(Role, on_delete=models.PROTECT, related_name="memberships")
+    # Optional "home" subsystem. Detailed assignments live in subsystems.MemberSubsystem.
+    subsystem = models.ForeignKey(
+        "subsystems.Subsystem", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="memberships",
+    )
     # 'main' / 'junior' for regular members, NULL for leadership roles (checked in Django later).
     member_level = models.CharField(
         max_length=10, choices=MemberLevel.choices, null=True, blank=True
