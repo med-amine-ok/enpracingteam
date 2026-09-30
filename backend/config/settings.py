@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "apps.members",
     "apps.projects",
     "apps.subsystems",
+    "apps.tasks",
 ]
 
 
