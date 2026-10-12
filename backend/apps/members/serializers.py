@@ -25,7 +25,6 @@ class MembershipSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    memberships = MembershipSerializer(many=True, read_only=True)
     class Meta:
         model = Member
         fields = ["id", "first_name", "last_name", "email", "phone", "facebook_url", "skill", "status", "join_date"]

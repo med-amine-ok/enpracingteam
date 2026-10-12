@@ -10,3 +10,4 @@ class StockItemAdmin(admin.ModelAdmin):
 class StockMovementAdmin(admin.ModelAdmin):
     list_display = ("stock_item", "movement_type", "quantity", "moved_by", "moved_at")
     list_filter = ("movement_type",)
+    
