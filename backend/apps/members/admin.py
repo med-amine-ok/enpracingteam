@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import (AlumniProfile, Member, MemberRoleType, Membership,
+from .models import (AlumniProfile, LoginOTP, Member, MemberRoleType, Membership,
                      OrgUnit, OrgUnitType, Role, RoleScope)
 
 
@@ -134,3 +134,30 @@ class MembershipAdmin(admin.ModelAdmin):
 @admin.register(AlumniProfile)
 class AlumniProfileAdmin(admin.ModelAdmin):
     list_display = ("member", "graduation_year", "current_company", "willing_to_mentor")
+
+
+@admin.register(LoginOTP)
+class LoginOTPAdmin(admin.ModelAdmin):
+    """Read-only view of OTP history for ops/debugging."""
+    list_display = ("member", "created_at", "expires_at", "attempts", "_status", "requested_ip")
+    list_filter = ("created_at",)
+    search_fields = ("member__email", "member__first_name", "member__last_name")
+    readonly_fields = ("member", "code_hash", "created_at", "expires_at", "attempts",
+                       "used_at", "requested_ip")
+    list_select_related = ("member",)
+    ordering = ("-created_at",)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    @admin.display(description="Status")
+    def _status(self, obj):
+        if obj.used_at:
+            return "Used"
+        from django.utils import timezone
+        if timezone.now() > obj.expires_at:
+            return "Expired"
+        return "Pending"
