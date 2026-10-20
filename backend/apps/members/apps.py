@@ -7,4 +7,4 @@ class MembersConfig(AppConfig):
     label = "members"
 
     def ready(self):
-        pass
+        import apps.members.signals  # noqa: F401 — register signal handlers

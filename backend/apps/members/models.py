@@ -1,8 +1,66 @@
+import hashlib
+import hmac
+import secrets
+from datetime import timedelta
+
+from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.db.models import F, Q
+from django.utils import timezone
 
+class LoginOTP(models.Model):
+    """One row per OTP sent. The plaintext code is never stored, only an HMAC digest."""
+    member = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="login_otps")
+    code_hash = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    attempts = models.PositiveSmallIntegerField(default=0)
+    used_at = models.DateTimeField(null=True, blank=True)
+    requested_ip = models.GenericIPAddressField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["member", "-created_at"], name="idx_login_otp_member_created"),
+        ]
+
+    def __str__(self):
+        return f"OTP for member_id={self.member_id} ({'used' if self.used_at else 'pending'})"
+
+    @staticmethod
+    def _hash(code: str) -> str:
+        # HMAC keyed with SECRET_KEY: a DB leak alone doesn't let an attacker
+        # brute-force codes offline without also having the app secret.
+        return hmac.new(settings.SECRET_KEY.encode(), code.encode(), hashlib.sha256).hexdigest()
+
+    @classmethod
+    def generate_code(cls) -> str:
+        # secrets.randbelow is CSPRNG-backed (not random.randint).
+        n = secrets.randbelow(10 ** settings.OTP_LENGTH)
+        return str(n).zfill(settings.OTP_LENGTH)
+
+    @classmethod
+    def issue(cls, member, ip=None):
+        code = cls.generate_code()
+        otp = cls.objects.create(
+            member=member,
+            code_hash=cls._hash(code),
+            expires_at=timezone.now() + timedelta(seconds=settings.OTP_TTL_SECONDS),
+            requested_ip=ip,
+        )
+        return otp, code
+
+    def is_valid(self) -> bool:
+        return (
+            self.used_at is None
+            and timezone.now() < self.expires_at
+            and self.attempts < settings.OTP_MAX_ATTEMPTS
+        )
+
+    def check_code(self, code: str) -> bool:
+        # Constant-time comparison: prevents timing attacks revealing partial matches.
+        return hmac.compare_digest(self.code_hash, self._hash(code))
 
 # ---------- Enums (PostgreSQL ENUM types become TextChoices) ----------
 

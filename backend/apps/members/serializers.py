@@ -25,7 +25,6 @@ class MembershipSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    memberships = MembershipSerializer(many=True, read_only=True)
     class Meta:
         model = Member
         fields = ["id", "first_name", "last_name", "email", "phone", "facebook_url", "skill", "status", "join_date"]
@@ -40,14 +39,17 @@ class MemberDetailSerializer(MemberSerializer):
 
 
 class MemberCreateSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, min_length=8)
+    """
+    Admin-only serializer for invite-only member creation.
+    No password field — members authenticate exclusively via email OTP.
+    """
 
     class Meta:
         model = Member
         fields = ["id", "first_name", "last_name", "email", "phone", "facebook_url", "skill",
-                  "status", "join_date", "password"]
+                  "status", "join_date"]
         read_only_fields = ["id"]
 
     def create(self, validated_data):
-        password = validated_data.pop("password")
-        return Member.objects.create_user(password=password, **validated_data)
+        # password=None gives an unusable password — login is OTP-only.
+        return Member.objects.create_user(password=None, **validated_data)

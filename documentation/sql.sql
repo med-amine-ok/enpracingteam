@@ -2,7 +2,7 @@ Project ERP_FSAE {
   database_type: 'PostgreSQL'
   Note: '''
     Full ERP schema - Information Systems Department - ENP Racing Team (FSAE Club)
-    Covers all 8 official modules (see charte 2026/2027 + Systeme d'Information PDF)
+    Covers all 8 official modules (see charte 2026/2027 + Systeme d Information PDF)
     + purchasing/supplier data modeled from the real subcontracting sheet.
   '''
 }
@@ -12,7 +12,8 @@ Project ERP_FSAE {
 // ======================================================
 
 // Global permission level. "Head of Department" scope is defined
-// by the member's department_id — a head only manages their own dept.
+// by the member's department_id — a head only manages their own dept.'''
+
 Enum member_role {
   admin              // Bureau Executif / full system access
   head_of_department  // Chef de Departement / Chef de Projet — manages their dept
@@ -24,7 +25,7 @@ Enum department_name {
   projet                          // Departement Projet (Formula Student + competition project)
   formation_industrie              // Departement Formation & Industrie
   medias_journalisme_scientifique  // Departement Medias & Journalisme Scientifique
-  systemes_information             // Departement Systemes d'Information
+  systemes_information             // Departement Systemes d Information
   business_innovation              // Departement Business & Innovation
   operations_partenariats          // Departement Operations & Partenariats
 }
@@ -145,7 +146,7 @@ Table member {
   created_at timestamp
 
   Note: '''
-    A member's real-world authority is role + department_id together:
+    A member s real-world authority is role + department_id together:
     a head_of_department only has elevated rights inside their own department.
     RLS policies key off this pair.
   '''
