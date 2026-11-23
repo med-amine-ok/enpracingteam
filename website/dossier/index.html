@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ENP Racing Team — Sponsorship deck 2026-27</title>
+<!--
+  Source of public/enp-racing-team-sponsorship-deck.pdf
+  Regenerate: open in Chrome → Print → Save as PDF (A4, margins none, background graphics on),
+  or any headless Chrome "page.pdf({ format: 'A4', printBackground: true })".
+-->
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@700;800;900&family=Big+Shoulders+Stencil:wght@900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  :root { --red:#e1251b; --paper:#ece8df; --carbon:#0b0b0c; --c1:#121214; --muted:#9a978f; --line:rgba(236,232,223,.13); --green:#1fb25a; }
+  html, body { margin: 0; background: var(--carbon); color: var(--paper); font-family: 'Instrument Sans', sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 16mm 15mm; background: var(--carbon); }
+  .page:last-child { page-break-after: auto; }
+  h1, h2, h3 { font-family: 'Big Shoulders', sans-serif; text-transform: uppercase; margin: 0; line-height: .94; font-weight: 900; }
+  p { margin: 0; }
+  .mono { font-family: 'IBM Plex Mono', monospace; font-size: 8pt; color: var(--muted); }
+  .code { display: inline-block; background: var(--red); color: #fff; font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 7.5pt; padding: 1mm 1.6mm; margin-right: 2.5mm; }
+  .kerb { position: absolute; left: 0; right: 0; top: 0; height: 3mm; background: repeating-linear-gradient(90deg, var(--red) 0 12mm, var(--paper) 12mm 24mm); }
+  .bar { display: flex; align-items: center; padding-bottom: 3mm; border-bottom: 1px solid var(--line); margin-top: 6mm; }
+  .bar .ruler { flex: 1; height: 2.5mm; margin-left: 4mm; background: repeating-linear-gradient(90deg, rgba(236,232,223,.3) 0 1px, transparent 1px 2mm); align-self: flex-end; margin-bottom: -3mm; }
+  .bar .meta { margin-left: 4mm; }
+  .title { font-size: 44pt; margin: 8mm 0 6mm; }
+  .lead { font-size: 11.5pt; line-height: 1.55; color: rgba(236,232,223,.85); }
+  .foot { position: absolute; left: 15mm; right: 15mm; bottom: 9mm; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 3mm; }
+  .img { background: center / cover; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7mm), calc(100% - 7mm) 100%, 0 100%); }
+  .plate { background: var(--c1); border: 1px solid var(--line); padding: 5mm; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .stencil { font-family: 'Big Shoulders Stencil', sans-serif; font-weight: 900; line-height: .9; }
+  ul.list { list-style: none; margin: 0; padding: 0; }
+  ul.list li { display: grid; grid-template-columns: 5mm 1fr; gap: 3mm; padding: 2.6mm 0; border-bottom: 1px solid var(--line); font-size: 9.8pt; line-height: 1.4; }
+  ul.list li::before { content: ""; width: 3mm; height: 3mm; margin-top: 1mm; border: 1px solid rgba(236,232,223,.35); background: var(--green); background-clip: content-box; padding: .6mm; }
+
+  .cover { padding: 0; }
+  .cover .photo { position: absolute; inset: 0; background: url('../public/images/car-unveil.jpg') 60% 66% / cover; filter: brightness(.6) saturate(1.05); }
+  .cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,.92) 0%, rgba(11,11,12,.15) 34%, rgba(11,11,12,.2) 52%, rgba(11,11,12,.97) 80%); }
+  .cover .top { position: absolute; left: 15mm; right: 15mm; top: 15mm; display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover .top img { width: 32mm; }
+  .cover .bottom { position: absolute; left: 15mm; right: 15mm; bottom: 20mm; }
+  .cover h1 { font-size: 76pt; line-height: .9; }
+  .cover h1 em { font-style: normal; color: var(--red); }
+  .cover .sub { margin-top: 7mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; }
+  .cover .sub p { max-width: 100mm; font-size: 11pt; line-height: 1.5; color: rgba(236,232,223,.85); }
+  .badge { background: var(--paper); color: var(--carbon); padding: 2.5mm 4mm; font-family: 'Big Shoulders'; font-weight: 800; text-transform: uppercase; font-size: 11pt; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5mm), calc(100% - 2.5mm) 100%, 0 100%); white-space: nowrap; }
+  .cover .kerb { top: auto; bottom: 0; }
+
+  .numbers { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); margin-top: 8mm; }
+  .numbers div { padding: 4mm; border-right: 1px solid var(--line); }
+  .numbers div:last-child { border-right: 0; }
+  .numbers b { display: block; font-size: 36pt; }
+  .numbers b i { font-style: normal; color: var(--red); font-family: 'Big Shoulders'; font-size: .45em; vertical-align: top; }
+  .numbers span { display: block; font-size: 8pt; color: var(--muted); margin-top: 1.5mm; line-height: 1.35; }
+  .punch { font-family: 'Big Shoulders'; font-weight: 900; font-style: italic; text-transform: uppercase; font-size: 30pt; color: var(--red); margin-top: 8mm; }
+
+  .specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 7mm; }
+  .specs div { background: var(--c1); padding: 5mm 4mm; }
+  .specs b { display: block; font-size: 34pt; margin-top: 1mm; }
+  .specs b small { font-family: 'IBM Plex Mono'; font-size: 9pt; color: var(--red); margin-left: 1.5mm; }
+
+  .award { background: linear-gradient(160deg, #f1ede4, #d9d3c5); color: var(--carbon); padding: 6mm 7mm; margin-top: 6mm; }
+  .award b { display: block; font-family: 'Big Shoulders'; font-weight: 900; text-transform: uppercase; font-size: 24pt; line-height: .92; margin-top: 2mm; }
+  .award .rule { width: 16mm; height: 1mm; background: var(--red); margin: 4mm 0 3mm; }
+  .scores div { display: grid; grid-template-columns: 8mm 1fr auto; align-items: center; padding: 3mm 0; border-bottom: 1px solid var(--line); font-size: 10pt; }
+  .scores div span:first-child { font-family: 'IBM Plex Mono'; color: var(--red); font-size: 8pt; }
+  .scores b { font-size: 20pt; }
+
+  .proj { border: 1px solid var(--line); border-top: 1.2mm solid var(--c); background: var(--c1); padding: 5mm; margin-bottom: 5mm; display: grid; grid-template-columns: 34mm 1fr; gap: 5mm; }
+  .proj .stencil { font-size: 44pt; color: transparent; -webkit-text-stroke: 1px var(--c); margin-top: 2mm; }
+  .proj h3 { font-size: 18pt; margin: 2mm 0 2mm; }
+  .proj p { font-size: 9.5pt; line-height: 1.5; color: #b9b6ad; }
+  .proj .st { display: inline-block; font-family: 'IBM Plex Mono'; font-size: 7.5pt; border: 1px solid var(--c); color: var(--c); padding: .6mm 1.6mm; }
+
+  .org ul { margin: 3mm 0 0; padding: 0; }
+  .org li { display: flex; justify-content: space-between; padding: 2.3mm 0; border-bottom: 1px solid var(--line); font-size: 9.3pt; list-style: none; }
+  .org li span { color: var(--muted); }
+  .five { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 2.5mm; margin-top: 5mm; }
+  .five .plate { padding: 3.5mm 3mm; }
+  .five h3 { font-size: 11pt; margin: 1.5mm 0 1mm; }
+  .five p { font-size: 7.6pt; color: #b9b6ad; line-height: 1.35; }
+
+  .tiers { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 2.5mm; margin-top: 6mm; }
+  .tier { border-top: 2.5px solid var(--paper); padding: 3mm 2.5mm; position: relative; }
+  .tier::before, .tier::after { content: ""; position: absolute; top: -2.5px; width: 2.5px; height: 9mm; background: var(--paper); }
+  .tier::before { left: 0; } .tier::after { right: 0; }
+  .tier .stencil { font-size: 22pt; color: var(--a); }
+  .tier h3 { font-size: 12pt; margin: 1mm 0 2mm; }
+  .tier ul { margin: 0; padding: 0; }
+  .tier li { font-size: 7.5pt; color: #c9c6bd; line-height: 1.35; padding: 1mm 0; list-style: none; }
+  .contact { margin-top: 6mm; background: var(--paper); color: var(--carbon); padding: 6mm 7mm; }
+  .contact h3 { font-size: 26pt; }
+  .contact .rows div { display: flex; justify-content: space-between; padding: 2.4mm 0; border-bottom: 1px solid rgba(0,0,0,.15); font-size: 10pt; }
+  .contact .rows .mono { color: #6b6860; }
+</style>
+</head>
+<body>
+
+<!-- 1 · COVER -->
+<section class="page cover">
+  <div class="photo"></div><div class="shade"></div>
+  <div class="top">
+    <img src="../public/brand/logo-light-ink.png" alt="ENP Racing Team">
+    <div class="mono" style="text-align:right">Sponsorship deck<br><span style="color:var(--red)">Season 2026 — 27</span></div>
+  </div>
+  <div class="bottom">
+    <div class="mono"><span class="code">GRID</span>Formula Student UK · Silverstone</div>
+    <h1 style="margin-top:5mm">From Algeria<br>to <em>Silverstone</em></h1>
+    <div class="sub">
+      <p>The first Formula Student single-seater from North Africa, designed, built and raced by the students of the National Polytechnic School of Algiers.</p>
+      <div class="badge">Best Newcomer · FS UK 2026</div>
+    </div>
+  </div>
+  <div class="kerb"></div>
+</section>
+
+<!-- 2 · FORMULA STUDENT + WHO WE ARE -->
+<section class="page">
+  <div class="kerb"></div>
+  <div class="bar mono"><span class="code">S01</span>Formula Student<span class="ruler"></span><span class="meta">IMechE · Silverstone</span></div>
+  <h2 class="title">What is Formula Student?</h2>
+  <p class="lead">Organised by the Institution of Mechanical Engineers and held every year at the Silverstone Circuit, Formula Student is an international engineering competition. University students take on the challenge of creating their own race cars, from the first design to the final race.</p>
+  <p class="lead" style="margin-top:3mm">It is not just about building a fast car. It is about engineering, teamwork and problem-solving, and about putting everything you have learned into practice.</p>
+  <div class="punch">This is where we come in.</div>
+
+  <div class="bar mono" style="margin-top:10mm"><span class="code">S02</span>Who we are<span class="ruler"></span><span class="meta">ENP Algiers</span></div>
+  <h2 class="title" style="font-size:36pt">One club, seventy engineers</h2>
+  <div class="grid2">
+    <p class="lead" style="font-size:10.5pt">We are the ENP Racing Team, an engineering club of 70 members at the National Polytechnic School of Algiers. The team brings together students from different engineering fields who share one goal: working together on technical projects, taking part in competitions and developing new ideas.</p>
+    <p class="lead" style="font-size:10.5pt">We started as a Formula Student team, and we became the first team from North Africa to present its own single-seater. Today we also race in electric and underwater robotics competitions.</p>
+  </div>
+  <div class="numbers">
+    <div><b class="stencil">70</b><span>Team members</span></div>
+    <div><b class="stencil">3</b><span>International competitions</span></div>
+    <div><b class="stencil">1<i>st</i></b><span>Algerian team at Formula Student UK</span></div>
+    <div><b class="stencil">80<i>%</i></b><span>Technical scrutineering reached</span></div>
+  </div>
+  <div class="foot mono"><span>ENP Racing Team</span><span>02</span></div>
+</section>
+
+<!-- 3 · THE CAR -->
+<section class="page">
+  <div class="kerb"></div>
+  <div class="bar mono"><span class="code">S03</span>Our racing car<span class="ruler"></span><span class="meta">FS UK 2026</span></div>
+  <h2 class="title">Car #19.<br>Built to race.</h2>
+  <p class="lead">Our first single-seater, designed and manufactured in Algeria, and raced at Silverstone in July 2026.</p>
+  <div class="img" style="height:92mm;margin-top:7mm;background-image:url('../public/images/car-unveil.jpg');background-position:60% 78%"></div>
+  <div class="specs">
+    <div><span class="mono">0–100 km/h</span><b class="stencil">5<small>s</small></b></div>
+    <div><span class="mono">Top speed</span><b class="stencil">200<small>km/h</small></b></div>
+    <div><span class="mono">Weight</span><b class="stencil">314<small>kg</small></b></div>
+    <div><span class="mono">Power</span><b class="stencil">92<small>hp</small></b></div>
+    <div><span class="mono">Torque</span><b class="stencil">78<small>Nm</small></b></div>
+    <div><span class="mono">Transmission</span><b class="stencil" style="font-size:24pt;margin-top:2mm">RWD</b><span style="font-size:8.5pt;color:var(--muted)">4-speed sequential gearbox</span></div>
+  </div>
+  <div class="foot mono"><span>ENP Racing Team</span><span>03</span></div>
+</section>
+
+<!-- 4 · LAST SEASON -->
+<section class="page">
+  <div class="kerb"></div>
+  <div class="bar mono"><span class="code">S04</span>Last season<span class="ruler"></span><span class="meta">15—19.07.2026</span></div>
+  <h2 class="title">Last season:<br>what did we achieve?</h2>
+  <div class="img" style="height:66mm;background-image:url('../public/images/team-silverstone.jpg')"></div>
+  <div class="award">
+    <span class="mono" style="color:#6b6860">Formula Student UK · 2026</span>
+    <b>Allan Staniforth Best Newcomer Award</b>
+    <div class="rule"></div>
+    <span class="mono" style="color:#4a4740">Our first trophy · ENP Racing Team · #19</span>
+  </div>
+  <div class="grid2" style="margin-top:6mm">
+    <div>
+      <div class="mono" style="margin-bottom:2mm"><span class="code">STA</span>Static events</div>
+      <div class="scores">
+        <div><span>01</span><span>Business Presentation</span><b class="stencil">30.3</b></div>
+        <div><span>02</span><span>Cost Report</span><b class="stencil">60</b></div>
+        <div><span>03</span><span>Design</span><b class="stencil">79</b></div>
+        <div><span>04</span><span>FS Lap Time Simulation</span><b class="stencil">6.5</b></div>
+      </div>
+      <p class="mono" style="margin-top:3mm">Chassis validated · 80% technical scrutineering reached</p>
+    </div>
+    <div>
+      <div class="mono" style="margin-bottom:2mm"><span class="code">REC</span>Recognition</div>
+      <ul class="list">
+        <li>Distinction from the Ministry of Higher Education</li>
+        <li>The President of the Republic praised our performance</li>
+        <li>Recognition and sponsorship from the Ministry of Startups</li>
+        <li>Recognition and sponsorship from the Algerian Ambassador in London</li>
+        <li>Wide media coverage</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot mono"><span>ENP Racing Team</span><span>04</span></div>
+</section>
+
+<!-- 5 · THIS SEASON -->
+<section class="page">
+  <div class="kerb"></div>
+  <div class="bar mono"><span class="code">S05</span>This season<span class="ruler"></span><span class="meta">2026—27</span></div>
+  <h2 class="title">This season:<br>what are we working on?</h2>
+  <p class="lead" style="margin-bottom:7mm">Three projects run in parallel: a faster combustion car, our first electric concept, and a new underwater robotics competition.</p>
+  <div class="proj" style="--c:#e1251b">
+    <div><span class="mono">01</span><div class="stencil">IC</div></div>
+    <div><span class="st">In development</span><h3>IC Dynamic</h3><p>Our goal is a new internal combustion car that surpasses our first edition. Drawing on the lessons from our previous car, we are improving its performance, reliability and overall design. We want a more competitive and more refined vehicle.</p></div>
+  </div>
+  <div class="proj" style="--c:#1fb25a">
+    <div><span class="mono">02</span><div class="stencil">EV</div></div>
+    <div><span class="st">Design 2027 · Build 2028</span><h3>EV Concept Class</h3><p>Our new project: designing a complete electric Formula Student car. The work covers simulations, calculations, technical reports, cost analysis and project management. We aim to complete the design in 2027 and build the physical car in 2028.</p></div>
+  </div>
+  <div class="proj" style="--c:#ece8df">
+    <div><span class="mono">03</span><div class="stencil">ROV</div></div>
+    <div><span class="st">New competition</span><h3>MATE ROV</h3><p>MATE ROV is a competition where students design and build underwater robots, also called ROVs. The robots complete missions inspired by real maritime work.</p></div>
+  </div>
+  <div class="foot mono"><span>ENP Racing Team</span><span>05</span></div>
+</section>
+
+<!-- 6 · STRUCTURE -->
+<section class="page">
+  <div class="kerb"></div>
+  <div class="bar mono"><span class="code">S06</span>Structure<span class="ruler"></span><span class="meta">Season 2026—27</span></div>
+  <h2 class="title">Organised like<br>a constructor</h2>
+  <p class="lead">A board of directors, an executive bureau, six cross-functional departments and a Formula Student team with five technical departments.</p>
+  <div class="grid2 org" style="margin-top:7mm">
+    <div class="plate">
+      <span class="mono">Association departments</span>
+      <ul>
+        <li>Projects<span>Youcef Bengoumida</span></li>
+        <li>Training &amp; Industry<span>Anefal Choumane</span></li>
+        <li>Media &amp; Science Journalism<span>Besma Kada</span></li>
+        <li>Information Systems<span>M. Amine Ould Khaoua</span></li>
+        <li>Business Projects<span>Now recruiting</span></li>
+        <li>Operations &amp; Partnerships<span>Hammouda Baouchi</span></li>
+      </ul>
+    </div>
+    <div class="plate" style="border-color:rgba(225,37,27,.5)">
+      <span class="mono" style="color:#ff8178">Formula Student team</span>
+      <ul>
+        <li>Team Lead<span>Youcef Bengoumida</span></li>
+        <li>Chief Engineer<span>Aimen Hamour</span></li>
+        <li>Manufacturing &amp; Workshop<span>Zahreddin Sebaa</span></li>
+        <li>Team Manager<span>Imane Lounis</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="five">
+    <div class="plate"><span class="mono" style="color:#ff8178">2.1</span><h3>Suspension</h3><p>Steering, kinematics, vehicle dynamics.</p></div>
+    <div class="plate"><span class="mono" style="color:#ff8178">2.2</span><h3>Chassis</h3><p>Tubular frame and driver ergonomics.</p></div>
+    <div class="plate"><span class="mono" style="color:#ff8178">2.3</span><h3>Powertrain</h3><p>Drivetrain, brakes, cooling, EV.</p></div>
+    <div class="plate"><span class="mono" style="color:#ff8178">2.4</span><h3>Aero</h3><p>Wings, undertray, CFD simulations.</p></div>
+    <div class="plate"><span class="mono" style="color:#ff8178">2.5</span><h3>Electronics</h3><p>HV system, BMS, harness, sensors.</p></div>
+  </div>
+  <div class="foot mono"><span>ENP Racing Team</span><span>06</span></div>
+</section>
+
+<!-- 7 · PARTNER WITH US -->
+<section class="page">
+  <div class="kerb"></div>
+  <div class="bar mono"><span class="code">S07</span>Partner with us<span class="ruler"></span><span class="meta">Season 2027</span></div>
+  <h2 class="title">Race with us<br>into 2027</h2>
+  <p class="lead">Behind every lap there is a network of partners who believed in a young Algerian team before it had proven anything. Every contribution directly funds parts, tools, software or travel to competitions.</p>
+  <div class="grid2" style="margin-top:6mm">
+    <div class="plate"><span class="mono" style="color:var(--red)">01</span><h3 style="font-size:14pt;margin:1.5mm 0">On the car</h3><p style="font-size:9pt;color:#b9b6ad">Your logo on the livery of car #19, on track and in every competition photo.</p></div>
+    <div class="plate"><span class="mono" style="color:var(--red)">02</span><h3 style="font-size:14pt;margin:1.5mm 0">Access to talent</h3><p style="font-size:9pt;color:#b9b6ad">Meet Algeria's best engineering students, trained on a real project.</p></div>
+    <div class="plate"><span class="mono" style="color:var(--red)">03</span><h3 style="font-size:14pt;margin:1.5mm 0">A national story</h3><p style="font-size:9pt;color:#b9b6ad">North Africa's first Formula Student single-seater, praised by the President.</p></div>
+    <div class="plate"><span class="mono" style="color:var(--red)">04</span><h3 style="font-size:14pt;margin:1.5mm 0">Content &amp; reach</h3><p style="font-size:9pt;color:#b9b6ad">Social media, events, car presentations and press coverage.</p></div>
+  </div>
+  <div class="tiers">
+    <div class="tier" style="--a:#e1251b"><div class="stencil">P1</div><h3>Title</h3><ul><li>Name on team &amp; car</li><li>XXL logo, livery &amp; wear</li><li>Private car event</li><li>Recruitment priority</li></ul></div>
+    <div class="tier" style="--a:#ece8df"><div class="stencil">P2</div><h3>Platinum</h3><ul><li>Major bodywork logo</li><li>Logo on team wear</li><li>Car at your premises</li></ul></div>
+    <div class="tier" style="--a:#d9b35a"><div class="stencil">P3</div><h3>Gold</h3><ul><li>Bodywork logo</li><li>Website &amp; social</li><li>Event invitations</li></ul></div>
+    <div class="tier" style="--a:#b9bcc0"><div class="stencil">P4</div><h3>Silver</h3><ul><li>Wing or chassis logo</li><li>Listed on website</li></ul></div>
+    <div class="tier" style="--a:#1fb25a"><div class="stencil">P5</div><h3>Technical</h3><ul><li>Materials, machining, software</li><li>Equivalent visibility</li></ul></div>
+  </div>
+  <div class="contact">
+    <h3>Ready for the next lap?</h3>
+    <div class="rows" style="margin-top:3mm">
+      <div><span class="mono">Email</span><span>contact@enp-racing-team.dz</span></div>
+      <div><span class="mono">Instagram</span><span>@enp_racing.team</span></div>
+      <div><span class="mono">LinkedIn</span><span>linkedin.com/company/enp-racing-team</span></div>
+      <div><span class="mono">Workshop</span><span>ENP, 10 Av. Hassen Badi, El Harrach, Algiers</span></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
