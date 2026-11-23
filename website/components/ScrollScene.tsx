@@ -26,49 +26,13 @@ type CarModel = {
 // Camera keyframes along the scroll. Car faces −X (nose), rear is +X.
 // shift: horizontal frame offset (fraction of width) → positive pushes the car to the right.
 const KEYS = [
+  // hero: the camera barely moves in the garage, a gentle dolly while the door opens
   { p: 0.0, pos: [-4.6, 1.45, 4.4], look: [0, 0.42, 0], fov: 34, shift: 0.21 },
-  { p: 0.14, pos: [-2.2, 1.0, 5.6], look: [0, 0.45, 0], fov: 33, shift: 0.15 },
-  {
-    p: 0.3,
-    pos: [0.15, 0.62, 6.1],
-    look: [-0.1, 0.48, 0],
-    fov: 32,
-    shift: -0.17,
-  },
-  { p: 0.44, pos: [3.4, 2.9, 3.4], look: [0, 0.35, 0], fov: 34, shift: -0.12 },
-  {
-    p: 0.56,
-    pos: [3.6, 3.7, -2.8],
-    look: [-0.3, 0.3, 0],
-    fov: 34,
-    shift: 0.15,
-  },
-  { p: 0.62, pos: [-3.2, 2.0, -4.6], look: [0, 0.4, 0], fov: 36, shift: 0.08 },
-  { p: 0.68, pos: [-4.4, 0.32, 1.7], look: [0, 0.45, 0], fov: 36, shift: 0.1 },
-  {
-    p: 0.74,
-    pos: [0.6, 1.7, 4.6],
-    look: [-0.6, 0.4, 0],
-    fov: 40,
-    shift: 0.0,
-    lift: 0.06,
-  },
-  {
-    p: 0.8,
-    pos: [4.6, 1.35, 1.1],
-    look: [-3, 0.35, 0],
-    fov: 44,
-    shift: 0.0,
-    lift: 0.12,
-  },
-  {
-    p: 1.0,
-    pos: [5.4, 1.15, -0.3],
-    look: [-4, 0.4, 0],
-    fov: 50,
-    shift: 0.0,
-    lift: 0.16,
-  },
+  { p: 0.56, pos: [-3.9, 1.35, 4.9], look: [-0.2, 0.42, 0], fov: 35, shift: 0.14 },
+  // drive-out: swing once to the side, then settle into the chase cam
+  { p: 0.68, pos: [-0.8, 1.3, 5.0], look: [-0.6, 0.42, 0], fov: 38, shift: 0.04, lift: 0.04 },
+  { p: 0.8, pos: [4.6, 1.35, 1.1], look: [-3, 0.35, 0], fov: 44, shift: 0.0, lift: 0.12 },
+  { p: 1.0, pos: [5.4, 1.15, -0.3], look: [-4, 0.4, 0], fov: 50, shift: 0.0, lift: 0.16 },
 ] as {
   p: number;
   pos: number[];

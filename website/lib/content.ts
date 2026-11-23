@@ -43,8 +43,18 @@ export const CHAPTERS = [
 
 /** People to contact directly (shown in the contact section). */
 export const CONTACT_PEOPLE = [
-  { role: "President", name: "Ilyes Menzer", email: "mohamed_ilyes.menzer@g.enp.edu.dz", phone: "0540024003" },
-  { role: "External Relations", name: "Hammouda Baouchi", email: "hammouda.baouchi@g.enp.edu.dz", phone: "0699544870" },
+  {
+    role: "President",
+    name: "Ilyes Menzer",
+    email: "mohamed_ilyes.menzer@g.enp.edu.dz",
+    phone: "0540024003",
+  },
+  {
+    role: "External Relations",
+    name: "Hammouda Baouchi",
+    email: "hammouda.baouchi@g.enp.edu.dz",
+    phone: "0699544870",
+  },
 ];
 
 // ---------------------------------------------------------------- FORMULA STUDENT
@@ -206,7 +216,7 @@ export const TIMELINE = [
   {
     date: "Build",
     title: "Made in Algeria",
-    text: "Machining, welding and assembly by the team: the first single-seater presented by a North African team.",
+    text: "Machining, welding and assembly by the team: the first single-seater presented by a Algerian team.",
   },
   {
     date: "15 | 19 July 2026",
@@ -586,7 +596,7 @@ export const WHY_PARTNER = [
   {
     n: "03",
     title: "A national story",
-    text: "Associate your brand with North Africa's first Formula Student single-seater, praised by the President of the Republic.",
+    text: "Associate your brand with Algeria's first Formula Student single-seater, praised by the President of the Republic.",
   },
   {
     n: "04",

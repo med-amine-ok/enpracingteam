@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ENP Racing Team | From Algeria to Silverstone",
     description:
-      "The first Formula Student single-seater from North Africa. Designed, built and raced by the students of the National Polytechnic School of Algiers. Best Newcomer Award, Formula Student UK 2026.",
+      "The first Formula Student single-seater from Algeria. Designed, built and raced by the students of the National Polytechnic School of Algiers. Best Newcomer Award, Formula Student UK 2026.",
     url: siteUrl,
     siteName: "ENP Racing Team",
     locale: "en_US",
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ENP Racing Team | From Algeria to Silverstone",
     description:
-      "The first Formula Student single-seater from North Africa. Winner of the Allan Staniforth Best Newcomer Award, Formula Student UK 2026.",
+      "The first Formula Student single-seater from Algeria. Winner of the Allan Staniforth Best Newcomer Award, Formula Student UK 2026.",
     site: "@enp.rt",
     creator: "@enp.rt",
     images: [
@@ -202,7 +202,7 @@ const jsonLd = {
       url: siteUrl,
       name: "ENP Racing Team",
       description:
-        "From Algeria to Silverstone | The first Formula Student single-seater from North Africa.",
+        "From Algeria to Silverstone | The first Formula Student single-seater from Algeria.",
       publisher: {
         "@id": `${siteUrl}/#team`,
       },
