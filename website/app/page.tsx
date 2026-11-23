@@ -12,6 +12,7 @@ import {
   ABOUT_PHOTOS,
   CAR,
   CAR_YEARS,
+  CONTACT_PEOPLE,
   FORMULA_STUDENT,
   LAST_SEASON,
   PARTNERS,
@@ -776,6 +777,22 @@ export default function Home() {
                 <small>Workshop</small>
                 <b>{SITE.address}</b>
               </div>
+            </div>
+            <div className="people" data-stagger>
+              {CONTACT_PEOPLE.map((c) => (
+                <div className="person" key={c.email}>
+                  <span className="person-role">{c.role}</span>
+                  <b className="person-name">{c.name}</b>
+                  <a className="person-link" href={`mailto:${c.email}`}>
+                    <Icon name="arrow" size={14} />
+                    {c.email}
+                  </a>
+                  <a className="person-link" href={`tel:+213${c.phone.slice(1)}`}>
+                    <Icon name="arrow" size={14} />
+                    {`+213 ${c.phone.slice(1, 4)} ${c.phone.slice(4, 6)} ${c.phone.slice(6, 8)} ${c.phone.slice(8)}`}
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
         </section>

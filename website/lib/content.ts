@@ -5,7 +5,7 @@
 export const SITE = {
   name: "ENP Racing Team",
   school: "National Polytechnic School of Algiers",
-  email: "contact@enp-racing-team.dz",
+  email: "enp_racingteam@g.enp.edu.dz",
   address:
     "National Polytechnic School, 10 Avenue Hassen Badi, El Harrach, Algiers",
   instagram: "https://www.instagram.com/enp.rt/",
@@ -27,28 +27,24 @@ export const NAV = [
 export const CHAPTERS = [
   {
     at: 0.0,
+    cls: "chapter-0",
     kicker: "Formula Student UK · Silverstone",
     title: ["From Algeria", "to Silverstone"],
     body: "The first Formula Student single-seater from Algeria. Designed, built and raced by the students of the National Polytechnic School of Algiers.",
   },
   {
-    at: 0.3,
-    kicker: "Design",
-    title: ["Every part,", "drawn by us"],
-    body: "Chassis, suspension, aerodynamics, powertrain, electronics: five technical departments, from the first sketch to the final race.",
-  },
-  {
-    at: 0.5,
-    kicker: "Build",
-    title: ["Built", "in Algiers"],
-    body: "From CAD to the workshop: students weld, machine, wire and assemble car #19.",
-  },
-  {
     at: 0.82,
+    cls: "chapter-3",
     kicker: "Track",
     title: ["Full", "attack"],
     body: "July 2026, Silverstone. 92 hp, 314 kg, 0–100 km/h in 5 seconds. The first Algerian team ever on the grid.",
   },
+];
+
+/** People to contact directly (shown in the contact section). */
+export const CONTACT_PEOPLE = [
+  { role: "President", name: "Ilyes Menzer", email: "mohamed_ilyes.menzer@g.enp.edu.dz", phone: "0540024003" },
+  { role: "External Relations", name: "Hammouda Baouchi", email: "hammouda.baouchi@g.enp.edu.dz", phone: "0699544870" },
 ];
 
 // ---------------------------------------------------------------- FORMULA STUDENT

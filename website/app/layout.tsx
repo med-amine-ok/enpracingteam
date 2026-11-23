@@ -175,7 +175,7 @@ const jsonLd = {
       image: `${siteUrl}/brand/og-image.jpg`,
       description:
         "The Formula Student team of the National Polytechnic School of Algiers. First Algerian team at Formula Student UK and winner of the Allan Staniforth Best Newcomer Award 2026.",
-      email: "contact@enp-racing-team.dz",
+      email: "enp_racingteam@g.enp.edu.dz",
       sport: "Motorsport / Formula Student",
       award:
         "Allan Staniforth Best Newcomer Award 2026 (Formula Student UK, Silverstone)",

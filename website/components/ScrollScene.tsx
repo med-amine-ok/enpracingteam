@@ -88,7 +88,7 @@ const band = (p: number, a: number, b: number) => clamp((p - a) / (b - a));
 
 // The garage part of the story (p 0 → 0.56) uses only the first 40% of the scroll, so the
 // hero is short and the car reaches the racetrack quickly.
-const GARAGE_SCROLL = 0.4;
+const GARAGE_SCROLL = 0.25;
 const GARAGE_P = 0.56;
 const remap = (raw: number) =>
   raw < GARAGE_SCROLL
@@ -787,7 +787,7 @@ export default function ScrollScene() {
         if (!el) return;
         const next = CHAPTERS[i + 1]?.at ?? 1.2;
         const prev = CHAPTERS[i - 1]?.at ?? -1;
-        const inEnd = c.at - (c.at - prev) * 0.35;
+        const inEnd = c.at - (c.at - prev) * 0.25;
         const outStart = c.at + (next - c.at) * 0.45;
         const outEnd = c.at + (next - c.at) * 0.75;
         let o: number;
@@ -891,7 +891,7 @@ export default function ScrollScene() {
             ref={(el) => {
               chapterRefs.current[i] = el;
             }}
-            className={`chapter chapter-${i}`}
+            className={`chapter ${c.cls}`}
             style={i === 0 ? undefined : { opacity: 0, visibility: "hidden" }}
           >
             <div className="chapter-kicker">
