@@ -13,30 +13,95 @@ import { buildGarage } from "@/components/garage";
 import { buildRearEnd } from "@/components/rearEnd";
 import { buildSuspension } from "@/components/suspension";
 
-type MeshData = { p: string; i: string; w: number };
-type CarModel = { red: MeshData; white: MeshData; carbon: MeshData; wheel: MeshData; places: number[][] };
+/** n: pre-baked Int16 normals (scripts/bake-model.mjs) — when present no welding/normal pass runs here */
+type MeshData = { p: string; i: string; w: number; n?: string };
+type CarModel = {
+  red: MeshData;
+  white: MeshData;
+  carbon: MeshData;
+  wheel: MeshData;
+  places: number[][];
+};
 
 // Camera keyframes along the scroll. Car faces −X (nose), rear is +X.
 // shift: horizontal frame offset (fraction of width) → positive pushes the car to the right.
 const KEYS = [
   { p: 0.0, pos: [-4.6, 1.45, 4.4], look: [0, 0.42, 0], fov: 34, shift: 0.21 },
   { p: 0.14, pos: [-2.2, 1.0, 5.6], look: [0, 0.45, 0], fov: 33, shift: 0.15 },
-  { p: 0.3, pos: [0.15, 0.62, 6.1], look: [-0.1, 0.48, 0], fov: 32, shift: -0.17 },
+  {
+    p: 0.3,
+    pos: [0.15, 0.62, 6.1],
+    look: [-0.1, 0.48, 0],
+    fov: 32,
+    shift: -0.17,
+  },
   { p: 0.44, pos: [3.4, 2.9, 3.4], look: [0, 0.35, 0], fov: 34, shift: -0.12 },
-  { p: 0.56, pos: [3.6, 3.7, -2.8], look: [-0.3, 0.3, 0], fov: 34, shift: 0.15 },
+  {
+    p: 0.56,
+    pos: [3.6, 3.7, -2.8],
+    look: [-0.3, 0.3, 0],
+    fov: 34,
+    shift: 0.15,
+  },
   { p: 0.62, pos: [-3.2, 2.0, -4.6], look: [0, 0.4, 0], fov: 36, shift: 0.08 },
   { p: 0.68, pos: [-4.4, 0.32, 1.7], look: [0, 0.45, 0], fov: 36, shift: 0.1 },
-  { p: 0.74, pos: [0.6, 1.7, 4.6], look: [-0.6, 0.4, 0], fov: 40, shift: 0.0, lift: 0.06 },
-  { p: 0.8, pos: [4.6, 1.35, 1.1], look: [-3, 0.35, 0], fov: 44, shift: 0.0, lift: 0.12 },
-  { p: 1.0, pos: [5.4, 1.15, -0.3], look: [-4, 0.4, 0], fov: 50, shift: 0.0, lift: 0.16 },
-] as { p: number; pos: number[]; look: number[]; fov: number; shift: number; lift?: number }[];
+  {
+    p: 0.74,
+    pos: [0.6, 1.7, 4.6],
+    look: [-0.6, 0.4, 0],
+    fov: 40,
+    shift: 0.0,
+    lift: 0.06,
+  },
+  {
+    p: 0.8,
+    pos: [4.6, 1.35, 1.1],
+    look: [-3, 0.35, 0],
+    fov: 44,
+    shift: 0.0,
+    lift: 0.12,
+  },
+  {
+    p: 1.0,
+    pos: [5.4, 1.15, -0.3],
+    look: [-4, 0.4, 0],
+    fov: 50,
+    shift: 0.0,
+    lift: 0.16,
+  },
+] as {
+  p: number;
+  pos: number[];
+  look: number[];
+  fov: number;
+  shift: number;
+  lift?: number;
+}[];
 
-const TOP_SPEED = 200; // km/h — car #19 top speed
+const TOP_SPEED = 200; // km/h | car #19 top speed
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const smooth = (t: number) => t * t * (3 - 2 * t);
-const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const ease = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const band = (p: number, a: number, b: number) => clamp((p - a) / (b - a));
+
+// The garage part of the story (p 0 → 0.56) uses only the first 40% of the scroll, so the
+// hero is short and the car reaches the racetrack quickly.
+const GARAGE_SCROLL = 0.4;
+const GARAGE_P = 0.56;
+const remap = (raw: number) =>
+  raw < GARAGE_SCROLL
+    ? (raw / GARAGE_SCROLL) * GARAGE_P
+    : GARAGE_P + ((raw - GARAGE_SCROLL) / (1 - GARAGE_SCROLL)) * (1 - GARAGE_P);
+
+/** Static scenery: compose local matrices once instead of every frame (skips `userData.dynamic` subtrees). */
+function freezeStatic(o: THREE.Object3D) {
+  if (o.userData.dynamic) return;
+  o.updateMatrix();
+  o.matrixAutoUpdate = false;
+  for (const c of o.children) freezeStatic(c);
+}
 
 function decode(b64: string) {
   const s = atob(b64);
@@ -46,8 +111,20 @@ function decode(b64: string) {
 }
 function geometry(d: MeshData) {
   const g = new THREE.BufferGeometry();
-  g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(decode(d.p)), 3));
-  g.setIndex(new THREE.BufferAttribute(d.w === 2 ? new Uint16Array(decode(d.i)) : new Uint32Array(decode(d.i)), 1));
+  g.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array(decode(d.p)), 3),
+  );
+  g.setIndex(
+    new THREE.BufferAttribute(
+      d.w === 2 ? new Uint16Array(decode(d.i)) : new Uint32Array(decode(d.i)),
+      1,
+    ),
+  );
+  if (d.n) {
+    g.setAttribute("normal", new THREE.BufferAttribute(new Int16Array(decode(d.n)), 3, true));
+    return g;
+  }
   const m = mergeVertices(g, 1e-4);
   m.computeVertexNormals();
   g.dispose();
@@ -55,8 +132,8 @@ function geometry(d: MeshData) {
 }
 
 async function fetchModel(onProgress: (f: number) => void): Promise<CarModel> {
-  const res = await fetch("/models/enp-car.json");
-  const total = Number(res.headers.get("content-length")) || 2_100_000;
+  const res = await fetch("/models/enp-car-baked.json");
+  const total = Number(res.headers.get("content-length")) || 2_550_000;
   if (!res.body) return res.json();
   const reader = res.body.getReader();
   const chunks: Uint8Array[] = [];
@@ -95,7 +172,12 @@ export default function ScrollScene() {
     // ---------- renderer / scene
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: false,
+        powerPreference: "high-performance",
+      });
     } catch {
       telemetry.ready = true;
       section.classList.add("no-webgl");
@@ -103,7 +185,10 @@ export default function ScrollScene() {
     }
     // quality tier: phones / low-memory / few-core devices get a lighter renderer
     const nav = navigator as Navigator & { deviceMemory?: number };
-    const low = innerWidth < 900 || (nav.deviceMemory ?? 8) <= 4 || (navigator.hardwareConcurrency ?? 8) <= 4;
+    const low =
+      innerWidth < 900 ||
+      (nav.deviceMemory ?? 8) <= 4 ||
+      (navigator.hardwareConcurrency ?? 8) <= 4;
     const maxPR = Math.min(devicePixelRatio, low ? 1 : 1.5);
     const minPR = Math.min(maxPR, low ? 0.7 : 0.85);
     let pixelRatio = maxPR;
@@ -120,11 +205,11 @@ export default function ScrollScene() {
         geometries: renderer.info.memory.geometries,
         pixelRatio: renderer.getPixelRatio(),
       });
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.setClearColor(0x07070a, 1);
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.setClearColor(0x050a16, 1);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x07070a, 14, 60);
+    scene.fog = new THREE.Fog(0x050a16, 14, 60);
     const camera = new THREE.PerspectiveCamera(34, 1, 0.08, 2600);
 
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -132,10 +217,19 @@ export default function ScrollScene() {
     // tint the studio softboxes with team colours
     const env = new THREE.Scene();
     env.add(room);
-    const panel = (w: number, h: number, p: [number, number, number], color: number, i: number) => {
+    const panel = (
+      w: number,
+      h: number,
+      p: [number, number, number],
+      color: number,
+      i: number,
+    ) => {
       const m = new THREE.Mesh(
         new THREE.PlaneGeometry(w, h),
-        new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(i), side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({
+          color: new THREE.Color(color).multiplyScalar(i),
+          side: THREE.DoubleSide,
+        }),
       );
       m.position.set(...p);
       m.lookAt(0, 0, 0);
@@ -157,15 +251,21 @@ export default function ScrollScene() {
     const skyScene = new THREE.Scene();
     skyScene.add(circuit.sky);
     const envDay = pmrem.fromScene(skyScene).texture;
-    pmrem.dispose();
+    // (pmrem is reused for the garage capture below, so its shaders compile only once)
     scene.add(circuit.sky, circuit.group);
     circuit.setOpacity(0);
     // black dome that hides the sky while we are in the studio
-    const domeMat = new THREE.MeshBasicMaterial({ color: 0x07070a, side: THREE.BackSide, transparent: true, depthWrite: false, fog: false });
+    const domeMat = new THREE.MeshBasicMaterial({
+      color: 0x050a16,
+      side: THREE.BackSide,
+      transparent: true,
+      depthWrite: false,
+      fog: false,
+    });
     const dome = new THREE.Mesh(new THREE.SphereGeometry(900, 32, 16), domeMat);
     dome.renderOrder = -1;
     scene.add(dome);
-    const fogStudio = new THREE.Color(0x07070a);
+    const fogStudio = new THREE.Color(0x050a16);
     const fogDay = new THREE.Color(0x6a7d90);
 
     // ---------- lights
@@ -178,20 +278,47 @@ export default function ScrollScene() {
     sunLight.shadow.mapSize.set(low ? 512 : 1024, low ? 512 : 1024);
     sunLight.shadow.bias = -0.0004;
     sunLight.shadow.normalBias = 0.03;
-    Object.assign(sunLight.shadow.camera, { left: -22, right: 22, top: 22, bottom: -22, near: 1, far: 200 });
+    Object.assign(sunLight.shadow.camera, {
+      left: -22,
+      right: 22,
+      top: 22,
+      bottom: -22,
+      near: 1,
+      far: 200,
+    });
     scene.add(sunLight, sunLight.target);
     const key = new THREE.DirectionalLight(0xffffff, 2.2);
     key.position.set(-3, 8, 4);
     key.shadow.mapSize.set(2048, 2048);
     key.shadow.bias = -0.0003;
     key.shadow.normalBias = 0.02;
-    Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 1, far: 20 });
+    Object.assign(key.shadow.camera, {
+      left: -5,
+      right: 5,
+      top: 5,
+      bottom: -5,
+      near: 1,
+      far: 20,
+    });
     scene.add(key);
 
-    // ---------- the workshop (hero) — the car starts parked in the team garage
+    // ---------- the workshop (hero) | the car starts parked in the team garage
     const garage = buildGarage(low);
     performance.mark("enp:garage");
     scene.add(garage.group);
+    freezeStatic(garage.group);
+    freezeStatic(circuit.group);
+    // the garage is static: its spot-light shadow map is drawn only when something in it changes
+    const garageShadows: THREE.LightShadow[] = [];
+    garage.group.traverse((o) => {
+      const l = o as THREE.SpotLight;
+      if (l.isLight && l.castShadow) {
+        l.shadow.autoUpdate = false;
+        garageShadows.push(l.shadow);
+      }
+    });
+    let shadowDirty = 3;
+    let lastDoor = -1;
 
     // ---------- car
     const car = new THREE.Group(); // yaw / roll / bob
@@ -204,13 +331,40 @@ export default function ScrollScene() {
 
     // clearcoat paint on capable devices; light devices get the (much cheaper) standard shader
     const paint = low
-      ? new THREE.MeshStandardMaterial({ color: 0xe2321f, metalness: 0.3, roughness: 0.2, side: THREE.DoubleSide })
-      : new THREE.MeshPhysicalMaterial({ color: 0xe2321f, metalness: 0.25, roughness: 0.24, clearcoat: 1, clearcoatRoughness: 0.04, side: THREE.DoubleSide });
+      ? new THREE.MeshStandardMaterial({
+          color: 0xe2321f,
+          metalness: 0.3,
+          roughness: 0.2,
+          side: THREE.DoubleSide,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xe2321f,
+          metalness: 0.25,
+          roughness: 0.24,
+          clearcoat: 1,
+          clearcoatRoughness: 0.04,
+          side: THREE.DoubleSide,
+        });
     const white = low
-      ? new THREE.MeshStandardMaterial({ color: 0xf1f1ec, metalness: 0.15, roughness: 0.3, side: THREE.DoubleSide })
-      : new THREE.MeshPhysicalMaterial({ color: 0xf1f1ec, metalness: 0.15, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.08, side: THREE.DoubleSide });
+      ? new THREE.MeshStandardMaterial({
+          color: 0xf1f1ec,
+          metalness: 0.15,
+          roughness: 0.3,
+          side: THREE.DoubleSide,
+        })
+      : new THREE.MeshPhysicalMaterial({
+          color: 0xf1f1ec,
+          metalness: 0.15,
+          roughness: 0.32,
+          clearcoat: 1,
+          clearcoatRoughness: 0.08,
+          side: THREE.DoubleSide,
+        });
     const carbon = new THREE.MeshStandardMaterial({
-      color: 0x111216, metalness: 0.55, roughness: 0.38, side: THREE.DoubleSide,
+      color: 0x111216,
+      metalness: 0.55,
+      roughness: 0.38,
+      side: THREE.DoubleSide,
     });
     const tyre = wheelMaterial();
     // the real car's bodywork stops behind the main hoop: clip the mesh there (plane kept in world space)
@@ -218,6 +372,19 @@ export default function ScrollScene() {
     const rearClip = new THREE.Plane();
     paint.clippingPlanes = [rearClip];
     white.clippingPlanes = [rearClip];
+    // Shader variants are expensive to compile (seconds on Windows/ANGLE). Materials that differ only in
+    // culling side or clipping-plane count get distinct programs, so every plain car material is made
+    // double-sided with exactly one plane (a far-away one that never clips) to share a single program.
+    const noClip = new THREE.Plane(new THREE.Vector3(0, 1, 0), 1e5);
+    const unifyPrograms = (root: THREE.Object3D) =>
+      root.traverse((o) => {
+        const mesh = o as THREE.Mesh;
+        if (!mesh.isMesh) return;
+        const mat = mesh.material as THREE.MeshStandardMaterial;
+        if (!mat.isMeshStandardMaterial || mat.clippingPlanes?.length) return;
+        if (!mat.map) mat.side = THREE.DoubleSide;
+        if (!mat.map || mat.transparent) mat.clippingPlanes = [noClip];
+      });
     const rearEnd = buildRearEnd();
     let suspDispose = () => {};
 
@@ -242,14 +409,19 @@ export default function ScrollScene() {
           carbon: new THREE.Mesh(geometry(m.carbon), carbon),
         };
         model.add(parts.red, parts.white, parts.carbon);
-        // #19 livery — projected while the model still has an identity transform
+        // #19 livery | projected while the model still has an identity transform
         performance.mark("enp:meshes");
-        const decals = await applyLivery(parts, model).catch(() => [] as THREE.Mesh[]);
+        const decals = await applyLivery(parts, model).catch(
+          () => [] as THREE.Mesh[],
+        );
         // only bodywork decals get the rear cut (wing endplates sit further back and must stay)
         decals.forEach((dm) => {
           dm.geometry.computeBoundingBox();
-          const cx = (dm.geometry.boundingBox!.min.x + dm.geometry.boundingBox!.max.x) / 2;
-          if (cx > -1.4) (dm.material as THREE.Material).clippingPlanes = [rearClip];
+          const cx =
+            (dm.geometry.boundingBox!.min.x + dm.geometry.boundingBox!.max.x) /
+            2;
+          if (cx > -1.4)
+            (dm.material as THREE.Material).clippingPlanes = [rearClip];
         });
         model.add(rearEnd.group);
         if (disposed) return;
@@ -257,7 +429,11 @@ export default function ScrollScene() {
         garage.setTyreMesh(wg, tyre);
         // axle positions matched to the real #19 (photos): front wing clearly ahead of the front
         // wheels, rear wheels behind the hoop/engine under the rear wing. Wheelbase ≈ 1.68 m.
-        const places = m.places.map((p) => [p[0] > 0 ? 0.3 : -1.38, p[1], p[2]]);
+        const places = m.places.map((p) => [
+          p[0] > 0 ? 0.3 : -1.38,
+          p[1],
+          p[2],
+        ]);
         const susp = buildSuspension(places);
         model.add(susp.group);
         suspDispose = susp.dispose;
@@ -280,9 +456,14 @@ export default function ScrollScene() {
         performance.mark("enp:livery");
         // warm up: compile all programs now (circuit + sky temporarily visible) instead of mid-scroll
         // compile the car's programs in parallel while it is still off-scene, then add it
+        unifyPrograms(car);
         await renderer.compileAsync(car, camera, scene).catch(() => undefined);
+        // upload the livery / tyre textures one per frame instead of all inside the first car frame
+        await uploadTextures(car);
+        if (disposed) return;
         if (disposed) return;
         scene.add(car);
+        shadowDirty = 3;
         performance.mark("enp:compiled");
         telemetry.load = 1;
       })
@@ -293,26 +474,47 @@ export default function ScrollScene() {
 
     // ---------- real reflections: capture the finished garage into the environment map
     let envGarage: THREE.Texture | null = null;
+    let envReady = low; // low tier skips the capture
+    setTimeout(() => (envReady = true), 12000); // never hold the loader on a stuck capture
     const capture = () => {
       if (disposed) return;
       if (!warm) {
         setTimeout(capture, 200);
         return;
       }
-      requestAnimationFrame(() => {
-        if (disposed) return;
-        const carVis = car.visible;
-        const domeVis = dome.visible;
-        car.visible = false;
-        dome.visible = false;
-        const cgVis = circuit.group.visible;
-        circuit.group.visible = false;
-        const pm = new THREE.PMREMGenerator(renderer);
-        envGarage = pm.fromScene(scene, 0.012, 0.1, 40, { size: 256, position: new THREE.Vector3(0, 1.1, 0) }).texture;
-        pm.dispose();
-        car.visible = carVis;
-        dome.visible = domeVis;
-        circuit.group.visible = cgVis;
+      // low-end devices keep the studio reflections: the capture costs seconds of main-thread time
+      if (low) {
+        pmrem.dispose();
+        return;
+      }
+      const hideForCapture = () => {
+        const prev = [car.visible, dome.visible, circuit.group.visible];
+        car.visible = dome.visible = circuit.group.visible = false;
+        return () => ([car.visible, dome.visible, circuit.group.visible] = prev);
+      };
+      // rendering into a render target needs the non-tone-mapped variant of every garage shader:
+      // queue those compiles in parallel first, then capture once they are ready
+      const rt = new THREE.WebGLRenderTarget(4, 4);
+      let restore = hideForCapture();
+      renderer.setRenderTarget(rt);
+      const compiled = renderer.compileAsync(scene, camera).catch(() => undefined);
+      renderer.setRenderTarget(null);
+      restore();
+      compiled.then(() => {
+        rt.dispose();
+        requestAnimationFrame(() => {
+          if (disposed) return;
+          restore = hideForCapture();
+          performance.mark("enp:capture");
+          envGarage = pmrem.fromScene(scene, 0.012, 0.1, 40, {
+            size: 256,
+            position: new THREE.Vector3(0, 1.1, 0),
+          }).texture;
+          pmrem.dispose();
+          performance.mark("enp:captured");
+          envReady = true;
+          restore();
+        });
       });
     };
     garage.ready.then(capture);
@@ -320,14 +522,18 @@ export default function ScrollScene() {
     // ---------- interaction
     let mx = 0;
     let my = 0;
+    let lastInput = 0;
     const onMove = (e: PointerEvent) => {
+      lastInput = performance.now();
       mx = e.clientX / innerWidth - 0.5;
       my = e.clientY / innerHeight - 0.5;
     };
     addEventListener("pointermove", onMove, { passive: true });
 
     let visible = true;
-    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting), { rootMargin: "100px" });
+    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting), {
+      rootMargin: "100px",
+    });
     io.observe(section);
 
     // ---------- loop
@@ -350,6 +556,12 @@ export default function ScrollScene() {
     let frameAvg = 16;
     let frameCount = 0;
     let first = true;
+    let skip = false;
+    // DOM overlay: only touch styles when a value actually changes
+    const chapterCache: string[] = [];
+    let lastRail = "";
+    let lastHint = "";
+    let lastVig = "";
 
     const sample = (p: number) => {
       let i = 0;
@@ -363,14 +575,18 @@ export default function ScrollScene() {
       look.copy(tmpA);
       const la = a.lift ?? 0;
       const lb = b.lift ?? 0;
-      return { fov: a.fov + (b.fov - a.fov) * t, shift: a.shift + (b.shift - a.shift) * t, lift: la + (lb - la) * t };
+      return {
+        fov: a.fov + (b.fov - a.fov) * t,
+        shift: a.shift + (b.shift - a.shift) * t,
+        lift: la + (lb - la) * t,
+      };
     };
 
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
       if (!warm) {
         last = now;
-        return; // shaders still compiling in parallel — don't block the main thread with a sync compile
+        return; // shaders still compiling in parallel | don't block the main thread with a sync compile
       }
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
@@ -382,7 +598,7 @@ export default function ScrollScene() {
       // scroll progress through the pinned section
       const r = section.getBoundingClientRect();
       const span = r.height - innerHeight;
-      progress = clamp(-r.top / (span || 1));
+      progress = remap(clamp(-r.top / (span || 1)));
       smoothP += (progress - smoothP) * (reduce ? 1 : 1 - Math.pow(0.0012, dt));
       const p = smoothP;
 
@@ -413,14 +629,22 @@ export default function ScrollScene() {
       camera.updateProjectionMatrix();
 
       // driving along the circuit
-      const target = (TOP_SPEED * (0.12 * smooth(band(p, 0.56, 0.66)) + 0.88 * speedK)) / 3.6;
+      const target =
+        (TOP_SPEED * (0.12 * smooth(band(p, 0.56, 0.66)) + 0.88 * speedK)) /
+        3.6;
       const uNow = (((distance / circuit.length) % 1) + 1) % 1;
       // look ahead for corners and brake like a driver would (≈1.7 g lateral)
       let kMax = 0;
-      for (let a = 0; a <= 60; a += 12) kMax = Math.max(kMax, Math.abs(circuit.curvatureAt(uNow + a / circuit.length)));
+      for (let a = 0; a <= 60; a += 12)
+        kMax = Math.max(
+          kMax,
+          Math.abs(circuit.curvatureAt(uNow + a / circuit.length)),
+        );
       const vCorner = kMax > 1e-4 ? Math.sqrt(17 / kMax) : 1e9;
       const vTarget = Math.min(target, race > 0.5 ? vCorner : 1e9);
-      speedMs += (vTarget - speedMs) * (1 - Math.exp(-dt * (vTarget < speedMs ? 2.6 : 1.2)));
+      speedMs +=
+        (vTarget - speedMs) *
+        (1 - Math.exp(-dt * (vTarget < speedMs ? 2.6 : 1.2)));
       if (race < 0.01 && target < 0.5) {
         // back in the studio: park the car on the turntable
         distance = 0;
@@ -438,7 +662,11 @@ export default function ScrollScene() {
       const k = circuit.curvatureAt(u);
       const steer = clamp(Math.atan(1.6 * k) * 1.4, -0.38, 0.38);
       frontWheels.forEach((f) => (f.rotation.y = steer));
-      car.position.set(carPos.x, Math.sin(time * 31) * 0.004 * speedK, carPos.z);
+      car.position.set(
+        carPos.x,
+        Math.sin(time * 31) * 0.004 * speedK,
+        carPos.z,
+      );
       car.rotation.y = yaw;
       car.rotation.x = clamp(-k * speedMs * speedMs * 0.0011, -0.035, 0.035); // body roll
       car.rotation.z = clamp(-(vTarget - speedMs) * 0.0015, -0.02, 0.02); // pitch under braking
@@ -464,6 +692,12 @@ export default function ScrollScene() {
 
       // workshop → circuit: the roller door rolls up, daylight floods in, the car drives out
       const doorOpen = smooth(band(p, 0.48, 0.62));
+      if (
+        Math.abs(doorOpen - lastDoor) > 1e-4 ||
+        (garage.group.visible && speedMs > 0.01)
+      )
+        shadowDirty = Math.max(shadowDirty, 1);
+      lastDoor = doorOpen;
       // daylight ramps in slowly over a long stretch of scroll (≈ eyes adjusting as the car rolls out)
       const day = smooth(band(p, 0.54, 0.9));
       const sunK = smooth(band(day, 0.12, 1));
@@ -483,7 +717,10 @@ export default function ScrollScene() {
       // reflections cross-fade: garage env dims to a low point, swaps, then the sky env brightens
       const swap = 0.45;
       scene.environment = day > swap ? envDay : (envGarage ?? envStudio);
-      scene.environmentIntensity = day > swap ? THREE.MathUtils.lerp(0.22, 0.38, (day - swap) / (1 - swap)) : THREE.MathUtils.lerp(1, 0.3, day / swap);
+      scene.environmentIntensity =
+        day > swap
+          ? THREE.MathUtils.lerp(0.22, 0.38, (day - swap) / (1 - swap))
+          : THREE.MathUtils.lerp(1, 0.3, day / swap);
       renderer.toneMappingExposure = THREE.MathUtils.lerp(1.22, 0.32, day);
       const fog = scene.fog as THREE.Fog;
       fog.color.copy(fogStudio).lerp(fogDay, day);
@@ -495,11 +732,29 @@ export default function ScrollScene() {
       const sunCam = sunLight.shadow.camera;
       const ext = day > 0.05 ? 22 : 0.01;
       if (sunCam.right !== ext) {
-        Object.assign(sunCam, { left: -ext, right: ext, top: ext, bottom: -ext });
+        Object.assign(sunCam, {
+          left: -ext,
+          right: ext,
+          top: ext,
+          bottom: -ext,
+        });
         sunCam.updateProjectionMatrix();
       }
 
-      renderer.render(scene, camera);
+      // sun shadows are only drawn once daylight is in (the pass is skipped, not removed: no recompile)
+      sunLight.shadow.autoUpdate = day > 0.05;
+
+      // idle in the garage (no scroll, no pointer): draw every other frame, the sway is slow anyway
+      const settled =
+        Math.abs(progress - smoothP) < 1e-4 &&
+        race < 0.01 &&
+        now - lastInput > 500;
+      skip = settled && !skip && !first;
+      if (!skip) {
+        for (const sh of garageShadows) sh.needsUpdate = shadowDirty > 0;
+        if (shadowDirty > 0) shadowDirty--;
+        renderer.render(scene, camera);
+      }
 
       // adaptive resolution: drop pixel ratio when frames are slow, recover when there is headroom
       frameAvg += (dt * 1000 - frameAvg) * 0.05;
@@ -517,7 +772,12 @@ export default function ScrollScene() {
         }
       }
       if (first) {
+        performance.mark("enp:first-frame");
         first = false;
+      }
+      // the loader lifts once the first frame is drawn and the reflection capture (if any) is done,
+      // so the visitor never sees that one-off stall
+      if (!telemetry.ready && envReady) {
         telemetry.ready = true;
       }
 
@@ -535,15 +795,40 @@ export default function ScrollScene() {
         else if (i === CHAPTERS.length - 1) o = band(p, inEnd, c.at);
         else o = Math.min(band(p, inEnd, c.at), 1 - band(p, outStart, outEnd));
         o = smooth(clamp(o));
-        el.style.opacity = String(o);
-        el.style.transform = `translate3d(0, ${(1 - o) * (p < c.at ? 40 : -40)}px, 0)`;
+        const key = o.toFixed(3) + (p < c.at ? "a" : "b");
+        if (chapterCache[i] === key) return;
+        chapterCache[i] = key;
+        el.style.opacity = o.toFixed(3);
+        el.style.transform = `translate3d(0, ${((1 - o) * (p < c.at ? 40 : -40)).toFixed(1)}px, 0)`;
         el.style.visibility = o < 0.01 ? "hidden" : "visible";
         el.style.pointerEvents = o > 0.5 ? "auto" : "none";
       });
-      if (railRef.current) railRef.current.style.setProperty("--p", String(p));
-      if (hintRef.current) hintRef.current.style.opacity = String(1 - band(p, 0, 0.05));
-      if (vignetteRef.current) vignetteRef.current.style.opacity = String(race);
+      const rail = p.toFixed(4);
+      if (railRef.current && rail !== lastRail)
+        railRef.current.style.setProperty("--p", (lastRail = rail));
+      const hint = (1 - band(p, 0, 0.05)).toFixed(3);
+      if (hintRef.current && hint !== lastHint)
+        hintRef.current.style.opacity = lastHint = hint;
+      const vig = race.toFixed(3);
+      if (vignetteRef.current && vig !== lastVig)
+        vignetteRef.current.style.opacity = lastVig = vig;
     };
+    // GPU texture uploads (+ mipmaps) are synchronous: do them one per frame so the loader keeps animating
+    async function uploadTextures(root: THREE.Object3D) {
+      const seen = new Set<THREE.Texture>();
+      root.traverse((o) => {
+        const mats = (o as THREE.Mesh).material;
+        if (!mats) return;
+        for (const m of Array.isArray(mats) ? mats : [mats])
+          for (const v of Object.values(m))
+            if ((v as THREE.Texture)?.isTexture) seen.add(v as THREE.Texture);
+      });
+      for (const t of seen) {
+        if (disposed) return;
+        renderer.initTexture(t);
+        await new Promise((r) => requestAnimationFrame(r));
+      }
+    }
     // compile every program in parallel (KHR_parallel_shader_compile) before the first frame
     (async () => {
       const g = circuit.group.visible;
@@ -553,6 +838,7 @@ export default function ScrollScene() {
       camera.position.set(-4.6, 1.45, 4.4);
       camera.lookAt(0, 0.4, 0);
       await renderer.compileAsync(scene, camera).catch(() => undefined);
+      await uploadTextures(scene);
       circuit.group.visible = g;
       circuit.sky.visible = sk;
       performance.mark("enp:warm");
@@ -572,20 +858,28 @@ export default function ScrollScene() {
       rearEnd.dispose();
       suspDispose();
       envGarage?.dispose();
+      pmrem.dispose();
       envDay.dispose();
       envStudio.dispose();
       scene.traverse((o) => {
         const m = o as THREE.Mesh;
         if (m.isMesh) {
           m.geometry.dispose();
-          (Array.isArray(m.material) ? m.material : [m.material]).forEach((x) => x.dispose());
+          (Array.isArray(m.material) ? m.material : [m.material]).forEach((x) =>
+            x.dispose(),
+          );
         }
       });
     };
   }, []);
 
   return (
-    <section ref={sectionRef} id="top" className="scene" aria-label="ENP Racing Team car #19 in 3D">
+    <section
+      ref={sectionRef}
+      id="top"
+      className="scene"
+      aria-label="ENP Racing Team car #19 in 3D"
+    >
       <div className="scene-sticky">
         <canvas ref={canvasRef} className="scene-canvas" />
         <div ref={vignetteRef} className="scene-race-fx" aria-hidden />
@@ -608,7 +902,15 @@ export default function ScrollScene() {
               <h1 className="chapter-title hero-title">
                 {c.title.map((l, k) => (
                   <span className="line" key={k}>
-                    <span>{k === 1 ? <>to <em>Silverstone</em></> : l}</span>
+                    <span>
+                      {k === 1 ? (
+                        <>
+                          to <em>Silverstone</em>
+                        </>
+                      ) : (
+                        l
+                      )}
+                    </span>
                   </span>
                 ))}
               </h1>
@@ -643,7 +945,11 @@ export default function ScrollScene() {
         <div ref={railRef} className="scene-rail" aria-hidden>
           <span className="rail-title">Lap</span>
           {["S1", "S2", "S3"].map((s, i) => (
-            <span className="rail-sector" key={s} style={{ ["--i" as string]: i }}>
+            <span
+              className="rail-sector"
+              key={s}
+              style={{ ["--i" as string]: i }}
+            >
               <i />
               <small>{s}</small>
             </span>

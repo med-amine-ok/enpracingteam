@@ -29,7 +29,7 @@ def group(unit, role, level, *people):
     return [(person, unit, role, level) for person in people]
 
 
-# ---- People (key, first, last, email, phone, fb) — from ENPRT_Members_Database_2026_2027.md ----
+# ---- People (key, first, last, email, phone, fb) | from ENPRT_Members_Database_2026_2027.md ----
 # Using member_id as the stable key.
 
 _ilyes_menzer         = p("ilyes-menzer", "Ilyes", "Menzer", "mohamed_ilyes.menzer@g.enp.edu.dz", "0540024003", "https://www.facebook.com/ilyes.menzer.146")

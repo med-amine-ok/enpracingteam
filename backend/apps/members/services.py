@@ -13,7 +13,7 @@ def sync_executive_bureau():
     Ensure every member who currently holds a leadership role anywhere in the
     org also has an active "Executive Bureau Member" membership in the
     Executive Bureau org unit.  Members who no longer hold any leadership
-    role have their Bureau membership ended (not deleted — history is kept).
+    role have their Bureau membership ended (not deleted | history is kept).
 
     This is idempotent and safe to call on every Membership/Role change.
     """
@@ -23,7 +23,7 @@ def sync_executive_bureau():
     bureau_role = Role.objects.filter(code="executive-bureau-member").first()
 
     if bureau is None or bureau_role is None:
-        # Org structure not seeded yet — nothing to sync.
+        # Org structure not seeded yet | nothing to sync.
         return
 
     with transaction.atomic():

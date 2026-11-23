@@ -1,4 +1,4 @@
-# ENP Racing — ERP Database Schema Guide
+# ENP Racing | ERP Database Schema Guide
 
 **Purpose of this document:** explain, in plain language, every table, column, and index of the ENP Racing ERP database, with a concrete example for each, and a hierarchical example wherever a table points to a "parent" of the same kind.
 
@@ -15,7 +15,7 @@
 Every table section follows the same layout:
 
 1. **Purpose**: what the table is for, in one or two sentences.
-2. **Columns**: name, type, whether it is required (✔ = `NOT NULL`, — = may be empty), what it means, and an example value.
+2. **Columns**: name, type, whether it is required (✔ = `NOT NULL`, | = may be empty), what it means, and an example value.
 3. **Indexes & constraints**: what each one does and _why it exists_ (an index makes a frequent search fast; a constraint blocks invalid data).
 4. **Example rows / hierarchy**: sample data. Where the table has a parent/child structure, a tree is shown.
 
@@ -60,7 +60,7 @@ The most important design decision is that **three different questions are answe
 | **What position** do they hold?           | `role` (via `membership`)            | Lead, Member                    |
 | **What technical thing** do they work on? | `subsystem` (via `member_subsystem`) | HV Battery & Battery Management |
 
-On top of that, **seniority** (`main` / `junior`) is stored separately as `member_level`, so "Steering System — Main Member" in the org chart becomes:
+On top of that, **seniority** (`main` / `junior`) is stored separately as `member_level`, so "Steering System | Main Member" in the org chart becomes:
 _org unit_ = Suspension & Steering · _role_ = Member · _level_ = main · _subsystem_ = Steering System.
 
 A technical name such as "Steering System" is **never** a role.
@@ -134,7 +134,7 @@ An **enum** restricts a column to a fixed list of values, so typos such as `"act
 
 ---
 
-## 3. Module 1 — Members & Organization
+## 3. Module 1 | Members & Organization
 
 ### 3.1 `role`
 
@@ -175,17 +175,17 @@ An **enum** restricts a column to a fixed list of values, so typos such as `"act
 
 **Purpose:** one row per person who is or was part of ENP Racing. It holds only personal data; positions and units come from `membership`.
 
-| Column                      | Type            | Req.  | Meaning                                  | Example                    |
-| --------------------------- | --------------- | :---: | ---------------------------------------- | -------------------------- |
-| `id`                        | integer         |   ✔   | Primary key                              | `21`                       |
-| `first_name`                | varchar         |   ✔   | First name                               | `Yanir`                    |
-| `last_name`                 | varchar         |   ✔   | Family name                              | `Louni`                    |
-| `email`                     | varchar         |   ✔   | Unique email, identifies the person      | `y.louni@example.com`      |
-| `phone`                     | varchar         |   —   | Phone number                             | `+213 555 00 00 00`        |
-| `skill`                     | varchar         |   —   | Free-text main skill                     | `Battery systems`          |
-| `status`                    | `member_status` |   ✔   | `active` (default), `alumni`, `on_leave` | `active`                   |
-| `join_date`                 | date            |   —   | When the person joined the club          | `2025-10-01`               |
-| `created_at` / `updated_at` | timestamp       | ✔ / — | Record creation / last modification      | `2026-09-01 10:00` / empty |
+| Column                      | Type            | Req. | Meaning                                  | Example                             |
+| --------------------------- | --------------- | :--: | ---------------------------------------- | ----------------------------------- | -------------------------- |
+| `id`                        | integer         |  ✔   | Primary key                              | `21`                                |
+| `first_name`                | varchar         |  ✔   | First name                               | `Yanir`                             |
+| `last_name`                 | varchar         |  ✔   | Family name                              | `Louni`                             |
+| `email`                     | varchar         |  ✔   | Unique email, identifies the person      | `y.louni@example.com`               |
+| `phone`                     | varchar         |      |                                          | Phone number                        | `+213 555 00 00 00`        |
+| `skill`                     | varchar         |      |                                          | Free-text main skill                | `Battery systems`          |
+| `status`                    | `member_status` |  ✔   | `active` (default), `alumni`, `on_leave` | `active`                            |
+| `join_date`                 | date            |      |                                          | When the person joined the club     | `2025-10-01`               |
+| `created_at` / `updated_at` | timestamp       | ✔ /  |                                          | Record creation / last modification | `2026-09-01 10:00` / empty |
 
 **Indexes & constraints**
 
@@ -208,16 +208,16 @@ An **enum** restricts a column to a fixed list of values, so typos such as `"act
 
 **Purpose:** extra career information for members whose status is `alumni`, used for mentoring and networking. It is **one-to-one** with `member`. (The rule "only for `status = alumni`" is enforced in Django.)
 
-| Column                      | Type      | Req.  | Meaning                                            | Example                           |
-| --------------------------- | --------- | :---: | -------------------------------------------------- | --------------------------------- |
-| `id`                        | integer   |   ✔   | Primary key                                        | `1`                               |
-| `member_id`                 | integer   |   ✔   | FK → `member.id` · unique · `ON DELETE CASCADE`    | `57`                              |
-| `graduation_year`           | integer   |   —   | Year of graduation                                 | `2024`                            |
-| `current_position`          | varchar   |   —   | Job title today                                    | `Mechanical Engineer`             |
-| `current_company`           | varchar   |   —   | Employer                                           | `Example Industries`              |
-| `linkedin_url`              | varchar   |   —   | Profile link                                       | `https://linkedin.com/in/example` |
-| `willing_to_mentor`         | boolean   |   ✔   | Open to mentoring current members. Default `false` | `true`                            |
-| `created_at` / `updated_at` | timestamp | ✔ / — | Creation / last modification                       | —                                 |
+| Column                      | Type      | Req. | Meaning                                            | Example                      |
+| --------------------------- | --------- | :--: | -------------------------------------------------- | ---------------------------- | --------------------------------- | --- |
+| `id`                        | integer   |  ✔   | Primary key                                        | `1`                          |
+| `member_id`                 | integer   |  ✔   | FK → `member.id` · unique · `ON DELETE CASCADE`    | `57`                         |
+| `graduation_year`           | integer   |      |                                                    | Year of graduation           | `2024`                            |
+| `current_position`          | varchar   |      |                                                    | Job title today              | `Mechanical Engineer`             |
+| `current_company`           | varchar   |      |                                                    | Employer                     | `Example Industries`              |
+| `linkedin_url`              | varchar   |      |                                                    | Profile link                 | `https://linkedin.com/in/example` |
+| `willing_to_mentor`         | boolean   |  ✔   | Open to mentoring current members. Default `false` | `true`                       |
+| `created_at` / `updated_at` | timestamp | ✔ /  |                                                    | Creation / last modification |                                   |     |
 
 **Indexes & constraints**
 
@@ -231,15 +231,15 @@ An **enum** restricts a column to a fixed list of values, so typos such as `"act
 
 **Purpose:** every box of the org chart: Board, Executive Bureau, the 6 departments, poles/teams, the Formula Student team and its technical departments. The table points to itself through `parent_id`, so any depth is possible and new units can be added without changing the schema.
 
-| Column                      | Type            | Req.  | Meaning                                                                          | Example         |
-| --------------------------- | --------------- | :---: | -------------------------------------------------------------------------------- | --------------- |
-| `id`                        | integer         |   ✔   | Primary key                                                                      | `14`            |
-| `name`                      | varchar         |   ✔   | Unit name                                                                        | `Electronics`   |
-| `type`                      | `org_unit_type` |   ✔   | `governing_body`, `club_department`, `club_pole`, `fs_team`, `fs_department`     | `fs_department` |
-| `parent_id`                 | integer         |   —   | FK → `org_unit.id` · `ON DELETE RESTRICT`. **Empty for top-level units**         | `9`             |
-| `is_temporary`              | boolean         |   ✔   | `true` for units created for a limited time (e.g. a task force). Default `false` | `false`         |
-| `is_active`                 | boolean         |   ✔   | `false` to archive a unit without deleting it. Default `true`                    | `true`          |
-| `created_at` / `updated_at` | timestamp       | ✔ / — | Creation / last modification                                                     | —               |
+| Column                      | Type            | Req. | Meaning                                                                          | Example                                                                  |
+| --------------------------- | --------------- | :--: | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --- | --- |
+| `id`                        | integer         |  ✔   | Primary key                                                                      | `14`                                                                     |
+| `name`                      | varchar         |  ✔   | Unit name                                                                        | `Electronics`                                                            |
+| `type`                      | `org_unit_type` |  ✔   | `governing_body`, `club_department`, `club_pole`, `fs_team`, `fs_department`     | `fs_department`                                                          |
+| `parent_id`                 | integer         |      |                                                                                  | FK → `org_unit.id` · `ON DELETE RESTRICT`. **Empty for top-level units** | `9` |
+| `is_temporary`              | boolean         |  ✔   | `true` for units created for a limited time (e.g. a task force). Default `false` | `false`                                                                  |
+| `is_active`                 | boolean         |  ✔   | `false` to archive a unit without deleting it. Default `true`                    | `true`                                                                   |
+| `created_at` / `updated_at` | timestamp       | ✔ /  |                                                                                  | Creation / last modification                                             |     |     |
 
 **Indexes & constraints**
 
@@ -267,18 +267,18 @@ _"Who is above Electronics?"_ → parent 9 (Formula Student Team) → parent 3 (
 
 **Purpose:** the link between a **person**, a **role**, and an **org unit**. One member can have several memberships (e.g. Project Manager in one unit and Team Lead in another). It also carries the `main` / `junior` level, so a person can be junior one season and main the next without losing history.
 
-| Column         | Type           | Req. | Meaning                                                                                                      | Example            |
-| -------------- | -------------- | :--: | ------------------------------------------------------------------------------------------------------------ | ------------------ |
-| `id`           | integer        |  ✔   | Primary key                                                                                                  | `1`                |
-| `member_id`    | integer        |  ✔   | FK → `member.id` · `RESTRICT`                                                                                | `21` (Yanir Louni) |
-| `org_unit_id`  | integer        |  ✔   | FK → `org_unit.id` · `RESTRICT`                                                                              | `14` (Electronics) |
-| `subsystem_id` | integer        |  —   | FK → `subsystem.id` · `SET NULL`. Optional "home" subsystem; detailed assignments live in `member_subsystem` | `5`                |
-| `role_id`      | integer        |  ✔   | FK → `role.id` · `RESTRICT`                                                                                  | `6` (Member)       |
-| `member_level` | `member_level` |  —   | `main` or `junior` for regular members; **empty for leadership roles** (rule checked in Django)              | `main`             |
-| `start_date`   | date           |  —   | When the membership began                                                                                    | `2025-10-01`       |
-| `end_date`     | date           |  —   | When it ended. **Empty = currently active**                                                                  | _(empty)_          |
-| `is_primary`   | boolean        |  ✔   | Marks the person's main membership. Default `true`                                                           | `true`             |
-| `created_at`   | timestamp      |  ✔   | Creation time                                                                                                | —                  |
+| Column         | Type           | Req. | Meaning                                            | Example                                                                                                      |
+| -------------- | -------------- | :--: | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------ |
+| `id`           | integer        |  ✔   | Primary key                                        | `1`                                                                                                          |
+| `member_id`    | integer        |  ✔   | FK → `member.id` · `RESTRICT`                      | `21` (Yanir Louni)                                                                                           |
+| `org_unit_id`  | integer        |  ✔   | FK → `org_unit.id` · `RESTRICT`                    | `14` (Electronics)                                                                                           |
+| `subsystem_id` | integer        |      |                                                    | FK → `subsystem.id` · `SET NULL`. Optional "home" subsystem; detailed assignments live in `member_subsystem` | `5`          |
+| `role_id`      | integer        |  ✔   | FK → `role.id` · `RESTRICT`                        | `6` (Member)                                                                                                 |
+| `member_level` | `member_level` |      |                                                    | `main` or `junior` for regular members; **empty for leadership roles** (rule checked in Django)              | `main`       |
+| `start_date`   | date           |      |                                                    | When the membership began                                                                                    | `2025-10-01` |
+| `end_date`     | date           |      |                                                    | When it ended. **Empty = currently active**                                                                  | _(empty)_    |
+| `is_primary`   | boolean        |  ✔   | Marks the person's main membership. Default `true` | `true`                                                                                                       |
+| `created_at`   | timestamp      |  ✔   | Creation time                                      |                                                                                                              |              |
 
 **Indexes & constraints**
 
@@ -295,38 +295,38 @@ _"Who is above Electronics?"_ → parent 9 (Formula Student Team) → parent 3 (
 
 **Example rows**
 
-| member                      | org_unit                 | role            | member_level | is_primary | end_date |
-| --------------------------- | ------------------------ | --------------- | ------------ | :--------: | -------- |
-| Youcef Bengoumida           | 9 Formula Student Team   | Team Lead       | —            |    true    | —        |
-| Youcef Bengoumida           | 3 Département Projet     | Project Manager | —            | **false**  | —        |
-| Brahim Khial                | 14 Electronics           | Lead            | —            |    true    | —        |
-| Yanir Louni                 | 14 Electronics           | Member          | main         |    true    | —        |
-| Islam Amrouche              | 14 Electronics           | Member          | junior       |    true    | —        |
-| Mohamed Amine Ould Khaoua   | 6 Systèmes d'Information | Head            | —            |    true    | —        |
-| Malki Yasmine               | 6 Systèmes d'Information | ERP Developer   | main         |    true    | —        |
-| Anis Abdeldjalil Boukhedimi | 6 Systèmes d'Information | Member          | junior       |    true    | —        |
+| member                      | org_unit                 | role            | member_level | is_primary | end_date  |
+| --------------------------- | ------------------------ | --------------- | ------------ | :--------: | --------- | --- | --- |
+| Youcef Bengoumida           | 9 Formula Student Team   | Team Lead       |              |            | true      |     |     |
+| Youcef Bengoumida           | 3 Département Projet     | Project Manager |              |            | **false** |     |     |
+| Brahim Khial                | 14 Electronics           | Lead            |              |            | true      |     |     |
+| Yanir Louni                 | 14 Electronics           | Member          | main         |    true    |           |     |
+| Islam Amrouche              | 14 Electronics           | Member          | junior       |    true    |           |     |
+| Mohamed Amine Ould Khaoua   | 6 Systèmes d'Information | Head            |              |            | true      |     |     |
+| Malki Yasmine               | 6 Systèmes d'Information | ERP Developer   | main         |    true    |           |     |
+| Anis Abdeldjalil Boukhedimi | 6 Systèmes d'Information | Member          | junior       |    true    |           |     |
 
 **Why the partial unique index matters:** Youcef Bengoumida is both Team Lead of the FS team _and_ Project Manager (Département Projet). He has two active memberships, but only one can have `is_primary = true`. Trying to insert a second primary one is rejected by `uq_membership_one_active_primary`.
 
 ---
 
-## 4. Module 2 — Projects
+## 4. Module 2 | Projects
 
 ### 4.1 `project`
 
 **Purpose:** a project of the club: the two Formula Student cars (IC and EV), the complementary competition, or an internal club project such as the ERP platform. Every project is **owned** by an org unit and has one **official Project Manager**.
 
-| Column                      | Type               | Req.  | Meaning                                                                                                                                                                                | Example                        |
-| --------------------------- | ------------------ | :---: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `id`                        | integer            |   ✔   | Primary key                                                                                                                                                                            | `1`                            |
-| `name`                      | varchar            |   ✔   | Project name                                                                                                                                                                           | `EV 2027`                      |
-| `category`                  | `project_category` |   ✔   | `IC`, `EV`, `complementary_competition`, `club_project`                                                                                                                                | `EV`                           |
-| `org_unit_id`               | integer            |   ✔   | FK → `org_unit.id` · `RESTRICT`. **Owning unit.** `club_project` → the club department; `IC` / `EV` / `complementary_competition` → the Projet department or Formula Student Team unit | `9`                            |
-| `description`               | text               |   —   | Free description                                                                                                                                                                       | `Electric Formula Student car` |
-| `start_date` / `end_date`   | date               |   —   | Planned or actual dates                                                                                                                                                                | `2026-09-01` / `2027-07-31`    |
-| `status`                    | `project_status`   |   ✔   | `planned`, `active`, `completed`, `on_hold`                                                                                                                                            | `active`                       |
-| `project_manager_id`        | integer            |   —   | FK → `member.id` · `RESTRICT`. The **official** Project Manager (not automatically the "team lead"). Eligibility is checked in Django; no person is hardcoded                          | `3` (Youcef Bengoumida)        |
-| `created_at` / `updated_at` | timestamp          | ✔ / — | Creation / last modification                                                                                                                                                           | —                              |
+| Column                      | Type               | Req. | Meaning                                                                                                                                                                                | Example                                                                                                                                                       |
+| --------------------------- | ------------------ | :--: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | --- |
+| `id`                        | integer            |  ✔   | Primary key                                                                                                                                                                            | `1`                                                                                                                                                           |
+| `name`                      | varchar            |  ✔   | Project name                                                                                                                                                                           | `EV 2027`                                                                                                                                                     |
+| `category`                  | `project_category` |  ✔   | `IC`, `EV`, `complementary_competition`, `club_project`                                                                                                                                | `EV`                                                                                                                                                          |
+| `org_unit_id`               | integer            |  ✔   | FK → `org_unit.id` · `RESTRICT`. **Owning unit.** `club_project` → the club department; `IC` / `EV` / `complementary_competition` → the Projet department or Formula Student Team unit | `9`                                                                                                                                                           |
+| `description`               | text               |      |                                                                                                                                                                                        | Free description                                                                                                                                              | `Electric Formula Student car` |
+| `start_date` / `end_date`   | date               |      |                                                                                                                                                                                        | Planned or actual dates                                                                                                                                       | `2026-09-01` / `2027-07-31`    |
+| `status`                    | `project_status`   |  ✔   | `planned`, `active`, `completed`, `on_hold`                                                                                                                                            | `active`                                                                                                                                                      |
+| `project_manager_id`        | integer            |      |                                                                                                                                                                                        | FK → `member.id` · `RESTRICT`. The **official** Project Manager (not automatically the "team lead"). Eligibility is checked in Django; no person is hardcoded | `3` (Youcef Bengoumida)        |
+| `created_at` / `updated_at` | timestamp          | ✔ /  |                                                                                                                                                                                        | Creation / last modification                                                                                                                                  |                                |     |
 
 **Indexes & constraints**
 
@@ -355,15 +355,15 @@ The org chart's "Projet de compétition complémentaire: TBD" is simply a row wi
 
 **Purpose:** who takes part in a project, with an optional project-specific role. It complements `membership` (which is about the organization) by describing participation in a _specific project_.
 
-| Column                    | Type      | Req. | Meaning                                                                           | Example              |
-| ------------------------- | --------- | :--: | --------------------------------------------------------------------------------- | -------------------- |
-| `id`                      | integer   |  ✔   | Primary key                                                                       | `1`                  |
-| `project_id`              | integer   |  ✔   | FK → `project.id` · `CASCADE` (deleting a project removes its participation rows) | `1`                  |
-| `member_id`               | integer   |  ✔   | FK → `member.id` · `RESTRICT`                                                     | `21`                 |
-| `role`                    | varchar   |  —   | Free-text project role                                                            | `HV battery lead`    |
-| `start_date` / `end_date` | date      |  —   | Period of participation                                                           | `2026-09-15` / empty |
-| `is_active`               | boolean   |  ✔   | Currently participating. Default `true`                                           | `true`               |
-| `created_at`              | timestamp |  ✔   | Creation time                                                                     | —                    |
+| Column                    | Type      | Req. | Meaning                                                                           | Example                 |
+| ------------------------- | --------- | :--: | --------------------------------------------------------------------------------- | ----------------------- | -------------------- |
+| `id`                      | integer   |  ✔   | Primary key                                                                       | `1`                     |
+| `project_id`              | integer   |  ✔   | FK → `project.id` · `CASCADE` (deleting a project removes its participation rows) | `1`                     |
+| `member_id`               | integer   |  ✔   | FK → `member.id` · `RESTRICT`                                                     | `21`                    |
+| `role`                    | varchar   |      |                                                                                   | Free-text project role  | `HV battery lead`    |
+| `start_date` / `end_date` | date      |      |                                                                                   | Period of participation | `2026-09-15` / empty |
+| `is_active`               | boolean   |  ✔   | Currently participating. Default `true`                                           | `true`                  |
+| `created_at`              | timestamp |  ✔   | Creation time                                                                     |                         |                      |
 
 **Indexes & constraints**
 
@@ -378,7 +378,7 @@ The org chart's "Projet de compétition complémentaire: TBD" is simply a row wi
 
 ---
 
-## 5. Module 3 — Formula Student Subsystems & Lifecycle
+## 5. Module 3 | Formula Student Subsystems & Lifecycle
 
 > **Rule:** subsystems exist **only** under `fs_department` org units. Club departments never own subsystems (checked in Django).
 
@@ -386,15 +386,15 @@ The org chart's "Projet de compétition complémentaire: TBD" is simply a row wi
 
 **Purpose:** a _technical_ part of the car (Steering System, HV Battery & BMS...). Subsystems can be grouped: "HV System" contains "HV Battery & Battery Management", "HV Motors & Motor Data", etc., through `parent_subsystem_id`. Each subsystem belongs to **one vehicle project** (EV or IC) and **one technical department**.
 
-| Column                      | Type               | Req.  | Meaning                                                              | Example                           |
-| --------------------------- | ------------------ | :---: | -------------------------------------------------------------------- | --------------------------------- |
-| `id`                        | integer            |   ✔   | Primary key                                                          | `2`                               |
-| `name`                      | varchar            |   ✔   | Technical name. **Never a role name**                                | `HV Battery & Battery Management` |
-| `project_id`                | integer            |   ✔   | FK → `project.id` · `RESTRICT`. The car/phase it belongs to          | `1` (EV 2027)                     |
-| `org_unit_id`               | integer            |   ✔   | FK → `org_unit.id` · `RESTRICT`. Must be an `fs_department`          | `14` (Electronics)                |
-| `parent_subsystem_id`       | integer            |   —   | FK → `subsystem.id` · `RESTRICT`. **Empty for top-level subsystems** | `1` (HV System)                   |
-| `status`                    | `subsystem_status` |   ✔   | `planned` (default), `active`, `blocked`, `complete`                 | `active`                          |
-| `created_at` / `updated_at` | timestamp          | ✔ / — | Creation / last modification                                         | —                                 |
+| Column                      | Type               | Req. | Meaning                                                     | Example                                                              |
+| --------------------------- | ------------------ | :--: | ----------------------------------------------------------- | -------------------------------------------------------------------- | --------------- | --- |
+| `id`                        | integer            |  ✔   | Primary key                                                 | `2`                                                                  |
+| `name`                      | varchar            |  ✔   | Technical name. **Never a role name**                       | `HV Battery & Battery Management`                                    |
+| `project_id`                | integer            |  ✔   | FK → `project.id` · `RESTRICT`. The car/phase it belongs to | `1` (EV 2027)                                                        |
+| `org_unit_id`               | integer            |  ✔   | FK → `org_unit.id` · `RESTRICT`. Must be an `fs_department` | `14` (Electronics)                                                   |
+| `parent_subsystem_id`       | integer            |      |                                                             | FK → `subsystem.id` · `RESTRICT`. **Empty for top-level subsystems** | `1` (HV System) |
+| `status`                    | `subsystem_status` |  ✔   | `planned` (default), `active`, `blocked`, `complete`        | `active`                                                             |
+| `created_at` / `updated_at` | timestamp          | ✔ /  |                                                             | Creation / last modification                                         |                 |     |
 
 **Indexes & constraints**
 
@@ -439,16 +439,16 @@ subsystem  (project_id = 2 "IC 2027")
 
 **Purpose:** who works on which subsystem, and at which level (`main` / `junior`). A member **can have several active assignments** (this is common in Electronics), so there is deliberately no "one subsystem per member" limit. Conditional rules are in Django.
 
-| Column         | Type           | Req. | Meaning                                  | Example                             |
-| -------------- | -------------- | :--: | ---------------------------------------- | ----------------------------------- |
-| `id`           | integer        |  ✔   | Primary key                              | `1`                                 |
-| `subsystem_id` | integer        |  ✔   | FK → `subsystem.id` · `CASCADE`          | `2`                                 |
-| `member_id`    | integer        |  ✔   | FK → `member.id` · `RESTRICT`            | `21`                                |
-| `member_level` | `member_level` |  ✔   | `main` or `junior` **on this subsystem** | `main`                              |
-| `start_date`   | date           |  —   | Start of the assignment                  | `2026-09-15`                        |
-| `end_date`     | date           |  —   | End. **Empty = currently active**        | _(empty)_                           |
-| `note`         | varchar        |  —   | Free comment                             | `Battery choice & inverter modules` |
-| `created_at`   | timestamp      |  ✔   | Creation time                            | —                                   |
+| Column         | Type           | Req. | Meaning                                  | Example                           |
+| -------------- | -------------- | :--: | ---------------------------------------- | --------------------------------- | ----------------------------------- |
+| `id`           | integer        |  ✔   | Primary key                              | `1`                               |
+| `subsystem_id` | integer        |  ✔   | FK → `subsystem.id` · `CASCADE`          | `2`                               |
+| `member_id`    | integer        |  ✔   | FK → `member.id` · `RESTRICT`            | `21`                              |
+| `member_level` | `member_level` |  ✔   | `main` or `junior` **on this subsystem** | `main`                            |
+| `start_date`   | date           |      |                                          | Start of the assignment           | `2026-09-15`                        |
+| `end_date`     | date           |      |                                          | End. **Empty = currently active** | _(empty)_                           |
+| `note`         | varchar        |      |                                          | Free comment                      | `Battery choice & inverter modules` |
+| `created_at`   | timestamp      |  ✔   | Creation time                            |                                   |                                     |
 
 **Indexes & constraints**
 
@@ -491,13 +491,13 @@ Yanir Louni appears three times, Islam Amrouche and Ayoub Benadir twice each: th
 **Purpose:** the fixed list of engineering stages every subsystem goes through. It is reference data, filled once.
 
 | Column          | Type      | Req. | Meaning                                                                                                                | Example          |
-| --------------- | --------- | :--: | ---------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| --------------- | --------- | :--: | ---------------------------------------------------------------------------------------------------------------------- | ---------------- | --- |
 | `id`            | integer   |  ✔   | Primary key                                                                                                            | `2`              |
 | `step_order`    | integer   |  ✔   | Position in the sequence (unique)                                                                                      | `2`              |
 | `name`          | varchar   |  ✔   | Step name                                                                                                              | `Conception CAD` |
 | `applies_to_ic` | boolean   |  ✔   | Step applies to the IC car. Default `true`                                                                             | `true`           |
 | `applies_to_ev` | boolean   |  ✔   | Step applies to the EV car. Default `true` (the EV Concept Class may follow a different path; the application decides) | `true`           |
-| `created_at`    | timestamp |  ✔   | Creation time                                                                                                          | —                |
+| `created_at`    | timestamp |  ✔   | Creation time                                                                                                          |                  |     |
 
 **Indexes & constraints:** `step_order` is `UNIQUE`, so two steps cannot share the same position.
 
@@ -519,16 +519,16 @@ Yanir Louni appears three times, Islam Amrouche and Ayoub Benadir twice each: th
 
 **Purpose:** a checklist per subsystem: which lifecycle steps are done, when, and who validated them.
 
-| Column              | Type      | Req. | Meaning                                                                                                               | Example                                  |
-| ------------------- | --------- | :--: | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `id`                | integer   |  ✔   | Primary key                                                                                                           | `1`                                      |
-| `subsystem_id`      | integer   |  ✔   | FK → `subsystem.id` · `CASCADE`                                                                                       | `2`                                      |
-| `lifecycle_step_id` | integer   |  ✔   | FK → `lifecycle_step.id` · `RESTRICT`                                                                                 | `4`                                      |
-| `is_complete`       | boolean   |  ✔   | Step finished. Default `false`                                                                                        | `true`                                   |
-| `completed_at`      | timestamp |  —   | When it was finished                                                                                                  | `2026-11-20 16:30`                       |
-| `validated_by`      | integer   |  —   | FK → `member.id` · `RESTRICT`. For the validation step, Django checks this person holds a leadership role in the unit | `22` (Brahim Khial, Lead of Electronics) |
-| `notes`             | text      |  —   | Comments                                                                                                              | `Cell choice approved`                   |
-| `created_at`        | timestamp |  ✔   | Creation time                                                                                                         | —                                        |
+| Column              | Type      | Req. | Meaning                               | Example                                                                                                               |
+| ------------------- | --------- | :--: | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `id`                | integer   |  ✔   | Primary key                           | `1`                                                                                                                   |
+| `subsystem_id`      | integer   |  ✔   | FK → `subsystem.id` · `CASCADE`       | `2`                                                                                                                   |
+| `lifecycle_step_id` | integer   |  ✔   | FK → `lifecycle_step.id` · `RESTRICT` | `4`                                                                                                                   |
+| `is_complete`       | boolean   |  ✔   | Step finished. Default `false`        | `true`                                                                                                                |
+| `completed_at`      | timestamp |      |                                       | When it was finished                                                                                                  | `2026-11-20 16:30`                       |
+| `validated_by`      | integer   |      |                                       | FK → `member.id` · `RESTRICT`. For the validation step, Django checks this person holds a leadership role in the unit | `22` (Brahim Khial, Lead of Electronics) |
+| `notes`             | text      |      |                                       | Comments                                                                                                              | `Cell choice approved`                   |
+| `created_at`        | timestamp |  ✔   | Creation time                         |                                                                                                                       |                                          |
 
 **Indexes & constraints**
 
@@ -542,35 +542,35 @@ Yanir Louni appears three times, Islam Amrouche and Ayoub Benadir twice each: th
 **Example: HV Battery & Battery Management**
 
 | Step                     | is_complete | completed_at | validated_by |
-| ------------------------ | :---------: | ------------ | ------------ |
-| 1 Étude & recherche      |      ✔      | 2026-10-05   | —            |
-| 2 Conception CAD         |      ✔      | 2026-11-02   | —            |
-| 3 Simulation             |      ✔      | 2026-11-15   | —            |
+| ------------------------ | :---------: | ------------ | ------------ | --- | --- |
+| 1 Étude & recherche      |      ✔      | 2026-10-05   |              |     |
+| 2 Conception CAD         |      ✔      | 2026-11-02   |              |     |
+| 3 Simulation             |      ✔      | 2026-11-15   |              |     |
 | 4 Validation par le chef |      ✔      | 2026-11-20   | Brahim Khial |
-| 5 Fabrication / achat    |      ✘      | —            | —            |
+| 5 Fabrication / achat    |      ✘      |              |              |     |     |
 
 ---
 
-## 6. Module 4 — Tasks
+## 6. Module 4 | Tasks
 
 ### 6.1 `task` (hierarchical: tasks and subtasks)
 
 **Purpose:** a unit of work. A **subtask** is simply a task whose `parent_task_id` points to another task. Subtasks have their own status, assignees, and comments. Maximum depth is enforced in Django.
 
-| Column                      | Type            | Req.  | Meaning                                                                 | Example                     |
-| --------------------------- | --------------- | :---: | ----------------------------------------------------------------------- | --------------------------- |
-| `id`                        | integer         |   ✔   | Primary key                                                             | `10`                        |
-| `project_id`                | integer         |   ✔   | FK → `project.id` · `RESTRICT`                                          | `1`                         |
-| `parent_task_id`            | integer         |   —   | FK → `task` (with `project_id`) · `CASCADE`. **Empty = top-level task** | `10`                        |
-| `subsystem_id`              | integer         |   —   | FK → `subsystem.id` · `RESTRICT`. Subsystem this task supports          | `2`                         |
-| `lifecycle_step_id`         | integer         |   —   | FK → `lifecycle_step.id` · `RESTRICT`. Engineering step it belongs to   | `1`                         |
-| `title`                     | varchar         |   ✔   | Short title                                                             | `Choose battery cells`      |
-| `description`               | text            |   —   | Details                                                                 | `Compare 3 cell suppliers…` |
-| `status`                    | `task_status`   |   ✔   | `todo` (default), `in_progress`, `blocked`, `done`                      | `in_progress`               |
-| `priority`                  | `task_priority` |   —   | `low`, `medium`, `high`                                                 | `high`                      |
-| `due_date`                  | date            |   —   | Deadline                                                                | `2026-10-15`                |
-| `created_by`                | integer         |   —   | FK → `member.id` · `RESTRICT`                                           | `22`                        |
-| `created_at` / `updated_at` | timestamp       | ✔ / — | Creation / last modification                                            | —                           |
+| Column                      | Type            | Req. | Meaning                                            | Example                                                                 |
+| --------------------------- | --------------- | :--: | -------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------- | --- |
+| `id`                        | integer         |  ✔   | Primary key                                        | `10`                                                                    |
+| `project_id`                | integer         |  ✔   | FK → `project.id` · `RESTRICT`                     | `1`                                                                     |
+| `parent_task_id`            | integer         |      |                                                    | FK → `task` (with `project_id`) · `CASCADE`. **Empty = top-level task** | `10`                        |
+| `subsystem_id`              | integer         |      |                                                    | FK → `subsystem.id` · `RESTRICT`. Subsystem this task supports          | `2`                         |
+| `lifecycle_step_id`         | integer         |      |                                                    | FK → `lifecycle_step.id` · `RESTRICT`. Engineering step it belongs to   | `1`                         |
+| `title`                     | varchar         |  ✔   | Short title                                        | `Choose battery cells`                                                  |
+| `description`               | text            |      |                                                    | Details                                                                 | `Compare 3 cell suppliers…` |
+| `status`                    | `task_status`   |  ✔   | `todo` (default), `in_progress`, `blocked`, `done` | `in_progress`                                                           |
+| `priority`                  | `task_priority` |      |                                                    | `low`, `medium`, `high`                                                 | `high`                      |
+| `due_date`                  | date            |      |                                                    | Deadline                                                                | `2026-10-15`                |
+| `created_by`                | integer         |      |                                                    | FK → `member.id` · `RESTRICT`                                           | `22`                        |
+| `created_at` / `updated_at` | timestamp       | ✔ /  |                                                    | Creation / last modification                                            |                             |     |
 
 **Indexes & constraints**
 
@@ -605,12 +605,12 @@ Deleting task 10 also deletes tasks 11 to 13 (`ON DELETE CASCADE` on the parent 
 **Purpose:** who is responsible for a task. Several people can share a task; one of them can be marked as the main owner.
 
 | Column       | Type      | Req. | Meaning                                 | Example |
-| ------------ | --------- | :--: | --------------------------------------- | ------- |
+| ------------ | --------- | :--: | --------------------------------------- | ------- | --- |
 | `id`         | integer   |  ✔   | Primary key                             | `1`     |
 | `task_id`    | integer   |  ✔   | FK → `task.id` · `CASCADE`              | `10`    |
 | `member_id`  | integer   |  ✔   | FK → `member.id` · `RESTRICT`           | `21`    |
 | `is_primary` | boolean   |  ✔   | Main owner of the task. Default `false` | `true`  |
-| `created_at` | timestamp |  ✔   | Creation time                           | —       |
+| `created_at` | timestamp |  ✔   | Creation time                           |         |     |
 
 **Indexes & constraints**
 
@@ -640,20 +640,20 @@ Deleting task 10 also deletes tasks 11 to 13 (`ON DELETE CASCADE` on the parent 
 
 ---
 
-## 7. Module 5 — Communication
+## 7. Module 5 | Communication
 
 ### 7.1 `announcement`
 
 **Purpose:** news posted to the whole club or to a single unit.
 
-| Column        | Type      | Req. | Meaning                                                             | Example                                      |
-| ------------- | --------- | :--: | ------------------------------------------------------------------- | -------------------------------------------- |
-| `id`          | integer   |  ✔   | Primary key                                                         | `1`                                          |
-| `title`       | varchar   |  ✔   | Headline                                                            | `Workshop safety briefing`                   |
-| `body`        | text      |  ✔   | Full text                                                           | `Mandatory for everyone using the machines…` |
-| `posted_by`   | integer   |  ✔   | FK → `member.id` · `RESTRICT`                                       | `22`                                         |
-| `org_unit_id` | integer   |  —   | FK → `org_unit.id` · `RESTRICT`. **Empty = club-wide announcement** | `14` (Electronics only)                      |
-| `posted_at`   | timestamp |  ✔   | Publication time                                                    | `2026-09-18 09:00`                           |
+| Column        | Type      | Req. | Meaning                       | Example                                                             |
+| ------------- | --------- | :--: | ----------------------------- | ------------------------------------------------------------------- | ----------------------- |
+| `id`          | integer   |  ✔   | Primary key                   | `1`                                                                 |
+| `title`       | varchar   |  ✔   | Headline                      | `Workshop safety briefing`                                          |
+| `body`        | text      |  ✔   | Full text                     | `Mandatory for everyone using the machines…`                        |
+| `posted_by`   | integer   |  ✔   | FK → `member.id` · `RESTRICT` | `22`                                                                |
+| `org_unit_id` | integer   |      |                               | FK → `org_unit.id` · `RESTRICT`. **Empty = club-wide announcement** | `14` (Electronics only) |
+| `posted_at`   | timestamp |  ✔   | Publication time              | `2026-09-18 09:00`                                                  |
 
 **Indexes**
 
@@ -669,15 +669,15 @@ Deleting task 10 also deletes tasks 11 to 13 (`ON DELETE CASCADE` on the parent 
 
 **Purpose:** personal alerts for one member ("you were assigned a task").
 
-| Column                | Type      | Req. | Meaning                                                            | Example                                    |
-| --------------------- | --------- | :--: | ------------------------------------------------------------------ | ------------------------------------------ |
-| `id`                  | integer   |  ✔   | Primary key                                                        | `1`                                        |
-| `member_id`           | integer   |  ✔   | FK → `member.id` · `CASCADE`. The recipient                        | `21`                                       |
-| `message`             | varchar   |  ✔   | Text shown to the user                                             | `You were assigned "Choose battery cells"` |
-| `is_read`             | boolean   |  ✔   | Already seen. Default `false`                                      | `false`                                    |
-| `related_entity_type` | varchar   |  —   | **Loose pointer** (not a real foreign key): type of related record | `task`                                     |
-| `related_entity_id`   | integer   |  —   | Loose pointer: id of the related record                            | `10`                                       |
-| `created_at`          | timestamp |  ✔   | Creation time                                                      | `2026-10-01 08:12`                         |
+| Column                | Type      | Req. | Meaning                                     | Example                                                            |
+| --------------------- | --------- | :--: | ------------------------------------------- | ------------------------------------------------------------------ | ------ |
+| `id`                  | integer   |  ✔   | Primary key                                 | `1`                                                                |
+| `member_id`           | integer   |  ✔   | FK → `member.id` · `CASCADE`. The recipient | `21`                                                               |
+| `message`             | varchar   |  ✔   | Text shown to the user                      | `You were assigned "Choose battery cells"`                         |
+| `is_read`             | boolean   |  ✔   | Already seen. Default `false`               | `false`                                                            |
+| `related_entity_type` | varchar   |      |                                             | **Loose pointer** (not a real foreign key): type of related record | `task` |
+| `related_entity_id`   | integer   |      |                                             | Loose pointer: id of the related record                            | `10`   |
+| `created_at`          | timestamp |  ✔   | Creation time                               | `2026-10-01 08:12`                                                 |
 
 **Indexes**
 
@@ -694,38 +694,38 @@ The loose pointer allows one table to notify about tasks, documents, orders, etc
 
 **Purpose:** tracking of journalist / influencer outreach (from the "Journalistes / médias" sheet).
 
-| Column                      | Type      | Req.  | Meaning                                                              | Example                             |
-| --------------------------- | --------- | :---: | -------------------------------------------------------------------- | ----------------------------------- |
-| `id`                        | integer   |   ✔   | Primary key                                                          | `1`                                 |
-| `journalist_name`           | varchar   |   ✔   | Contact person                                                       | `A. Example`                        |
-| `channel_name`              | varchar   |   —   | Outlet or channel                                                    | `Example Tech TV`                   |
-| `contact_info`              | varchar   |   —   | Email, phone or social handle                                        | `contact@example.com`               |
-| `handled_by`                | integer   |   —   | FK → `member.id` · `RESTRICT`. Club member in charge of this contact | `31`                                |
-| `posted_video_link`         | varchar   |   —   | Link to the published video/article                                  | `https://example.com/video/123`     |
-| `remarks`                   | text      |   —   | Notes on the exchange                                                | `Interested in an EV workshop tour` |
-| `created_at` / `updated_at` | timestamp | ✔ / — | Creation / last modification                                         | —                                   |
+| Column                      | Type      | Req. | Meaning        | Example                                                              |
+| --------------------------- | --------- | :--: | -------------- | -------------------------------------------------------------------- | ----------------------------------- | --- |
+| `id`                        | integer   |  ✔   | Primary key    | `1`                                                                  |
+| `journalist_name`           | varchar   |  ✔   | Contact person | `A. Example`                                                         |
+| `channel_name`              | varchar   |      |                | Outlet or channel                                                    | `Example Tech TV`                   |
+| `contact_info`              | varchar   |      |                | Email, phone or social handle                                        | `contact@example.com`               |
+| `handled_by`                | integer   |      |                | FK → `member.id` · `RESTRICT`. Club member in charge of this contact | `31`                                |
+| `posted_video_link`         | varchar   |      |                | Link to the published video/article                                  | `https://example.com/video/123`     |
+| `remarks`                   | text      |      |                | Notes on the exchange                                                | `Interested in an EV workshop tour` |
+| `created_at` / `updated_at` | timestamp | ✔ /  |                | Creation / last modification                                         |                                     |     |
 
 **Indexes:** `idx_media_contact_handled_by` (`handled_by`): "contacts handled by this member".
 
 ---
 
-## 8. Module 6 — Documents
+## 8. Module 6 | Documents
 
 ### 8.1 `document`
 
 **Purpose:** a catalogue of documents (CAD files, reports, technical documents...). **The files themselves stay on Google Drive**; the database only stores the link and the metadata.
 
-| Column                      | Type              | Req.  | Meaning                                                     | Example                        |
-| --------------------------- | ----------------- | :---: | ----------------------------------------------------------- | ------------------------------ |
-| `id`                        | integer           |   ✔   | Primary key                                                 | `1`                            |
-| `title`                     | varchar           |   ✔   | Document title                                              | `Accumulator container CAD v3` |
-| `type`                      | `document_type`   |   ✔   | `cad`, `report`, `technical_doc`, `drawing`, `admin`, `faq` | `cad`                          |
-| `org_unit_id`               | integer           |   —   | FK → `org_unit.id` · `RESTRICT`. Owning unit                | `14`                           |
-| `subsystem_id`              | integer           |   —   | FK → `subsystem.id` · `RESTRICT`. Subsystem it concerns     | `2`                            |
-| `uploaded_by`               | integer           |   ✔   | FK → `member.id` · `RESTRICT`                               | `21`                           |
-| `status`                    | `document_status` |   ✔   | `draft` (default), `in_review`, `approved`, `rejected`      | `in_review`                    |
-| `drive_url`                 | varchar           |   ✔   | Link to the Google Drive file or folder                     | `https://drive.google.com/…`   |
-| `created_at` / `updated_at` | timestamp         | ✔ / — | Creation / last modification                                | —                              |
+| Column                      | Type              | Req. | Meaning                                                     | Example                                                 |
+| --------------------------- | ----------------- | :--: | ----------------------------------------------------------- | ------------------------------------------------------- | ---- | --- |
+| `id`                        | integer           |  ✔   | Primary key                                                 | `1`                                                     |
+| `title`                     | varchar           |  ✔   | Document title                                              | `Accumulator container CAD v3`                          |
+| `type`                      | `document_type`   |  ✔   | `cad`, `report`, `technical_doc`, `drawing`, `admin`, `faq` | `cad`                                                   |
+| `org_unit_id`               | integer           |      |                                                             | FK → `org_unit.id` · `RESTRICT`. Owning unit            | `14` |
+| `subsystem_id`              | integer           |      |                                                             | FK → `subsystem.id` · `RESTRICT`. Subsystem it concerns | `2`  |
+| `uploaded_by`               | integer           |  ✔   | FK → `member.id` · `RESTRICT`                               | `21`                                                    |
+| `status`                    | `document_status` |  ✔   | `draft` (default), `in_review`, `approved`, `rejected`      | `in_review`                                             |
+| `drive_url`                 | varchar           |  ✔   | Link to the Google Drive file or folder                     | `https://drive.google.com/…`                            |
+| `created_at` / `updated_at` | timestamp         | ✔ /  |                                                             | Creation / last modification                            |      |     |
 
 **Indexes**
 
@@ -739,7 +739,7 @@ The loose pointer allows one table to notify about tasks, documents, orders, etc
 
 ---
 
-## 9. Module 7 — Purchasing & Procurement
+## 9. Module 7 | Purchasing & Procurement
 
 This module reproduces the real "Pièces & Commandes" and "Fournisseurs entreprises" sheets.
 
@@ -757,20 +757,20 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 **Purpose:** companies the club buys from or subcontracts to, with their validation status.
 
-| Column                          | Type              | Req.  | Meaning                                                                       | Example                                   |
-| ------------------------------- | ----------------- | :---: | ----------------------------------------------------------------------------- | ----------------------------------------- |
-| `id`                            | integer           |   ✔   | Primary key                                                                   | `1`                                       |
-| `name`                          | varchar           |   ✔   | Company name                                                                  | `Example Machining SARL`                  |
-| `type`                          | `supplier_type`   |   —   | `fournisseur`, `sous_traitant`, `mixte`, `usinage`, `logistique`              | `usinage`                                 |
-| `status`                        | `supplier_status` |   ✔   | Validation state (column "Statut" of the sheet). Default `pas_encore_envoyee` | `en_attente`                              |
-| `technical_capabilities`        | text              |   —   | What they can make                                                            | `CNC milling, 5 axes, aluminium`          |
-| `address` / `city` / `country`  | varchar           |   —   | Location                                                                      | `Zone industrielle` / `Blida` / `Algeria` |
-| `contact_name` / `contact_role` | varchar           |   —   | Contact person and their function                                             | `M. Example` / `Sales manager`            |
-| `email` / `phone`               | varchar           |   —   | Contact details                                                               | `sales@example.com` / `+213 …`            |
-| `contacted_by`                  | integer           |   —   | FK → `member.id` · `RESTRICT`. Club member who reached out                    | `35`                                      |
-| `average_lead_time_days`        | integer           |   —   | Typical delivery time in days. Must be ≥ 0                                    | `14`                                      |
-| `comments`                      | text              |   —   | Free notes                                                                    | `Fast quotes, asks 50% upfront`           |
-| `created_at` / `updated_at`     | timestamp         | ✔ / — | Creation / last modification                                                  | —                                         |
+| Column                          | Type              | Req. | Meaning                                                                       | Example                                                          |
+| ------------------------------- | ----------------- | :--: | ----------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------- | --- |
+| `id`                            | integer           |  ✔   | Primary key                                                                   | `1`                                                              |
+| `name`                          | varchar           |  ✔   | Company name                                                                  | `Example Machining SARL`                                         |
+| `type`                          | `supplier_type`   |      |                                                                               | `fournisseur`, `sous_traitant`, `mixte`, `usinage`, `logistique` | `usinage`                                 |
+| `status`                        | `supplier_status` |  ✔   | Validation state (column "Statut" of the sheet). Default `pas_encore_envoyee` | `en_attente`                                                     |
+| `technical_capabilities`        | text              |      |                                                                               | What they can make                                               | `CNC milling, 5 axes, aluminium`          |
+| `address` / `city` / `country`  | varchar           |      |                                                                               | Location                                                         | `Zone industrielle` / `Blida` / `Algeria` |
+| `contact_name` / `contact_role` | varchar           |      |                                                                               | Contact person and their function                                | `M. Example` / `Sales manager`            |
+| `email` / `phone`               | varchar           |      |                                                                               | Contact details                                                  | `sales@example.com` / `+213 …`            |
+| `contacted_by`                  | integer           |      |                                                                               | FK → `member.id` · `RESTRICT`. Club member who reached out       | `35`                                      |
+| `average_lead_time_days`        | integer           |      |                                                                               | Typical delivery time in days. Must be ≥ 0                       | `14`                                      |
+| `comments`                      | text              |      |                                                                               | Free notes                                                       | `Fast quotes, asks 50% upfront`           |
+| `created_at` / `updated_at`     | timestamp         | ✔ /  |                                                                               | Creation / last modification                                     |                                           |     |
 
 **Indexes & constraints**
 
@@ -788,19 +788,19 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 **Purpose:** a part or item the club needs (a brake disc, a bearing, a workshop tool), with its category and manufacturing process.
 
-| Column                      | Type            | Req.  | Meaning                                                   | Example                                     |
-| --------------------------- | --------------- | :---: | --------------------------------------------------------- | ------------------------------------------- |
-| `id`                        | integer         |   ✔   | Primary key                                               | `1`                                         |
-| `category`                  | `part_category` |   ✔   | Category of the sheet (default `other`)                   | `brakes`                                    |
-| `name`                      | varchar         |   ✔   | Part name                                                 | `Brake disc (front)`                        |
-| `description`               | text            |   —   | Details                                                   | `Floating disc, 220 mm`                     |
-| `reference`                 | varchar         |   —   | Manufacturer / catalogue reference                        | `BD-220-F`                                  |
-| `quantity`                  | integer         |   —   | Quantity needed (≥ 0)                                     | `4`                                         |
-| `material`                  | varchar         |   —   | Material                                                  | `Stainless steel`                           |
-| `process`                   | varchar         |   —   | Manufacturing process                                     | `Usinage`, `Impression 3D`, `Découpe laser` |
-| `subsystem_id`              | integer         |   —   | FK → `subsystem.id` · `RESTRICT`. Subsystem that needs it | `20` (Braking System)                       |
-| `org_unit_id`               | integer         |   —   | FK → `org_unit.id` · `RESTRICT`. Owning unit              | `12` (Powertrain)                           |
-| `created_at` / `updated_at` | timestamp       | ✔ / — | Creation / last modification                              | —                                           |
+| Column                      | Type            | Req. | Meaning                                 | Example                                                   |
+| --------------------------- | --------------- | :--: | --------------------------------------- | --------------------------------------------------------- | ------------------------------------------- | --- |
+| `id`                        | integer         |  ✔   | Primary key                             | `1`                                                       |
+| `category`                  | `part_category` |  ✔   | Category of the sheet (default `other`) | `brakes`                                                  |
+| `name`                      | varchar         |  ✔   | Part name                               | `Brake disc (front)`                                      |
+| `description`               | text            |      |                                         | Details                                                   | `Floating disc, 220 mm`                     |
+| `reference`                 | varchar         |      |                                         | Manufacturer / catalogue reference                        | `BD-220-F`                                  |
+| `quantity`                  | integer         |      |                                         | Quantity needed (≥ 0)                                     | `4`                                         |
+| `material`                  | varchar         |      |                                         | Material                                                  | `Stainless steel`                           |
+| `process`                   | varchar         |      |                                         | Manufacturing process                                     | `Usinage`, `Impression 3D`, `Découpe laser` |
+| `subsystem_id`              | integer         |      |                                         | FK → `subsystem.id` · `RESTRICT`. Subsystem that needs it | `20` (Braking System)                       |
+| `org_unit_id`               | integer         |      |                                         | FK → `org_unit.id` · `RESTRICT`. Owning unit              | `12` (Powertrain)                           |
+| `created_at` / `updated_at` | timestamp       | ✔ /  |                                         | Creation / last modification                              |                                             |     |
 
 **Indexes:** `idx_part_category` (`category`): filter by sheet category. `idx_part_subsystem_id` (`subsystem_id`): "parts of this subsystem". `idx_part_org_unit_id` (`org_unit_id`): "parts of this unit". `idx_part_reference` (`reference`): look up by reference.
 
@@ -810,17 +810,17 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 **Purpose:** someone asks for a part to be bought.
 
-| Column                      | Type              | Req.  | Meaning                                                   | Example                   |
-| --------------------------- | ----------------- | :---: | --------------------------------------------------------- | ------------------------- |
-| `id`                        | integer           |   ✔   | Primary key                                               | `1`                       |
-| `part_id`                   | integer           |   ✔   | FK → `part.id` · `RESTRICT`                               | `1`                       |
-| `requested_by`              | integer           |   ✔   | FK → `member.id` · `RESTRICT`                             | `30`                      |
-| `quantity`                  | integer           |   ✔   | Quantity requested, must be > 0                           | `4`                       |
-| `priority`                  | `task_priority`   |   —   | `low`, `medium`, `high`                                   | `high`                    |
-| `requested_date`            | date              |   —   | Date of the request                                       | `2026-10-10`              |
-| `status`                    | `purchase_status` |   ✔   | `a_commander` (default), `en_commande`, `livre`, `annule` | `a_commander`             |
-| `notes`                     | text              |   —   | Comments                                                  | `Needed before dyno test` |
-| `created_at` / `updated_at` | timestamp         | ✔ / — | Creation / last modification                              | —                         |
+| Column                      | Type              | Req. | Meaning                                                   | Example                      |
+| --------------------------- | ----------------- | :--: | --------------------------------------------------------- | ---------------------------- | ------------------------- | --- |
+| `id`                        | integer           |  ✔   | Primary key                                               | `1`                          |
+| `part_id`                   | integer           |  ✔   | FK → `part.id` · `RESTRICT`                               | `1`                          |
+| `requested_by`              | integer           |  ✔   | FK → `member.id` · `RESTRICT`                             | `30`                         |
+| `quantity`                  | integer           |  ✔   | Quantity requested, must be > 0                           | `4`                          |
+| `priority`                  | `task_priority`   |      |                                                           | `low`, `medium`, `high`      | `high`                    |
+| `requested_date`            | date              |      |                                                           | Date of the request          | `2026-10-10`              |
+| `status`                    | `purchase_status` |  ✔   | `a_commander` (default), `en_commande`, `livre`, `annule` | `a_commander`                |
+| `notes`                     | text              |      |                                                           | Comments                     | `Needed before dyno test` |
+| `created_at` / `updated_at` | timestamp         | ✔ /  |                                                           | Creation / last modification |                           |     |
 
 **Indexes:** `idx_purchase_request_part_id` (`part_id`), `idx_purchase_request_requested_by` (`requested_by`), `idx_purchase_request_status` (`status`): "everything still to order".
 
@@ -830,13 +830,13 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 **Purpose:** reusable delivery addresses (workshop, a freight forwarder abroad...).
 
-| Column         | Type      | Req. | Meaning                                         | Example                             |
-| -------------- | --------- | :--: | ----------------------------------------------- | ----------------------------------- |
-| `id`           | integer   |  ✔   | Primary key                                     | `1`                                 |
-| `country`      | varchar   |  —   | Country                                         | `Algeria`                           |
-| `address`      | text      |  ✔   | Full address                                    | `Example workshop address, Algiers` |
-| `contacted_by` | integer   |  —   | FK → `member.id` · `RESTRICT`. Member in charge | `36`                                |
-| `created_at`   | timestamp |  ✔   | Creation time                                   | —                                   |
+| Column         | Type      | Req. | Meaning       | Example                                         |
+| -------------- | --------- | :--: | ------------- | ----------------------------------------------- | --------- |
+| `id`           | integer   |  ✔   | Primary key   | `1`                                             |
+| `country`      | varchar   |      |               | Country                                         | `Algeria` |
+| `address`      | text      |  ✔   | Full address  | `Example workshop address, Algiers`             |
+| `contacted_by` | integer   |      |               | FK → `member.id` · `RESTRICT`. Member in charge | `36`      |
+| `created_at`   | timestamp |  ✔   | Creation time |                                                 |           |
 
 **Indexes:** `idx_shipping_address_contacted_by` (`contacted_by`).
 
@@ -846,21 +846,21 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 **Purpose:** the actual order of a request placed with one supplier: prices, delivery costs, dates and status.
 
-| Column                      | Type              | Req.  | Meaning                                                              | Example      |
-| --------------------------- | ----------------- | :---: | -------------------------------------------------------------------- | ------------ |
-| `id`                        | integer           |   ✔   | Primary key                                                          | `1`          |
-| `purchase_request_id`       | integer           |   ✔   | FK → `purchase_request.id` · `RESTRICT`                              | `1`          |
-| `supplier_id`               | integer           |   ✔   | FK → `supplier.id` · `RESTRICT`                                      | `1`          |
-| `shipping_address_id`       | integer           |   —   | FK → `shipping_address.id` · `RESTRICT`. Delivery address            | `1`          |
-| `unit_price`                | numeric(12,2)     |   —   | Price per unit, ≥ 0                                                  | `4500.00`    |
-| `delivery_cost`             | numeric(12,2)     |   ✔   | Shipping cost, default 0, ≥ 0                                        | `800.00`     |
-| `customs_cost`              | numeric(12,2)     |   ✔   | Customs / duties, default 0, ≥ 0                                     | `0.00`       |
-| `total_price`               | numeric(12,2)     |   —   | **Computed in Django**: `unit_price × quantity + delivery + customs` | `18800.00`   |
-| `ordered_at`                | date              |   —   | Date the order was placed                                            | `2026-10-12` |
-| `estimated_delivery_date`   | date              |   —   | Promised delivery                                                    | `2026-10-26` |
-| `actual_delivery_date`      | date              |   —   | Real delivery                                                        | `2026-10-29` |
-| `status`                    | `purchase_status` |   ✔   | `a_commander`, `en_commande` (default), `livre`, `annule`            | `livre`      |
-| `created_at` / `updated_at` | timestamp         | ✔ / — | Creation / last modification                                         | —            |
+| Column                      | Type              | Req. | Meaning                                                   | Example                                                              |
+| --------------------------- | ----------------- | :--: | --------------------------------------------------------- | -------------------------------------------------------------------- | ------------ | --- |
+| `id`                        | integer           |  ✔   | Primary key                                               | `1`                                                                  |
+| `purchase_request_id`       | integer           |  ✔   | FK → `purchase_request.id` · `RESTRICT`                   | `1`                                                                  |
+| `supplier_id`               | integer           |  ✔   | FK → `supplier.id` · `RESTRICT`                           | `1`                                                                  |
+| `shipping_address_id`       | integer           |      |                                                           | FK → `shipping_address.id` · `RESTRICT`. Delivery address            | `1`          |
+| `unit_price`                | numeric(12,2)     |      |                                                           | Price per unit, ≥ 0                                                  | `4500.00`    |
+| `delivery_cost`             | numeric(12,2)     |  ✔   | Shipping cost, default 0, ≥ 0                             | `800.00`                                                             |
+| `customs_cost`              | numeric(12,2)     |  ✔   | Customs / duties, default 0, ≥ 0                          | `0.00`                                                               |
+| `total_price`               | numeric(12,2)     |      |                                                           | **Computed in Django**: `unit_price × quantity + delivery + customs` | `18800.00`   |
+| `ordered_at`                | date              |      |                                                           | Date the order was placed                                            | `2026-10-12` |
+| `estimated_delivery_date`   | date              |      |                                                           | Promised delivery                                                    | `2026-10-26` |
+| `actual_delivery_date`      | date              |      |                                                           | Real delivery                                                        | `2026-10-29` |
+| `status`                    | `purchase_status` |  ✔   | `a_commander`, `en_commande` (default), `livre`, `annule` | `livre`                                                              |
+| `created_at` / `updated_at` | timestamp         | ✔ /  |                                                           | Creation / last modification                                         |              |     |
 
 **Indexes & constraints**
 
@@ -881,13 +881,13 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 **Purpose:** an invoice received from a supplier.
 
 | Column         | Type          | Req. | Meaning                         | Example         |
-| -------------- | ------------- | :--: | ------------------------------- | --------------- |
+| -------------- | ------------- | :--: | ------------------------------- | --------------- | ------------ |
 | `id`           | integer       |  ✔   | Primary key                     | `1`             |
 | `supplier_id`  | integer       |  ✔   | FK → `supplier.id` · `RESTRICT` | `1`             |
 | `reference`    | varchar       |  ✔   | Invoice number                  | `FAC-2026-0042` |
 | `total_amount` | numeric(12,2) |  ✔   | Amount, ≥ 0                     | `18800.00`      |
-| `issued_at`    | date          |  —   | Issue date                      | `2026-10-27`    |
-| `created_at`   | timestamp     |  ✔   | Creation time                   | —               |
+| `issued_at`    | date          |      |                                 | Issue date      | `2026-10-27` |
+| `created_at`   | timestamp     |  ✔   | Creation time                   |                 |              |
 
 **Indexes & constraints:** `uq_invoice_supplier_reference` (unique on `(supplier_id, reference)`): the same supplier cannot have two invoices with the same number (different suppliers may). `idx_invoice_issued_at` (`issued_at`): reports by period.
 
@@ -910,20 +910,20 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 ---
 
-## 10. Module 8 — Stock & Logistics
+## 10. Module 8 | Stock & Logistics
 
 ### 10.1 `stock_item`
 
 **Purpose:** how much of a part is physically in stock and where.
 
-| Column               | Type      | Req. | Meaning                                                                                | Example    |
-| -------------------- | --------- | :--: | -------------------------------------------------------------------------------------- | ---------- |
-| `id`                 | integer   |  ✔   | Primary key                                                                            | `1`        |
-| `part_id`            | integer   |  ✔   | FK → `part.id` · `RESTRICT`. Not unique: the same part may be stored in several places | `1`        |
-| `quantity_available` | integer   |  ✔   | Units in stock, default 0, ≥ 0. Computed from movements in Django                      | `5`        |
-| `location`           | varchar   |  —   | Storage place                                                                          | `Shelf B2` |
-| `min_threshold`      | integer   |  ✔   | Alert level, default 0, ≥ 0                                                            | `6`        |
-| `updated_at`         | timestamp |  —   | Last modification                                                                      | —          |
+| Column               | Type      | Req. | Meaning                                                                                | Example           |
+| -------------------- | --------- | :--: | -------------------------------------------------------------------------------------- | ----------------- | ---------- | --- |
+| `id`                 | integer   |  ✔   | Primary key                                                                            | `1`               |
+| `part_id`            | integer   |  ✔   | FK → `part.id` · `RESTRICT`. Not unique: the same part may be stored in several places | `1`               |
+| `quantity_available` | integer   |  ✔   | Units in stock, default 0, ≥ 0. Computed from movements in Django                      | `5`               |
+| `location`           | varchar   |      |                                                                                        | Storage place     | `Shelf B2` |
+| `min_threshold`      | integer   |  ✔   | Alert level, default 0, ≥ 0                                                            | `6`               |
+| `updated_at`         | timestamp |      |                                                                                        | Last modification |            |     |
 
 **Indexes**
 
@@ -940,17 +940,17 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 **Purpose:** the history of every entry, exit, or correction. Stock quantities are derived from it.
 
-| Column                      | Type                  | Req. | Meaning                                                                | Example                         |
-| --------------------------- | --------------------- | :--: | ---------------------------------------------------------------------- | ------------------------------- |
-| `id`                        | integer               |  ✔   | Primary key                                                            | `1`                             |
-| `stock_item_id`             | integer               |  ✔   | FK → `stock_item.id` · `RESTRICT`                                      | `1`                             |
-| `movement_type`             | `stock_movement_type` |  ✔   | `in`, `out`, `adjustment`                                              | `in`                            |
-| `quantity`                  | integer               |  ✔   | `in` / `out`: positive. `adjustment`: signed and non-zero              | `8`                             |
-| `related_purchase_order_id` | integer               |  —   | FK → `purchase_order.id` · `RESTRICT`. Order that brought the goods in | `1`                             |
-| `related_task_id`           | integer               |  —   | FK → `task.id` · `SET NULL`. Task that consumed the goods              | `10`                            |
-| `moved_by`                  | integer               |  ✔   | FK → `member.id` · `RESTRICT`                                          | `36`                            |
-| `moved_at`                  | timestamp             |  ✔   | When it happened (default now)                                         | `2026-10-29 11:00`              |
-| `notes`                     | text                  |  —   | Comment                                                                | `Delivery received, box intact` |
+| Column                      | Type                  | Req. | Meaning                                                   | Example                                                                |
+| --------------------------- | --------------------- | :--: | --------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------- |
+| `id`                        | integer               |  ✔   | Primary key                                               | `1`                                                                    |
+| `stock_item_id`             | integer               |  ✔   | FK → `stock_item.id` · `RESTRICT`                         | `1`                                                                    |
+| `movement_type`             | `stock_movement_type` |  ✔   | `in`, `out`, `adjustment`                                 | `in`                                                                   |
+| `quantity`                  | integer               |  ✔   | `in` / `out`: positive. `adjustment`: signed and non-zero | `8`                                                                    |
+| `related_purchase_order_id` | integer               |      |                                                           | FK → `purchase_order.id` · `RESTRICT`. Order that brought the goods in | `1`                             |
+| `related_task_id`           | integer               |      |                                                           | FK → `task.id` · `SET NULL`. Task that consumed the goods              | `10`                            |
+| `moved_by`                  | integer               |  ✔   | FK → `member.id` · `RESTRICT`                             | `36`                                                                   |
+| `moved_at`                  | timestamp             |  ✔   | When it happened (default now)                            | `2026-10-29 11:00`                                                     |
+| `notes`                     | text                  |      |                                                           | Comment                                                                | `Delivery received, box intact` |
 
 **Indexes & constraints**
 
@@ -973,7 +973,7 @@ part ───▶ purchase_request ───▶ purchase_order ───▶ supp
 
 ---
 
-## 11. Module 9 — Workshops & Equipment
+## 11. Module 9 | Workshops & Equipment
 
 Modeled on the "Workshop" rows of the parts sheet: compressor, table saw, hydraulic press, 3D printer, etc.
 
@@ -981,16 +981,16 @@ Modeled on the "Workshop" rows of the parts sheet: compressor, table saw, hydrau
 
 **Purpose:** a machine or tool of the workshop that members can reserve and that needs maintenance.
 
-| Column                      | Type               | Req.  | Meaning                                                                        | Example           |
-| --------------------------- | ------------------ | :---: | ------------------------------------------------------------------------------ | ----------------- |
-| `id`                        | integer            |   ✔   | Primary key                                                                    | `1`               |
-| `name`                      | varchar            |   ✔   | Equipment name                                                                 | `Hydraulic press` |
-| `category`                  | varchar            |   —   | Free category                                                                  | `Metalworking`    |
-| `status`                    | `equipment_status` |   ✔   | `available` (default), `borrowed`, `maintenance`, `reserved`, `out_of_service` | `available`       |
-| `location`                  | varchar            |   —   | Where it is kept                                                               | `Workshop, bay 2` |
-| `purchased_at`              | date               |   —   | Purchase date                                                                  | `2025-03-14`      |
-| `last_maintenance_at`       | date               |   —   | Last maintenance date                                                          | `2026-06-01`      |
-| `created_at` / `updated_at` | timestamp          | ✔ / — | Creation / last modification                                                   | —                 |
+| Column                      | Type               | Req. | Meaning                                                                        | Example                      |
+| --------------------------- | ------------------ | :--: | ------------------------------------------------------------------------------ | ---------------------------- | ----------------- | --- |
+| `id`                        | integer            |  ✔   | Primary key                                                                    | `1`                          |
+| `name`                      | varchar            |  ✔   | Equipment name                                                                 | `Hydraulic press`            |
+| `category`                  | varchar            |      |                                                                                | Free category                | `Metalworking`    |
+| `status`                    | `equipment_status` |  ✔   | `available` (default), `borrowed`, `maintenance`, `reserved`, `out_of_service` | `available`                  |
+| `location`                  | varchar            |      |                                                                                | Where it is kept             | `Workshop, bay 2` |
+| `purchased_at`              | date               |      |                                                                                | Purchase date                | `2025-03-14`      |
+| `last_maintenance_at`       | date               |      |                                                                                | Last maintenance date        | `2026-06-01`      |
+| `created_at` / `updated_at` | timestamp          | ✔ /  |                                                                                | Creation / last modification |                   |     |
 
 **Indexes:** `idx_equipment_status` (`status`): "what is available right now". `idx_equipment_category` (`category`): browse by category.
 
@@ -1001,14 +1001,14 @@ Modeled on the "Workshop" rows of the parts sheet: compressor, table saw, hydrau
 **Purpose:** booking of a piece of equipment for a time slot.
 
 | Column          | Type                 | Req. | Meaning                                                    | Example            |
-| --------------- | -------------------- | :--: | ---------------------------------------------------------- | ------------------ |
+| --------------- | -------------------- | :--: | ---------------------------------------------------------- | ------------------ | --- |
 | `id`            | integer              |  ✔   | Primary key                                                | `1`                |
 | `equipment_id`  | integer              |  ✔   | FK → `equipment.id` · `CASCADE`                            | `1`                |
 | `reserved_by`   | integer              |  ✔   | FK → `member.id` · `RESTRICT`                              | `30`               |
 | `reserved_from` | timestamp            |  ✔   | Start of the slot                                          | `2027-03-10 09:00` |
 | `reserved_to`   | timestamp            |  ✔   | End of the slot (must be after the start)                  | `2027-03-10 12:00` |
 | `status`        | `reservation_status` |  ✔   | `pending` (default), `confirmed`, `cancelled`, `completed` | `confirmed`        |
-| `created_at`    | timestamp            |  ✔   | Creation time                                              | —                  |
+| `created_at`    | timestamp            |  ✔   | Creation time                                              |                    |     |
 
 **Indexes & constraints**
 
@@ -1034,33 +1034,33 @@ Modeled on the "Workshop" rows of the parts sheet: compressor, table saw, hydrau
 
 **Purpose:** log of maintenance operations on equipment.
 
-| Column         | Type          | Req. | Meaning                         | Example                  |
-| -------------- | ------------- | :--: | ------------------------------- | ------------------------ |
-| `id`           | integer       |  ✔   | Primary key                     | `1`                      |
-| `equipment_id` | integer       |  ✔   | FK → `equipment.id` · `CASCADE` | `1`                      |
-| `performed_by` | integer       |  ✔   | FK → `member.id` · `RESTRICT`   | `36`                     |
-| `performed_at` | timestamp     |  ✔   | When (default now)              | `2026-06-01 15:00`       |
-| `description`  | text          |  —   | What was done                   | `Hydraulic oil replaced` |
-| `cost`         | numeric(12,2) |  —   | Cost, ≥ 0                       | `3500.00`                |
-| `created_at`   | timestamp     |  ✔   | Creation time                   | —                        |
+| Column         | Type          | Req. | Meaning                         | Example            |
+| -------------- | ------------- | :--: | ------------------------------- | ------------------ | ------------------------ |
+| `id`           | integer       |  ✔   | Primary key                     | `1`                |
+| `equipment_id` | integer       |  ✔   | FK → `equipment.id` · `CASCADE` | `1`                |
+| `performed_by` | integer       |  ✔   | FK → `member.id` · `RESTRICT`   | `36`               |
+| `performed_at` | timestamp     |  ✔   | When (default now)              | `2026-06-01 15:00` |
+| `description`  | text          |      |                                 | What was done      | `Hydraulic oil replaced` |
+| `cost`         | numeric(12,2) |      |                                 | Cost, ≥ 0          | `3500.00`                |
+| `created_at`   | timestamp     |  ✔   | Creation time                   |                    |                          |
 
 **Indexes:** `idx_equipment_maintenance_equipment_id` (`equipment_id`): maintenance history of a machine. `idx_equipment_maintenance_performed_by` (`performed_by`).
 
 ---
 
-## 12. Module 10 — Budget & Finance
+## 12. Module 10 | Budget & Finance
 
 ### 12.1 `budget`
 
 **Purpose:** the money allocated to an org unit for a fiscal year.
 
-| Column                      | Type          | Req.  | Meaning                                      | Example            |
-| --------------------------- | ------------- | :---: | -------------------------------------------- | ------------------ |
-| `id`                        | integer       |   ✔   | Primary key                                  | `1`                |
-| `org_unit_id`               | integer       |   ✔   | FK → `org_unit.id` · `RESTRICT`. Owning unit | `14` (Electronics) |
-| `fiscal_year`               | varchar       |   ✔   | Year label                                   | `2026-2027`        |
-| `allocated_amount`          | numeric(12,2) |   ✔   | Allocated money, default 0, ≥ 0              | `500000.00`        |
-| `created_at` / `updated_at` | timestamp     | ✔ / — | Creation / last modification                 | —                  |
+| Column                      | Type          | Req. | Meaning                                      | Example                      |
+| --------------------------- | ------------- | :--: | -------------------------------------------- | ---------------------------- | --- | --- |
+| `id`                        | integer       |  ✔   | Primary key                                  | `1`                          |
+| `org_unit_id`               | integer       |  ✔   | FK → `org_unit.id` · `RESTRICT`. Owning unit | `14` (Electronics)           |
+| `fiscal_year`               | varchar       |  ✔   | Year label                                   | `2026-2027`                  |
+| `allocated_amount`          | numeric(12,2) |  ✔   | Allocated money, default 0, ≥ 0              | `500000.00`                  |
+| `created_at` / `updated_at` | timestamp     | ✔ /  |                                              | Creation / last modification |     |     |
 
 **Indexes & constraints:** `uq_budget_org_unit_year` (unique on `(org_unit_id, fiscal_year)`): a unit has only **one budget per year**.
 
@@ -1072,17 +1072,17 @@ Modeled on the "Workshop" rows of the parts sheet: compressor, table saw, hydrau
 
 **Purpose:** money actually spent, charged to a budget, optionally traced back to the order or invoice that caused it.
 
-| Column              | Type          | Req. | Meaning                               | Example      |
-| ------------------- | ------------- | :--: | ------------------------------------- | ------------ |
-| `id`                | integer       |  ✔   | Primary key                           | `1`          |
-| `budget_id`         | integer       |  ✔   | FK → `budget.id` · `RESTRICT`         | `1`          |
-| `purchase_order_id` | integer       |  —   | FK → `purchase_order.id` · `RESTRICT` | `1`          |
-| `invoice_id`        | integer       |  —   | FK → `invoice.id` · `RESTRICT`        | `1`          |
-| `amount`            | numeric(12,2) |  ✔   | Amount spent, ≥ 0                     | `18800.00`   |
-| `category`          | varchar       |  —   | Free category                         | `Brakes`     |
-| `recorded_by`       | integer       |  ✔   | FK → `member.id` · `RESTRICT`         | `30`         |
-| `recorded_at`       | date          |  ✔   | Accounting date (default today)       | `2026-10-29` |
-| `created_at`        | timestamp     |  ✔   | Creation time                         | —            |
+| Column              | Type          | Req. | Meaning                         | Example                               |
+| ------------------- | ------------- | :--: | ------------------------------- | ------------------------------------- | -------- |
+| `id`                | integer       |  ✔   | Primary key                     | `1`                                   |
+| `budget_id`         | integer       |  ✔   | FK → `budget.id` · `RESTRICT`   | `1`                                   |
+| `purchase_order_id` | integer       |      |                                 | FK → `purchase_order.id` · `RESTRICT` | `1`      |
+| `invoice_id`        | integer       |      |                                 | FK → `invoice.id` · `RESTRICT`        | `1`      |
+| `amount`            | numeric(12,2) |  ✔   | Amount spent, ≥ 0               | `18800.00`                            |
+| `category`          | varchar       |      |                                 | Free category                         | `Brakes` |
+| `recorded_by`       | integer       |  ✔   | FK → `member.id` · `RESTRICT`   | `30`                                  |
+| `recorded_at`       | date          |  ✔   | Accounting date (default today) | `2026-10-29`                          |
+| `created_at`        | timestamp     |  ✔   | Creation time                   |                                       |          |
 
 **Indexes:** `idx_expense_budget_id` (`budget_id`): "spent so far vs allocated". `idx_expense_purchase_order_id`, `idx_expense_invoice_id`: trace an expense back to its source. `idx_expense_recorded_by`: "expenses recorded by this person". `idx_expense_recorded_at` (`recorded_at`): reports by month or year.
 
@@ -1094,34 +1094,34 @@ Modeled on the "Workshop" rows of the parts sheet: compressor, table saw, hydrau
 
 **Purpose:** sponsor pipeline, from first contact to confirmed deal, with money or in-kind support.
 
-| Column                           | Type                 | Req.  | Meaning                                                                   | Example                               |
-| -------------------------------- | -------------------- | :---: | ------------------------------------------------------------------------- | ------------------------------------- |
-| `id`                             | integer              |   ✔   | Primary key                                                               | `1`                                   |
-| `sponsor_name`                   | varchar              |   ✔   | Company or person                                                         | `Example Motors`                      |
-| `amount`                         | numeric(12,2)        |   —   | Cash amount, ≥ 0. Empty for pure in-kind support                          | `200000.00`                           |
-| `in_kind_description`            | text                 |   —   | Non-cash support                                                          | `CNC machining of 10 parts`           |
-| `contact_name` / `contact_email` | varchar              |   —   | Sponsor contact                                                           | `S. Example` / `partners@example.com` |
-| `status`                         | `sponsorship_status` |   ✔   | `prospect` (default), `contacted`, `negotiating`, `confirmed`, `declined` | `negotiating`                         |
-| `managed_by`                     | integer              |   —   | FK → `member.id` · `RESTRICT`. Member handling the sponsor                | `34`                                  |
-| `created_at` / `updated_at`      | timestamp            | ✔ / — | Creation / last modification                                              | —                                     |
+| Column                           | Type                 | Req. | Meaning                                                                   | Example                                                    |
+| -------------------------------- | -------------------- | :--: | ------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------- | --- |
+| `id`                             | integer              |  ✔   | Primary key                                                               | `1`                                                        |
+| `sponsor_name`                   | varchar              |  ✔   | Company or person                                                         | `Example Motors`                                           |
+| `amount`                         | numeric(12,2)        |      |                                                                           | Cash amount, ≥ 0. Empty for pure in-kind support           | `200000.00`                           |
+| `in_kind_description`            | text                 |      |                                                                           | Non-cash support                                           | `CNC machining of 10 parts`           |
+| `contact_name` / `contact_email` | varchar              |      |                                                                           | Sponsor contact                                            | `S. Example` / `partners@example.com` |
+| `status`                         | `sponsorship_status` |  ✔   | `prospect` (default), `contacted`, `negotiating`, `confirmed`, `declined` | `negotiating`                                              |
+| `managed_by`                     | integer              |      |                                                                           | FK → `member.id` · `RESTRICT`. Member handling the sponsor | `34`                                  |
+| `created_at` / `updated_at`      | timestamp            | ✔ /  |                                                                           | Creation / last modification                               |                                       |     |
 
 **Indexes:** `idx_sponsorship_status` (`status`): pipeline view. `idx_sponsorship_managed_by` (`managed_by`): "sponsors I handle".
 
 ---
 
-## 13. Module 11 — Dashboard & Reporting
+## 13. Module 11 | Dashboard & Reporting
 
 Reports are mostly **views and aggregations** over the tables above (tasks by status, budget used, low stock...). Only user-saved custom views need storage.
 
 ### 13.1 `saved_report`
 
 | Column        | Type      | Req. | Meaning                                                              | Example                        |
-| ------------- | --------- | :--: | -------------------------------------------------------------------- | ------------------------------ |
+| ------------- | --------- | :--: | -------------------------------------------------------------------- | ------------------------------ | --- |
 | `id`          | integer   |  ✔   | Primary key                                                          | `1`                            |
 | `name`        | varchar   |  ✔   | Report name                                                          | `Electronics: tasks by status` |
 | `created_by`  | integer   |  ✔   | FK → `member.id` · `CASCADE` (a member's saved reports go with them) | `22`                           |
 | `config_json` | jsonb     |  ✔   | Report settings in flexible JSON. Default `{}`                       | see below                      |
-| `created_at`  | timestamp |  ✔   | Creation time                                                        | —                              |
+| `created_at`  | timestamp |  ✔   | Creation time                                                        |                                |     |
 
 ```json
 {
@@ -1135,7 +1135,7 @@ Reports are mostly **views and aggregations** over the tables above (tasks by st
 
 ---
 
-## 14. Module 12 — Technical Data / Telemetry
+## 14. Module 12 | Technical Data / Telemetry
 
 ```
 competition_edition (optional) ──▶ telemetry_session ──▶ telemetry_data_point (many per session)
@@ -1148,12 +1148,12 @@ competition_edition (optional) ──▶ telemetry_session ──▶ telemetry_d
 **Purpose:** a competition edition (name + year) that test or race sessions can belong to.
 
 | Column       | Type      | Req. | Meaning          | Example                       |
-| ------------ | --------- | :--: | ---------------- | ----------------------------- |
+| ------------ | --------- | :--: | ---------------- | ----------------------------- | ----- |
 | `id`         | integer   |  ✔   | Primary key      | `1`                           |
 | `name`       | varchar   |  ✔   | Competition name | `Formula Student Competition` |
 | `year`       | integer   |  ✔   | Edition year     | `2027`                        |
-| `location`   | varchar   |  —   | Venue            | `TBD`                         |
-| `created_at` | timestamp |  ✔   | Creation time    | —                             |
+| `location`   | varchar   |      |                  | Venue                         | `TBD` |
+| `created_at` | timestamp |  ✔   | Creation time    |                               |       |
 
 **Constraints:** `uq_competition_edition_name_year` (unique on `(name, year)`): each edition is recorded once.
 
@@ -1163,15 +1163,15 @@ competition_edition (optional) ──▶ telemetry_session ──▶ telemetry_d
 
 **Purpose:** one recording session (a test day, a dynamic event run...).
 
-| Column                   | Type      | Req. | Meaning                                                                                       | Example                  |
-| ------------------------ | --------- | :--: | --------------------------------------------------------------------------------------------- | ------------------------ |
-| `id`                     | integer   |  ✔   | Primary key                                                                                   | `1`                      |
-| `competition_edition_id` | integer   |  —   | FK → `competition_edition.id` · `RESTRICT`. **Empty for test sessions outside a competition** | _(empty)_                |
-| `subsystem_id`           | integer   |  —   | FK → `subsystem.id` · `RESTRICT`. Subsystem being tested                                      | `2`                      |
-| `session_date`           | date      |  ✔   | Day of the session                                                                            | `2027-02-20`             |
-| `session_type`           | varchar   |  —   | Free label                                                                                    | `Battery discharge test` |
-| `recorded_by`            | integer   |  ✔   | FK → `member.id` · `RESTRICT`                                                                 | `21`                     |
-| `created_at`             | timestamp |  ✔   | Creation time                                                                                 | —                        |
+| Column                   | Type      | Req. | Meaning                       | Example                                                                                       |
+| ------------------------ | --------- | :--: | ----------------------------- | --------------------------------------------------------------------------------------------- | ------------------------ |
+| `id`                     | integer   |  ✔   | Primary key                   | `1`                                                                                           |
+| `competition_edition_id` | integer   |      |                               | FK → `competition_edition.id` · `RESTRICT`. **Empty for test sessions outside a competition** | _(empty)_                |
+| `subsystem_id`           | integer   |      |                               | FK → `subsystem.id` · `RESTRICT`. Subsystem being tested                                      | `2`                      |
+| `session_date`           | date      |  ✔   | Day of the session            | `2027-02-20`                                                                                  |
+| `session_type`           | varchar   |      |                               | Free label                                                                                    | `Battery discharge test` |
+| `recorded_by`            | integer   |  ✔   | FK → `member.id` · `RESTRICT` | `21`                                                                                          |
+| `created_at`             | timestamp |  ✔   | Creation time                 |                                                                                               |                          |
 
 **Indexes:** `idx_telemetry_session_edition_id`, `idx_telemetry_session_subsystem_id`, `idx_telemetry_session_recorded_by`, and `idx_telemetry_session_date` (`session_date`): find sessions by competition, subsystem, author, or date.
 
@@ -1182,13 +1182,13 @@ competition_edition (optional) ──▶ telemetry_session ──▶ telemetry_d
 **Purpose:** the raw sensor readings: **very high volume** (millions of rows), hence a `bigint` id and compact `double precision` values.
 
 | Column                 | Type             | Req. | Meaning                                                                           | Example           |
-| ---------------------- | ---------------- | :--: | --------------------------------------------------------------------------------- | ----------------- |
+| ---------------------- | ---------------- | :--: | --------------------------------------------------------------------------------- | ----------------- | --- |
 | `id`                   | bigint           |  ✔   | Primary key                                                                       | `9000001`         |
 | `telemetry_session_id` | integer          |  ✔   | FK → `telemetry_session.id` · `CASCADE` (deleting a session deletes its readings) | `1`               |
 | `timestamp_ms`         | bigint           |  ✔   | Milliseconds since the session start                                              | `1200`            |
 | `sensor_name`          | varchar          |  ✔   | Which sensor                                                                      | `battery_voltage` |
 | `value`                | double precision |  ✔   | Measured value                                                                    | `398.4`           |
-| `unit`                 | varchar          |  —   | Unit                                                                              | `V`               |
+| `unit`                 | varchar          |      |                                                                                   | Unit              | `V` |
 
 **Indexes:** `idx_telemetry_data_point_session_sensor_time` on `(telemetry_session_id, sensor_name, timestamp_ms)`. It answers the typical graph query "give me sensor X of session Y in time order" straight from the index, with no sorting.
 
@@ -1236,7 +1236,7 @@ Things noticed while comparing the org chart, the roadmap, and the schema. None 
 
 ---
 
-## Appendix A — Deletion behaviour of foreign keys (summary)
+## Appendix A | Deletion behaviour of foreign keys (summary)
 
 | Rule                                             | Foreign keys                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

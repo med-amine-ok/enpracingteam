@@ -41,7 +41,7 @@ class MemberDetailSerializer(MemberSerializer):
 class MemberCreateSerializer(serializers.ModelSerializer):
     """
     Admin-only serializer for invite-only member creation.
-    No password field — members authenticate exclusively via email OTP.
+    No password field | members authenticate exclusively via email OTP.
     """
 
     class Meta:
@@ -51,5 +51,5 @@ class MemberCreateSerializer(serializers.ModelSerializer):
         read_only_fields = ["id"]
 
     def create(self, validated_data):
-        # password=None gives an unusable password — login is OTP-only.
+        # password=None gives an unusable password | login is OTP-only.
         return Member.objects.create_user(password=None, **validated_data)

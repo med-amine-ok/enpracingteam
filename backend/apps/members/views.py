@@ -60,7 +60,7 @@ class OTPRequestView(APIView):
                     {"detail": "Too many requests. Try again later."},
                     status=429,
                 )
-            # Unknown OTPError — don't leak info, fall through to generic response.
+            # Unknown OTPError | don't leak info, fall through to generic response.
 
         return Response({
             "detail": "If this email is registered, a code has been sent."

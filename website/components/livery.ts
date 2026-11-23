@@ -9,7 +9,11 @@ import specsJson from "./livery-specs.json";
  * Coordinates are the mesh's local space (nose towards +X, y up).
  */
 
-function canvas(w: number, h: number, draw: (x: CanvasRenderingContext2D) => void) {
+function canvas(
+  w: number,
+  h: number,
+  draw: (x: CanvasRenderingContext2D) => void,
+) {
   const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
@@ -29,9 +33,12 @@ function loadImage(src: string) {
   });
 }
 
-// next/font hashes family names — read the real one from the CSS variable
+// next/font hashes family names | read the real one from the CSS variable
 const family = () =>
-  (typeof document !== "undefined" && getComputedStyle(document.documentElement).getPropertyValue("--font-display").trim()) ||
+  (typeof document !== "undefined" &&
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--font-display")
+      .trim()) ||
   '"Arial Narrow", Impact, sans-serif';
 const font = (s: number) => `900 ${s}px ${family()}, Impact, sans-serif`;
 
@@ -88,9 +95,31 @@ async function textures() {
         cx += x.measureText(t).width + 36;
       }
     };
-    row([["MathWorks", "italic 700 {s}px Arial, sans-serif", 70], ["Ansys", "700 {s}px Arial, sans-serif", 72], ["SKF", "900 {s}px Arial Black, sans-serif", 70]], 64);
-    row([["DASSAULT SYSTÈMES", "700 {s}px Arial, sans-serif", 46], ["slb", "900 {s}px Arial, sans-serif", 66], ["IPG", "900 {s}px Arial, sans-serif", 62]], 180);
-    row([["VMS", "italic 900 {s}px Arial Black, sans-serif", 64], ["cosider", "italic 700 {s}px Arial, sans-serif", 60], ["AIR ALGÉRIE", "700 {s}px Arial, sans-serif", 44], ["OXY", "900 {s}px Arial, sans-serif", 56]], 300);
+    row(
+      [
+        ["MathWorks", "italic 700 {s}px Arial, sans-serif", 70],
+        ["Ansys", "700 {s}px Arial, sans-serif", 72],
+        ["SKF", "900 {s}px Arial Black, sans-serif", 70],
+      ],
+      64,
+    );
+    row(
+      [
+        ["DASSAULT SYSTÈMES", "700 {s}px Arial, sans-serif", 46],
+        ["slb", "900 {s}px Arial, sans-serif", 66],
+        ["IPG", "900 {s}px Arial, sans-serif", 62],
+      ],
+      180,
+    );
+    row(
+      [
+        ["VMS", "italic 900 {s}px Arial Black, sans-serif", 64],
+        ["cosider", "italic 700 {s}px Arial, sans-serif", 60],
+        ["AIR ALGÉRIE", "700 {s}px Arial, sans-serif", 44],
+        ["OXY", "900 {s}px Arial, sans-serif", 56],
+      ],
+      300,
+    );
   });
 
   // rear-wing endplate as on the real car: partner marks on top, big 19, ENP mark at the bottom
@@ -112,7 +141,8 @@ async function textures() {
     x.fillText("IPG", 380, 134);
     x.font = font(270);
     x.fillText("19", 256, 300);
-    if (mark) x.drawImage(mark, 150, 420, 212, (212 * mark.height) / mark.width);
+    if (mark)
+      x.drawImage(mark, 150, 420, 212, (212 * mark.height) / mark.width);
   });
 
   const fsSticker = canvas(512, 256, (x) => {
@@ -153,10 +183,20 @@ async function textures() {
     }
   });
 
-  return { roundel, endplate, sidepod, body, wingLogo, noseText, sideNumber, stickers, fsSticker };
+  return {
+    roundel,
+    endplate,
+    sidepod,
+    body,
+    wingLogo,
+    noseText,
+    sideNumber,
+    stickers,
+    fsSticker,
+  };
 }
 
-/** Tyre + rim texture keyed by (angle, radius) — the wheel mesh gets matching UVs below. */
+/** Tyre + rim texture keyed by (angle, radius) | the wheel mesh gets matching UVs below. */
 function wheelTexture() {
   return canvas(2048, 512, (x) => {
     // v (y axis of the canvas) = radius: 0 at hub (bottom), 1 at tread (top)
@@ -173,16 +213,19 @@ function wheelTexture() {
     x.fillRect(0, 0, 2048, H);
     // rim spokes
     x.fillStyle = "rgba(0,0,0,.45)";
-    for (let i = 0; i < 10; i++) x.fillRect((i * 2048) / 10, H * 0.42, 60, H * 0.4);
+    for (let i = 0; i < 10; i++)
+      x.fillRect((i * 2048) / 10, H * 0.42, 60, H * 0.4);
     // sidewall lettering band
     x.fillStyle = "rgba(244,241,234,.42)";
     x.font = font(70);
     x.textBaseline = "middle";
     x.textAlign = "center";
-    for (let k = 0; k < 2; k++) x.fillText("RACING SLICK", 512 + k * 1024, H * 0.21);
+    for (let k = 0; k < 2; k++)
+      x.fillText("RACING SLICK", 512 + k * 1024, H * 0.21);
     x.font = font(40);
     x.fillStyle = "rgba(244,241,234,.3)";
-    for (let k = 0; k < 2; k++) x.fillText("20.5 x 7.0 - 13", 1024 + k * 1024, H * 0.21);
+    for (let k = 0; k < 2; k++)
+      x.fillText("20.5 x 7.0 - 13", 1024 + k * 1024, H * 0.21);
   });
 }
 
@@ -190,7 +233,8 @@ function wheelTexture() {
 export function wheelUVs(g: THREE.BufferGeometry) {
   const p = g.attributes.position;
   let R = 0;
-  for (let i = 0; i < p.count; i++) R = Math.max(R, Math.hypot(p.getX(i), p.getY(i)));
+  for (let i = 0; i < p.count; i++)
+    R = Math.max(R, Math.hypot(p.getX(i), p.getY(i)));
   const uv = new Float32Array(p.count * 2);
   for (let i = 0; i < p.count; i++) {
     const x = p.getX(i);
@@ -204,7 +248,11 @@ export function wheelUVs(g: THREE.BufferGeometry) {
 
 export function wheelMaterial() {
   const map = wheelTexture();
-  return new THREE.MeshStandardMaterial({ map, metalness: 0.35, roughness: 0.62 });
+  return new THREE.MeshStandardMaterial({
+    map,
+    metalness: 0.35,
+    roughness: 0.62,
+  });
 }
 
 type Spec = {
@@ -220,7 +268,14 @@ type Spec = {
 // Decal placements live in livery-specs.json so the offline baker (scripts/bake-livery.mjs) uses the same data.
 const SPECS = specsJson as Spec[];
 
-type Baked = { tex: Spec["tex"]; p: string; n: string; uv: string; i?: string; w?: 2 | 4 }[];
+type Baked = {
+  tex: Spec["tex"];
+  p: string;
+  n: string;
+  uv: string;
+  i?: string;
+  w?: 2 | 4;
+}[];
 
 function b64Buf(b64: string) {
   const s = atob(b64);
@@ -242,7 +297,10 @@ function decalMaterial(map: THREE.Texture) {
 }
 
 /** Project the livery decals onto the car meshes (call while the model has an identity transform). */
-export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THREE.Mesh>, parent: THREE.Object3D) {
+export async function applyLivery(
+  meshes: Record<"red" | "white" | "carbon", THREE.Mesh>,
+  parent: THREE.Object3D,
+) {
   const [tex, baked] = await Promise.all([
     textures(),
     fetch("/models/enp-livery.json")
@@ -251,7 +309,8 @@ export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THR
   ]);
   const out: THREE.Mesh[] = [];
   const mats = new Map<string, THREE.Material>();
-  const matFor = (k: Spec["tex"]) => mats.get(k) ?? (mats.set(k, decalMaterial(tex[k])), mats.get(k)!);
+  const matFor = (k: Spec["tex"]) =>
+    mats.get(k) ?? (mats.set(k, decalMaterial(tex[k])), mats.get(k)!);
 
   // fast path: geometry pre-baked offline (no per-triangle decal clipping in the browser)
   if (baked?.length) {
@@ -260,7 +319,15 @@ export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THR
       g.setAttribute("position", new THREE.BufferAttribute(b64ToF32(b.p), 3));
       g.setAttribute("normal", new THREE.BufferAttribute(b64ToF32(b.n), 3));
       g.setAttribute("uv", new THREE.BufferAttribute(b64ToF32(b.uv), 2));
-      if (b.i) g.setIndex(new THREE.BufferAttribute(b.w === 4 ? new Uint32Array(b64Buf(b.i)) : new Uint16Array(b64Buf(b.i)), 1));
+      if (b.i)
+        g.setIndex(
+          new THREE.BufferAttribute(
+            b.w === 4
+              ? new Uint32Array(b64Buf(b.i))
+              : new Uint16Array(b64Buf(b.i)),
+            1,
+          ),
+        );
       const d = new THREE.Mesh(g, matFor(b.tex));
       d.renderOrder = 2;
       parent.add(d);
@@ -275,7 +342,10 @@ export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THR
   parent.updateMatrixWorld(true);
   for (const s of SPECS) {
     const targets = s.targets.map((k) => meshes[k]);
-    rc.set(new THREE.Vector3(...s.from), new THREE.Vector3(...s.dir).normalize());
+    rc.set(
+      new THREE.Vector3(...s.from),
+      new THREE.Vector3(...s.dir).normalize(),
+    );
     const hit = rc.intersectObjects(Object.values(meshes), false)[0];
     if (!hit || !targets.includes(hit.object as THREE.Mesh)) continue;
     helper.position.copy(hit.point);
@@ -283,7 +353,12 @@ export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THR
     helper.lookAt(hit.point.clone().sub(new THREE.Vector3(...s.dir)));
     helper.rotateZ(s.spin ?? 0);
     for (const t of targets) {
-      const g = new DecalGeometry(t, helper.position, helper.rotation, new THREE.Vector3(...s.size));
+      const g = new DecalGeometry(
+        t,
+        helper.position,
+        helper.rotation,
+        new THREE.Vector3(...s.size),
+      );
       if (g.attributes.position.count === 0) continue;
       const d = new THREE.Mesh(g, matFor(s.tex));
       d.renderOrder = 2;

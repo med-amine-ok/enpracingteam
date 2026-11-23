@@ -8,7 +8,7 @@ ENP RACING TEAM
 │
 ├── 1.1 Département Projet
 │ │
-│ ├── Project Manager — Formula Student + membre du bureau executif
+│ ├── Project Manager | Formula Student + membre du bureau executif
 │ │ └── Bengoumida Youcef
 │ │
 │ └── Projets
@@ -23,7 +23,7 @@ ENP RACING TEAM
 │ ├── HeadS + membre du bureau executif
 │ │ └── Choumane Anefal
 │ │
-│ └── Coordinator — Main Member
+│ └── Coordinator | Main Member
 │ └── Zaouadi Yacine
 │
 ├── 1.3 Médias & Journalisme Scientifique
@@ -34,7 +34,7 @@ ENP RACING TEAM
 │ ├── Head of Production + membre du bureau executif
 │ │ └── Meguellati Moncef
 │ │
-│ └── Producer — Main Members
+│ └── Producer | Main Members
 │ ├── Bendali Mohamed Hani
 │ └── Abdelmadjid Medjkane
 │
@@ -43,7 +43,7 @@ ENP RACING TEAM
 │ ├── Head + membre du bureau executif
 │ │ └── Mohamed Amine Ould Khaoua
 │ │
-│ ├── ERP Developer — Main Members
+│ ├── ERP Developer | Main Members
 │ │ ├── Malki Yasmine
 │ │ ├── Insaf Meriem Krim
 │ │ ├── Sadouni Yanis
@@ -61,7 +61,7 @@ ENP RACING TEAM
 ├── Head + membre du bureau executif
 │ └── Baouchi Hammouda
 │
-├── Logistics Coordinator — Main Members
+├── Logistics Coordinator | Main Members
 │ ├── Khaoula Chaib Bessou
 │ ├── Hiba Ibtissem Amrane
 │ └── Mohamed Idris Amalou
@@ -89,11 +89,11 @@ ENP RACING TEAM
    │ │
    │ ├── Lead + membre du bureau executif
    │ │ └── Chakib Tetbirt
-   │ ├── Steering System — Main Member
+   │ ├── Steering System | Main Member
    │ │ └── Abdelmadjid Ouldali
-   │ ├── Suspension Design — Main Member
+   │ ├── Suspension Design | Main Member
    │ │ └── Maya Arfi
-   │ ├── Vehicle Dynamics — Main Member
+   │ ├── Vehicle Dynamics | Main Member
    │ │ └── Akram Rami Hadji
    │ └── Junior Member
    │ └── Lamia Beddek
@@ -102,9 +102,9 @@ ENP RACING TEAM
    │ │
    │ ├── Lead + membre du bureau executif
    │ │ └── Moncef Abed
-   │ ├── Chassis Design — Main Member
+   │ ├── Chassis Design | Main Member
    │ │ └── Abbes Mohamed Issam
-   │ ├── Ergonomics — Main Member
+   │ ├── Ergonomics | Main Member
    │ │ └── Yacine Hadjout
    │ └── Junior Member
    │ └── Sohaib Mattalah
@@ -113,15 +113,15 @@ ENP RACING TEAM
    │ │
    │ ├── Lead + membre du bureau executif
    │ │ └── Youcef Ouarab
-   │ ├── Intake / Exhaust — Main Member
+   │ ├── Intake / Exhaust | Main Member
    │ │ └── Dekali Yacine
-   │ ├── Drivetrain — Main Member
+   │ ├── Drivetrain | Main Member
    │ │ └── Youcef Khaouni
-   │ ├── Braking System — Main Member
+   │ ├── Braking System | Main Member
    │ │ └── Mouassa Sara
-   │ ├── Cooling / Fuel System — Main Member
+   │ ├── Cooling / Fuel System | Main Member
    │ │ └── Ismail Didani
-   │ ├── EV Powertrain — Main Member
+   │ ├── EV Powertrain | Main Member
    │ │ └── Rayane Benchouhrani
    │ └── Junior Member
    │ └── Hiba Benkhaled
@@ -130,9 +130,9 @@ ENP RACING TEAM
    │ │
    │ ├── Lead + membre du bureau executif
    │ │ └── Abid Boussaha
-   │ ├── Aerodynamics & CFD — Main Member
+   │ ├── Aerodynamics & CFD | Main Member
    │ │ └── Abderrahmene Khelifi
-   │ ├── Chassis & Aero — Main Member
+   │ ├── Chassis & Aero | Main Member
    │ │ └── Manel Bekhouche
    │ └── Junior Member
    │ └── Fethallah Ouadah
@@ -161,7 +161,7 @@ ENP RACING TEAM
    │
    └── Development Phases
    │
-   ├── Phase 1 — EV Car
+   ├── Phase 1 | EV Car
    │ │
    │ ├── HV System
    │ │ ├── HV Battery & Battery Management
@@ -171,7 +171,7 @@ ENP RACING TEAM
    │ │ ├── HV Motors & Motor Data
    │ │ │ ├── Deghnouche Abdessamad
    │ │ │ ├── Yanir Louni
-   │ │ │ └── Islam Amrouche — Junior
+   │ │ │ └── Islam Amrouche | Junior
    │ │ │
    │ │ └── HV Wiring Harness
    │ │ ├── Amara Lyna Sarah
@@ -186,25 +186,25 @@ ENP RACING TEAM
    │ │ ├── Deghnouche Abdessamad
    │ │ ├── Yanir Louni
    │ │ ├── Bennouar Amine
-   │ │ ├── Ayoub Benadir — Junior
-   │ │ └── Amir Azzem — Junior
+   │ │ ├── Ayoub Benadir | Junior
+   │ │ └── Amir Azzem | Junior
    │ │
    │ └── Sensors & Data Acquisition
    │ ├── Bouabdallah Halim
    │ ├── Walid Mahmoudi
-   │ ├── Islam Amrouche — Junior
-   │ └── Ayoub Benadir — Junior
+   │ ├── Islam Amrouche | Junior
+   │ └── Ayoub Benadir | Junior
    │
-   └── Phase 2 — IC Car
+   └── Phase 2 | IC Car
    │
    ├── Wiring Harness
-   │ └── Members — TBD
+   │ └── Members | TBD
    │
    ├── Safety & Control Systems Design
-   │ └── Members — TBD
+   │ └── Members | TBD
    │
    ├── Sensors & Actuators
-   │ └── Members — TBD
+   │ └── Members | TBD
    │
    └── Embedded Systems
-   └── Members — TBD
+   └── Members | TBD

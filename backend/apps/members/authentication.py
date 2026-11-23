@@ -12,7 +12,7 @@ SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
 class CookieJWTAuthentication(JWTAuthentication):
     """
     Reads the access token from an Authorization header if present (mobile /
-    explicit bearer clients — no CSRF risk, browsers don't auto-attach custom
+    explicit bearer clients | no CSRF risk, browsers don't auto-attach custom
     headers cross-site). Otherwise falls back to the httpOnly access-token
     cookie (web). When the cookie path is used, unsafe methods must also
     carry a matching X-CSRF-Token header (double-submit), since the cookie

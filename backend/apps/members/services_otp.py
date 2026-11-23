@@ -20,8 +20,8 @@ class OTPError(Exception):
 
 def request_otp(email: str, ip: str | None) -> None:
     """
-    Always returns normally for an unknown/inactive email — never raises on
-    that case — so the caller can give a generic response and not leak
+    Always returns normally for an unknown/inactive email | never raises on
+    that case | so the caller can give a generic response and not leak
     whether the address is registered. Only raises for rate limiting.
     """
     if ip and not check_and_increment(f"otp:ip:{ip}", settings.OTP_IP_MAX_REQUESTS_PER_HOUR, 3600):
@@ -47,7 +47,7 @@ def request_otp(email: str, ip: str | None) -> None:
         _send_otp_email(member.email, code)
     except Exception:
         # Email delivery failed: kill the OTP immediately so it can't be
-        # guessed/used later, but DO NOT tell the caller — same generic
+        # guessed/used later, but DO NOT tell the caller | same generic
         # response either way, to avoid leaking delivery status. Log for
         # admin visibility only (no code, no address beyond the id).
         LoginOTP.objects.filter(pk=otp.pk).update(used_at=timezone.now())
@@ -80,7 +80,7 @@ def verify_otp(email: str, code: str, ip: str | None) -> Member:
     attempt's increment) INSIDE the block, which then exits normally and
     COMMITS. Only after the block has committed do we look at the outcome
     and raise if it failed. This guarantees a wrong-code attempt is
-    persisted even though the overall call "fails" — if we raised inside
+    persisted even though the overall call "fails" | if we raised inside
     the atomic block instead, Django would roll back everything written
     in it, silently erasing the failed-attempt record and defeating the
     attempt limit entirely.
@@ -114,7 +114,7 @@ def verify_otp(email: str, code: str, ip: str | None) -> Member:
         else:
             # select_for_update() above holds the row lock for the duration of
             # this block, so a concurrent verify attempt on the SAME otp row
-            # waits here and then sees this increment — no lost updates.
+            # waits here and then sees this increment | no lost updates.
             LoginOTP.objects.filter(pk=otp.pk).update(attempts=F("attempts") + 1)
 
     if not outcome["ok"]:

@@ -29,7 +29,7 @@ export const MEMBERS: Record<string, Member[]> = {
     { name: "Ibrahim Khial", role: "Executive Bureau" },
   ],
   projet: [
-    { name: "Youcef Bengoumida", role: "Project Manager — Formula Student" },
+    { name: "Youcef Bengoumida", role: "Project Manager | Formula Student" },
   ],
   formation: [
     { name: "Anefal Choumane", role: "Head" },
@@ -47,7 +47,11 @@ export const MEMBERS: Record<string, Member[]> = {
     { name: "Krim Meriem Insaf", role: "ERP Developer" },
     { name: "Yanis Sadouni", role: "ERP Developer" },
     { name: "Dyna Sourour Boukhedimi", role: "ERP Developer" },
-    { name: "Anis Abdeldjalil Boukhedimi", role: "Junior member", junior: true },
+    {
+      name: "Anis Abdeldjalil Boukhedimi",
+      role: "Junior member",
+      junior: true,
+    },
   ],
   business: [
     { name: "Boulebghal Youcef", role: "Member" },
@@ -68,7 +72,11 @@ export const MEMBERS: Record<string, Member[]> = {
     { name: "Amrane Hiba Ibtissem", role: "Logistics Coordinator" },
     { name: "Amalou Mohamed Idris", role: "Logistics Coordinator" },
     { name: "Al Hamarsheh Chaima", role: "Junior member", junior: true },
-    { name: "Bouhechiche Anas Abderrahim", role: "Junior member", junior: true },
+    {
+      name: "Bouhechiche Anas Abderrahim",
+      role: "Junior member",
+      junior: true,
+    },
     { name: "Ayoub Serir", role: "Junior member", junior: true },
   ],
   fs: [

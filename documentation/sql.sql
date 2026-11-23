@@ -12,11 +12,11 @@ Project ERP_FSAE {
 // ======================================================
 
 // Global permission level. "Head of Department" scope is defined
-// by the member's department_id — a head only manages their own dept.'''
+// by the member's department_id | a head only manages their own dept.'''
 
 Enum member_role {
   admin              // Bureau Executif / full system access
-  head_of_department  // Chef de Departement / Chef de Projet — manages their dept
+  head_of_department  // Chef de Departement / Chef de Projet | manages their dept
   member              // regular member
 }
 
@@ -194,12 +194,12 @@ Table media_contact {
   remarks text
   created_at timestamp
 
-  Note: 'From Journalistes/medias sheet — press & influencer outreach tracking'
+  Note: 'From Journalistes/medias sheet | press & influencer outreach tracking'
 }
 
 // ======================================================
 // 3. DOCUMENT MANAGEMENT
-// (files live on Google Drive — we only store the link + metadata)
+// (files live on Google Drive | we only store the link + metadata)
 // ======================================================
 
 Table document {
