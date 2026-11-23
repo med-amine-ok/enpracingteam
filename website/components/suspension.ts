@@ -8,7 +8,7 @@ export function buildSuspension(wheels: number[][]) {
   const group = new THREE.Group();
   const disposables: { dispose: () => void }[] = [];
   const d = <T extends { dispose: () => void }>(o: T) => (disposables.push(o), o);
-  const armMat = d(new THREE.MeshPhysicalMaterial({ color: 0x131417, metalness: 0.55, roughness: 0.35, clearcoat: 0.7 }));
+  const armMat = d(new THREE.MeshStandardMaterial({ color: 0x131417, metalness: 0.55, roughness: 0.35 }));
   const rodMat = d(new THREE.MeshStandardMaterial({ color: 0xb9bcc2, metalness: 0.95, roughness: 0.2 }));
   const uprightMat = d(new THREE.MeshStandardMaterial({ color: 0x8d9097, metalness: 0.9, roughness: 0.3 }));
   const geo = d(new THREE.CylinderGeometry(0.011, 0.011, 1, 8));

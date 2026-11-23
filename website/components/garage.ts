@@ -1,5 +1,9 @@
 import * as THREE from "three";
+
+/** texture-noise density (lowered on light devices) */
+const QUALITY = { k: 1 };
 import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 let rectInit = false;
 
@@ -32,7 +36,7 @@ function tex(w: number, h: number, draw: (x: CanvasRenderingContext2D) => void, 
 }
 
 function speckle(x: CanvasRenderingContext2D, w: number, h: number, n: number, a: number) {
-  for (let i = 0; i < n; i++) {
+  for (let i = 0, N = Math.round(n * QUALITY.k); i < N; i++) {
     const v = Math.random() < 0.5 ? 0 : 255;
     x.fillStyle = `rgba(${v},${v},${v},${Math.random() * a})`;
     x.fillRect(Math.random() * w, Math.random() * h, 1 + Math.random() * 2, 1 + Math.random() * 2);
@@ -191,39 +195,65 @@ async function bannerTex() {
   });
 }
 
+/** Algerian flag at official proportions (2:3): green / white halves, red crescent and star. */
 const flagTex = () =>
-  tex(600, 400, (x) => {
-    x.fillStyle = "#006233";
-    x.fillRect(0, 0, 300, 400);
+  tex(1500, 1000, (x) => {
+    const H = 1000;
+    const Wd = 1500;
+    x.fillStyle = "#006633";
+    x.fillRect(0, 0, Wd / 2, H);
     x.fillStyle = "#ffffff";
-    x.fillRect(300, 0, 300, 400);
-    x.fillStyle = "#d21034";
-    x.beginPath();
-    x.arc(300, 200, 100, 0, Math.PI * 2);
-    x.fill();
-    x.fillStyle = "#ffffff";
-    x.beginPath();
-    x.arc(330, 200, 82, 0, Math.PI * 2);
-    x.fill();
-    // red star
+    x.fillRect(Wd / 2, 0, Wd / 2, H);
+    const cx = Wd / 2;
+    const cy = H / 2;
+    // crescent = outer disc minus an inner disc offset towards the fly
+    const cres = document.createElement("canvas");
+    cres.width = Wd;
+    cres.height = H;
+    const c = cres.getContext("2d")!;
+    c.fillStyle = "#d21034";
+    c.beginPath();
+    c.arc(cx, cy, H * 0.25, 0, Math.PI * 2);
+    c.fill();
+    c.globalCompositeOperation = "destination-out";
+    c.beginPath();
+    c.arc(cx + H * 0.0625, cy, H * 0.2, 0, Math.PI * 2);
+    c.fill();
+    x.drawImage(cres, 0, 0);
+    // five-pointed star inside the crescent's opening, one point towards the hoist
+    const sx = cx + H * 0.099;
+    const R = H * 0.125;
+    const r = R * 0.382;
     x.fillStyle = "#d21034";
     x.beginPath();
     for (let i = 0; i < 10; i++) {
-      const a = -Math.PI / 2 + (i * Math.PI) / 5;
-      const r = i % 2 ? 22 : 55;
-      x.lineTo(345 + Math.cos(a) * r, 200 + Math.sin(a) * r);
+      const ang = Math.PI + (i * Math.PI) / 5;
+      const rad = i % 2 ? r : R;
+      x.lineTo(sx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad);
     }
+    x.closePath();
     x.fill();
-    // fold shading
-    for (let i = 0; i < 600; i += 100) {
-      const g = x.createLinearGradient(i, 0, i + 100, 0);
-      g.addColorStop(0, "rgba(0,0,0,.12)");
-      g.addColorStop(0.5, "rgba(255,255,255,.05)");
-      g.addColorStop(1, "rgba(0,0,0,.12)");
-      x.fillStyle = g;
-      x.fillRect(i, 0, 100, 400);
-    }
+    // fabric weave
+    x.globalAlpha = 0.09;
+    x.fillStyle = "#000";
+    for (let i = 0; i < Wd; i += 3) x.fillRect(i, 0, 1, H);
+    for (let j = 0; j < H; j += 3) x.fillRect(0, j, Wd, 1);
+    x.globalAlpha = 1;
   });
+
+const weaveTex = () =>
+  tex(256, 256, (x) => {
+    x.fillStyle = "#808080";
+    x.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 256; i += 4) {
+      for (let j = 0; j < 256; j += 4) {
+        x.fillStyle = (i + j) % 8 ? "#9a9a9a" : "#666";
+        x.fillRect(i, j, 2, 4);
+        x.fillStyle = (i + j) % 8 ? "#666" : "#9a9a9a";
+        x.fillRect(i + 2, j, 2, 4);
+      }
+    }
+  }, [10, 7]);
 
 const chestTex = () =>
   tex(256, 512, (x) => {
@@ -424,6 +454,8 @@ const posterTex = () =>
 // ---------------------------------------------------------------- build
 export type Garage = {
   group: THREE.Group;
+  /** advance animated details (flag cloth) */
+  tick: (t: number) => void;
   /** swap the placeholder tyres for the real wheel mesh */
   setTyreMesh: (geo: THREE.BufferGeometry, mat: THREE.Material) => void;
   /** resolves when banner + framed photos have loaded (time to capture reflections) */
@@ -433,7 +465,8 @@ export type Garage = {
   dispose: () => void;
 };
 
-export function buildGarage(): Garage {
+export function buildGarage(low = false): Garage {
+  QUALITY.k = low ? 0.35 : 1;
   if (!rectInit) {
     RectAreaLightUniformsLib.init();
     rectInit = true;
@@ -506,20 +539,21 @@ export function buildGarage(): Garage {
   for (const [x, z, i, shadow] of [
     [0, 0, 60, true],
   ] as [number, number, number, boolean][]) {
-    const s = new THREE.SpotLight(0xf3f6ff, i, 14, Math.PI / 3.2, 0.55, 1.4);
+    const s = new THREE.SpotLight(0xf3f6ff, low ? i * 1.8 : i, 14, Math.PI / 3.2, 0.55, 1.4);
     s.position.set(x, H - 0.5, z);
     s.target.position.set(x, 0, z);
     s.castShadow = shadow;
     if (shadow) {
-      s.shadow.mapSize.set(1024, 1024);
+      s.shadow.mapSize.set(low ? 512 : 1024, low ? 512 : 1024);
       s.shadow.bias = -0.0004;
     }
     s.userData.base = i;
     group.add(s, s.target);
     lights.push(s);
   }
-  for (const z of [-3.2, 0, 3.2]) {
-    const ra = new THREE.RectAreaLight(0xf4f7ff, z === 0 ? 15 : 11, 10, 0.35);
+  // one wide soft panel covering the three LED strips (area lights are expensive per pixel)
+  for (const z of low ? [] : [0]) {
+    const ra = new THREE.RectAreaLight(0xf4f7ff, 30, 10, 6.8);
     ra.position.set(0, H - 0.5, z);
     ra.rotation.x = -Math.PI / 2;
     ra.userData.base = ra.intensity;
@@ -548,13 +582,47 @@ export function buildGarage(): Garage {
     bannerMat.map = t;
     bannerMat.needsUpdate = true;
   }));
-  const flag = new THREE.Mesh(d(new THREE.PlaneGeometry(2.4, 1.6, 12, 1)), std({ map: d(flagTex()), roughness: 0.85, side: THREE.DoubleSide }));
-  const fp = flag.geometry.attributes.position;
-  for (let i = 0; i < fp.count; i++) fp.setZ(i, Math.sin(fp.getX(i) * 4) * 0.05);
-  flag.geometry.computeVertexNormals();
-  flag.position.set(-0.37, 2.25, -W / 2 + 0.07);
-  flag.scale.setScalar(0.75);
+  // fabric flag hanging from a rod: soft vertical folds that deepen towards the bottom,
+  // animated on the GPU (vertex shader) with analytic normals so the folds catch the light
+  const FW = 1.8;
+  const FH = 1.2;
+  const flagUniforms = { uTime: { value: 0 } };
+  const flagMat = std({ map: d(flagTex()), bumpMap: d(weaveTex()), bumpScale: 0.6, roughness: 0.92, side: THREE.DoubleSide });
+  flagMat.onBeforeCompile = (sh) => {
+    sh.uniforms.uTime = flagUniforms.uTime;
+    const fold = `
+      float fv = clamp((${(FH / 2).toFixed(3)} - position.y) / ${FH.toFixed(3)}, 0.0, 1.0); // 0 at rod, 1 at hem
+      float famp = 0.026 + 0.07 * fv;
+      float fph = position.x * 7.5 + sin(uTime * 0.35 + position.x * 1.3) * 0.6;
+      float fz = famp * sin(fph) + 0.012 * sin(position.x * 17.0 + uTime * 0.5) * fv;
+      float dzdx = famp * 7.5 * cos(fph) + 0.2 * cos(position.x * 17.0 + uTime * 0.5) * fv;
+      float dzdy = -0.05 / ${FH.toFixed(3)} * sin(fph);
+    `;
+    sh.vertexShader = "uniform float uTime;\n" + sh.vertexShader
+      .replace("#include <beginnormal_vertex>", "#include <beginnormal_vertex>\n" + fold + "\nobjectNormal = normalize(vec3(-dzdx, -dzdy, 1.0));")
+      .replace("#include <begin_vertex>", "#include <begin_vertex>\ntransformed.z += fz;\ntransformed.y -= 0.02 * fv * fv;");
+  };
+  const flag = new THREE.Mesh(d(new THREE.PlaneGeometry(FW, FH, 72, 28)), flagMat);
+  flag.position.set(-0.37, 2.25, -W / 2 + 0.11);
+  flag.castShadow = true;
+  flag.userData.dynamic = true;
   group.add(flag);
+  // rod + clips + soft shadow on the wall
+  const rodMetal = std({ color: 0x9da1a8, metalness: 0.9, roughness: 0.25 });
+  const rod = new THREE.Mesh(d(new THREE.CylinderGeometry(0.015, 0.015, FW + 0.2, 10)), rodMetal);
+  rod.rotation.z = Math.PI / 2;
+  rod.position.set(-0.37, 2.25 + FH / 2 + 0.02, -W / 2 + 0.11);
+  group.add(rod);
+  for (const dx of [-(FW / 2 + 0.06), FW / 2 + 0.06]) {
+    const bracket = new THREE.Mesh(d(new THREE.BoxGeometry(0.03, 0.03, 0.1)), rodMetal);
+    bracket.position.set(-0.37 + dx, 2.25 + FH / 2 + 0.02, -W / 2 + 0.06);
+    group.add(bracket);
+  }
+  for (let i = 0; i < 7; i++) {
+    const clip = new THREE.Mesh(d(new THREE.BoxGeometry(0.02, 0.05, 0.02)), rodMetal);
+    clip.position.set(-0.37 - FW / 2 + 0.05 + (i * (FW - 0.1)) / 6, 2.25 + FH / 2 - 0.005, -W / 2 + 0.115);
+    group.add(clip);
+  }
 
   // right wall (−z): pegboard + workbench + laptop
   const wood = std({ map: d(woodTex()), roughness: 0.65 });
@@ -605,6 +673,7 @@ export function buildGarage(): Garage {
       t.position.set(x + (Math.random() - 0.5) * 0.05, 0.11 + i * 0.22, z);
       t.userData.stack = i;
       tyres.push(t);
+      t.userData.dynamic = true;
       t.castShadow = t.receiveShadow = true;
       group.add(t);
     }
@@ -711,6 +780,7 @@ export function buildGarage(): Garage {
     wheel.scale.setScalar(1.05);
     wheel.position.set(L / 2 - 0.35, 0.5 + i * 0.55, 5.4);
     tyres.push(wheel);
+    wheel.userData.dynamic = true;
     wheel.rotation.y = Math.PI / 2;
     wheel.castShadow = true;
     group.add(wheel);
@@ -797,10 +867,9 @@ export function buildGarage(): Garage {
     w.rotation.y = -Math.PI / 2;
     group.add(w);
   }
-  const sky = new THREE.RectAreaLight(0xcfe0ff, 3, 8, 1);
-  sky.position.set(L / 2 - 0.1, H - 0.8, 0);
-  sky.lookAt(0, 1, 0);
-  sky.userData.base = 3;
+  const sky = new THREE.PointLight(0xcfe0ff, 5, 12, 2);
+  sky.position.set(L / 2 - 1, H - 0.9, 0);
+  sky.userData.base = 5;
   group.add(sky);
   lights.push(sky);
 
@@ -829,9 +898,41 @@ export function buildGarage(): Garage {
   door.rotation.y = Math.PI / 2;
   door.position.set(-L / 2 + 0.05, DOOR_H / 2, 0);
   door.castShadow = true;
+  door.userData.dynamic = true;
   group.add(door);
   const drum = box(0.5, 0.5, DOOR_W + 0.4, steel, -L / 2 + 0.35, DOOR_H + 0.3, 0);
   drum.castShadow = false;
+
+  // merge every static mesh that shares a material into one draw call
+  group.updateMatrixWorld(true);
+  const buckets = new Map<THREE.Material, THREE.Mesh[]>();
+  group.traverse((o) => {
+    const m = o as THREE.Mesh;
+    if (!m.isMesh || m.userData.dynamic || Array.isArray(m.material) || (m as unknown as THREE.InstancedMesh).isInstancedMesh) return;
+    const list = buckets.get(m.material as THREE.Material) ?? [];
+    list.push(m);
+    buckets.set(m.material as THREE.Material, list);
+  });
+  const inv = new THREE.Matrix4().copy(group.matrixWorld).invert();
+  for (const [mat, meshes] of buckets) {
+    if (meshes.length < 2) continue;
+    const geos = meshes.map((m) => {
+      const g = (m.geometry.index ? m.geometry : m.geometry).clone();
+      g.applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, m.matrixWorld));
+      for (const key of Object.keys(g.attributes)) if (!["position", "normal", "uv"].includes(key)) g.deleteAttribute(key);
+      return g.index ? g : g;
+    });
+    const allIndexed = geos.every((g) => g.index);
+    const merged = mergeGeometries(allIndexed ? geos : geos.map((g) => (g.index ? g.toNonIndexed() : g)), false);
+    geos.forEach((g) => g.dispose());
+    if (!merged) continue;
+    const mm = new THREE.Mesh(d(merged), mat);
+    mm.castShadow = !low && meshes.some((m) => m.castShadow);
+    mm.receiveShadow = meshes.some((m) => m.receiveShadow);
+    meshes.forEach((m) => m.parent?.remove(m));
+    group.add(mm);
+  }
+  if (low) group.traverse((o) => ((o as THREE.Mesh).isMesh && o !== door ? (o.castShadow = false) : null));
 
   const setDoor = (k: number) => {
     // roll up into the drum: shrink + lift
@@ -853,5 +954,5 @@ export function buildGarage(): Garage {
       if (typeof t.userData.stack === "number") t.position.y = 0.118 + t.userData.stack * 0.236;
     });
   };
-  return { group, setTyreMesh, ready: Promise.all(pending).then(() => undefined), setDoor, setLights, dispose: () => disposables.forEach((x) => x.dispose()) };
+  return { group, tick: (t: number) => (flagUniforms.uTime.value = t), setTyreMesh, ready: Promise.all(pending).then(() => undefined), setDoor, setLights, dispose: () => disposables.forEach((x) => x.dispose()) };
 }

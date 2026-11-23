@@ -1,4 +1,7 @@
 import * as THREE from "three";
+
+/** texture-noise density (lowered on light devices) */
+const QUALITY = { k: 1 };
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 
 /*
@@ -26,7 +29,7 @@ function tex(w: number, h: number, draw: (x: CanvasRenderingContext2D) => void, 
 }
 
 function noise(x: CanvasRenderingContext2D, w: number, h: number, n: number, rgb: (r: number) => string, size = 2) {
-  for (let i = 0; i < n; i++) {
+  for (let i = 0, N = Math.round(n * QUALITY.k); i < N; i++) {
     x.fillStyle = rgb(Math.random());
     x.fillRect(Math.random() * w, Math.random() * h, size * Math.random() + 0.6, size * Math.random() + 0.6);
   }
@@ -227,7 +230,8 @@ export type Circuit = {
   dispose: () => void;
 };
 
-export function buildCircuit(): Circuit {
+export function buildCircuit(low = false): Circuit {
+  QUALITY.k = low ? 0.35 : 1;
   const group = new THREE.Group();
   const disposables: { dispose: () => void }[] = [];
   const track = <T extends { dispose: () => void }>(o: T) => (disposables.push(o), o);
@@ -440,9 +444,9 @@ export function buildCircuit(): Circuit {
   group.add(standGroup);
 
   // trees around the venue: each tree = trunk + 3 clustered, colour-varied crowns
-  const treeCount = 460;
+  const treeCount = low ? 180 : 300;
   const trunks = new THREE.InstancedMesh(track(new THREE.CylinderGeometry(0.22, 0.34, 3.4, 7)), mat(new THREE.MeshStandardMaterial({ color: 0x4a3a2a, roughness: 1, transparent: true })), treeCount);
-  const crownGeo = track(new THREE.IcosahedronGeometry(2.6, 3));
+  const crownGeo = track(new THREE.IcosahedronGeometry(2.6, 1));
   // lumpy foliage: displace vertices a little
   const cp = crownGeo.attributes.position;
   const tmp = new THREE.Vector3();

@@ -101,11 +101,25 @@ export default function ScrollScene() {
       section.classList.add("no-webgl");
       return;
     }
-    renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 900 ? 1.5 : 2));
+    // quality tier: phones / low-memory / few-core devices get a lighter renderer
+    const nav = navigator as Navigator & { deviceMemory?: number };
+    const low = innerWidth < 900 || (nav.deviceMemory ?? 8) <= 4 || (navigator.hardwareConcurrency ?? 8) <= 4;
+    const maxPR = Math.min(devicePixelRatio, low ? 1 : 1.5);
+    const minPR = Math.min(maxPR, low ? 0.7 : 0.85);
+    let pixelRatio = maxPR;
+    renderer.setPixelRatio(pixelRatio);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
     renderer.shadowMap.enabled = true;
     renderer.localClippingEnabled = true;
+    if (process.env.NODE_ENV !== "production")
+      (window as unknown as { __three: () => object }).__three = () => ({
+        calls: renderer.info.render.calls,
+        triangles: renderer.info.render.triangles,
+        textures: renderer.info.memory.textures,
+        geometries: renderer.info.memory.geometries,
+        pixelRatio: renderer.getPixelRatio(),
+      });
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setClearColor(0x07070a, 1);
 
@@ -133,7 +147,12 @@ export default function ScrollScene() {
     scene.environment = envStudio;
 
     // ---------- circuit + sky (daylight), built once
-    const circuit = buildCircuit();
+    let warm = false; // true once every shader program is compiled
+    performance.mark("enp:start");
+    // start downloading the car straight away so it overlaps the scene build below
+    const modelPromise = fetchModel((f) => (telemetry.load = f));
+    const circuit = buildCircuit(low);
+    performance.mark("enp:circuit");
     circuit.sky.scale.setScalar(2000);
     const skyScene = new THREE.Scene();
     skyScene.add(circuit.sky);
@@ -156,14 +175,13 @@ export default function ScrollScene() {
     scene.add(dayHemi);
     const sunLight = new THREE.DirectionalLight(0xfff1dc, 0);
     sunLight.castShadow = true;
-    sunLight.shadow.mapSize.set(2048, 2048);
+    sunLight.shadow.mapSize.set(low ? 512 : 1024, low ? 512 : 1024);
     sunLight.shadow.bias = -0.0004;
     sunLight.shadow.normalBias = 0.03;
     Object.assign(sunLight.shadow.camera, { left: -22, right: 22, top: 22, bottom: -22, near: 1, far: 200 });
     scene.add(sunLight, sunLight.target);
     const key = new THREE.DirectionalLight(0xffffff, 2.2);
     key.position.set(-3, 8, 4);
-    key.castShadow = true;
     key.shadow.mapSize.set(2048, 2048);
     key.shadow.bias = -0.0003;
     key.shadow.normalBias = 0.02;
@@ -171,7 +189,8 @@ export default function ScrollScene() {
     scene.add(key);
 
     // ---------- the workshop (hero) — the car starts parked in the team garage
-    const garage = buildGarage();
+    const garage = buildGarage(low);
+    performance.mark("enp:garage");
     scene.add(garage.group);
 
     // ---------- car
@@ -179,18 +198,19 @@ export default function ScrollScene() {
     car.rotation.order = "YXZ";
     const model = new THREE.Group();
     car.add(model);
-    scene.add(car);
+    // the car joins the scene only after its shaders are compiled (see model load below)
     const frontWheels: THREE.Group[] = [];
     const spinners: THREE.Group[] = [];
 
-    const paint = new THREE.MeshPhysicalMaterial({
-      color: 0xe2321f, metalness: 0.25, roughness: 0.24, clearcoat: 1, clearcoatRoughness: 0.04, side: THREE.DoubleSide,
-    });
-    const white = new THREE.MeshPhysicalMaterial({
-      color: 0xf1f1ec, metalness: 0.15, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.08, side: THREE.DoubleSide,
-    });
-    const carbon = new THREE.MeshPhysicalMaterial({
-      color: 0x111216, metalness: 0.55, roughness: 0.38, clearcoat: 0.6, clearcoatRoughness: 0.2, side: THREE.DoubleSide,
+    // clearcoat paint on capable devices; light devices get the (much cheaper) standard shader
+    const paint = low
+      ? new THREE.MeshStandardMaterial({ color: 0xe2321f, metalness: 0.3, roughness: 0.2, side: THREE.DoubleSide })
+      : new THREE.MeshPhysicalMaterial({ color: 0xe2321f, metalness: 0.25, roughness: 0.24, clearcoat: 1, clearcoatRoughness: 0.04, side: THREE.DoubleSide });
+    const white = low
+      ? new THREE.MeshStandardMaterial({ color: 0xf1f1ec, metalness: 0.15, roughness: 0.3, side: THREE.DoubleSide })
+      : new THREE.MeshPhysicalMaterial({ color: 0xf1f1ec, metalness: 0.15, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.08, side: THREE.DoubleSide });
+    const carbon = new THREE.MeshStandardMaterial({
+      color: 0x111216, metalness: 0.55, roughness: 0.38, side: THREE.DoubleSide,
     });
     const tyre = wheelMaterial();
     // the real car's bodywork stops behind the main hoop: clip the mesh there (plane kept in world space)
@@ -212,9 +232,10 @@ export default function ScrollScene() {
     ro.observe(canvas);
     onResize();
 
-    fetchModel((f) => (telemetry.load = f))
+    modelPromise
       .then(async (m) => {
         if (disposed) return;
+        performance.mark("enp:model");
         const parts = {
           red: new THREE.Mesh(geometry(m.red), paint),
           white: new THREE.Mesh(geometry(m.white), white),
@@ -222,6 +243,7 @@ export default function ScrollScene() {
         };
         model.add(parts.red, parts.white, parts.carbon);
         // #19 livery — projected while the model still has an identity transform
+        performance.mark("enp:meshes");
         const decals = await applyLivery(parts, model).catch(() => [] as THREE.Mesh[]);
         // only bodywork decals get the rear cut (wing endplates sit further back and must stay)
         decals.forEach((dm) => {
@@ -255,6 +277,13 @@ export default function ScrollScene() {
         car.traverse((o) => {
           if ((o as THREE.Mesh).isMesh) o.castShadow = true;
         });
+        performance.mark("enp:livery");
+        // warm up: compile all programs now (circuit + sky temporarily visible) instead of mid-scroll
+        // compile the car's programs in parallel while it is still off-scene, then add it
+        await renderer.compileAsync(car, camera, scene).catch(() => undefined);
+        if (disposed) return;
+        scene.add(car);
+        performance.mark("enp:compiled");
         telemetry.load = 1;
       })
       .catch(() => {
@@ -264,7 +293,12 @@ export default function ScrollScene() {
 
     // ---------- real reflections: capture the finished garage into the environment map
     let envGarage: THREE.Texture | null = null;
-    garage.ready.then(() =>
+    const capture = () => {
+      if (disposed) return;
+      if (!warm) {
+        setTimeout(capture, 200);
+        return;
+      }
       requestAnimationFrame(() => {
         if (disposed) return;
         const carVis = car.visible;
@@ -279,8 +313,9 @@ export default function ScrollScene() {
         car.visible = carVis;
         dome.visible = domeVis;
         circuit.group.visible = cgVis;
-      }),
-    );
+      });
+    };
+    garage.ready.then(capture);
 
     // ---------- interaction
     let mx = 0;
@@ -312,6 +347,8 @@ export default function ScrollScene() {
     const yAxis = new THREE.Vector3(0, 1, 0);
     const sunDir = circuit.sun.clone().normalize();
     let last = performance.now();
+    let frameAvg = 16;
+    let frameCount = 0;
     let first = true;
 
     const sample = (p: number) => {
@@ -331,6 +368,10 @@ export default function ScrollScene() {
 
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
+      if (!warm) {
+        last = now;
+        return; // shaders still compiling in parallel — don't block the main thread with a sync compile
+      }
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       if (!visible && !first) {
@@ -427,6 +468,7 @@ export default function ScrollScene() {
       const day = smooth(band(p, 0.54, 0.9));
       const sunK = smooth(band(day, 0.12, 1));
       garage.setDoor(doorOpen);
+      if (garage.group.visible) garage.tick(time);
       garage.setLights(1 - 0.4 * day);
       garage.group.visible = distance < 140;
       circuit.setOpacity(p > 0.44 ? 1 : 0);
@@ -448,7 +490,32 @@ export default function ScrollScene() {
       fog.near = THREE.MathUtils.lerp(30, 140, day);
       fog.far = THREE.MathUtils.lerp(90, 1900, day);
 
+      // sun shadows stay enabled (toggling would recompile every shader); while inside the
+      // garage its shadow frustum collapses so the pass renders nothing
+      const sunCam = sunLight.shadow.camera;
+      const ext = day > 0.05 ? 22 : 0.01;
+      if (sunCam.right !== ext) {
+        Object.assign(sunCam, { left: -ext, right: ext, top: ext, bottom: -ext });
+        sunCam.updateProjectionMatrix();
+      }
+
       renderer.render(scene, camera);
+
+      // adaptive resolution: drop pixel ratio when frames are slow, recover when there is headroom
+      frameAvg += (dt * 1000 - frameAvg) * 0.05;
+      if (++frameCount > 90) {
+        if (frameAvg > 30 && pixelRatio > minPR) {
+          pixelRatio = Math.max(minPR, pixelRatio - 0.1);
+          renderer.setPixelRatio(pixelRatio);
+          onResize();
+          frameCount = 0;
+        } else if (frameAvg < 18 && pixelRatio < maxPR) {
+          pixelRatio = Math.min(maxPR, pixelRatio + 0.1);
+          renderer.setPixelRatio(pixelRatio);
+          onResize();
+          frameCount = 0;
+        }
+      }
       if (first) {
         first = false;
         telemetry.ready = true;
@@ -477,6 +544,20 @@ export default function ScrollScene() {
       if (hintRef.current) hintRef.current.style.opacity = String(1 - band(p, 0, 0.05));
       if (vignetteRef.current) vignetteRef.current.style.opacity = String(race);
     };
+    // compile every program in parallel (KHR_parallel_shader_compile) before the first frame
+    (async () => {
+      const g = circuit.group.visible;
+      const sk = circuit.sky.visible;
+      circuit.group.visible = circuit.sky.visible = true;
+      onResize();
+      camera.position.set(-4.6, 1.45, 4.4);
+      camera.lookAt(0, 0.4, 0);
+      await renderer.compileAsync(scene, camera).catch(() => undefined);
+      circuit.group.visible = g;
+      circuit.sky.visible = sk;
+      performance.mark("enp:warm");
+      warm = true;
+    })();
     raf = requestAnimationFrame(tick);
 
     return () => {

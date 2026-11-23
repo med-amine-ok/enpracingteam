@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { DecalGeometry } from "three/examples/jsm/geometries/DecalGeometry.js";
+import specsJson from "./livery-specs.json";
 
 /*
  * Livery of the ENP Racing Team car #19 (FS UK 2026), applied to the generic FS mesh:
@@ -216,30 +217,61 @@ type Spec = {
   targets: ("red" | "white" | "carbon")[];
 };
 
-const side = (z: 1 | -1, s: Omit<Spec, "dir" | "from"> & { at: [number, number] }): Spec => ({
-  ...s,
-  from: [s.at[0], s.at[1], 3 * z],
-  dir: [0, 0, -z],
-});
+// Decal placements live in livery-specs.json so the offline baker (scripts/bake-livery.mjs) uses the same data.
+const SPECS = specsJson as Spec[];
 
-const SPECS: Spec[] = [1, -1].flatMap((z) => [
-  side(z as 1 | -1, { tex: "sidepod", at: [-0.8, 0.135], size: [0.78, 0.085, 0.4], targets: ["white"] }),
-  side(z as 1 | -1, { tex: "body", at: [-0.18, 0.44], size: [0.42, 0.1, 0.3], targets: ["red"] }),
-  side(z as 1 | -1, { tex: "noseText", at: [0.12, 0.28], size: [0.56, 0.05, 0.3], targets: ["red"] }),
-  side(z as 1 | -1, { tex: "sideNumber", at: [-0.56, 0.4], size: [0.13, 0.13, 0.3], targets: ["red"] }),
-  side(z as 1 | -1, { tex: "stickers", at: [-0.88, 0.42], size: [0.46, 0.18, 0.3], targets: ["red"] }),
-  side(z as 1 | -1, { tex: "fsSticker", at: [0.32, 0.38], size: [0.13, 0.065, 0.3], targets: ["red"] }),
-  side(z as 1 | -1, { tex: "endplate", at: [-1.72, 0.86], size: [0.42, 0.42, 0.3], targets: ["carbon"] }),
-  side(z as 1 | -1, { tex: "wingLogo", at: [0.72, 0.28], size: [0.26, 0.26, 0.3], targets: ["carbon"] }),
-]);
-SPECS.push({ tex: "roundel", from: [0.3, 3, 0], dir: [0, -1, 0], size: [0.2, 0.2, 0.3], spin: Math.PI / 2, targets: ["red", "white"] });
+type Baked = { tex: Spec["tex"]; p: string; n: string; uv: string; i?: string; w?: 2 | 4 }[];
+
+function b64Buf(b64: string) {
+  const s = atob(b64);
+  const u = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+  return u.buffer;
+}
+const b64ToF32 = (b64: string) => new Float32Array(b64Buf(b64));
+
+function decalMaterial(map: THREE.Texture) {
+  return new THREE.MeshStandardMaterial({
+    map,
+    transparent: true,
+    depthWrite: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -4,
+    roughness: 0.3,
+  });
+}
 
 /** Project the livery decals onto the car meshes (call while the model has an identity transform). */
 export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THREE.Mesh>, parent: THREE.Object3D) {
-  const tex = await textures();
+  const [tex, baked] = await Promise.all([
+    textures(),
+    fetch("/models/enp-livery.json")
+      .then((r) => (r.ok ? (r.json() as Promise<Baked>) : null))
+      .catch(() => null),
+  ]);
+  const out: THREE.Mesh[] = [];
+  const mats = new Map<string, THREE.Material>();
+  const matFor = (k: Spec["tex"]) => mats.get(k) ?? (mats.set(k, decalMaterial(tex[k])), mats.get(k)!);
+
+  // fast path: geometry pre-baked offline (no per-triangle decal clipping in the browser)
+  if (baked?.length) {
+    for (const b of baked) {
+      const g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.BufferAttribute(b64ToF32(b.p), 3));
+      g.setAttribute("normal", new THREE.BufferAttribute(b64ToF32(b.n), 3));
+      g.setAttribute("uv", new THREE.BufferAttribute(b64ToF32(b.uv), 2));
+      if (b.i) g.setIndex(new THREE.BufferAttribute(b.w === 4 ? new Uint32Array(b64Buf(b.i)) : new Uint16Array(b64Buf(b.i)), 1));
+      const d = new THREE.Mesh(g, matFor(b.tex));
+      d.renderOrder = 2;
+      parent.add(d);
+      out.push(d);
+    }
+    return out;
+  }
+
+  // fallback: project at runtime
   const rc = new THREE.Raycaster();
   const helper = new THREE.Object3D();
-  const out: THREE.Mesh[] = [];
   parent.updateMatrixWorld(true);
   for (const s of SPECS) {
     const targets = s.targets.map((k) => meshes[k]);
@@ -250,20 +282,10 @@ export async function applyLivery(meshes: Record<"red" | "white" | "carbon", THR
     // project straight along the ray (keeps text level), not along the facet normal
     helper.lookAt(hit.point.clone().sub(new THREE.Vector3(...s.dir)));
     helper.rotateZ(s.spin ?? 0);
-    const mat = new THREE.MeshPhysicalMaterial({
-      map: tex[s.tex],
-      transparent: true,
-      depthWrite: false,
-      polygonOffset: true,
-      polygonOffsetFactor: -4,
-      roughness: 0.3,
-      clearcoat: 1,
-      clearcoatRoughness: 0.08,
-    });
     for (const t of targets) {
       const g = new DecalGeometry(t, helper.position, helper.rotation, new THREE.Vector3(...s.size));
       if (g.attributes.position.count === 0) continue;
-      const d = new THREE.Mesh(g, mat);
+      const d = new THREE.Mesh(g, matFor(s.tex));
       d.renderOrder = 2;
       parent.add(d);
       out.push(d);

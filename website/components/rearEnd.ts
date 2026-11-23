@@ -11,7 +11,7 @@ export function buildRearEnd() {
   const disposables: { dispose: () => void }[] = [];
   const d = <T extends { dispose: () => void }>(o: T) => (disposables.push(o), o);
 
-  const frameMat = d(new THREE.MeshPhysicalMaterial({ color: 0x141518, metalness: 0.6, roughness: 0.35, clearcoat: 0.6 }));
+  const frameMat = d(new THREE.MeshStandardMaterial({ color: 0x141518, metalness: 0.6, roughness: 0.35 }));
   const engineMat = d(new THREE.MeshStandardMaterial({ color: 0x5d6168, metalness: 0.85, roughness: 0.38 }));
   const darkMat = d(new THREE.MeshStandardMaterial({ color: 0x1c1d21, metalness: 0.5, roughness: 0.5 }));
   const chrome = d(new THREE.MeshStandardMaterial({ color: 0xd9dbe0, metalness: 1, roughness: 0.16 }));
