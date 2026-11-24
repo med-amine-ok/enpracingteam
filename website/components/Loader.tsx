@@ -8,7 +8,7 @@ const FACTS = [
   "0–100 km/h in 5 s",
   "314 kg",
   "Top speed 200 km/h",
-  "RWD · 4-speed sequential",
+  "RWD · 6-speed sequential",
   "Best Newcomer · FS UK 2026",
 ];
 const LEDS = 15;
@@ -25,7 +25,7 @@ const KEYS_BLOCKED = new Set([
 
 /**
  * Start sequence. Scrolling is locked until the 3D scene is ready; meanwhile visitors can rev the
- * engine (hold anywhere or Space), shifting through the 4 gears, while the 5 start lights fill with
+ * engine (hold anywhere or Space), shifting through the 6 gears, while the 5 start lights fill with
  * loading progress. When the lights go out, a click measures their reaction time.
  */
 export default function Loader() {
@@ -176,9 +176,9 @@ export default function Loader() {
 
       // rev: rises while held, auto-shifts at the limiter through 4 gears, falls when released
       if (held) {
-        rpm += dt * (1.25 - gear * 0.17);
+        rpm += dt * (1.3 - gear * 0.13);
         if (rpm >= 1) {
-          if (gear < 4) {
+          if (gear < 6) {
             gear++;
             rpm = 0.55;
           } else rpm = 0.96 + Math.random() * 0.04; // limiter bounce

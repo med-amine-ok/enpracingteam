@@ -21,9 +21,9 @@ import {
   THIS_SEASON,
   TIERS,
   TIMELINE,
-  VALUES,
-  WHY_PARTNER,
 } from "@/lib/content";
+
+const ordinal = (n: number) => (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] ?? "th");
 
 const Y26 = CAR_YEARS.y2026;
 const Y27 = CAR_YEARS.y2027;
@@ -207,42 +207,6 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="about-grid">
-              <figure className="about-photo" data-clip>
-                <div className="about-photo-inner" data-parallax="0.18">
-                  <Image
-                    src="/gallery/workshop.jpg"
-                    alt="ENP Racing Team students assembling the car in the ENP workshop"
-                    fill
-                    sizes="(max-width: 900px) 100vw, 60vw"
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-                <figcaption>
-                  <span className="cap-num">ENP</span>
-                  <span>
-                    The workshop
-                    <small>National Polytechnic School · Algiers</small>
-                  </span>
-                </figcaption>
-              </figure>
-              <div className="about-text">
-                <p data-reveal>{ABOUT.p1}</p>
-                <p data-reveal data-delay="0.1">
-                  {ABOUT.p2}
-                </p>
-                <ol className="values" data-stagger>
-                  {VALUES.map((v, i) => (
-                    <li className="value" key={v.title}>
-                      <span className="value-n">V{i + 1}</span>
-                      <h3>{v.title}</h3>
-                      <p>{v.text}</p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-
             <div className="readout-head">
               <span className="sec-code">DATA</span>
               <span>ENP Racing Team in numbers</span>
@@ -287,7 +251,7 @@ export default function Home() {
             </div>
             {TIMELINE.map((t, i) => (
               <article
-                className={`tl-card ${i === 4 ? "is-key" : ""}`}
+                className={`tl-card ${i === 5 ? "is-key" : ""}`}
                 key={t.title}
               >
                 <Marks />
@@ -338,7 +302,7 @@ export default function Home() {
                       <div className="gearbox">
                         <div className="gearbox-gate" aria-hidden>
                           <span>+</span>
-                          {[4, 3, 2, 1].map((g) => (
+                          {[6, 5, 4, 3, 2, 1].map((g) => (
                             <i key={g}>{g}</i>
                           ))}
                           <i className="n">N</i>
@@ -347,7 +311,7 @@ export default function Home() {
                         <div>
                           <div className="gauge-key">{CAR.drivetrain.key}</div>
                           <b className="gearbox-val">RWD</b>
-                          <p>4-speed sequential gearbox</p>
+                          <p>6-speed sequential gearbox</p>
                         </div>
                       </div>
                     </div>
@@ -370,35 +334,6 @@ export default function Home() {
                         </span>
                       </figcaption>
                     </figure>
-                  </div>
-                  <div className="year-did">
-                    <div className="scrut">
-                      <span className="sec-code">SCRUT</span>
-                      <div className="scrut-num">
-                        <span data-count={Y26.scrutineering.value}>
-                          {Y26.scrutineering.value}
-                        </span>
-                        <em>{Y26.scrutineering.suffix}</em>
-                      </div>
-                      <div className="scrut-bar" aria-hidden>
-                        <i style={{ width: `${Y26.scrutineering.value}%` }} />
-                      </div>
-                      <p>{Y26.scrutineering.label}</p>
-                    </div>
-                    <div>
-                      <h4 className="list-title">
-                        <span className="sec-code">DID</span> What we did with
-                        it
-                      </h4>
-                      <ol className="checklist">
-                        {Y26.did.map((d) => (
-                          <li key={d}>
-                            <span className="check" aria-hidden />
-                            {d}
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
                   </div>
                 </div>,
                 <div key="27" className="year">
@@ -495,45 +430,57 @@ export default function Home() {
 
                 <div className="board" data-reveal="right" data-delay="0.1">
                   <div className="board-head">
-                    <span>Static events</span>
-                    <span>Points</span>
+                    <span>Event</span>
+                    <span>Ranking</span>
                   </div>
                   <ul className="board-rows">
-                    {LAST_SEASON.scores.map((s, i) => (
-                      <li key={s.key}>
-                        <span className="board-pos-n">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="board-key">{s.key}</span>
+                    {LAST_SEASON.rankings.map((r, i) => (
+                      <li key={r.key}>
+                        <span className="board-pos-n">{String(i + 1).padStart(2, "0")}</span>
+                        <span className="board-key">{r.key}</span>
                         <span className="board-val">
-                          <span data-count={s.value} data-decimals={s.decimals}>
-                            {s.value}
-                          </span>
+                          <span data-count={r.rank}>{r.rank}</span>
+                          <sup>{ordinal(r.rank)}</sup>
+                          <small>/ {r.of}</small>
                         </span>
                       </li>
                     ))}
+                    <li className="board-total">
+                      <span className="board-pos-n">FS</span>
+                      <span className="board-key">{LAST_SEASON.overall.key}</span>
+                      <span className="board-val">
+                        <span data-count={LAST_SEASON.overall.rank}>{LAST_SEASON.overall.rank}</span>
+                        <sup>{ordinal(LAST_SEASON.overall.rank)}</sup>
+                        <small>/ {LAST_SEASON.overall.of}</small>
+                      </span>
+                    </li>
                   </ul>
-                  <div className="board-foot">
-                    <span className="led" /> Chassis validated · 80% technical
-                    scrutineering
-                  </div>
                 </div>
               </div>
             </div>
 
             <div className="season-lists">
-              <div>
+              <div className="stages" data-reveal>
                 <h3 className="list-title">
-                  <span className="sec-code">ACH</span> Achievements
+                  <span className="sec-code">STG</span> Scrutineering
                 </h3>
-                <ol className="checklist" data-stagger>
-                  {LAST_SEASON.achievements.map((a) => (
-                    <li key={a}>
-                      <span className="check" aria-hidden />
-                      {a}
-                    </li>
-                  ))}
-                </ol>
+                <div className="stage-row">
+                  <span className="stage-key">Chassis</span>
+                  <span className="stage-ok">
+                    <span className="check" aria-hidden /> {LAST_SEASON.stages.chassis}
+                  </span>
+                </div>
+                <div className="stage-big">
+                  <span className="stage-key">Technical scrutineering</span>
+                  <div className="stage-num">
+                    <span data-count={LAST_SEASON.stages.scrutineering}>{LAST_SEASON.stages.scrutineering}</span>
+                    <em>%</em>
+                    <small>completed</small>
+                  </div>
+                  <div className="scrut-bar" aria-hidden>
+                    <i style={{ width: `${LAST_SEASON.stages.scrutineering}%` }} />
+                  </div>
+                </div>
               </div>
               <div>
                 <h3 className="list-title">
@@ -668,19 +615,6 @@ export default function Home() {
                 desc="Every contribution directly funds parts, tools, software or travel to competitions."
               />
             </div>
-
-            <ol className="why" data-stagger>
-              {WHY_PARTNER.map((w) => (
-                <li className="why-row" key={w.n}>
-                  <span className="why-n">{w.n}</span>
-                  <h3>{w.title}</h3>
-                  <p>{w.text}</p>
-                  <span className="why-go">
-                    <Icon name="arrow" />
-                  </span>
-                </li>
-              ))}
-            </ol>
 
             <div className="grid-wrap">
               <div className="grid-head">

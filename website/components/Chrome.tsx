@@ -48,7 +48,7 @@ export default function Chrome() {
       shown += (target - shown) * 0.1;
       const v = Math.round(shown);
       if (kmhRef.current) kmhRef.current.textContent = String(v).padStart(3, "0");
-      if (gearRef.current) gearRef.current.textContent = v < 2 ? "N" : String(Math.min(4, 1 + Math.floor(v / 52)));
+      if (gearRef.current) gearRef.current.textContent = v < 2 ? "N" : String(Math.min(6, 1 + Math.floor(v / 34)));
       const n = Math.round((Math.min(shown, MAX_KMH) / MAX_KMH) * LEDS);
       if (n !== lit) {
         lit = n;

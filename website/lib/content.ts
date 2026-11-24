@@ -55,6 +55,18 @@ export const CONTACT_PEOPLE = [
     email: "hammouda.baouchi@g.enp.edu.dz",
     phone: "0699544870",
   },
+  {
+    role: "Formula Student Head",
+    name: "Youcef Bengoumida",
+    email: "youcef.bengoumida@g.enp.edu.dz",
+    phone: "0555268749",
+  },
+  {
+    role: "MATE ROV Head",
+    name: "Yacine Zitoune",
+    email: "ahmed_yacine.zitoune@g.enp.edu.dz",
+    phone: "0656402213",
+  },
 ];
 
 // ---------------------------------------------------------------- FORMULA STUDENT
@@ -142,7 +154,7 @@ export const CAR = {
   ],
   drivetrain: {
     key: "Transmission",
-    value: "RWD · 4-speed sequential gearbox",
+    value: "RWD · 6-speed sequential gearbox",
   },
 };
 
@@ -182,17 +194,16 @@ export const LAST_SEASON = {
   event: "Formula Student UK 2026",
   place: "Silverstone Circuit, United Kingdom",
   award: "Allan Staniforth Best Newcomer Award",
-  achievements: [
-    "Our first participation as an Algerian team, at Formula Student UK 2026, Silverstone",
-    "A validated chassis, with 80% reached in the technical scrutineering",
-    "The Allan Staniforth Best Newcomer Award, our first trophy",
+  /** Official FS UK 2026 results (Formula Student Class). */
+  rankings: [
+    { key: "Project Management", rank: 5, of: 40 },
+    { key: "Lap Time Simulation", rank: 24, of: 34 },
+    { key: "Engineering Design", rank: 30, of: 64 },
+    { key: "Cost & Manufacturing", rank: 36, of: 64 },
+    { key: "Business Plan Presentation", rank: 46, of: 64 },
   ],
-  scores: [
-    { key: "Business Presentation", value: 30.3, decimals: 1 },
-    { key: "Cost Report", value: 60, decimals: 0 },
-    { key: "Design", value: 79, decimals: 0 },
-    { key: "FS Lap Time Simulation", value: 6.5, decimals: 1 },
-  ],
+  overall: { key: "Overall (Formula Student Class)", rank: 44, of: 64 },
+  stages: { chassis: "Validated", scrutineering: 80 },
   recognition: [
     "Distinction from the Ministry of Higher Education",
     "The President of the Republic praised our performance at Silverstone",
@@ -203,41 +214,14 @@ export const LAST_SEASON = {
 };
 
 export const TIMELINE = [
-  {
-    date: "The beginning",
-    title: "A Formula Student team",
-    text: "ENP students set out to design and build a Formula Student car from scratch.",
-  },
-  {
-    date: "Design",
-    title: "CAD & simulation",
-    text: "Chassis, suspension kinematics, CFD: every subsystem is calculated before it is made.",
-  },
-  {
-    date: "Build",
-    title: "Made in Algeria",
-    text: "Machining, welding and assembly by the team: the first single-seater presented by a Algerian team.",
-  },
-  {
-    date: "15 | 19 July 2026",
-    title: "Silverstone",
-    text: "The first Algerian team ever at Formula Student UK. Chassis validated, 80% of technical scrutineering reached.",
-  },
-  {
-    date: "July 2026",
-    title: "Best Newcomer",
-    text: "The Allan Staniforth Best Newcomer Award, our first trophy.",
-  },
-  {
-    date: "August 2026",
-    title: "National recognition",
-    text: "Honoured by the Ministry of Higher Education and praised by the President of the Republic.",
-  },
-  {
-    date: "Season 2026 | 27",
-    title: "Three projects",
-    text: "A new IC car, an EV concept and an underwater robot for MATE ROV.",
-  },
+  { date: "The beginning", title: "Formula Student team", text: "ENP students set out to design and build a Formula Student car from scratch." },
+  { date: "Design", title: "Concept & design", text: "Chassis, suspension kinematics, CFD: every subsystem is calculated before it is made." },
+  { date: "Build", title: "Manufacturing", text: "Machining, welding and assembly by the team: the first single-seater presented by an Algerian team." },
+  { date: "Testing", title: "On track", text: "Car #19 runs for the first time: testing sessions before leaving for Silverstone." },
+  { date: "15 — 19 July 2026", title: "Silverstone", text: "The first Algerian team ever at Formula Student UK. Chassis validated, 80% of technical scrutineering completed." },
+  { date: "July 2026", title: "Best Newcomer", text: "The Allan Staniforth Best Newcomer Award, our first trophy." },
+  { date: "August 2026", title: "National recognition", text: "Honoured by the Ministry of Higher Education and praised by the President of the Republic." },
+  { date: "Season 2026 — 27", title: "Three projects", text: "A new IC car, an EV concept and an underwater robot for MATE ROV." },
 ];
 
 // ---------------------------------------------------------------- THIS SEASON

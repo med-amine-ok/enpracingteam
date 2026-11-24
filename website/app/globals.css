@@ -2208,6 +2208,93 @@ figcaption small {
   .season-lists { grid-template-columns: 1fr; }
 }
 
+/* results board: rankings */
+.board-val sup {
+  font-family: var(--display);
+  font-size: 0.42em;
+  vertical-align: top;
+  margin-left: 1px;
+  color: var(--red);
+}
+.board-val small {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.board-total {
+  background: var(--red);
+  color: #fff;
+}
+.board-total .board-pos-n,
+.board-total .board-val sup,
+.board-total .board-val small {
+  color: #fff;
+}
+.board-total .board-key {
+  font-weight: 600;
+}
+/* scrutineering: chassis + the big 80% */
+.stages {
+  padding: 26px 26px 30px;
+  border: 1px solid var(--line);
+  background: var(--carbon-1);
+}
+.stage-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.stage-key {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.stage-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.stage-big {
+  padding-top: 18px;
+}
+.stage-num {
+  margin-top: 8px;
+  display: flex;
+  align-items: flex-start;
+  font-family: var(--stencil);
+  font-weight: 900;
+  font-size: clamp(6rem, 13vw, 11rem);
+  line-height: 0.85;
+}
+.stage-num em {
+  font-family: var(--display);
+  font-size: 0.4em;
+  color: var(--red);
+  margin: 0.06em 0 0 6px;
+}
+.stage-num small {
+  align-self: flex-end;
+  margin: 0 0 0.3em 14px;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+}
+.stages .scrut-bar {
+  height: 10px;
+  margin: 18px 0 0;
+}
+
 /* ---------------------------------------------------------------- this season: project plates */
 .projects {
   padding-top: 0;
