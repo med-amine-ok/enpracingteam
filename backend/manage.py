@@ -6,6 +6,12 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    # Redirected to a file or a pipe on Windows, Python writes in the PC's code page (cp1252, cp1256...), which
+    # cannot hold the accents, Arabic or "└─" of the commands' output: UnicodeEncodeError. The scripts set
+    # PYTHONUTF8=1; this covers the commands typed by hand (README). A console is left as it is.
+    for stream in (sys.stdout, sys.stderr):
+        if not stream.isatty() and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     try:
         from django.core.management import execute_from_command_line

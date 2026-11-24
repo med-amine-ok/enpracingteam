@@ -1,0 +1,43 @@
+# French translations missing from the libraries the ERP uses (simplejwt 5.5.1).
+# Hand-written: makemessages never touches this folder. Compile with
+# scripts/translations.ps1 -CompileOnly. Remove an entry once the library ships it.
+msgid ""
+msgstr ""
+"Project-Id-Version: ENP Racing Team ERP (library French overrides)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
+
+# --- simplejwt (login tokens) ---
+
+msgid "The user's password has been changed."
+msgstr "Le mot de passe de l'utilisateur a été modifié."
+
+msgid ""
+"Unrecognized type '{}', 'leeway' must be of type int, float or timedelta."
+msgstr ""
+"Type « {} » non reconnu, « leeway » doit être de type int, float ou "
+"timedelta."
+
+msgid "Outstanding Token"
+msgstr "Jeton émis"
+
+msgid "Outstanding Tokens"
+msgstr "Jetons émis"
+
+#, python-format
+msgid "Token for %(user)s (%(jti)s)"
+msgstr "Jeton de %(user)s (%(jti)s)"
+
+msgid "Blacklisted Token"
+msgstr "Jeton révoqué"
+
+msgid "Blacklisted Tokens"
+msgstr "Jetons révoqués"
+
+#, python-format
+msgid "Blacklisted token for %(user)s"
+msgstr "Jeton révoqué de %(user)s"

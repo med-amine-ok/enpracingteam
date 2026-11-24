@@ -1,0 +1,3 @@
+# What the production server needs on top of the application (backend/Dockerfile).
+-r requirements.txt
+gunicorn==26.2.0

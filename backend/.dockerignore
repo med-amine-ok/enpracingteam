@@ -1,0 +1,10 @@
+# Kept out of the production image: secrets, local environments, caches.
+.env
+.env.*
+LOCAL_ADMIN.txt
+Notes.md
+.venv/
+__pycache__/
+*.pyc
+staticfiles/
+media/

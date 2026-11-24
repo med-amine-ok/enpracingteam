@@ -1,0 +1,165 @@
+# Arabic translations missing from Django 6.1 (admin and core). Without them an Arabic page
+# shows these messages in French, because Django falls back to LANGUAGE_CODE.
+# Hand-written: makemessages never touches this folder. Compile with
+# scripts/translations.ps1 -CompileOnly. The test ArabicFallbackTests lists what is needed;
+# an entry can be removed once Django ships it.
+msgid ""
+msgstr ""
+"Project-Id-Version: ENP Racing Team ERP (Django Arabic overrides)\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+# --- Django core (django/conf/locale) ---
+
+msgid "Haitian Creole"
+msgstr "الكريولية الهايتية"
+
+msgid "- Select an option -"
+msgstr "- اختر خيارًا -"
+
+#, python-format
+msgid "“%(value)s” is not a valid binary value."
+msgstr "«%(value)s» ليست قيمة ثنائية صالحة."
+
+#, python-format
+msgid "No %s matches the given query."
+msgstr "لا يوجد %s يطابق الاستعلام."
+
+# Statuses of Django's background tasks (feminine: مهمة).
+msgctxt "Task"
+msgid "Ready"
+msgstr "جاهزة"
+
+msgctxt "Task"
+msgid "Running"
+msgstr "قيد التنفيذ"
+
+msgctxt "Task"
+msgid "Failed"
+msgstr "فشلت"
+
+msgctxt "Task"
+msgid "Successful"
+msgstr "نجحت"
+
+# --- Django admin (django/contrib/admin) ---
+
+#, python-format
+msgid "The app \"%s\" could not be found."
+msgstr "تعذّر العثور على التطبيق «%s»."
+
+msgid ", "
+msgstr "، "
+
+#, python-format
+msgid "…and %(count)d more object."
+msgid_plural "…and %(count)d more objects."
+msgstr[0] "…و%(count)d عنصر آخر."
+msgstr[1] "…و%(count)d عنصر آخر."
+msgstr[2] "…و%(count)d عنصران آخران."
+msgstr[3] "…و%(count)d عناصر أخرى."
+msgstr[4] "…و%(count)d عنصرًا آخر."
+msgstr[5] "…و%(count)d عنصر آخر."
+
+msgid "Run"
+msgstr "تنفيذ"
+
+#, python-format
+msgid "Filter by %(field_name)s"
+msgstr "تصفية حسب %(field_name)s"
+
+#, python-format
+msgid ""
+"Deleting the %(object_name)s “%(escaped_object)s” would result in deleting "
+"related objects, but your account doesn't have permission to delete the "
+"following types of objects:"
+msgstr ""
+"حذف %(object_name)s «%(escaped_object)s» سيؤدي إلى حذف عناصر مرتبطة به، "
+"لكن حسابك لا يملك صلاحية حذف أنواع العناصر التالية:"
+
+#, python-format
+msgid ""
+"Deleting the %(object_name)s “%(escaped_object)s” would require deleting the "
+"following protected related objects:"
+msgstr ""
+"حذف %(object_name)s «%(escaped_object)s» يتطلب حذف العناصر المرتبطة المحمية "
+"التالية:"
+
+#, python-format
+msgid ""
+"Are you sure you want to delete the %(object_name)s “%(escaped_object)s”? "
+"All of the following related items will be deleted:"
+msgstr ""
+"هل أنت متأكد من رغبتك في حذف %(object_name)s «%(escaped_object)s»؟ سيتم "
+"حذف جميع العناصر المرتبطة التالية:"
+
+#, python-format
+msgid "Pagination %(name)s entries"
+msgstr "ترقيم صفحات عناصر %(name)s"
+
+#, python-format
+msgid "Pagination %(name)s"
+msgstr "ترقيم صفحات %(name)s"
+
+#, python-format
+msgid "Search %(name)s"
+msgstr "البحث في %(name)s"
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+# --- Django admin: neutral wording ---
+# Django's Arabic refers to any object with a masculine pronoun (لتغييره، تعديله، احذفه،
+# له), wrong for feminine model names (قطعة، مهمة، حركة). Neutral wording instead.
+
+#, python-format
+msgid "Select %s to change"
+msgstr "اختر %s للتعديل"
+
+msgid "You may edit it again below."
+msgstr "يمكن التعديل مرة أخرى أدناه."
+
+#, python-brace-format
+msgid ""
+"The {name} “{obj}” was changed successfully. You may edit it again below."
+msgstr "تم تعديل {name} “{obj}” بنجاح. يمكنك التعديل مجددًا أدناه."
+
+msgid "Delete?"
+msgstr "حذف؟"
+
+#, python-format
+msgid "%(name)s with ID “%(key)s” doesn’t exist. Perhaps it was deleted?"
+msgstr "لا يوجد عنصر من %(name)s بالمعرّف «%(key)s». ربما حُذف؟"
+
+# Typo in Django's Arabic ("تغديل" instead of "تعديل").
+msgid "You don’t have permission to view or edit anything."
+msgstr "ليس لديك إذن لعرض أو تعديل أي شيء."
+
+# --- simplejwt (login tokens): entries missing from its Arabic catalog ---
+
+msgid "The user's password has been changed."
+msgstr "تم تغيير كلمة مرور المستخدم."
+
+msgid "Outstanding Token"
+msgstr "رمز صادر"
+
+msgid "Outstanding Tokens"
+msgstr "الرموز الصادرة"
+
+#, python-format
+msgid "Token for %(user)s (%(jti)s)"
+msgstr "رمز %(user)s (%(jti)s)"
+
+msgid "Blacklisted Token"
+msgstr "رمز ملغى"
+
+msgid "Blacklisted Tokens"
+msgstr "الرموز الملغاة"
+
+#, python-format
+msgid "Blacklisted token for %(user)s"
+msgstr "رمز ملغى لـ %(user)s"

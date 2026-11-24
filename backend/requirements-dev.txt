@@ -1,0 +1,4 @@
+# Tools for working on the code (not needed to run the application).
+# Install with: .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+-r requirements.txt
+ruff==0.17.1

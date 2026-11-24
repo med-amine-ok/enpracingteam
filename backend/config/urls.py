@@ -17,11 +17,30 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from .views import health
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/health/", health),
+    # API documentation (staff only, see SPECTACULAR_SETTINGS).
+    path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
+    path("api/docs/", SpectacularSwaggerView.as_view(url_name="api-schema"), name="api-docs"),
     path("api/", include("apps.members.urls")),
+    path("api/", include("apps.projects.urls")),
+    path("api/", include("apps.subsystems.urls")),
+    path("api/", include("apps.tasks.urls")),
+    path("api/", include("apps.communication.urls")),
+    path("api/", include("apps.purchasing.urls")),
+    path("api/", include("apps.inventory.urls")),
+    path("api/", include("apps.finance.urls")),
+    path("api/", include("apps.meetings.urls")),
+    path("api/", include("apps.reporting.urls")),
+    path("api/", include("apps.documents.urls")),
+    path("api/", include("apps.equipment.urls")),
+    path("api/", include("apps.ranking.urls")),
+    path("api/", include("apps.discipline.urls")),
+    path("api/", include("apps.engagement.urls")),
+    path("api/", include("apps.assistant.urls")),
 ]

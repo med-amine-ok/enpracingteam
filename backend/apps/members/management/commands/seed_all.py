@@ -5,7 +5,7 @@ from django.db.models import Count, Q
 
 from apps.members.models import Member, MemberRoleType, Membership, OrgUnit, Role
 
-SEEDS = ["seed_org_units", "seed_roles", "seed_members", "sync_group"]
+SEEDS = ["seed_org_units", "seed_roles", "seed_lifecycle_steps", "seed_members", "sync_group"]
 
 
 class Command(BaseCommand):
@@ -15,7 +15,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for name in SEEDS:
             self.stdout.write(self.style.MIGRATE_HEADING(f"\n== {name} =="))
-            call_command(name)
+            # Same output as seed_all, so the messages go where the caller sent them.
+            call_command(name, stdout=self.stdout, stderr=self.stderr)
 
         self.stdout.write(self.style.MIGRATE_HEADING("\n== verification =="))
         problems = self._verify()

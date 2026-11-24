@@ -1,6 +1,6 @@
 # apps/telemetry/admin.py
 from django.contrib import admin
-from .models import CompetitionEdition, TelemetryDataPoint, TelemetrySession
+from .models import CompetitionEdition, TelemetrySession
 
 @admin.register(CompetitionEdition)
 class CompetitionEditionAdmin(admin.ModelAdmin):

@@ -9,8 +9,8 @@ class AnnouncementAdmin(admin.ModelAdmin):
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ("member", "message", "is_read", "created_at")
-    list_filter = ("is_read",)
+    list_display = ("member", "kind", "__str__", "actor", "is_read", "created_at")
+    list_filter = ("kind", "is_read")
 
 @admin.register(MediaContact)
 class MediaContactAdmin(admin.ModelAdmin):

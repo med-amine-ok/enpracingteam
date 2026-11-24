@@ -25,7 +25,13 @@ def role(code, name, scope, role_type, leadership=False, pm=False, aliases=()):
 ROLES = [
     # --- Governing bodies (admins; refine titles when known) ---
     role("board-member", "Board Member", CLUB, ADMIN, leadership=True), # membre de conseil d administration 
+    # Positions in the Board (decision D-025), given with a member in the web app.
+    role("president", "President", CLUB, ADMIN, leadership=True),
+    role("vice-president", "Vice-President", CLUB, ADMIN, leadership=True),
     role("executive-bureau-member", "Executive Bureau Member", CLUB, ADMIN, leadership=True), # membre bureau executifs 
+    # Manages the club's money with the admins (apps/finance/access.py, decision D-011): given in the
+    # Executive Bureau, by an admin.
+    role("treasurer", "Treasurer", CLUB, ADMIN, leadership=True),
 
     # --- Club departments: leadership ---
     role("project-manager", "Project Manager", CLUB, HEAD, leadership=True, pm=True),
@@ -45,6 +51,8 @@ ROLES = [
     role("logistics-coordinator", "Logistics Coordinator", CLUB, MEMBER),
     role("business-projects-member", "Business Projects Member", CLUB, MEMBER,
          aliases=["Buisness projects Member ", "Buisness projects Member"]),
+    # Generic member role (used for junior club members, level = junior).
+    role("club-member", "Member", CLUB, MEMBER),
 
 
     # --- Formula Student team leadership ---
@@ -66,6 +74,8 @@ ROLES = [
     role("powertrain-engineer", "Powertrain Engineer", FS, MEMBER),
     role("aerodynamics-engineer", "Aerodynamics Engineer", FS, MEMBER),
     role("electronics-engineer", "Electronics Engineer", FS, MEMBER),
+    # Generic member role (used for junior FS members, level = junior).
+    role("fs-member", "Member", FS, MEMBER),
 ]
 
 FIELDS = ["code", "name", "scope", "role_type", "is_leadership",

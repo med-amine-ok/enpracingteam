@@ -1,0 +1,47 @@
+# Caddy, on Windows, in front of the production ERP (knowledge base: PROJECTS/ERP/hosting_design.md).
+# Values from the file given with --envfile (written by scripts\deploy_prod.ps1):
+#   ERP_DOMAIN  the ERP's address (erp.<club's domain>, or erp.localhost for the trial)
+#   ERP_DATA    the ERP's data folder (static files, logs, certificates)
+#   ERP_TLS     the e-mail for Let's Encrypt on the server, "internal" for the trial
+#   ERP_BIND    0.0.0.0 on the server (the router sends ports 80 and 443 here), 127.0.0.1 for the trial
+#   ERP_HSTS_SECONDS  how long browsers keep to HTTPS (SECURE_HSTS_SECONDS of the settings)
+# Caddy runs on Windows, not in Docker: it sees the visitors' real address (Docker Desktop hides it)
+# and gives it to Django (X-Forwarded-For; NUM_PROXIES=1).
+{
+	storage file_system {
+		root {$ERP_DATA}/caddy
+	}
+	# The trial's local certificate is never added to Windows' trusted certificates.
+	skip_install_trust
+}
+
+{$ERP_DOMAIN} {
+	bind {$ERP_BIND}
+	tls {$ERP_TLS}
+	encode zstd gzip
+	log {
+		output file {$ERP_DATA}/logs/caddy.log
+	}
+	header {
+		Strict-Transport-Security "max-age={$ERP_HSTS_SECONDS}"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+	route {
+		# Django's admin and the API documentation: from the local network only.
+		@admin_from_outside {
+			path /admin /admin/* /api/docs /api/docs/* /api/schema /api/schema/*
+			not remote_ip private_ranges
+		}
+		respond @admin_from_outside "Local network only." 403
+		# The admin's static files, gathered by collectstatic in ERP_DATA\static.
+		handle_path /static/* {
+			root * {$ERP_DATA}/static
+			file_server
+		}
+		reverse_proxy /api/* 127.0.0.1:8200
+		reverse_proxy /admin* 127.0.0.1:8200
+		reverse_proxy 127.0.0.1:3200
+	}
+}

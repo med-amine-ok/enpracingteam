@@ -1,0 +1,5 @@
+#!/bin/sh
+# Git pre-commit hook: runs every backend check (scripts/check_all.ps1) before each commit.
+# If a check fails, the commit is cancelled: fix the problem, then commit again.
+# Enable it once per clone with:  git config core.hooksPath scripts/git-hooks
+exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/check_all.ps1

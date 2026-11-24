@@ -1,0 +1,116 @@
+# The ERP in production on this PC (knowledge base: PROJECTS/ERP/hosting_design.md). Started by
+# scripts\deploy_prod.ps1 with the settings of backend\.env.prod (never committed); -Trial uses
+# backend\.env.trial and its own project and data.
+# Apart from development: own project name, database, secrets and ports. Nothing listens beyond
+# this PC: Caddy (on Windows, ports 80 and 443) is the only way in.
+name: enp_erp_prod
+
+x-backend: &backend
+  build: ./backend
+  image: enp_erp_prod/api
+  restart: unless-stopped
+  env_file: ${ERP_ENV_FILE:-backend/.env.prod}
+  environment:
+    DB_HOST: db
+    DB_PORT: "5432"
+    REDIS_URL: redis://redis:6379/0
+    STATIC_ROOT: /app/staticfiles
+    # The documents' files (decision D-015), on the PC in ERP_DATA\media.
+    MEDIA_ROOT: /app/media
+    # The team's assistant (decision D-021): Ollama runs on Windows, outside Docker.
+    OLLAMA_URL: http://host.docker.internal:11434
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    <<: *backend
+    depends_on:
+      db: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    ports:
+      - "127.0.0.1:8200:8000" # for Caddy only
+    volumes:
+      - type: bind
+        source: ${ERP_DATA}/static
+        target: /app/staticfiles
+      - type: bind
+        source: ${ERP_DATA}/media
+        target: /app/media
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health/', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: https://${ERP_DOMAIN}
+    image: enp_erp_prod/web
+    restart: unless-stopped
+    depends_on:
+      api: {condition: service_healthy}
+    ports:
+      - "127.0.0.1:3200:3000" # for Caddy only
+
+  # The deadline reminders each morning (manage.py run_scheduler).
+  scheduler:
+    <<: *backend
+    command: ["python", "manage.py", "run_scheduler"]
+    depends_on:
+      api: {condition: service_healthy} # the migrations are done
+
+  # A dump of the database and an archive of the documents' files each night at 03:00, the last 14 kept
+  # (deploy/backup_loop.sh).
+  backup:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    entrypoint: ["sh", "/backup_loop.sh"]
+    environment:
+      TZ: Africa/Algiers
+      PGHOST: db
+      PGDATABASE: ${DB_NAME}
+      PGUSER: ${DB_USER}
+      PGPASSWORD: ${DB_PASSWORD}
+    volumes:
+      - type: bind
+        source: ./deploy/backup_loop.sh
+        target: /backup_loop.sh
+        read_only: true
+      - type: bind
+        source: ${ERP_DATA}/backups
+        target: /backups
+      - type: bind
+        source: ${ERP_DATA}/media
+        target: /media
+        read_only: true
+    depends_on:
+      db: {condition: service_healthy}
+
+volumes:
+  pgdata:

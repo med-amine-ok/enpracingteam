@@ -19,7 +19,6 @@ import {
   SITE,
   STATS,
   THIS_SEASON,
-  TIERS,
   TIMELINE,
 } from "@/lib/content";
 
@@ -602,46 +601,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="institutional">
-              With the support of {PARTNERS.institutional.join(" · ")}
-            </p>
-
-            <div className="partner-with-us">
-              <SectionHead
-                code="S09"
-                name="Partner with us"
-                meta="Season 2027"
-                title={["Race with us", "into 2027"]}
-                desc="Every contribution directly funds parts, tools, software or travel to competitions."
-              />
-            </div>
-
-            <div className="grid-wrap">
-              <div className="grid-head">
-                <span className="sec-code">Grid</span>
-                <span>Partnership levels: pick your spot on the grid</span>
-              </div>
-              <div className="grid" data-stagger>
-                {TIERS.map((t, i) => (
-                  <article
-                    className="slot"
-                    key={t.name}
-                    style={{ ["--accent" as string]: t.accent }}
-                  >
-                    <span className="slot-p">P{i + 1}</span>
-                    <div className="slot-body">
-                      <h3>{t.name}</h3>
-                      <ul>
-                        {t.perks.map((p) => (
-                          <li key={p}>{p}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
             <div className="deck" id="deck" data-reveal>
               <span className="deck-icon" aria-hidden>
                 <span>PDF</span>
@@ -665,6 +624,10 @@ export default function Home() {
                 </a>
               </div>
             </div>
+            <p className="institutional">
+              With the support of {PARTNERS.institutional.join(" · ")}
+            </p>
+
           </div>
         </section>
 

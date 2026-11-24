@@ -3,16 +3,23 @@ services:
     image: pgvector/pgvector:pg16
     container_name: enp_racing_team_db
     restart: unless-stopped
+    # The same settings file as Django: the .env at the root of the project (decision D-023). The
+    # POSTGRES_* names of before still work in an older .env.
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-${POSTGRES_DB}}
+      POSTGRES_USER: ${DB_USER:-${POSTGRES_USER}}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-${POSTGRES_PASSWORD}}
     ports:
-      - "5432:5432"
+      # This PC only, never the network (not even with start_erp.ps1 -Network): its two loopback
+      # addresses, as "localhost" is tried in IPv6 first (with IPv4 only, each connection waits 2 s).
+      - "127.0.0.1:5432:5432"
+      - "[::1]:5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U enp -d enp_erp"]
+      # $$ = the variable is read inside the container, so the check always uses the
+      # same user and database as POSTGRES_USER / POSTGRES_DB above.
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -22,6 +29,13 @@ services:
     container_name: enp_redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"  # this PC only, as the database
+      - "[::1]:6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
 volumes:
   pgdata:

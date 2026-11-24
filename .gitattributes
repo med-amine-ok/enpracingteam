@@ -1,0 +1,6 @@
+# Git hooks are run by sh: they must keep Unix line endings, even on Windows.
+scripts/git-hooks/* text eol=lf
+# Batch files are read by cmd.exe: Windows line endings.
+*.cmd text eol=crlf
+# Shell scripts run inside the Linux containers: Unix line endings, even on Windows.
+deploy/*.sh text eol=lf

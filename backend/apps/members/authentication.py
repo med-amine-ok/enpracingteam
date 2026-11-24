@@ -3,8 +3,11 @@
 import hmac
 
 from django.conf import settings
+from django.utils.translation import gettext as _
 from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.authentication import JWTAuthentication
+
+from .language import activate_member_language
 
 SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
 
@@ -12,7 +15,7 @@ SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
 class CookieJWTAuthentication(JWTAuthentication):
     """
     Reads the access token from an Authorization header if present (mobile /
-    explicit bearer clients | no CSRF risk, browsers don't auto-attach custom
+    explicit bearer clients — no CSRF risk, browsers don't auto-attach custom
     headers cross-site). Otherwise falls back to the httpOnly access-token
     cookie (web). When the cookie path is used, unsafe methods must also
     carry a matching X-CSRF-Token header (double-submit), since the cookie
@@ -21,6 +24,12 @@ class CookieJWTAuthentication(JWTAuthentication):
     """
 
     def authenticate(self, request):
+        result = self._authenticate(request)
+        if result is not None:
+            activate_member_language(request, result[0])  # the member's language wins over the browser's
+        return result
+
+    def _authenticate(self, request):
         header = self.get_header(request)
         if header is not None:
             raw_token = self.get_raw_token(header)
@@ -39,7 +48,7 @@ class CookieJWTAuthentication(JWTAuthentication):
             sent = request.headers.get("X-CSRF-Token")
             cookie_csrf = request.COOKIES.get(settings.AUTH_COOKIE_CSRF)
             if not sent or not cookie_csrf or not hmac.compare_digest(sent, cookie_csrf):
-                raise PermissionDenied("CSRF check failed.")
+                raise PermissionDenied(_("CSRF check failed."))
 
         return self.get_user(validated), validated
         

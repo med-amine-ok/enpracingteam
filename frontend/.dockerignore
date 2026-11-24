@@ -1,0 +1,12 @@
+# Kept out of the production image: dependencies (installed inside), builds, test results, secrets.
+# (The tests stay: next build checks the types of the whole project.)
+node_modules/
+.next/
+.next-e2e/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+e2e/.auth/
+e2e/.mail/
+e2e/.media/

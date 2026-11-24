@@ -10,6 +10,7 @@ class BudgetAdmin(admin.ModelAdmin):
 class ExpenseAdmin(admin.ModelAdmin):
     list_display = ("budget", "amount", "category", "recorded_by", "recorded_at")
     list_filter = ("category",)
+    readonly_fields = ("created_at",)
 
 @admin.register(Sponsorship)
 class SponsorshipAdmin(admin.ModelAdmin):

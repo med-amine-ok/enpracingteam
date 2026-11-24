@@ -3370,7 +3370,7 @@ figcaption small {
 }
 /* sponsorship deck: one quiet strip */
 .deck {
-  margin-top: 56px;
+  margin-top: 22px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;

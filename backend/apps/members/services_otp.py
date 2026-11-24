@@ -1,12 +1,16 @@
 # apps/members/services_otp.py
 
+import hashlib
+import hmac
 import logging
 
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db import transaction
 from django.db.models import F
-from django.utils import timezone
+from django.utils import timezone, translation
+from django.utils.translation import gettext as _
+from django.utils.translation import ngettext
 
 from .models import LoginOTP, Member
 from .rate_limit import check_and_increment, is_in_cooldown
@@ -20,12 +24,23 @@ class OTPError(Exception):
 
 def request_otp(email: str, ip: str | None) -> None:
     """
-    Always returns normally for an unknown/inactive email | never raises on
-    that case | so the caller can give a generic response and not leak
+    Always returns normally for an unknown/inactive email — never raises on
+    that case — so the caller can give a generic response and not leak
     whether the address is registered. Only raises for rate limiting.
     """
     if ip and not check_and_increment(f"otp:ip:{ip}", settings.OTP_IP_MAX_REQUESTS_PER_HOUR, 3600):
         logger.warning("OTP request blocked: IP rate limit")
+        raise OTPError("rate_limited")
+
+    # The cooldown and the per-address limit apply to every address, registered or not, BEFORE the lookup:
+    # applied only to members, a second request within the cooldown answered 429 for a registered address and
+    # 200 for an unknown one, which told who is a member. Keyed by a hash, never the address itself.
+    address = _address_key(email)
+    if is_in_cooldown(f"otp:cooldown:{address}", settings.OTP_RESEND_COOLDOWN_SECONDS):
+        raise OTPError("cooldown")
+
+    if not check_and_increment(f"otp:email:{address}", settings.OTP_MAX_REQUESTS_PER_HOUR, 3600):
+        logger.warning("OTP request blocked: email rate limit")
         raise OTPError("rate_limited")
 
     member = Member.objects.filter(email__iexact=email, is_active=True).first()
@@ -33,21 +48,14 @@ def request_otp(email: str, ip: str | None) -> None:
         logger.info("OTP requested for unknown/inactive email")
         return
 
-    if is_in_cooldown(f"otp:cooldown:{member.id}", settings.OTP_RESEND_COOLDOWN_SECONDS):
-        raise OTPError("cooldown")
-
-    if not check_and_increment(f"otp:email:{member.id}", settings.OTP_MAX_REQUESTS_PER_HOUR, 3600):
-        logger.warning("OTP request blocked: email rate limit, member_id=%s", member.id)
-        raise OTPError("rate_limited")
-
     with transaction.atomic():
         otp, code = LoginOTP.issue(member, ip=ip)
 
     try:
-        _send_otp_email(member.email, code)
+        _send_otp_email(member, code)
     except Exception:
         # Email delivery failed: kill the OTP immediately so it can't be
-        # guessed/used later, but DO NOT tell the caller | same generic
+        # guessed/used later, but DO NOT tell the caller — same generic
         # response either way, to avoid leaking delivery status. Log for
         # admin visibility only (no code, no address beyond the id).
         LoginOTP.objects.filter(pk=otp.pk).update(used_at=timezone.now())
@@ -57,16 +65,30 @@ def request_otp(email: str, ip: str | None) -> None:
     logger.info("OTP issued for member_id=%s", member.id)
 
 
-def _send_otp_email(email: str, code: str) -> None:
+def _address_key(email: str) -> str:
+    return hmac.new(settings.SECRET_KEY.encode(), email.strip().lower().encode(), hashlib.sha256).hexdigest()
+
+
+def _send_otp_email(member: Member, code: str) -> None:
+    # In the member's language, else in the language of the request (the browser asking for the code).
+    minutes = settings.OTP_TTL_SECONDS // 60
+    with translation.override(member.language or translation.get_language()):
+        subject = _("Your ENP Racing Team login code")
+        message = "\n".join([
+            _("Your login code is: {code}").format(code=code),
+            "",
+            ngettext(
+                "It expires in {minutes} minute and can only be used once.",
+                "It expires in {minutes} minutes and can only be used once.",
+                minutes,
+            ).format(minutes=minutes),
+            _("If you did not request this, ignore this email."),
+        ])
     send_mail(
-        subject="Your ENP Racing Team login code",
-        message=(
-            f"Your login code is: {code}\n\n"
-            f"It expires in {settings.OTP_TTL_SECONDS // 60} minutes and can only be used once.\n"
-            "If you did not request this, ignore this email."
-        ),
+        subject=subject,
+        message=message,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[email],
+        recipient_list=[member.email],
         fail_silently=False,
     )
 
@@ -80,7 +102,7 @@ def verify_otp(email: str, code: str, ip: str | None) -> Member:
     attempt's increment) INSIDE the block, which then exits normally and
     COMMITS. Only after the block has committed do we look at the outcome
     and raise if it failed. This guarantees a wrong-code attempt is
-    persisted even though the overall call "fails" | if we raised inside
+    persisted even though the overall call "fails" — if we raised inside
     the atomic block instead, Django would roll back everything written
     in it, silently erasing the failed-attempt record and defeating the
     attempt limit entirely.
@@ -114,7 +136,7 @@ def verify_otp(email: str, code: str, ip: str | None) -> Member:
         else:
             # select_for_update() above holds the row lock for the duration of
             # this block, so a concurrent verify attempt on the SAME otp row
-            # waits here and then sees this increment | no lost updates.
+            # waits here and then sees this increment — no lost updates.
             LoginOTP.objects.filter(pk=otp.pk).update(attempts=F("attempts") + 1)
 
     if not outcome["ok"]:

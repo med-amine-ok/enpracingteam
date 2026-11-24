@@ -315,10 +315,11 @@ export default function Structure() {
                 </div>
               )}
               {(() => {
-                const r = roster(sel.id);
-                const leads = r.filter(isLead);
-                const main = r.filter((m) => !isLead(m) && !m.junior);
-                const juniors = r.filter((m) => m.junior);
+                // heads only: member names stay internal
+                const fromRoster = roster(sel.id).filter(isLead);
+                const leads = fromRoster.length
+                  ? fromRoster.map((m) => ({ name: m.name, role: m.role }))
+                  : (sel.lead ?? []);
                 const initials = (n: string) =>
                   n
                     .split(" ")
@@ -326,50 +327,22 @@ export default function Structure() {
                     .slice(0, 2)
                     .join("");
                 return (
-                  <>
-                    {leads.length > 0 && (
-                      <div className="drawer-block">
-                        <h4>Leadership</h4>
-                        <ul className="drawer-leads">
-                          {leads.map((l) => (
-                            <li key={l.role + l.name}>
-                              <span className="avatar">{initials(l.name)}</span>
-                              <span>
-                                <b>{l.name}</b>
-                                <small>{l.role}</small>
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    {main.length > 0 && (
-                      <div className="drawer-block">
-                        <h4>{leads.length ? "Members" : "Team"}</h4>
-                        <ul className="drawer-members">
-                          {main.map((m) => (
-                            <li key={m.name + m.role}>
-                              <b>{m.name}</b>
-                              <small>{m.role}</small>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    {juniors.length > 0 && (
-                      <div className="drawer-block">
-                        <h4>Junior members</h4>
-                        <ul className="drawer-members is-junior">
-                          {juniors.map((m) => (
-                            <li key={m.name}>
-                              <b>{m.name}</b>
-                              <small>Junior</small>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </>
+                  leads.length > 0 && (
+                    <div className="drawer-block">
+                      <h4>{leads.length > 1 ? "Heads" : "Head"}</h4>
+                      <ul className="drawer-leads">
+                        {leads.map((l) => (
+                          <li key={l.role + l.name}>
+                            <span className="avatar">{initials(l.name)}</span>
+                            <span>
+                              <b>{l.name}</b>
+                              <small>{l.role}</small>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
                 );
               })()}
               <div className="drawer-block">

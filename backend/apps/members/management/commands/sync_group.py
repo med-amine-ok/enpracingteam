@@ -2,6 +2,7 @@ from django.contrib.auth.models import Group, Permission
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from apps.members.access import governing
 from apps.members.models import Member, MemberRoleType, Membership
 
 # Which Django model permissions each group gets. app_label.codename format.
@@ -18,9 +19,10 @@ GROUP_PERMISSIONS = {
     ],
 }
 
-# Which role_type puts someone in which group.
+# Which role_type puts someone in which group. The Admins group is for who governs (decision D-025): the members
+# of the Board of Directors and the Team Manager; the other admin roles (the Executive Bureau's) give the heads'.
 ROLE_TYPE_TO_GROUP = {
-    MemberRoleType.ADMIN: "Admins",
+    MemberRoleType.ADMIN: "Department Heads",
     MemberRoleType.HEAD_OF_DEPARTMENT: "Department Heads",
     MemberRoleType.MEMBER: "Members",
 }
@@ -62,8 +64,13 @@ class Command(BaseCommand):
             if current is None or priority.index(rt) < priority.index(current):
                 best[m.member_id] = rt
 
-        for member in Member.objects.filter(code__isnull=False):
-            wanted_group = groups[ROLE_TYPE_TO_GROUP[best.get(member.id, MemberRoleType.MEMBER)]]
+        governors = set(Membership.objects.filter(governing()).values_list("member_id", flat=True))
+        # Superusers keep their groups and their access to the admin site (e.g. promoted with grant_admin).
+        for member in Member.objects.filter(code__isnull=False, is_superuser=False):
+            if member.id in governors:
+                wanted_group = groups["Admins"]
+            else:
+                wanted_group = groups[ROLE_TYPE_TO_GROUP[best.get(member.id, MemberRoleType.MEMBER)]]
             current_groups = set(member.groups.filter(name__in=GROUP_PERMISSIONS).values_list("id", flat=True))
             if current_groups != {wanted_group.id}:
                 member.groups.remove(*Group.objects.filter(name__in=GROUP_PERMISSIONS))
@@ -76,4 +83,6 @@ class Command(BaseCommand):
         staff_group_ids = Group.objects.filter(name__in=["Admins", "Department Heads"]).values_list("id", flat=True)
         should_be_staff = set(Member.objects.filter(groups__id__in=staff_group_ids).values_list("id", flat=True))
         Member.objects.filter(id__in=should_be_staff, is_staff=False).update(is_staff=True)
-        Member.objects.filter(code__isnull=False, is_staff=True).exclude(id__in=should_be_staff).update(is_staff=False)
+        Member.objects.filter(code__isnull=False, is_staff=True, is_superuser=False).exclude(
+            id__in=should_be_staff
+        ).update(is_staff=False)

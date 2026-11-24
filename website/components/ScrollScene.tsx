@@ -12,6 +12,7 @@ import { buildCircuit } from "@/components/circuit";
 import { buildGarage } from "@/components/garage";
 import { buildRearEnd } from "@/components/rearEnd";
 import { buildSuspension } from "@/components/suspension";
+import { buildWheelHub } from "@/components/wheelHub";
 
 /** n: pre-baked Int16 normals (scripts/bake-model.mjs) — when present no welding/normal pass runs here */
 type MeshData = { p: string; i: string; w: number; n?: string };
@@ -351,6 +352,7 @@ export default function ScrollScene() {
       });
     const rearEnd = buildRearEnd();
     let suspDispose = () => {};
+    let hubDispose = () => {};
 
     const onResize = () => {
       const w = canvas.clientWidth;
@@ -401,12 +403,16 @@ export default function ScrollScene() {
         const susp = buildSuspension(places);
         model.add(susp.group);
         suspDispose = susp.dispose;
+        const hub = buildWheelHub();
+        hubDispose = hub.dispose;
         places.forEach((p) => {
           const steer = new THREE.Group();
           steer.position.set(p[0], p[1], p[2]);
           const spin = new THREE.Group();
           spin.add(new THREE.Mesh(wg, tyre));
           steer.add(spin);
+          // rim, brake disc and caliper inside the tyre; outer face points away from the car centre
+          hub.attach(spin, steer, Math.sign(p[2]) || 1);
           model.add(steer);
           spinners.push(spin);
           if (p[0] > 0) frontWheels.push(steer);
@@ -821,6 +827,7 @@ export default function ScrollScene() {
       garage.dispose();
       rearEnd.dispose();
       suspDispose();
+      hubDispose();
       envGarage?.dispose();
       pmrem.dispose();
       envDay.dispose();

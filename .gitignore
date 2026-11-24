@@ -4,5 +4,16 @@ __pycache__/
 *.pyc
 node_modules/
 .next/
-
+# Production settings and collected static files (docker-compose.prod.yml)
+.env.prod
+.env.trial
+staticfiles/
+# The files uploaded to the ERP on this PC (documents, decision D-015): never committed
+media/
+# A local folder of the team (added on GitHub, 20/10/2026)
 dpkid
+_archive/
+start_local.cmd
+
+
+documentation

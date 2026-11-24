@@ -1,7 +1,6 @@
-from datetime import date
-
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+from django.utils import timezone
 
 from apps.members.models import (
     Member, MemberLevel, Membership, OrgUnit, OrgUnitType, Role,
@@ -29,7 +28,7 @@ def group(unit, role, level, *people):
     return [(person, unit, role, level) for person in people]
 
 
-# ---- People (key, first, last, email, phone, fb) | from ENPRT_Members_Database_2026_2027.md ----
+# ---- People (key, first, last, email, phone, fb) — from ENPRT_Members_Database_2026_2027.md ----
 # Using member_id as the stable key.
 
 _ilyes_menzer         = p("ilyes-menzer", "Ilyes", "Menzer", "mohamed_ilyes.menzer@g.enp.edu.dz", "0540024003", "https://www.facebook.com/ilyes.menzer.146")
@@ -102,8 +101,6 @@ _benadir_ayoub          = p("bennadir-saber-ayoub", "Saber Ayoub", "Bennadir", "
 _azzam_amir             = p("azzam-amir", "Amir", "Azzam", "amir.azzam@g.enp.edu.dz", "0541382534", "https://www.facebook.com/amirakram.akram.96?mibextid=wwXIfr&mibextid=wwXIfr")
 _amrouche_islam         = p("amrouche-mohamed-islam", "Mohamed Islam", "Amrouche", "mohamed_islam.amrouche@g.enp.edu.dz", "0780544411", "https://www.facebook.com/share/19GuUKcA4p/?mibextid=wwXIfr")
 _chikhar_hani           = p("chikhar-hani-sofiane", "Hani Sofiane", "Chikhar", "hani_sofiane.chikhar@g.enp.edu.dz", "0540939195", "https://facebook.com/hani.chikhar")
-
-
 # ------------------------------------------------------------------
 # A person's PRIMARY membership is their first listed row that is NOT in a governing
 # body (Board / Executive Bureau). Leadership roles have no level (None).
@@ -298,7 +295,7 @@ class Command(BaseCommand):
         # Memberships that are no longer in the list end today (history is kept).
         for key, m in active.items():
             if key not in wanted_keys:
-                m.end_date = date.today()
+                m.end_date = timezone.localdate()
                 m.is_primary = False
                 m.save()
                 self.stdout.write(f"  ended: {m}")
@@ -310,6 +307,13 @@ class Command(BaseCommand):
 
     def _upsert(self, member, unit, role, level, primary, active):
         m = active.get((unit.id, role.id))
+        if m is None:
+            # `active` is a snapshot taken before this member's rows were written. Saving a
+            # leadership membership fires the Executive Bureau sync signal, which may already
+            # have created this row since then: look it up again instead of duplicating it.
+            m = member.memberships.filter(
+                org_unit=unit, role=role, end_date__isnull=True
+            ).first()
         if m is None:
             Membership.objects.create(
                 member=member, org_unit=unit, role=role,

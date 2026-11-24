@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens, from the team's Figma (decision D-022): night blue and racing red, Barlow and Barlow Condensed.
+ * Use the names (bg-navy, text-racing, border-line…), never raw hex values, so that a change of
+ * brand colour is made here only. For right-to-left (Arabic), use logical classes: ms-/me-
+ * (margin start/end), ps-/pe-, start-/end-, text-start/text-end — never ml-/mr-/left-/right-.
+ */
+@theme {
+  --color-navy: #11202c;
+  --color-navy-800: #1b3040;
+  --color-navy-700: #26405a;
+  --color-racing: #be1e2d;
+  --color-racing-hover: #a31926;
+  --color-racing-strong: #8f1622;
+  --color-racing-soft: #fbe9eb;
+  --color-canvas: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-line: #e2e6ea;
+  --color-ink: #11202c;
+  --color-muted: #5f6c78; /* 5:1 on the canvas: readable small text (WCAG AA) */
+  --color-subtle: #9ca8b4; /* decoration only (icons, chevrons): too pale for text */
+  --color-success: #1f7a45;
+  --color-success-soft: #e3f4ea;
+  --color-warning: #8a5a00;
+  --color-warning-soft: #fff2d6;
+  --color-info: #2d6a9f;
+  --color-info-soft: #eaf0f6;
+  /* The progress colours of the Figma (red under half, amber under three quarters, green above). */
+  --color-amber: #d97706;
+  --color-green: #059669;
+
+  /* The smallest text: badges, captions, labels in capitals. Never smaller (readability, Arabic). */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  /* Barlow for Latin letters, IBM Plex Sans Arabic for Arabic (loaded in app/[locale]/layout.tsx). */
+  --font-sans: var(--font-latin), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  /* Titles, figures, labels in capitals: Barlow Condensed. */
+  --font-display: var(--font-condensed), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(17 32 44 / 0.04), 0 6px 18px rgb(17 32 44 / 0.04);
+  --shadow-card-hover: 0 16px 36px rgb(17 32 44 / 0.1);
+}
+
+/* Arabic pages: the Arabic font first (its Latin letters then match the Arabic ones). */
+html[lang="ar"] {
+  /* Arabic letters look smaller than Latin ones at one size and have no capitals: everything a step larger. */
+  font-size: 106.25%;
+  --font-sans: var(--font-arabic), var(--font-latin), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-arabic), var(--font-condensed), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-racing;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-racing) 24%, white);
+    color: var(--color-navy);
+  }
+
+  /* Spaced capitals suit Latin letters only: letter spacing would break the joined Arabic letters. */
+  html[lang="ar"] * {
+    letter-spacing: normal !important;
+  }
+}
+
+@layer utilities {
+  /* A small label in spaced capitals, as above the figures and the fields of the Figma. */
+  .eyebrow {
+    @apply text-2xs font-semibold tracking-[0.14em] text-muted uppercase;
+  }
+}
+
+/* Thin scroll bars, as in the Figma. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+/* The side menu's scroll bar, on night blue. */
+.sidebar-scroll * {
+  scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+}
+
+/* The racing backdrop of the pages: a speed pattern in a corner and a red line, barely visible. */
+.racing-canvas {
+  position: relative;
+  isolation: isolate;
+}
+
+.racing-canvas::before {
+  position: absolute;
+  z-index: -1;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  width: min(52vw, 760px);
+  height: 260px;
+  background: url("/racing/speed-pattern.webp") right top / cover no-repeat;
+  content: "";
+  opacity: 0.035;
+  pointer-events: none;
+}
+
+html[dir="rtl"] .racing-canvas::before {
+  transform: scaleX(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+}

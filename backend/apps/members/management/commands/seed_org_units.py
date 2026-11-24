@@ -9,6 +9,7 @@ GOV = OrgUnitType.GOVERNING_BODY
 DEPT = OrgUnitType.CLUB_DEPARTMENT
 FS_TEAM = OrgUnitType.FS_TEAM
 FS_DEPT = OrgUnitType.FS_DEPARTMENT
+POLE = OrgUnitType.CLUB_POLE
 
 
 def unit(code, name, type_, parent=None, aliases=()):
@@ -46,6 +47,8 @@ UNITS = [
          aliases=["Département Opérations & Partenariats"]),
 
     unit("fs-team", "Formula Student Team", FS_TEAM, "dept-projet"),
+    # The complementary competition's team (charter art. 5), with the club's roles (decision D-025).
+    unit("mate-rov", "MATE ROV", POLE, "dept-projet"),
     unit("fs-suspension-steering", "Suspension & Steering", FS_DEPT, "fs-team"),
     unit("fs-chassis-ergonomics", "Chassis & Ergonomics", FS_DEPT, "fs-team"),
     unit("fs-powertrain", "Powertrain", FS_DEPT, "fs-team"),

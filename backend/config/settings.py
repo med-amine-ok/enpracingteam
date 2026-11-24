@@ -10,18 +10,37 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 import environ
+from corsheaders.defaults import default_headers
 from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(BASE_DIR / ".env")
+# One settings file on this PC: ENV_FILE, at the root of the project, read by Docker Compose too
+# (decision D-023). A backend/.env of before is still read for what it lacks (check members.W001
+# asks to move it). On a server, the settings come from the containers' environment (.env.prod).
+ENV_FILE = BASE_DIR.parent / ".env"
+LEGACY_ENV_FILE = BASE_DIR / ".env"
+for settings_file in (ENV_FILE, LEGACY_ENV_FILE):
+    if settings_file.is_file():
+        environ.Env.read_env(settings_file)  # never overrides a variable already set
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
+
+
+def api_throttle_rates(environment=os.environ):
+    """The general API limits: requests per address without a session ("anon"), per member ("user").
+    Keep the defaults; only the end-to-end test server raises them (frontend/playwright.config.ts),
+    a test browser being much faster than a person."""
+    return {
+        "anon": environment.get("API_THROTTLE_ANON", "60/minute"),
+        "user": environment.get("API_THROTTLE_USER", "120/minute"),
+    }
 
 
 # Application definition
@@ -36,7 +55,10 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt",  # no models: loads its translations (admin names, API error messages)
     "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",  # Swagger UI files served locally (no CDN)
     "apps.members",
     "apps.projects",
     "apps.subsystems",
@@ -47,7 +69,12 @@ INSTALLED_APPS = [
     "apps.inventory",
     "apps.equipment",
     "apps.finance",
+    "apps.meetings",
     "apps.reporting",
+    "apps.ranking",
+    "apps.discipline",
+    "apps.engagement",
+    "apps.assistant",
     "apps.telemetry",
 ]
 
@@ -67,16 +94,100 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 50,
+    # Number of trusted reverse proxies in front of Django (Nginx, a PaaS router...).
+    # 0 = X-Forwarded-For is ignored, the client IP is REMOTE_ADDR. Without this DRF would
+    # trust the whole client-supplied header and per-IP limits could be bypassed.
+    "NUM_PROXIES": env.int("NUM_PROXIES", default=0),
     # Defense-in-depth: broad throttle on all endpoints.
     # OTP endpoints have their own stricter Redis-based rate limiter on top.
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
         "rest_framework.throttling.UserRateThrottle",
     ],
-    "DEFAULT_THROTTLE_RATES": {
-        "anon": "60/minute",
-        "user": "120/minute",
+    "DEFAULT_THROTTLE_RATES": api_throttle_rates(),
+    # OpenAPI schema generation (drf-spectacular), shown at /api/docs/.
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# API documentation: OpenAPI schema at /api/schema/, Swagger UI at /api/docs/.
+SPECTACULAR_SETTINGS = {
+    "TITLE": "ENP Racing Team ERP API",
+    "DESCRIPTION": (
+        "Internal API of the ENP Racing Team ERP. Log in with the e-mail code "
+        "(auth/otp/request, then auth/otp/verify): the session is kept in HttpOnly cookies."
+    ),
+    "VERSION": "0.1.0",
+    "SERVE_INCLUDE_SCHEMA": False,  # do not list /api/schema/ itself
+    # The docs list every endpoint: staff only. The Django admin session works too,
+    # so being logged into /admin/ is enough to open /api/docs/.
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+    "SERVE_AUTHENTICATION": [
+        "rest_framework.authentication.SessionAuthentication",
+        "apps.members.authentication.CookieJWTAuthentication",
+    ],
+    # Separate request/response schemas (read-only fields such as id only in responses):
+    # exact types when the frontend generates its TypeScript client from the schema.
+    "COMPONENT_SPLIT_REQUEST": True,
+    # Several models have a "status" field with different choices: one clear name each.
+    "ENUM_NAME_OVERRIDES": {
+        # A list of choices without a field of its own name (the e-mails a member turned off).
+        "EmailTopicEnum": "apps.members.models.EmailTopic",
+        # Fields with the same name in several apps: each list of choices gets its own name.
+        "CategoryEnum": "apps.projects.models.ProjectCategory",
+        "ExpenseCategoryEnum": "apps.finance.models.ExpenseCategory",
+        "LinkTypeEnum": "apps.tasks.models.TaskLinkType",
+        "MeetingKindEnum": "apps.meetings.models.MeetingKind",
+        "MeetingStatusEnum": "apps.meetings.models.MeetingStatus",
+        "AttendanceStatusEnum": "apps.meetings.models.AttendanceStatus",
+        "ExcuseStatusEnum": "apps.meetings.models.ExcuseStatus",
+        "ExcuseReasonEnum": "apps.meetings.models.ExcuseReason",
+        "HealthColourEnum": "apps.reporting.serializers.COLOURS",
+        "DocumentStatusEnum": "apps.documents.models.DocumentStatus",
+        "DocumentTypeEnum": "apps.documents.models.DocumentType",
+        "KnowledgeCategoryEnum": "apps.documents.models.KnowledgeCategory",
+        "EquipmentCategoryEnum": "apps.equipment.models.EquipmentCategory",
+        "EquipmentStatusEnum": "apps.equipment.models.EquipmentStatus",
+        "LoanStatusEnum": "apps.equipment.models.LoanStatus",
+        "ReservationStatusEnum": "apps.equipment.models.ReservationStatus",
+        "ReturnConditionEnum": "apps.equipment.models.ReturnCondition",
+        "SettableEquipmentStatusEnum": "apps.equipment.serializers.SETTABLE_STATUSES",
+        "RankingCategoryEnum": "apps.ranking.models.Category",
+        "ContributionStatusEnum": "apps.ranking.models.ContributionStatus",
+        "DisciplineGroundEnum": "apps.discipline.models.Ground",
+        "SeriousGroundEnum": "apps.discipline.models.SeriousGround",
+        "ReportStatusEnum": "apps.discipline.models.ReportStatus",
+        "WarningStatusEnum": "apps.discipline.models.WarningStatus",
+        "ExclusionStatusEnum": "apps.discipline.models.ExclusionStatus",
+        "ExclusionCauseEnum": "apps.discipline.models.ExclusionCause",
+        "ObjectiveStatusEnum": "apps.engagement.models.ObjectiveStatus",
+        "TrainingStatusEnum": "apps.engagement.models.TrainingStatus",
+        "VolunteeringKindEnum": "apps.engagement.models.VolunteeringKind",
+        "VolunteeringStatusEnum": "apps.engagement.models.VolunteeringStatus",
+        "StudyLevelEnum": "apps.members.models.StudyLevel",
+        "SourceStatusEnum": "apps.assistant.models.SourceStatus",
+        "ProjectHealthEnum": "apps.projects.health.ProjectHealth",
+        "TaskHealthEnum": "apps.tasks.followup.Health",
+        "MessageRoleEnum": "apps.assistant.models.MessageRole",
+        "SeverityEnum": "apps.tasks.models.BlockerSeverity",
+        "MemberHealthEnum": "apps.reporting.serializers.MEMBER_STATUSES",
+        "WarningKindEnum": "apps.reporting.serializers.WARNING_KINDS",
+        "MemberStatusEnum": "apps.members.models.MemberStatus",
+        "NotificationKindEnum": "apps.communication.models.NotificationKind",
+        "PartCategoryEnum": "apps.purchasing.models.PartCategory",
+        "ProjectStatusEnum": "apps.projects.models.ProjectStatus",
+        "SponsorshipStatusEnum": "apps.finance.models.SponsorshipStatus",
+        "PurchaseActionEnum": "apps.purchasing.models.PurchaseAction",
+        "PurchaseStatusEnum": "apps.purchasing.models.PurchaseStatus",
+        "StockMovementTypeEnum": "apps.inventory.models.StockMovementType",
+        "SubsystemStatusEnum": "apps.subsystems.models.SubsystemStatus",
+        "SupplierStatusEnum": "apps.purchasing.models.SupplierStatus",
+        "SupplierTypeEnum": "apps.purchasing.models.SupplierType",
+        "TaskStatusEnum": "apps.tasks.models.TaskStatus",
+        "TypeEnum": "apps.members.models.OrgUnitType",
     },
+    "SWAGGER_UI_DIST": "SIDECAR",
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
 }
 
 SIMPLE_JWT = {
@@ -98,6 +209,9 @@ AUTH_REFRESH_COOKIE_PATH = "/api/auth/" # refresh cookie only sent to auth endpo
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000"])
+# The frontend sends X-CSRF-Token (double-submit, see authentication.py) on unsafe methods; the
+# browser blocks those cross-origin requests unless the CORS preflight answer lists the header.
+CORS_ALLOW_HEADERS = (*default_headers, "x-csrf-token")
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=["http://localhost:3000"])
 
 # --- Redis cache, used for all rate limiting (atomic INCR is why Redis specifically) ---
@@ -107,6 +221,14 @@ CACHES = {
         "LOCATION": env("REDIS_URL", default="redis://localhost:6379/0"),
     }
 }
+# A PC without Docker (no Redis): REDIS_URL=locmem:// keeps the cache in the server's memory. Development only, one
+# server process: the limits are then per process and forgotten on restart, so it is refused with DEBUG off.
+if CACHES["default"]["LOCATION"] == "locmem://":
+    if not DEBUG:
+        from django.core.exceptions import ImproperlyConfigured
+
+        raise ImproperlyConfigured("REDIS_URL=locmem:// is for development only (DEBUG=True); use Redis on a server.")
+    CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 
 # --- OTP policy ---
 OTP_LENGTH = 6
@@ -124,6 +246,22 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@enpracing.team")
+# Folder of the file e-mail backend (django.core.mail.backends.filebased.EmailBackend): the
+# end-to-end tests read the login codes there (frontend/playwright.config.ts).
+EMAIL_FILE_PATH = env("EMAIL_FILE_PATH", default=None)
+# Address of the web pages, for the links in the notification e-mails (apps/communication/emails.py).
+FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000").rstrip("/")
+
+# First month of the club's budget year (apps/finance/years.py): September, so 2026-2027 runs from
+# 1 September 2026 to 31 August 2027.
+FINANCE_YEAR_START_MONTH = 9
+
+# --- Background work (notification e-mails) ---
+# Run at once on this computer. In production, a backend with a worker sends the e-mails without
+# slowing the pages down (roadmap step 8); the code does not change.
+TASKS = {
+    "default": {"BACKEND": env("TASKS_BACKEND", default="django.tasks.backends.immediate.ImmediateBackend")},
+}
 
 LOGGING = {
     "version": 1,
@@ -132,13 +270,20 @@ LOGGING = {
     "loggers": {"members.auth": {"handlers": ["console"], "level": "INFO"}},
 }
 
+# 'manage.py test' hides INFO/WARNING logs (errors still shown), see config/test_runner.py.
+TEST_RUNNER = "config.test_runner.QuietTestRunner"
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # Picks the language of each request among LANGUAGES (browser's Accept-Language), else LANGUAGE_CODE.
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    # The logged-in member's language choice wins over the browser's (admin and other session pages).
+    "apps.members.language.MemberLanguageMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -200,9 +345,28 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# Default language of the admin and of the API messages, used when the browser asks
+# for none of LANGUAGES. A per-user choice will be added on top of it.
+LANGUAGE_CODE = "fr"
 
-TIME_ZONE = "UTC"
+# The languages the ERP speaks. Arabic is written right to left: the frontend switches
+# direction with django.utils.translation.get_language_bidi() / the language code.
+LANGUAGES = [
+    ("fr", "Français"),
+    ("en", "English"),
+    ("ar", "العربية"),
+]
+
+# Translations of the ERP's own messages (English in the code). Update them with
+# scripts/translations.ps1, see backend/README.md "Translations". makemessages only writes
+# to the first folder; locale_overrides holds hand-written translations that Django and
+# simplejwt are missing (Arabic, and a few French ones).
+LOCALE_PATHS = [BASE_DIR / "locale", BASE_DIR / "locale_overrides"]
+
+# The club is in Algiers. Dates and times are still stored in UTC in the database
+# (USE_TZ below); this is the zone used to display them and to compute "today"
+# (always use timezone.localdate(), never date.today() or timezone.now().date()).
+TIME_ZONE = "Africa/Algiers"
 
 USE_I18N = True
 
@@ -213,6 +377,39 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = "static/"
+# Where collectstatic gathers them on the server (served there by Caddy, not by Django).
+STATIC_ROOT = env("STATIC_ROOT", default=str(BASE_DIR / "staticfiles"))
+
+# The files uploaded to the ERP (the documents, decision D-015): never served as they are, only through
+# the API, which checks who may download them. Production: ERP_DATA\media (docker-compose.prod.yml).
+MEDIA_ROOT = env("MEDIA_ROOT", default=str(BASE_DIR / "media"))
+DOCUMENT_MAX_UPLOAD_MB = env.int("DOCUMENT_MAX_UPLOAD_MB", default=50)
+
+# The team's assistant (decision D-021, knowledge base: PROJECTS/ERP/assistant_design.md): local models served
+# by Ollama on this PC (from Docker in production: http://host.docker.internal:11434). ASSISTANT_BACKEND=fake:
+# a stand-in without any model, for the end-to-end tests. The sources are read in a background thread.
+ASSISTANT_BACKEND = env("ASSISTANT_BACKEND", default="ollama")
+OLLAMA_URL = env("OLLAMA_URL", default="http://localhost:11434").rstrip("/")
+ASSISTANT_CHAT_MODEL = env("ASSISTANT_CHAT_MODEL", default="qwen2.5:7b")
+ASSISTANT_EMBED_MODEL = env("ASSISTANT_EMBED_MODEL", default="bge-m3")
+ASSISTANT_VISION_MODEL = env("ASSISTANT_VISION_MODEL", default="qwen2.5vl:7b")
+ASSISTANT_READ_IN_BACKGROUND = env.bool("ASSISTANT_READ_IN_BACKGROUND", default=True)
+
+
+# --- Production: DEBUG off, behind Caddy in HTTPS (knowledge base: PROJECTS/ERP/hosting_design.md) ---
+# Nothing of it applies on this PC (DEBUG on). `manage.py check --deploy` passes (tested).
+if not DEBUG:
+    # Caddy ends HTTPS and says so in X-Forwarded-Proto (it replaces any value sent by the visitor).
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_SSL_REDIRECT = True
+    SECURE_REDIRECT_EXEMPT = [r"^api/health/$"]  # the containers' own health check, in plain HTTP inside
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    # Browsers then keep to HTTPS: an hour at first, a year (31536000) once everything works.
+    SECURE_HSTS_SECONDS = env.int("SECURE_HSTS_SECONDS", default=3600)
+    # The ERP is one subdomain of the club's domain, whose other sites may not all be in HTTPS:
+    # no includeSubDomains, no preload list.
+    SILENCED_SYSTEM_CHECKS = ["security.W005", "security.W021"]
 
 
 

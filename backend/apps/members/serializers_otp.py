@@ -1,6 +1,7 @@
 # apps/members/serializers_otp.py
 
 from django.conf import settings
+from django.utils.translation import gettext as _
 from rest_framework import serializers
 
 
@@ -14,6 +15,6 @@ class OTPVerifySerializer(serializers.Serializer):
 
     def validate_code(self, value: str) -> str:
         if not value.isdigit() or len(value) != settings.OTP_LENGTH:
-            raise serializers.ValidationError("Invalid code format.")
+            raise serializers.ValidationError(_("Invalid code format."))
         return value
         

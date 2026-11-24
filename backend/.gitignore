@@ -4,3 +4,7 @@ __pycache__/
 .env
 node_modules/
 .next/
+
+_archive
+.claude
+.ruff_cash

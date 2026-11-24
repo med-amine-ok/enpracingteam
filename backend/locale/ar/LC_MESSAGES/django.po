@@ -1,0 +1,5282 @@
+# ENP Racing Team ERP: Arabic translations of the backend messages.
+# Update with scripts/translations.ps1 (see backend/README.md, "Translations").
+msgid ""
+msgstr ""
+"Project-Id-Version: ENP Racing Team ERP\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 14:22+0100\n"
+"PO-Revision-Date: 2026-10-17 23:30+0100\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\apps\assistant\answering.py
+msgid ""
+"No document has been given to the assistant yet: the Executive Bureau adds "
+"the charter and the competition's documents in its Sources."
+msgstr ""
+"لم تُعطَ أي وثيقة للمساعد بعد: يضيف المكتب التنفيذي الميثاق ووثائق المسابقة في "
+"مصادره."
+
+#: .\apps\assistant\apps.py
+msgid "Team assistant"
+msgstr "مساعد الفريق"
+
+#: .\apps\assistant\llm.py
+#, python-format
+msgid "The assistant's model answered with an error: %(detail)s"
+msgstr "ردّ نموذج المساعد بخطأ: %(detail)s"
+
+#: .\apps\assistant\llm.py
+msgid "The assistant cannot be reached: start Ollama on the server."
+msgstr "لا يمكن الوصول إلى المساعد: شغّل Ollama على الخادم."
+
+#: .\apps\assistant\llm.py
+msgid "I could not find the answer in the documents."
+msgstr "لم أجد الإجابة في الوثائق."
+
+#: .\apps\assistant\models.py
+msgctxt "source status"
+msgid "Being read"
+msgstr "قيد القراءة"
+
+#: .\apps\assistant\models.py
+msgctxt "source status"
+msgid "Ready"
+msgstr "جاهز"
+
+#: .\apps\assistant\models.py
+msgctxt "source status"
+msgid "Failed"
+msgstr "فشل"
+
+#: .\apps\assistant\models.py .\apps\communication\models.py
+#: .\apps\documents\models.py .\apps\engagement\models.py
+#: .\apps\meetings\models.py .\apps\tasks\models.py
+msgid "title"
+msgstr "العنوان"
+
+#: .\apps\assistant\models.py .\apps\discipline\models.py
+#: .\apps\documents\models.py .\apps\engagement\models.py
+msgid "season"
+msgstr "الموسم"
+
+#: .\apps\assistant\models.py .\apps\discipline\models.py
+#: .\apps\documents\models.py .\apps\engagement\models.py
+msgid "The year it starts: 2026 for 2026/2027."
+msgstr "سنة بدايته: 2026 لموسم 2026/2027."
+
+#: .\apps\assistant\models.py .\apps\documents\models.py
+msgid "file"
+msgstr "الملف"
+
+#: .\apps\assistant\models.py .\apps\documents\models.py
+msgid "file name"
+msgstr "اسم الملف"
+
+#: .\apps\assistant\models.py .\apps\documents\models.py
+msgid "size"
+msgstr "الحجم"
+
+#: .\apps\assistant\models.py .\apps\documents\models.py
+msgid "In bytes."
+msgstr "بالبايت."
+
+#: .\apps\assistant\models.py .\apps\discipline\models.py
+#: .\apps\documents\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\finance\models.py
+#: .\apps\meetings\models.py .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\purchasing\models.py .\apps\ranking\models.py
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "status"
+msgstr "الحالة"
+
+#: .\apps\assistant\models.py
+msgid "error"
+msgstr "الخطأ"
+
+#: .\apps\assistant\models.py
+msgid "pages"
+msgstr "الصفحات"
+
+#: .\apps\assistant\models.py .\apps\documents\models.py
+msgid "uploaded by"
+msgstr "تم الرفع بواسطة"
+
+#: .\apps\assistant\models.py .\apps\communication\models.py
+#: .\apps\discipline\models.py .\apps\documents\models.py
+#: .\apps\engagement\models.py .\apps\equipment\models.py
+#: .\apps\finance\models.py .\apps\inventory\models.py
+#: .\apps\meetings\models.py .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\purchasing\models.py .\apps\ranking\models.py
+#: .\apps\reporting\models.py .\apps\subsystems\models.py
+#: .\apps\tasks\models.py .\apps\telemetry\models.py
+msgid "created at"
+msgstr "تاريخ الإنشاء"
+
+#: .\apps\assistant\models.py
+msgid "read at"
+msgstr "تاريخ القراءة"
+
+#: .\apps\assistant\models.py
+msgid "assistant source"
+msgstr "مصدر للمساعد"
+
+#: .\apps\assistant\models.py
+msgid "assistant sources"
+msgstr "مصادر المساعد"
+
+#: .\apps\assistant\models.py
+msgid "source"
+msgstr "المصدر"
+
+#: .\apps\assistant\models.py
+msgid "page"
+msgstr "الصفحة"
+
+#: .\apps\assistant\models.py
+msgid "position"
+msgstr "الموضع"
+
+#: .\apps\assistant\models.py .\apps\communication\models.py
+msgid "text"
+msgstr "النص"
+
+#: .\apps\assistant\models.py
+msgid "vector"
+msgstr "المتجه"
+
+#: .\apps\assistant\models.py
+msgid "source passage"
+msgstr "مقطع من مصدر"
+
+#: .\apps\assistant\models.py
+msgid "source passages"
+msgstr "مقاطع المصادر"
+
+#: .\apps\assistant\models.py .\apps\communication\models.py
+#: .\apps\discipline\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\meetings\models.py
+#: .\apps\members\models.py .\apps\projects\models.py .\apps\ranking\models.py
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "member"
+msgstr "عضو"
+
+#: .\apps\assistant\models.py .\apps\communication\models.py
+#: .\apps\documents\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\finance\models.py
+#: .\apps\inventory\models.py .\apps\meetings\models.py
+#: .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\purchasing\models.py .\apps\ranking\models.py
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "updated at"
+msgstr "تاريخ التعديل"
+
+#: .\apps\assistant\models.py
+msgid "conversation"
+msgstr "محادثة"
+
+#: .\apps\assistant\models.py
+msgid "conversations"
+msgstr "محادثات"
+
+#: .\apps\assistant\models.py
+msgid "Question"
+msgstr "سؤال"
+
+#: .\apps\assistant\models.py
+msgid "Answer"
+msgstr "إجابة"
+
+#: .\apps\assistant\models.py .\apps\members\models.py
+msgid "role"
+msgstr "دور"
+
+#: .\apps\assistant\models.py
+msgid "content"
+msgstr "المحتوى"
+
+#: .\apps\assistant\models.py
+msgid "sources"
+msgstr "المصادر"
+
+#: .\apps\assistant\models.py
+msgid "assistant message"
+msgstr "رسالة مساعد"
+
+#: .\apps\assistant\models.py
+msgid "assistant messages"
+msgstr "رسائل المساعد"
+
+#: .\apps\assistant\reading.py .\apps\documents\workflow.py
+#, python-format
+msgid "The file is larger than %(limit)s MB."
+msgstr "الملف أكبر من %(limit)s ميغابايت."
+
+#: .\apps\assistant\reading.py
+msgid "The assistant reads PDF, Word (DOCX), text and pictures (PNG, JPEG)."
+msgstr "يقرأ المساعد ملفات PDF وWord (DOCX) والنصوص والصور (PNG وJPEG)."
+
+#: .\apps\assistant\reading.py
+msgid "This PDF cannot be opened."
+msgstr "لا يمكن فتح ملف PDF هذا."
+
+#: .\apps\assistant\reading.py
+msgid "This Word file cannot be opened."
+msgstr "لا يمكن فتح ملف Word هذا."
+
+#: .\apps\assistant\reading.py
+#, python-format
+msgid ""
+"These pages could not be read: %(pages)s. Their text is not in the assistant."
+msgstr "تعذّرت قراءة هذه الصفحات: %(pages)s. نصّها غير موجود في المساعد."
+
+#: .\apps\assistant\reading.py
+msgid "No text was found in this file."
+msgstr "لم يُعثر على أي نص في هذا الملف."
+
+#: .\apps\assistant\reading.py
+msgid "The reading stopped on an unexpected error."
+msgstr "توقفت القراءة بسبب خطأ غير متوقع."
+
+#: .\apps\assistant\views.py
+msgid "Only the Executive Bureau manages the assistant's sources."
+msgstr "لا يدير مصادر المساعد إلا المكتب التنفيذي."
+
+#: .\apps\communication\apps.py
+msgid "Communication"
+msgstr "التواصل"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "%(actor)s assigned you the task “%(task)s” (project %(project)s)."
+msgstr "أُسندت إليك المهمة «%(task)s» (المشروع %(project)s) من طرف %(actor)s."
+
+#: .\apps\communication\emails.py
+msgid "You are its main assignee."
+msgstr "لك المسؤولية الرئيسية عنها."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Task assigned to you: %(task)s"
+msgstr "مهمة مُسندة إليك: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Validation awaited: %(subsystem)s"
+msgstr "مصادقة منتظرة: %(subsystem)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The steps of the subsystem “%(subsystem)s” (project %(project)s) before "
+"“%(step)s” are done: it awaits your validation."
+msgstr ""
+"اكتملت مراحل النظام الفرعي «%(subsystem)s» (المشروع %(project)s) التي تسبق "
+"«%(step)s»، وهو بانتظار مصادقتكم."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "🔴 Overdue: %(task)s"
+msgstr "🔴 متأخرة: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The task “%(task)s” (project %(project)s) was due on %(date)s and is still "
+"not done."
+msgstr ""
+"كان موعد تسليم المهمة «%(task)s» (المشروع %(project)s) يوم %(date)s، ولم "
+"تُنجز بعد."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Due in %(days)d day: %(task)s"
+msgid_plural "Due in %(days)d days: %(task)s"
+msgstr[0] "موعد التسليم بعد %(days)d يوم: %(task)s"
+msgstr[1] "موعد التسليم بعد %(days)d يوم: %(task)s"
+msgstr[2] "موعد التسليم بعد %(days)d يومين: %(task)s"
+msgstr[3] "موعد التسليم بعد %(days)d أيام: %(task)s"
+msgstr[4] "موعد التسليم بعد %(days)d يومًا: %(task)s"
+msgstr[5] "موعد التسليم بعد %(days)d يوم: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Due today: %(task)s"
+msgstr "موعد التسليم اليوم: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The task “%(task)s” (project %(project)s) is due on %(date)s and is not done "
+"yet."
+msgstr ""
+"موعد تسليم المهمة «%(task)s» (المشروع %(project)s) هو %(date)s، ولم تُنجز بعد."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Purchase to approve (Operations): %(part)s"
+msgstr "شراء بانتظار مصادقة العمليات: %(part)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(requester)s asks for %(quantity)s × “%(part)s”; their leader approved it: "
+"it awaits the approval of Operations."
+msgstr ""
+"طلب من %(requester)s: %(quantity)s × «%(part)s». صادق عليه المسؤول، وهو الآن "
+"بانتظار مصادقة العمليات."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Purchase to approve: %(part)s"
+msgstr "شراء بانتظار المصادقة: %(part)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(requester)s asks for %(quantity)s × “%(part)s”: it awaits your approval."
+msgstr ""
+"طلب من %(requester)s: %(quantity)s × «%(part)s». الطلب بانتظار مصادقتك."
+
+#: .\apps\communication\emails.py
+msgid "place not given"
+msgstr "مكان غير محدد"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Low stock: %(part)s"
+msgstr "مخزون منخفض: %(part)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(quantity)s left of “%(part)s” (%(place)s), at or below its threshold of "
+"%(threshold)s: think of asking for a purchase."
+msgstr ""
+"بقي %(quantity)s × «%(part)s» (%(place)s)، عند الحد %(threshold)s أو دونه: "
+"يُستحسن تقديم طلب شراء."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Budget exceeded: %(unit)s %(fiscal_year)s"
+msgstr "تجاوز الميزانية: %(unit)s %(fiscal_year)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The expenses of %(unit)s for %(fiscal_year)s (%(spent)s DA) are now above "
+"its budget of %(allocated)s DA."
+msgstr ""
+"نفقات %(unit)s لسنة %(fiscal_year)s (%(spent)s دج) تتجاوز الآن ميزانيتها "
+"البالغة %(allocated)s دج."
+
+#: .\apps\communication\emails.py
+msgid "Someone"
+msgstr "شخص ما"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "To validate: %(task)s"
+msgstr "للمصادقة: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(actor)s submitted the task “%(task)s” (project %(project)s): it awaits "
+"your validation and its quality mark."
+msgstr ""
+"قدّم %(actor)s المهمة «%(task)s» (المشروع %(project)s): إنها بانتظار مصادقتك "
+"وتقييم جودتها."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "To rework: %(task)s"
+msgstr "للمراجعة: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(actor)s sent the task “%(task)s” (project %(project)s) back for revision: "
+"“%(excerpt)s”"
+msgstr ""
+"أعاد %(actor)s المهمة «%(task)s» (المشروع %(project)s) للمراجعة: "
+"«%(excerpt)s»"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Blocker on: %(task)s"
+msgstr "عائق في: %(task)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(actor)s declared a blocker (%(severity)s) on the task “%(task)s” (project "
+"%(project)s): “%(excerpt)s”. It awaits your decision."
+msgstr ""
+"صرّح %(actor)s بعائق (%(severity)s) في المهمة «%(task)s» (المشروع "
+"%(project)s): «%(excerpt)s». إنه بانتظار قرارك."
+
+#: .\apps\communication\emails.py
+msgid "Your presence is mandatory: it counts in the presence score."
+msgstr "حضورك إلزامي: يُحتسب في نقطة الحضور."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Session: %(meeting)s, %(when)s"
+msgstr "جلسة: %(meeting)s، %(when)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "You are invited to “%(meeting)s” on %(when)s (%(place)s)."
+msgstr "أنت مدعو إلى «%(meeting)s» يوم %(when)s (%(place)s)."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Reminder: %(meeting)s, %(when)s"
+msgstr "تذكير: %(meeting)s، %(when)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Reminder: “%(meeting)s” takes place on %(when)s (%(place)s)."
+msgstr "تذكير: «%(meeting)s» تُعقد يوم %(when)s (%(place)s)."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "The session “%(meeting)s” of %(when)s is cancelled."
+msgstr "أُلغيت جلسة «%(meeting)s» المقررة يوم %(when)s."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Reason: %(reason)s"
+msgstr "السبب: %(reason)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Cancelled: %(meeting)s"
+msgstr "ملغاة: %(meeting)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Changed: %(meeting)s"
+msgstr "تعديل: %(meeting)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The session “%(meeting)s” changed: it now takes place on %(when)s "
+"(%(place)s)."
+msgstr "تغيّرت جلسة «%(meeting)s»: تُعقد الآن يوم %(when)s (%(place)s)."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(actor)s gave you an action after the session “%(meeting)s”: “%(excerpt)s”."
+msgstr "كلّفك %(actor)s بإجراء بعد جلسة «%(meeting)s»: «%(excerpt)s»."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "To do by %(date)s."
+msgstr "يُنجز قبل %(date)s."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Action for you: %(meeting)s"
+msgstr "إجراء موكل إليك: %(meeting)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Loan to decide: %(equipment)s"
+msgstr "إعارة بانتظار القرار: %(equipment)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "%(actor)s asks to borrow “%(equipment)s” until %(date)s: “%(excerpt)s”."
+msgstr "طلب %(actor)s استعارة «%(equipment)s» حتى %(date)s: «%(excerpt)s»."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Loan overdue: %(equipment)s"
+msgstr "إعارة متأخرة: %(equipment)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"“%(equipment)s” was to be back on %(date)s: bring it back to the workshop."
+msgstr "كان يجب إرجاع «%(equipment)s» يوم %(date)s: أعِدها إلى الورشة."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Your reservation of “%(equipment)s” on %(when)s is cancelled."
+msgstr "أُلغي حجزك لـ«%(equipment)s» يوم %(when)s."
+
+#: .\apps\communication\emails.py
+msgid "The equipment is in maintenance or out of service."
+msgstr "المعدّة قيد الصيانة أو خارج الخدمة."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Reservation cancelled: %(equipment)s"
+msgstr "حجز ملغى: %(equipment)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Ranking of %(month)s published"
+msgstr "نُشر ترتيب %(month)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The monthly ranking of %(month)s is published: your score and your category "
+"are in the ERP."
+msgstr "نُشر الترتيب الشهري لـ%(month)s: نقطتك وفئتك موجودتان في نظام ERP."
+
+#: .\apps\communication\emails.py
+msgid ""
+"The ranking supports feedback and development; it never triggers a sanction "
+"by itself."
+msgstr "يخدم الترتيب المتابعة والتطور، ولا يؤدي أبدًا إلى عقوبة تلقائية."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Ranking to publish: %(month)s"
+msgstr "ترتيب بانتظار النشر: %(month)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(month)s is over: check the scores and the department heads' marks, then "
+"publish the ranking (within 7 days)."
+msgstr ""
+"انتهى %(month)s: راجع النقاط وتقييمات رؤساء الأقسام، ثم انشر الترتيب (في "
+"غضون 7 أيام)."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Breach reported: %(member)s"
+msgstr "إبلاغ عن إخلال: %(member)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"%(actor)s reported a breach by %(member)s (%(ground)s). As their project "
+"manager or the Bureau, you decide what follows: a warning, or nothing with a "
+"reason."
+msgstr ""
+"أبلغ %(actor)s عن إخلال من %(member)s (%(ground)s). بصفتك رئيس المشروع أو "
+"عضوًا في المكتب، تقرر ما يلي: إنذار، أو لا شيء مع ذكر السبب."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Warning no. %(level)s of the season"
+msgstr "الإنذار رقم %(level)s لهذا الموسم"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"You received warning no. %(level)s of the season (charter, art. 27). In the "
+"ERP: the rule concerned and what is expected to correct it; you may give "
+"your version."
+msgstr ""
+"تلقيت الإنذار رقم %(level)s لهذا الموسم (الميثاق، المادة 27). في نظام ERP: "
+"القاعدة المعنية وما هو منتظر للتصحيح؛ ويمكنك تقديم روايتك."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Exclusion to confirm: %(member)s"
+msgstr "فصل بانتظار التأكيد: %(member)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"An exclusion of %(member)s awaits the Bureau's confirmation (%(cause)s)."
+msgstr "فصل %(member)s بانتظار تأكيد المكتب (%(cause)s)."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Volunteering of %(month)s"
+msgstr "التطوع لشهر %(month)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"No volunteering is validated for you yet in %(month)s: the charter (art. 21) "
+"asks each member for a day or a period of volunteering every month. Join an "
+"activity, or organise one in the ERP."
+msgstr ""
+"لم يُعتمد لك أي تطوع بعد في %(month)s: يطلب الميثاق (المادة 21) من كل عضو "
+"يومًا أو فترة تطوع كل شهر. انضم إلى نشاط أو نظّم واحدًا في نظام ERP."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "To order: %(part)s"
+msgstr "بانتظار الطلب: %(part)s"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"The request of %(requester)s for %(quantity)s × “%(part)s” is approved: it "
+"is to be ordered."
+msgstr ""
+"تمت المصادقة على طلب %(requester)s: %(quantity)s × «%(part)s». يجب الآن طلبه "
+"من المورد."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "Open it in the ERP: %(url)s"
+msgstr "للاطلاع عليها في نظام ERP: %(url)s"
+
+#: .\apps\communication\emails.py
+msgid ""
+"You receive this e-mail because this work concerns you in the ENP Racing "
+"Team ERP."
+msgstr "وصلتكم هذه الرسالة لأن هذا العمل يخصّكم في نظام ERP لفريق ENP Racing."
+
+#: .\apps\communication\emails.py
+#: .\apps\reporting\management\commands\send_weekly_report.py
+#, python-format
+msgid "Hello %(name)s,"
+msgstr "مرحبًا %(name)s،"
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "%(by)s added you to the ENP Racing Team ERP: %(role)s, %(unit)s."
+msgstr "أضافك %(by)s إلى نظام ENP Racing Team: %(role)s، %(unit)s."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid "You were added to the ENP Racing Team ERP: %(role)s, %(unit)s."
+msgstr "تمت إضافتك إلى نظام ENP Racing Team: %(role)s، %(unit)s."
+
+#: .\apps\communication\emails.py
+#, python-format
+msgid ""
+"To sign in, open %(url)s and type this e-mail address: a code is sent to it, "
+"no password is needed."
+msgstr ""
+"لتسجيل الدخول، افتح %(url)s واكتب عنوان البريد هذا: يُرسل إليه رمز، دون كلمة "
+"مرور."
+
+#: .\apps\communication\emails.py
+msgid ""
+"You receive this e-mail because you are a member of the ENP Racing Team."
+msgstr "تصلك هذه الرسالة لأنك عضو في ENP Racing Team."
+
+#: .\apps\communication\emails.py
+msgid "Welcome to the ENP Racing Team ERP"
+msgstr "مرحبًا بك في نظام ENP Racing Team"
+
+#: .\apps\communication\models.py
+msgid "posted by"
+msgstr "الناشر"
+
+#: .\apps\communication\models.py .\apps\documents\models.py
+#: .\apps\finance\models.py .\apps\members\admin.py .\apps\members\models.py
+#: .\apps\projects\models.py .\apps\purchasing\models.py
+msgid "organisational unit"
+msgstr "وحدة تنظيمية"
+
+#: .\apps\communication\models.py
+msgid "posted at"
+msgstr "تاريخ النشر"
+
+#: .\apps\communication\models.py
+msgid "announcement"
+msgstr "إعلان"
+
+#: .\apps\communication\models.py
+msgid "announcements"
+msgstr "الإعلانات"
+
+#: .\apps\communication\models.py
+msgid "Message"
+msgstr "رسالة"
+
+#: .\apps\communication\models.py
+msgid "Task assigned"
+msgstr "مهمة مُسندة"
+
+#: .\apps\communication\models.py
+msgid "New comment"
+msgstr "تعليق جديد"
+
+#: .\apps\communication\models.py
+msgid "Task blocked"
+msgstr "مهمة متوقفة"
+
+#: .\apps\communication\models.py
+msgid "Task done"
+msgstr "مهمة منجزة"
+
+#: .\apps\communication\models.py
+msgid "Validation awaited"
+msgstr "مصادقة منتظرة"
+
+#: .\apps\communication\models.py
+msgid "Validation signed"
+msgstr "مصادقة موقّعة"
+
+#: .\apps\communication\models.py .\apps\tasks\followup.py
+msgid "Due soon"
+msgstr "موعد قريب"
+
+#: .\apps\communication\models.py
+msgid "Overdue"
+msgstr "مهمة متأخرة"
+
+#: .\apps\communication\models.py
+msgid "Purchase to approve"
+msgstr "شراء بانتظار المصادقة"
+
+#: .\apps\communication\models.py
+msgid "Purchase to order"
+msgstr "شراء بانتظار الطلب"
+
+#: .\apps\communication\models.py
+msgid "Purchase request update"
+msgstr "تحديث طلب شراء"
+
+#: .\apps\communication\models.py
+msgid "Low stock"
+msgstr "مخزون منخفض"
+
+#: .\apps\communication\models.py
+msgid "Budget exceeded"
+msgstr "تجاوز الميزانية"
+
+#: .\apps\communication\models.py
+msgid "Task submitted"
+msgstr "مهمة مقدَّمة"
+
+#: .\apps\communication\models.py
+msgid "Task validated"
+msgstr "مهمة مصادَق عليها"
+
+#: .\apps\communication\models.py
+msgid "Task to rework"
+msgstr "مهمة للمراجعة"
+
+#: .\apps\communication\models.py
+msgid "Blocker declared"
+msgstr "عائق مصرَّح به"
+
+#: .\apps\communication\models.py
+msgid "Blocker update"
+msgstr "تحديث عائق"
+
+#: .\apps\communication\models.py
+msgid "Session scheduled"
+msgstr "جلسة مبرمجة"
+
+#: .\apps\communication\models.py
+msgid "Session changed"
+msgstr "جلسة معدَّلة"
+
+#: .\apps\communication\models.py
+msgid "Session reminder"
+msgstr "تذكير بجلسة"
+
+#: .\apps\communication\models.py
+msgid "Excuse to decide"
+msgstr "عذر للبت فيه"
+
+#: .\apps\communication\models.py
+msgid "Excuse decided"
+msgstr "عذر تم البت فيه"
+
+#: .\apps\communication\models.py
+msgid "Action assigned to you"
+msgstr "إجراء موكل إليك"
+
+#: .\apps\communication\models.py
+msgid "Minutes published"
+msgstr "محضر منشور"
+
+#: .\apps\communication\models.py
+msgid "Document to review"
+msgstr "وثيقة للمراجعة"
+
+#: .\apps\communication\models.py
+msgid "Document reviewed"
+msgstr "وثيقة تمت مراجعتها"
+
+#: .\apps\communication\models.py
+msgid "Loan to decide"
+msgstr "إعارة للبت فيها"
+
+#: .\apps\communication\models.py
+msgid "Loan decided"
+msgstr "قرار بشأن إعارة"
+
+#: .\apps\communication\models.py
+msgid "Loan overdue"
+msgstr "إعارة متأخرة"
+
+#: .\apps\communication\models.py
+msgid "Reservation cancelled"
+msgstr "حجز ملغى"
+
+#: .\apps\communication\models.py
+msgid "Machine certification"
+msgstr "تأهيل لاستعمال آلة"
+
+#: .\apps\communication\models.py
+msgid "Contribution points to decide"
+msgstr "نقاط مساهمة بانتظار القرار"
+
+#: .\apps\communication\models.py
+msgid "Contribution points decided"
+msgstr "قرار بشأن نقاط مساهمة"
+
+#: .\apps\communication\models.py
+msgid "Ranking published"
+msgstr "ترتيب منشور"
+
+#: .\apps\communication\models.py
+msgid "Ranking to publish"
+msgstr "ترتيب بانتظار النشر"
+
+#: .\apps\communication\models.py
+msgid "Breach reported"
+msgstr "إبلاغ عن إخلال"
+
+#: .\apps\communication\models.py
+msgid "Warning given"
+msgstr "إنذار"
+
+#: .\apps\communication\models.py
+msgid "Exclusion to confirm"
+msgstr "فصل بانتظار التأكيد"
+
+#: .\apps\communication\models.py
+msgid "New goal"
+msgstr "هدف جديد"
+
+#: .\apps\communication\models.py
+msgid "Training planned"
+msgstr "تكوين مبرمج"
+
+#: .\apps\communication\models.py
+msgid "Volunteering to validate"
+msgstr "تطوع بانتظار الاعتماد"
+
+#: .\apps\communication\models.py
+msgid "Volunteering decided"
+msgstr "قرار بشأن تطوع"
+
+#: .\apps\communication\models.py
+msgid "Volunteering of the month"
+msgstr "تطوع الشهر"
+
+#: .\apps\communication\models.py .\apps\engagement\models.py
+#: .\apps\meetings\models.py .\apps\tasks\models.py
+msgid "kind"
+msgstr "النوع"
+
+#: .\apps\communication\models.py .\apps\purchasing\models.py
+msgid "by"
+msgstr "بواسطة"
+
+#: .\apps\communication\models.py
+msgid "message"
+msgstr "الرسالة"
+
+#: .\apps\communication\models.py .\apps\ranking\models.py
+#: .\apps\tasks\models.py
+msgid "details"
+msgstr "التفاصيل"
+
+#: .\apps\communication\models.py
+msgid "read"
+msgstr "القراءة"
+
+#: .\apps\communication\models.py
+msgid "related record type"
+msgstr "نوع العنصر المرتبط"
+
+#: .\apps\communication\models.py
+msgid "related record ID"
+msgstr "معرّف العنصر المرتبط"
+
+#: .\apps\communication\models.py
+msgid "notification"
+msgstr "إشعار"
+
+#: .\apps\communication\models.py
+msgid "notifications"
+msgstr "الإشعارات"
+
+#: .\apps\communication\models.py
+msgid "journalist name"
+msgstr "اسم الصحفي"
+
+#: .\apps\communication\models.py
+msgid "media outlet"
+msgstr "الوسيلة الإعلامية"
+
+#: .\apps\communication\models.py
+msgid "contact details"
+msgstr "معلومات الاتصال"
+
+#: .\apps\communication\models.py .\apps\discipline\models.py
+msgid "handled by"
+msgstr "المتابِع"
+
+#: .\apps\communication\models.py
+msgid "published video link"
+msgstr "رابط الفيديو المنشور"
+
+#: .\apps\communication\models.py
+msgid "remarks"
+msgstr "ملاحظات"
+
+#: .\apps\communication\models.py
+msgid "media contact"
+msgstr "جهة اتصال إعلامية"
+
+#: .\apps\communication\models.py
+msgid "media contacts"
+msgstr "جهات الاتصال الإعلامية"
+
+#: .\apps\discipline\apps.py .\apps\members\models.py
+msgid "Warnings and exclusions"
+msgstr "الإنذارات والفصل"
+
+#: .\apps\discipline\models.py
+msgid "Assigned work not done without valid reason"
+msgstr "عمل مُسند لم يُنجز دون مبرر مقبول"
+
+#: .\apps\discipline\models.py
+msgid "Commitments not kept"
+msgstr "التزامات غير محترمة"
+
+#: .\apps\discipline\models.py
+msgid "No communication on progress"
+msgstr "غياب التواصل بشأن التقدم"
+
+#: .\apps\discipline\models.py
+msgid "Team rules not respected"
+msgstr "عدم احترام قواعد الفريق"
+
+#: .\apps\discipline\models.py
+msgctxt "discipline ground"
+msgid "Other"
+msgstr "أخرى"
+
+#: .\apps\discipline\models.py
+msgid "Violence"
+msgstr "العنف"
+
+#: .\apps\discipline\models.py
+msgid "Serious harassment"
+msgstr "التحرش الخطير"
+
+#: .\apps\discipline\models.py
+msgid "Serious threats"
+msgstr "التهديدات الخطيرة"
+
+#: .\apps\discipline\models.py
+msgid "Deliberate sabotage"
+msgstr "التخريب المتعمد"
+
+#: .\apps\discipline\models.py
+msgid "Theft"
+msgstr "السرقة"
+
+#: .\apps\discipline\models.py
+msgid "Deliberately endangering someone"
+msgstr "تعريض شخص للخطر عمدًا"
+
+#: .\apps\discipline\models.py
+msgid "Deliberate damage to equipment"
+msgstr "إتلاف المعدات عمدًا"
+
+#: .\apps\discipline\models.py
+msgid "Disclosure of highly confidential information"
+msgstr "إفشاء معلومات سرية للغاية"
+
+#: .\apps\discipline\models.py
+msgid "Serious harm to the team or its image"
+msgstr "المساس الخطير بالفريق أو بصورته"
+
+#: .\apps\discipline\models.py
+msgctxt "report status"
+msgid "To handle"
+msgstr "للمعالجة"
+
+#: .\apps\discipline\models.py
+msgctxt "report status"
+msgid "Warning given"
+msgstr "أُعطي إنذار"
+
+#: .\apps\discipline\models.py
+msgctxt "report status"
+msgid "Dismissed"
+msgstr "حُفظ دون متابعة"
+
+#: .\apps\discipline\models.py
+msgid "ground"
+msgstr "السبب"
+
+#: .\apps\discipline\models.py
+msgid "facts"
+msgstr "الوقائع"
+
+#: .\apps\discipline\models.py .\apps\tasks\models.py
+msgid "reported by"
+msgstr "صرّح به"
+
+#: .\apps\discipline\models.py
+msgid "handled at"
+msgstr "تاريخ المعالجة"
+
+#: .\apps\discipline\models.py
+msgid "why dismissed"
+msgstr "سبب الحفظ"
+
+#: .\apps\discipline\models.py
+msgid "breach report"
+msgstr "إبلاغ عن إخلال"
+
+#: .\apps\discipline\models.py
+msgid "breach reports"
+msgstr "إبلاغات عن إخلال"
+
+#: .\apps\discipline\models.py
+msgctxt "warning status"
+msgid "Active"
+msgstr "ساري"
+
+#: .\apps\discipline\models.py
+msgctxt "warning status"
+msgid "Cancelled"
+msgstr "ملغى"
+
+#: .\apps\discipline\models.py .\apps\documents\models.py
+#: .\apps\tasks\models.py
+msgid "number"
+msgstr "الرقم"
+
+#: .\apps\discipline\models.py
+msgid "1, 2 or 3 in the season."
+msgstr "1 أو 2 أو 3 في الموسم."
+
+#: .\apps\discipline\models.py
+msgid "rule concerned"
+msgstr "القاعدة المعنية"
+
+#: .\apps\discipline\models.py
+msgid "what is expected to correct it"
+msgstr "المنتظر للتصحيح"
+
+#: .\apps\discipline\models.py .\apps\documents\models.py
+#: .\apps\projects\models.py .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "project"
+msgstr "مشروع"
+
+#: .\apps\discipline\models.py
+msgid "report"
+msgstr "الإبلاغ"
+
+#: .\apps\discipline\models.py
+msgid "given by"
+msgstr "أعطاه"
+
+#: .\apps\discipline\models.py
+msgid "given at"
+msgstr "تاريخ الإعطاء"
+
+#: .\apps\discipline\models.py
+msgid "member's response"
+msgstr "رد العضو"
+
+#: .\apps\discipline\models.py
+msgid "responded at"
+msgstr "تاريخ الرد"
+
+#: .\apps\discipline\models.py
+msgid "council"
+msgstr "المجلس"
+
+#: .\apps\discipline\models.py
+msgid "council decision"
+msgstr "قرار المجلس"
+
+#: .\apps\discipline\models.py
+msgid "decision recorded by"
+msgstr "سجّل القرار"
+
+#: .\apps\discipline\models.py
+msgid "decision recorded at"
+msgstr "تاريخ تسجيل القرار"
+
+#: .\apps\discipline\models.py .\apps\equipment\models.py
+msgid "cancelled by"
+msgstr "ألغاه"
+
+#: .\apps\discipline\models.py .\apps\equipment\models.py
+msgid "cancelled at"
+msgstr "تاريخ الإلغاء"
+
+#: .\apps\discipline\models.py
+msgid "why cancelled"
+msgstr "سبب الإلغاء"
+
+#: .\apps\discipline\models.py
+msgid "warning"
+msgstr "إنذار"
+
+#: .\apps\discipline\models.py
+msgid "warnings"
+msgstr "إنذارات"
+
+#: .\apps\discipline\models.py
+msgid "Third warning (art. 27.6)"
+msgstr "الإنذار الثالث (المادة 27.6)"
+
+#: .\apps\discipline\models.py
+msgid "Immediate exclusion (art. 28)"
+msgstr "الفصل الفوري (المادة 28)"
+
+#: .\apps\discipline\models.py
+msgctxt "exclusion status"
+msgid "To confirm"
+msgstr "بانتظار التأكيد"
+
+#: .\apps\discipline\models.py
+msgctxt "exclusion status"
+msgid "Confirmed"
+msgstr "مؤكَّد"
+
+#: .\apps\discipline\models.py
+msgctxt "exclusion status"
+msgid "Abandoned"
+msgstr "متخلّى عنه"
+
+#: .\apps\discipline\models.py
+msgid "cause"
+msgstr "السبب"
+
+#: .\apps\discipline\models.py
+msgid "serious behaviour"
+msgstr "السلوك الخطير"
+
+#: .\apps\discipline\models.py .\apps\ranking\models.py
+msgid "proposed by"
+msgstr "اقترحها"
+
+#: .\apps\discipline\models.py
+msgid "proposed at"
+msgstr "تاريخ الاقتراح"
+
+#: .\apps\discipline\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\ranking\models.py
+msgid "decided by"
+msgstr "قرّره"
+
+#: .\apps\discipline\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\ranking\models.py
+msgid "decided at"
+msgstr "تاريخ القرار"
+
+#: .\apps\discipline\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\meetings\models.py
+#: .\apps\ranking\models.py .\apps\tasks\models.py
+msgid "decision note"
+msgstr "سبب القرار"
+
+#: .\apps\discipline\models.py
+msgid "exclusion"
+msgstr "فصل"
+
+#: .\apps\discipline\models.py
+msgid "exclusions"
+msgstr "حالات فصل"
+
+#: .\apps\discipline\views.py
+msgid "Only the member and those who follow them see their warnings."
+msgstr "لا يرى إنذارات العضو إلا هو ومن يتابعونه."
+
+#: .\apps\discipline\views.py
+msgid ""
+"Only the member's department heads, project managers and the Bureau report a "
+"breach."
+msgstr "لا يبلّغ عن إخلال إلا رؤساء قسم العضو ورؤساء مشاريعه والمكتب."
+
+#: .\apps\discipline\views.py
+msgid "Only the project manager or the Bureau decides what follows a report."
+msgstr "لا يقرر متابعة الإبلاغ إلا رئيس المشروع أو المكتب."
+
+#: .\apps\discipline\views.py
+msgid ""
+"Only the member's project manager or the Bureau gives a warning (art. 27.1), "
+"never to oneself."
+msgstr ""
+"لا يعطي الإنذار إلا رئيس مشروع العضو أو المكتب (المادة 27.1)، ولا يعطيه أحد "
+"لنفسه."
+
+#: .\apps\discipline\views.py
+msgid "Only the member answers their warning."
+msgstr "لا يرد على الإنذار إلا العضو المعني."
+
+#: .\apps\discipline\views.py
+msgid "Only the Bureau or who gave the warning records the council's decision."
+msgstr "لا يسجل قرار المجلس إلا المكتب أو من أعطى الإنذار."
+
+#: .\apps\discipline\views.py
+msgid "Only the Bureau cancels a warning."
+msgstr "لا يلغي الإنذار إلا المكتب."
+
+#: .\apps\discipline\views.py
+msgid "Only the Bureau proposes an immediate exclusion."
+msgstr "لا يقترح الفصل الفوري إلا المكتب."
+
+#: .\apps\discipline\views.py
+msgid "Not oneself."
+msgstr "ليس لنفسك."
+
+#: .\apps\discipline\views.py
+msgid "Only the Bureau confirms or abandons an exclusion."
+msgstr "لا يؤكد الفصل أو يتخلى عنه إلا المكتب."
+
+#: .\apps\discipline\workflow.py
+msgid "This report is already handled."
+msgstr "تمت معالجة هذا الإبلاغ بالفعل."
+
+#: .\apps\discipline\workflow.py
+msgid "Say why it is dismissed."
+msgstr "اذكر سبب الحفظ."
+
+#: .\apps\discipline\workflow.py
+msgid "A second warning calls a council: give its date and time."
+msgstr "الإنذار الثاني يستدعي مجلسًا: حدّد تاريخه ووقته."
+
+#: .\apps\discipline\workflow.py .\apps\equipment\workflow.py
+msgid "The end must come after the start."
+msgstr "يجب أن تأتي النهاية بعد البداية."
+
+#: .\apps\discipline\workflow.py
+msgid "The council is still to come."
+msgstr "يجب أن يكون المجلس في المستقبل."
+
+#: .\apps\discipline\workflow.py
+#, python-format
+msgid "Council (art. 27.5): %(member)s"
+msgstr "مجلس (المادة 27.5): %(member)s"
+
+#: .\apps\discipline\workflow.py
+msgid ""
+"Second warning: the member presents their version; the council decides "
+"corrective measures or a sanction."
+msgstr ""
+"الإنذار الثاني: يقدّم العضو روايته، ويقرر المجلس إجراءات تصحيحية أو عقوبة."
+
+#: .\apps\discipline\workflow.py
+msgid "This report is about another member."
+msgstr "هذا الإبلاغ يخص عضوًا آخر."
+
+#: .\apps\discipline\workflow.py
+msgid "This member already has three warnings this season: see the exclusion."
+msgstr "لدى هذا العضو ثلاثة إنذارات هذا الموسم بالفعل: راجع الفصل."
+
+#: .\apps\discipline\workflow.py
+msgid "This warning is cancelled."
+msgstr "هذا الإنذار ملغى."
+
+#: .\apps\discipline\workflow.py
+msgid "Only a second warning has a council."
+msgstr "لا مجلس إلا للإنذار الثاني."
+
+#: .\apps\discipline\workflow.py
+msgid "Write the council's decision."
+msgstr "اكتب قرار المجلس."
+
+#: .\apps\discipline\workflow.py
+msgid "This warning is already cancelled."
+msgstr "هذا الإنذار ملغى بالفعل."
+
+#: .\apps\discipline\workflow.py
+msgid "Say why it is cancelled."
+msgstr "اذكر سبب الإلغاء."
+
+#: .\apps\discipline\workflow.py
+msgid "Its warning was cancelled."
+msgstr "أُلغي الإنذار المرتبط به."
+
+#: .\apps\discipline\workflow.py
+msgid "An exclusion of this member already awaits its confirmation."
+msgstr "فصل هذا العضو بانتظار التأكيد بالفعل."
+
+#: .\apps\discipline\workflow.py
+msgid "This exclusion is already decided."
+msgstr "تم البت في هذا الفصل بالفعل."
+
+#: .\apps\discipline\workflow.py
+msgid "Say why it is abandoned."
+msgstr "اذكر سبب التخلي."
+
+#: .\apps\documents\apps.py
+msgid "Documents"
+msgstr "الوثائق"
+
+#: .\apps\documents\models.py
+msgid "CAD"
+msgstr "تصميم بالحاسوب (CAD)"
+
+#: .\apps\documents\models.py .\apps\tasks\models.py
+msgid "Report"
+msgstr "تقرير"
+
+#: .\apps\documents\models.py
+msgid "Technical doc"
+msgstr "وثيقة تقنية"
+
+#: .\apps\documents\models.py
+msgid "Drawing"
+msgstr "رسم تقني"
+
+#: .\apps\documents\models.py
+msgctxt "document type"
+msgid "Admin"
+msgstr "إداري"
+
+#: .\apps\documents\models.py
+msgid "FAQ"
+msgstr "الأسئلة الشائعة"
+
+#: .\apps\documents\models.py
+msgid "Procedure"
+msgstr "إجراء"
+
+#: .\apps\documents\models.py
+msgid "Tutorial"
+msgstr "درس تطبيقي"
+
+#: .\apps\documents\models.py
+msgid "Photo or video"
+msgstr "صورة أو فيديو"
+
+#: .\apps\documents\models.py
+msgctxt "document type"
+msgid "Other"
+msgstr "أخرى"
+
+#: .\apps\documents\models.py
+msgctxt "document status"
+msgid "Draft"
+msgstr "مسودة"
+
+#: .\apps\documents\models.py
+msgctxt "document status"
+msgid "In review"
+msgstr "قيد المراجعة"
+
+#: .\apps\documents\models.py
+msgctxt "document status"
+msgid "Approved"
+msgstr "معتمدة"
+
+#: .\apps\documents\models.py
+msgctxt "document status"
+msgid "Rejected"
+msgstr "مرفوضة"
+
+#: .\apps\documents\models.py
+msgid "Team management"
+msgstr "تسيير الفريق"
+
+#: .\apps\documents\models.py
+msgid "Mechanical"
+msgstr "الميكانيك"
+
+#: .\apps\documents\models.py
+msgid "Electronics"
+msgstr "الإلكترونيات"
+
+#: .\apps\documents\models.py
+msgid "Aerodynamics"
+msgstr "الديناميكا الهوائية"
+
+#: .\apps\documents\models.py
+msgid "Software"
+msgstr "البرمجيات"
+
+#: .\apps\documents\models.py
+msgid "Manufacturing"
+msgstr "التصنيع"
+
+#: .\apps\documents\models.py
+msgid "Sponsoring"
+msgstr "الرعاية"
+
+#: .\apps\documents\models.py
+msgid "Competition"
+msgstr "المنافسة"
+
+#: .\apps\documents\models.py
+msgid "Administration"
+msgstr "الإدارة"
+
+#: .\apps\documents\models.py
+msgid "Previous projects"
+msgstr "المشاريع السابقة"
+
+#: .\apps\documents\models.py .\apps\engagement\models.py
+#: .\apps\equipment\models.py .\apps\finance\models.py
+#: .\apps\meetings\models.py .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\purchasing\models.py .\apps\ranking\models.py .\apps\tasks\models.py
+msgid "description"
+msgstr "الوصف"
+
+#: .\apps\documents\models.py .\apps\members\models.py
+#: .\apps\purchasing\models.py
+msgid "type"
+msgstr "النوع"
+
+#: .\apps\documents\models.py .\apps\equipment\models.py
+#: .\apps\finance\models.py .\apps\projects\models.py
+#: .\apps\purchasing\models.py .\apps\ranking\models.py
+msgid "category"
+msgstr "الفئة"
+
+#: .\apps\documents\models.py .\apps\purchasing\models.py
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+#: .\apps\telemetry\models.py
+msgid "subsystem"
+msgstr "نظام فرعي"
+
+#: .\apps\documents\models.py
+msgid "current version"
+msgstr "الإصدار الحالي"
+
+#: .\apps\documents\models.py
+msgid "The latest approved version, which every member sees."
+msgstr "آخر إصدار معتمد، يراه جميع الأعضاء."
+
+#: .\apps\documents\models.py
+msgid "Google Drive link"
+msgstr "رابط Google Drive"
+
+#: .\apps\documents\models.py
+msgid "document"
+msgstr "وثيقة"
+
+#: .\apps\documents\models.py
+msgid "documents"
+msgstr "الوثائق"
+
+#: .\apps\documents\models.py
+msgid "content type"
+msgstr "نوع المحتوى"
+
+#: .\apps\documents\models.py
+msgid "what changes"
+msgstr "ما الذي تغيّر"
+
+#: .\apps\documents\models.py
+msgid "uploaded at"
+msgstr "تاريخ الرفع"
+
+#: .\apps\documents\models.py .\apps\tasks\models.py
+msgid "submitted at"
+msgstr "تاريخ التقديم"
+
+#: .\apps\documents\models.py
+msgid "reviewed by"
+msgstr "راجعه"
+
+#: .\apps\documents\models.py
+msgid "reviewed at"
+msgstr "تاريخ المراجعة"
+
+#: .\apps\documents\models.py
+msgid "review note"
+msgstr "ملاحظة المراجعة"
+
+#: .\apps\documents\models.py
+msgid "document version"
+msgstr "إصدار وثيقة"
+
+#: .\apps\documents\models.py
+msgid "document versions"
+msgstr "إصدارات وثائق"
+
+#: .\apps\documents\models.py
+msgid "problem"
+msgstr "المشكلة"
+
+#: .\apps\documents\models.py
+msgid "context"
+msgstr "السياق"
+
+#: .\apps\documents\models.py
+msgid "root cause"
+msgstr "السبب الجذري"
+
+#: .\apps\documents\models.py
+msgid "solution"
+msgstr "الحل"
+
+#: .\apps\documents\models.py
+msgid "result"
+msgstr "النتيجة"
+
+#: .\apps\documents\models.py
+msgid "what to do differently next time"
+msgstr "ما يجب فعله بشكل مختلف مستقبلًا"
+
+#: .\apps\documents\models.py .\apps\tasks\models.py
+msgid "responsible unit"
+msgstr "الوحدة المسؤولة"
+
+#: .\apps\documents\models.py .\apps\tasks\models.py
+msgid "author"
+msgstr "الكاتب"
+
+#: .\apps\documents\models.py
+msgid "lesson learned"
+msgstr "درس مستفاد"
+
+#: .\apps\documents\models.py
+msgid "lessons learned"
+msgstr "دروس مستفادة"
+
+#: .\apps\documents\serializers.py
+msgid "The subsystem must belong to the document's project."
+msgstr "يجب أن ينتمي النظام الفرعي إلى مشروع الوثيقة."
+
+#: .\apps\documents\views.py .\apps\finance\views.py .\apps\inventory\views.py
+#: .\apps\meetings\views.py .\apps\purchasing\views.py .\apps\tasks\views.py
+msgid "A number is expected."
+msgstr "يجب إدخال رقم."
+
+#: .\apps\documents\views.py
+msgid "Only its author and its unit's leaders change a document."
+msgstr "لا يعدّل الوثيقة إلا صاحبها ورؤساء وحدتها."
+
+#: .\apps\documents\views.py
+msgid "Only its author or an admin deletes a document."
+msgstr "لا يحذف الوثيقة إلا صاحبها أو مسؤول."
+
+#: .\apps\documents\views.py
+msgid "Only its author and its unit's leaders upload its versions."
+msgstr "لا يرفع نسخ الوثيقة إلا صاحبها ورؤساء وحدتها."
+
+#: .\apps\documents\views.py
+msgid "Only its author, its unit's leaders and the bureau correct a lesson."
+msgstr "لا يصحح الدرس إلا صاحبه ومسؤولو وحدته والمكتب."
+
+#: .\apps\documents\views.py
+msgid "Only its author or an admin deletes a lesson."
+msgstr "لا يحذف الدرس إلا صاحبه أو المسؤول."
+
+#: .\apps\documents\workflow.py
+#, python-format
+msgid "This kind of file is not accepted (%(extension)s)."
+msgstr "هذا النوع من الملفات غير مقبول (%(extension)s)."
+
+#: .\apps\engagement\apps.py
+msgid "Goals, trainings and volunteering"
+msgstr "الأهداف والتكوين والتطوع"
+
+#: .\apps\engagement\models.py
+msgctxt "objective status"
+msgid "In progress"
+msgstr "قيد الإنجاز"
+
+#: .\apps\engagement\models.py
+msgctxt "objective status"
+msgid "Achieved"
+msgstr "محقَّق"
+
+#: .\apps\engagement\models.py
+msgctxt "objective status"
+msgid "Not achieved"
+msgstr "غير محقَّق"
+
+#: .\apps\engagement\models.py
+msgctxt "objective status"
+msgid "Dropped"
+msgstr "متخلّى عنه"
+
+#: .\apps\engagement\models.py
+msgid "how it is measured"
+msgstr "طريقة القياس"
+
+#: .\apps\engagement\models.py .\apps\meetings\models.py .\apps\tasks\models.py
+msgid "due date"
+msgstr "تاريخ الاستحقاق"
+
+#: .\apps\engagement\models.py .\apps\tasks\models.py
+msgid "progress (%)"
+msgstr "التقدم (%)"
+
+#: .\apps\engagement\models.py
+msgid "member's note"
+msgstr "ملاحظة العضو"
+
+#: .\apps\engagement\models.py
+msgid "set by"
+msgstr "حدّده"
+
+#: .\apps\engagement\models.py
+msgid "head's note"
+msgstr "ملاحظة الرئيس"
+
+#: .\apps\engagement\models.py .\apps\ranking\models.py
+msgid "assessed by"
+msgstr "قيّمه"
+
+#: .\apps\engagement\models.py
+msgid "assessed at"
+msgstr "تاريخ التقييم"
+
+#: .\apps\engagement\models.py
+msgid "goal"
+msgstr "هدف"
+
+#: .\apps\engagement\models.py
+msgid "goals"
+msgstr "أهداف"
+
+#: .\apps\engagement\models.py
+msgctxt "training status"
+msgid "Wished"
+msgstr "مرغوب فيه"
+
+#: .\apps\engagement\models.py
+msgctxt "training status"
+msgid "Planned"
+msgstr "مبرمج"
+
+#: .\apps\engagement\models.py
+msgctxt "training status"
+msgid "Followed"
+msgstr "متابَع"
+
+#: .\apps\engagement\models.py
+msgctxt "training status"
+msgid "Dropped"
+msgstr "متخلّى عنه"
+
+#: .\apps\engagement\models.py
+msgid "topic"
+msgstr "الموضوع"
+
+#: .\apps\engagement\models.py
+msgid "why"
+msgstr "لماذا"
+
+#: .\apps\engagement\models.py
+msgid "training session"
+msgstr "جلسة تكوين"
+
+#: .\apps\engagement\models.py
+msgid "followed on"
+msgstr "تاريخ المتابعة"
+
+#: .\apps\engagement\models.py
+msgid "updated by"
+msgstr "عدّله"
+
+#: .\apps\engagement\models.py
+msgid "training"
+msgstr "تكوين"
+
+#: .\apps\engagement\models.py
+msgid "trainings"
+msgstr "تكوينات"
+
+#: .\apps\engagement\models.py
+msgid "Cleaning and tidying the workshop"
+msgstr "تنظيف الورشة وترتيبها"
+
+#: .\apps\engagement\models.py
+msgid "Maintaining the equipment"
+msgstr "صيانة المعدات"
+
+#: .\apps\engagement\models.py
+msgid "Work needed by the team"
+msgstr "أعمال يحتاجها الفريق"
+
+#: .\apps\engagement\models.py
+msgid "Organising or preparing an event"
+msgstr "تنظيم فعالية أو التحضير لها"
+
+#: .\apps\engagement\models.py
+msgid "Helping another department"
+msgstr "مساعدة قسم آخر"
+
+#: .\apps\engagement\models.py
+msgid "Logistics of an activity"
+msgstr "التحضير اللوجستي لنشاط"
+
+#: .\apps\engagement\models.py
+msgid "Documenting or tidying the team's resources"
+msgstr "توثيق موارد الفريق أو ترتيبها"
+
+#: .\apps\engagement\models.py
+msgid "Another collective mission"
+msgstr "مهمة جماعية أخرى"
+
+#: .\apps\engagement\models.py
+msgctxt "volunteering status"
+msgid "To validate"
+msgstr "بانتظار الاعتماد"
+
+#: .\apps\engagement\models.py
+msgctxt "volunteering status"
+msgid "Validated"
+msgstr "معتمد"
+
+#: .\apps\engagement\models.py
+msgctxt "volunteering status"
+msgid "Refused"
+msgstr "مرفوض"
+
+#: .\apps\engagement\models.py .\apps\meetings\models.py .\apps\tasks\models.py
+msgid "task"
+msgstr "مهمة"
+
+#: .\apps\engagement\models.py .\apps\purchasing\models.py
+#: .\apps\ranking\models.py .\apps\tasks\models.py
+msgid "date"
+msgstr "التاريخ"
+
+#: .\apps\engagement\models.py .\apps\meetings\models.py
+msgid "organiser"
+msgstr "المنظِّم"
+
+#: .\apps\engagement\models.py
+msgid "participants"
+msgstr "المشاركون"
+
+#: .\apps\engagement\models.py
+msgid "volunteering activity"
+msgstr "نشاط تطوعي"
+
+#: .\apps\engagement\models.py
+msgid "volunteering activities"
+msgstr "أنشطة تطوعية"
+
+#: .\apps\engagement\views.py .\apps\ranking\views.py
+msgid "A month is written YYYY-MM."
+msgstr "يُكتب الشهر بالشكل YYYY-MM."
+
+#: .\apps\engagement\views.py
+msgid ""
+"Only the member, their heads, the Team Manager and the Bureau see this sheet."
+msgstr "لا يرى هذا الملف إلا العضو ورؤساؤه ومدير الفريق والمكتب."
+
+#: .\apps\engagement\views.py
+msgid "Only the Bureau sees this list."
+msgstr "لا يرى هذه القائمة إلا المكتب."
+
+#: .\apps\engagement\views.py
+msgid "Only the member's heads set their goals, never one's own."
+msgstr "لا يحدد أهداف العضو إلا رؤساؤه، ولا يحددها أحد لنفسه."
+
+#: .\apps\engagement\views.py
+msgid "The member moves the progress forward; their heads change the rest."
+msgstr "يُحدّث العضو التقدم، ويغيّر رؤساؤه الباقي."
+
+#: .\apps\engagement\views.py
+msgid "Only the member's heads record a training for them."
+msgstr "لا يسجل التكوين للعضو إلا رؤساؤه."
+
+#: .\apps\engagement\views.py
+msgid "Only the member withdraws a wish."
+msgstr "لا يسحب الرغبة إلا العضو."
+
+#: .\apps\engagement\views.py
+msgid "Only the member's heads plan their trainings."
+msgstr "لا يبرمج تكوينات العضو إلا رؤساؤه."
+
+#: .\apps\engagement\views.py
+msgid "Only its organiser deletes an activity."
+msgstr "لا يحذف النشاط إلا مسؤوله."
+
+#: .\apps\engagement\views.py .\apps\engagement\workflow.py
+msgid "This activity is already decided."
+msgstr "تم البت في هذا النشاط بالفعل."
+
+#: .\apps\engagement\views.py
+msgid "A head of its organiser validates an activity, never its organiser."
+msgstr "يعتمد النشاطَ أحدُ رؤساء مسؤوله، ولا يعتمده مسؤوله أبدًا."
+
+#: .\apps\engagement\views.py
+msgid "Only the heads, the Team Manager and the Bureau see this list."
+msgstr "لا يرى هذه القائمة إلا الرؤساء ومدير الفريق والمكتب."
+
+#: .\apps\engagement\workflow.py
+msgid "This training is already followed or dropped."
+msgstr "هذا التكوين متابَع أو متخلّى عنه بالفعل."
+
+#: .\apps\engagement\workflow.py
+msgid "Only a wish not planned yet is withdrawn."
+msgstr "لا تُسحب إلا رغبة لم تُبرمج بعد."
+
+#: .\apps\engagement\workflow.py
+msgid "A volunteering day is recorded once it took place."
+msgstr "يُسجَّل التطوع بعد حدوثه."
+
+#: .\apps\engagement\workflow.py .\apps\equipment\serializers.py
+msgid "Say why it is refused."
+msgstr "اذكر سبب الرفض."
+
+#: .\apps\equipment\apps.py
+msgid "Equipment"
+msgstr "المعدات"
+
+#: .\apps\equipment\models.py
+msgctxt "equipment status"
+msgid "Available"
+msgstr "متاحة"
+
+#: .\apps\equipment\models.py
+msgctxt "equipment status"
+msgid "Borrowed"
+msgstr "مُعارة"
+
+#: .\apps\equipment\models.py
+msgctxt "equipment status"
+msgid "Maintenance"
+msgstr "قيد الصيانة"
+
+#: .\apps\equipment\models.py
+msgctxt "equipment status"
+msgid "Out of service"
+msgstr "خارج الخدمة"
+
+#: .\apps\equipment\models.py
+msgid "Machine tool"
+msgstr "آلة تشغيل"
+
+#: .\apps\equipment\models.py
+msgid "Power tool"
+msgstr "أداة كهربائية"
+
+#: .\apps\equipment\models.py
+msgid "Hand tool"
+msgstr "أداة يدوية"
+
+#: .\apps\equipment\models.py
+msgid "Measuring and inspection"
+msgstr "قياس ومراقبة"
+
+#: .\apps\equipment\models.py
+msgctxt "equipment category"
+msgid "Electronics"
+msgstr "إلكترونيات"
+
+#: .\apps\equipment\models.py
+msgid "Safety equipment (PPE)"
+msgstr "معدات الوقاية (EPI)"
+
+#: .\apps\equipment\models.py
+msgctxt "equipment category"
+msgid "Other"
+msgstr "أخرى"
+
+#: .\apps\equipment\models.py
+msgctxt "reservation status"
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#: .\apps\equipment\models.py
+msgctxt "reservation status"
+msgid "Confirmed"
+msgstr "مؤكَّد"
+
+#: .\apps\equipment\models.py
+msgctxt "reservation status"
+msgid "Cancelled"
+msgstr "ملغى"
+
+#: .\apps\equipment\models.py
+msgctxt "reservation status"
+msgid "Completed"
+msgstr "مكتمل"
+
+#: .\apps\equipment\models.py
+msgctxt "loan status"
+msgid "Requested"
+msgstr "مطلوبة"
+
+#: .\apps\equipment\models.py
+msgctxt "loan status"
+msgid "Refused"
+msgstr "مرفوضة"
+
+#: .\apps\equipment\models.py
+msgctxt "loan status"
+msgid "Cancelled"
+msgstr "ملغاة"
+
+#: .\apps\equipment\models.py
+msgctxt "loan status"
+msgid "Out"
+msgstr "مُعارة"
+
+#: .\apps\equipment\models.py
+msgctxt "loan status"
+msgid "Returned"
+msgstr "مُرجعة"
+
+#: .\apps\equipment\models.py
+msgid "Good condition"
+msgstr "حالة جيدة"
+
+#: .\apps\equipment\models.py
+msgid "Damaged"
+msgstr "متضررة"
+
+#: .\apps\equipment\models.py .\apps\members\models.py
+#: .\apps\projects\models.py .\apps\purchasing\models.py
+#: .\apps\reporting\models.py .\apps\subsystems\models.py
+#: .\apps\telemetry\models.py
+msgid "name"
+msgstr "الاسم"
+
+#: .\apps\equipment\models.py .\apps\inventory\models.py
+#: .\apps\meetings\models.py .\apps\telemetry\models.py
+msgid "location"
+msgstr "الموقع"
+
+#: .\apps\equipment\models.py
+msgid "certification required"
+msgstr "يتطلب تأهيلًا"
+
+#: .\apps\equipment\models.py
+msgid ""
+"Only the members certified by the workshop lead may reserve or borrow it."
+msgstr "لا يحجزها أو يستعيرها إلا الأعضاء الذين أهّلهم مسؤول الورشة."
+
+#: .\apps\equipment\models.py
+msgid "may leave the workshop"
+msgstr "يمكن إخراجها من الورشة"
+
+#: .\apps\equipment\models.py
+msgid "Members may ask to borrow it."
+msgstr "يمكن للأعضاء طلب استعارتها."
+
+#: .\apps\equipment\models.py
+msgid "purchase date"
+msgstr "تاريخ الشراء"
+
+#: .\apps\equipment\models.py
+msgid "last maintenance"
+msgstr "آخر صيانة"
+
+#: .\apps\equipment\models.py
+msgid "equipment item"
+msgstr "معدّة"
+
+#: .\apps\equipment\models.py
+msgid "equipment items"
+msgstr "المعدات"
+
+#: .\apps\equipment\models.py
+msgid "equipment"
+msgstr "معدّة"
+
+#: .\apps\equipment\models.py
+msgid "granted by"
+msgstr "منحها"
+
+#: .\apps\equipment\models.py
+msgid "granted at"
+msgstr "تاريخ المنح"
+
+#: .\apps\equipment\models.py .\apps\meetings\models.py
+#: .\apps\ranking\models.py .\apps\subsystems\models.py
+msgid "note"
+msgstr "ملاحظة"
+
+#: .\apps\equipment\models.py
+msgid "revoked at"
+msgstr "تاريخ السحب"
+
+#: .\apps\equipment\models.py
+msgid "revoked by"
+msgstr "سحبها"
+
+#: .\apps\equipment\models.py
+msgid "machine certification"
+msgstr "تأهيل لاستعمال آلة"
+
+#: .\apps\equipment\models.py
+msgid "machine certifications"
+msgstr "تأهيلات لاستعمال الآلات"
+
+#: .\apps\equipment\models.py
+msgid "reserved by"
+msgstr "صاحب الحجز"
+
+#: .\apps\equipment\models.py
+msgid "reservation start"
+msgstr "بداية الحجز"
+
+#: .\apps\equipment\models.py
+msgid "reservation end"
+msgstr "نهاية الحجز"
+
+#: .\apps\equipment\models.py
+msgid "purpose"
+msgstr "الغرض"
+
+#: .\apps\equipment\models.py
+msgid "equipment reservation"
+msgstr "حجز معدّة"
+
+#: .\apps\equipment\models.py
+msgid "equipment reservations"
+msgstr "حجوزات المعدات"
+
+#: .\apps\equipment\models.py
+msgid "borrower"
+msgstr "المستعير"
+
+#: .\apps\equipment\models.py .\apps\meetings\models.py
+msgid "reason"
+msgstr "السبب"
+
+#: .\apps\equipment\models.py
+msgid "return date"
+msgstr "تاريخ الإرجاع"
+
+#: .\apps\equipment\models.py
+msgid "requested at"
+msgstr "تاريخ الطلب"
+
+#: .\apps\equipment\models.py
+msgid "returned at"
+msgstr "تاريخ الإرجاع الفعلي"
+
+#: .\apps\equipment\models.py
+msgid "received by"
+msgstr "استلمها"
+
+#: .\apps\equipment\models.py
+msgid "condition on return"
+msgstr "الحالة عند الإرجاع"
+
+#: .\apps\equipment\models.py
+msgid "return note"
+msgstr "ملاحظة الإرجاع"
+
+#: .\apps\equipment\models.py
+msgid "equipment loan"
+msgstr "إعارة معدّة"
+
+#: .\apps\equipment\models.py
+msgid "equipment loans"
+msgstr "إعارات المعدات"
+
+#: .\apps\equipment\models.py
+msgid "performed by"
+msgstr "المنفِّذ"
+
+#: .\apps\equipment\models.py
+msgid "maintenance date"
+msgstr "تاريخ الصيانة"
+
+#: .\apps\equipment\models.py
+msgid "cost"
+msgstr "التكلفة"
+
+#: .\apps\equipment\models.py
+msgid "maintenance record"
+msgstr "عملية صيانة"
+
+#: .\apps\equipment\models.py
+msgid "maintenance records"
+msgstr "عمليات الصيانة"
+
+#: .\apps\equipment\models.py
+#, python-format
+msgid "Maintenance on %(equipment)s"
+msgstr "صيانة %(equipment)s"
+
+#: .\apps\equipment\views.py
+msgid ""
+"Only the equipment managers (Operations, the workshop lead) can do this."
+msgstr "لا يقوم بهذا إلا مسيّرو المعدات (العمليات، مسؤول الورشة)."
+
+#: .\apps\equipment\views.py
+msgid "Only the workshop lead certifies the members."
+msgstr "لا يؤهّل الأعضاء إلا مسؤول الورشة."
+
+#: .\apps\equipment\views.py
+msgid "A day is written YYYY-MM-DD."
+msgstr "يُكتب التاريخ بالشكل YYYY-MM-DD."
+
+#: .\apps\equipment\views.py
+msgid "Only its author or an equipment manager cancels a reservation."
+msgstr "لا يلغي الحجز إلا صاحبه أو أحد مسيّري المعدات."
+
+#: .\apps\equipment\views.py
+msgid "Unknown status."
+msgstr "حالة غير معروفة."
+
+#: .\apps\equipment\views.py
+msgid "Only the member who asked withdraws the request."
+msgstr "لا يسحب الطلب إلا العضو الذي قدّمه."
+
+#: .\apps\equipment\workflow.py
+msgid "This equipment is in maintenance or out of service."
+msgstr "هذه المعدّة قيد الصيانة أو خارج الخدمة."
+
+#: .\apps\equipment\workflow.py
+msgid "This machine needs a certification: ask the workshop lead."
+msgstr "تتطلب هذه الآلة تأهيلًا: اتصل بمسؤول الورشة."
+
+#: .\apps\equipment\workflow.py
+msgid "This slot has already started."
+msgstr "بدأت هذه الفترة بالفعل."
+
+#: .\apps\equipment\workflow.py
+msgid "A reservation lasts 7 days at most."
+msgstr "لا يتجاوز الحجز 7 أيام."
+
+#: .\apps\equipment\workflow.py
+#, python-format
+msgid "It is lent out until %(date)s."
+msgstr "إنها مُعارة حتى %(date)s."
+
+#: .\apps\equipment\workflow.py
+msgid "This slot is already taken."
+msgstr "هذه الفترة محجوزة بالفعل."
+
+#: .\apps\equipment\workflow.py
+msgid "This reservation is already cancelled."
+msgstr "هذا الحجز ملغى بالفعل."
+
+#: .\apps\equipment\workflow.py
+msgid "This slot is over."
+msgstr "انتهت هذه الفترة."
+
+#: .\apps\equipment\workflow.py
+msgid "“Borrowed” is set when a loan is handed out."
+msgstr "تُعيَّن حالة «مُعارة» عند تسليم إعارة."
+
+#: .\apps\equipment\workflow.py
+msgid "It is lent out: record its return first."
+msgstr "إنها مُعارة: سجّل إرجاعها أولًا."
+
+#: .\apps\equipment\workflow.py
+msgid "This account is inactive."
+msgstr "هذا الحساب غير نشط."
+
+#: .\apps\equipment\workflow.py
+msgid "This member is already certified on it."
+msgstr "هذا العضو مؤهَّل لها بالفعل."
+
+#: .\apps\equipment\workflow.py
+msgid "This certification is already revoked."
+msgstr "هذا التأهيل مسحوب بالفعل."
+
+#: .\apps\equipment\workflow.py
+msgid "This equipment stays in the workshop."
+msgstr "هذه المعدّة لا تغادر الورشة."
+
+#: .\apps\equipment\workflow.py
+msgid "The return date is already past."
+msgstr "تاريخ الإرجاع قد مضى."
+
+#: .\apps\equipment\workflow.py
+msgid "You already asked to borrow it."
+msgstr "طلبت استعارتها من قبل."
+
+#: .\apps\equipment\workflow.py
+msgid "This request is no longer awaiting a decision."
+msgstr "هذا الطلب لم يعد ينتظر قرارًا."
+
+#: .\apps\equipment\workflow.py
+msgid "It is already lent out."
+msgstr "إنها مُعارة بالفعل."
+
+#: .\apps\equipment\workflow.py
+msgid "Its return date is past: the member asks again with a new date."
+msgstr "تاريخ إرجاعها قد مضى: يقدّم العضو طلبًا جديدًا بتاريخ جديد."
+
+#: .\apps\equipment\workflow.py
+msgid "It is reserved during this loan: see its reservations."
+msgstr "إنها محجوزة خلال هذه الإعارة: راجع حجوزاتها."
+
+#: .\apps\equipment\workflow.py
+msgid "This equipment is not out."
+msgstr "هذه المعدّة ليست مُعارة."
+
+#: .\apps\finance\apps.py
+msgid "Finance"
+msgstr "المالية"
+
+#: .\apps\finance\models.py
+msgctxt "sponsorship status"
+msgid "Prospect"
+msgstr "راعٍ محتمل"
+
+#: .\apps\finance\models.py
+msgctxt "sponsorship status"
+msgid "Contacted"
+msgstr "تم التواصل"
+
+#: .\apps\finance\models.py
+msgctxt "sponsorship status"
+msgid "Negotiating"
+msgstr "قيد التفاوض"
+
+#: .\apps\finance\models.py
+msgctxt "sponsorship status"
+msgid "Confirmed"
+msgstr "مؤكَّد"
+
+#: .\apps\finance\models.py
+msgctxt "sponsorship status"
+msgid "Declined"
+msgstr "تم الرفض"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Purchase"
+msgstr "شراء"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Registration"
+msgstr "تسجيل"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Transport"
+msgstr "نقل"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Accommodation"
+msgstr "إقامة"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Communication"
+msgstr "اتصال"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Tooling"
+msgstr "أدوات"
+
+#: .\apps\finance\models.py
+msgctxt "expense category"
+msgid "Other"
+msgstr "أخرى"
+
+#: .\apps\finance\models.py
+msgid "fiscal year"
+msgstr "السنة المالية"
+
+#: .\apps\finance\models.py
+msgid "allocated amount"
+msgstr "المبلغ المخصص"
+
+#: .\apps\finance\models.py .\apps\inventory\models.py
+#: .\apps\purchasing\models.py .\apps\subsystems\models.py
+msgid "notes"
+msgstr "ملاحظات"
+
+#: .\apps\finance\models.py
+msgid "budget"
+msgstr "ميزانية"
+
+#: .\apps\finance\models.py
+msgid "budgets"
+msgstr "الميزانيات"
+
+#: .\apps\finance\models.py .\apps\purchasing\models.py
+msgid "purchase order"
+msgstr "أمر شراء"
+
+#: .\apps\finance\models.py .\apps\purchasing\models.py
+msgid "invoice"
+msgstr "فاتورة"
+
+#: .\apps\finance\models.py
+msgid "amount"
+msgstr "المبلغ"
+
+#: .\apps\finance\models.py .\apps\telemetry\models.py
+msgid "recorded by"
+msgstr "المسجِّل"
+
+#: .\apps\finance\models.py
+msgid "expense date"
+msgstr "تاريخ النفقة"
+
+#: .\apps\finance\models.py
+msgid "expense"
+msgstr "نفقة"
+
+#: .\apps\finance\models.py
+msgid "expenses"
+msgstr "النفقات"
+
+#: .\apps\finance\models.py
+msgid "sponsor name"
+msgstr "اسم الراعي"
+
+#: .\apps\finance\models.py
+msgid "in-kind contribution"
+msgstr "المساهمة العينية"
+
+#: .\apps\finance\models.py .\apps\purchasing\models.py
+msgid "contact name"
+msgstr "اسم جهة الاتصال"
+
+#: .\apps\finance\models.py
+msgid "contact email"
+msgstr "البريد الإلكتروني لجهة الاتصال"
+
+#: .\apps\finance\models.py
+msgid "managed by"
+msgstr "المسؤول"
+
+#: .\apps\finance\models.py
+msgid "confirmation date"
+msgstr "تاريخ الاتفاق"
+
+#: .\apps\finance\models.py
+msgid "sponsorship"
+msgstr "رعاية"
+
+#: .\apps\finance\models.py
+msgid "sponsorships"
+msgstr "الرعايات"
+
+#: .\apps\finance\serializers.py .\apps\finance\views.py
+msgid "A budget year is written as two following years, such as 2026-2027."
+msgstr "تُكتب السنة المالية بسنتين متتاليتين، مثل 2026-2027."
+
+#: .\apps\finance\serializers.py
+#, python-format
+msgid "This unit already has a budget for %(year)s."
+msgstr "لهذه الوحدة ميزانية لسنة %(year)s بالفعل."
+
+#: .\apps\finance\serializers.py
+msgid "A purchase becomes an expense when its order is delivered."
+msgstr "يصبح الشراء نفقة عند تسليم طلبيته."
+
+#: .\apps\finance\views.py
+msgid "Only the treasurer and the admins manage the club's money."
+msgstr "يقتصر تسيير أموال النادي على أمين المال ومشرفي النادي."
+
+#: .\apps\finance\views.py
+msgid "The expense of an order follows its order: only its budget can change."
+msgstr "نفقة الطلبية تتبع طلبيتها: لا يمكن تغيير سوى ميزانيتها."
+
+#: .\apps\finance\views.py
+msgid "The expense of an order follows its order: it cannot be removed."
+msgstr "نفقة الطلبية تتبع طلبيتها: لا يمكن حذفها."
+
+#: .\apps\finance\views.py
+msgid "Only the expense of an order has a supplier's invoice."
+msgstr "لا تكون فاتورة المورد إلا لنفقة طلبية."
+
+#: .\apps\finance\views.py
+msgid "The invoice of this order is already noted."
+msgstr "فاتورة هذه الطلبية مسجلة بالفعل."
+
+#: .\apps\finance\views.py
+msgid "This supplier already has an invoice with this reference."
+msgstr "لهذا المورد فاتورة بهذا المرجع بالفعل."
+
+#: .\apps\finance\views.py
+msgid ""
+"The sponsors are followed by Operations; the bureau and the treasurer see "
+"them."
+msgstr "يتابع قسم العمليات الرعاة؛ ويطّلع عليهم المكتب وأمين المال."
+
+#: .\apps\finance\views.py
+msgid "Only Operations and the admins follow the sponsors."
+msgstr "تقتصر متابعة الرعاة على قسم العمليات ومشرفي النادي."
+
+#: .\apps\inventory\apps.py
+msgid "Inventory"
+msgstr "المخزون"
+
+#: .\apps\inventory\models.py
+msgid "Stock in"
+msgstr "إدخال"
+
+#: .\apps\inventory\models.py
+msgid "Stock out"
+msgstr "إخراج"
+
+#: .\apps\inventory\models.py
+msgid "Adjustment"
+msgstr "تسوية"
+
+#: .\apps\inventory\models.py .\apps\purchasing\models.py
+msgid "part"
+msgstr "قطعة"
+
+#: .\apps\inventory\models.py
+msgid "quantity available"
+msgstr "الكمية المتاحة"
+
+#: .\apps\inventory\models.py
+msgid "minimum threshold"
+msgstr "الحد الأدنى"
+
+#: .\apps\inventory\models.py
+msgid "stock item"
+msgstr "صنف مخزون"
+
+#: .\apps\inventory\models.py
+msgid "stock items"
+msgstr "أصناف المخزون"
+
+#: .\apps\inventory\models.py
+msgid "movement type"
+msgstr "نوع الحركة"
+
+#: .\apps\inventory\models.py .\apps\purchasing\models.py
+msgid "quantity"
+msgstr "الكمية"
+
+#: .\apps\inventory\models.py
+msgid "related purchase order"
+msgstr "أمر الشراء المرتبط"
+
+#: .\apps\inventory\models.py
+msgid "related task"
+msgstr "المهمة المرتبطة"
+
+#: .\apps\inventory\models.py
+msgid "moved by"
+msgstr "المنفِّذ"
+
+#: .\apps\inventory\models.py
+msgid "handed to"
+msgstr "سُلّمت إلى"
+
+#: .\apps\inventory\models.py
+msgid "movement date"
+msgstr "تاريخ الحركة"
+
+#: .\apps\inventory\models.py
+msgid "stock movement"
+msgstr "حركة مخزون"
+
+#: .\apps\inventory\models.py
+msgid "stock movements"
+msgstr "حركات المخزون"
+
+#: .\apps\inventory\serializers.py .\apps\purchasing\serializers.py
+msgid "Choose a known part or describe a new one (one of the two)."
+msgstr "اختر قطعة معروفة أو صِف قطعة جديدة (أحد الخيارين)."
+
+#: .\apps\inventory\serializers.py
+msgid "This part already has a stock line at this place."
+msgstr "لهذه القطعة سطر مخزون في هذا المكان مسبقًا."
+
+#: .\apps\inventory\serializers.py
+msgid "A movement cannot be in the future."
+msgstr "لا يمكن أن تكون الحركة في المستقبل."
+
+#: .\apps\inventory\views.py
+msgid "Only the stock managers (Operations, the workshop lead) can do this."
+msgstr "لا يمكن القيام بذلك إلا لمسيّري المخزون (العمليات، مسؤول الورشة)."
+
+#: .\apps\inventory\views.py
+msgid "Stock already there when the line was created."
+msgstr "مخزون موجود عند إنشاء السطر."
+
+#: .\apps\inventory\views.py
+#, python-format
+msgid "Only %(available)s left in stock."
+msgstr "لم يبق في المخزون إلا %(available)s."
+
+#: .\apps\inventory\views.py
+msgid "The count matches the stock: nothing to adjust."
+msgstr "يطابق العدّ المخزون: لا شيء لتعديله."
+
+#: .\apps\meetings\apps.py
+msgid "Meetings and attendance"
+msgstr "الاجتماعات والحضور"
+
+#: .\apps\meetings\models.py
+msgid "Department meeting"
+msgstr "اجتماع القسم"
+
+#: .\apps\meetings\models.py
+msgid "General meeting"
+msgstr "اجتماع عام"
+
+#: .\apps\meetings\models.py
+msgctxt "session kind"
+msgid "Workshop"
+msgstr "ورشة"
+
+#: .\apps\meetings\models.py
+msgid "Training session"
+msgstr "دورة تكوينية"
+
+#: .\apps\meetings\models.py
+msgctxt "session kind"
+msgid "Event"
+msgstr "فعالية"
+
+#: .\apps\meetings\models.py
+msgid "Council (art. 27.5)"
+msgstr "مجلس (المادة 27.5)"
+
+#: .\apps\meetings\models.py
+msgctxt "session status"
+msgid "Planned"
+msgstr "مبرمجة"
+
+#: .\apps\meetings\models.py
+msgctxt "session status"
+msgid "Cancelled"
+msgstr "ملغاة"
+
+#: .\apps\meetings\models.py
+msgid "invited unit"
+msgstr "الوحدة المدعوة"
+
+#: .\apps\meetings\models.py
+msgid "Empty: the whole team."
+msgstr "فارغ: الفريق كله."
+
+#: .\apps\meetings\models.py
+msgid "starts at"
+msgstr "البداية"
+
+#: .\apps\meetings\models.py
+msgid "ends at"
+msgstr "النهاية"
+
+#: .\apps\meetings\models.py
+msgid "agenda"
+msgstr "جدول الأعمال"
+
+#: .\apps\meetings\models.py
+msgid "mandatory"
+msgstr "إلزامية"
+
+#: .\apps\meetings\models.py
+msgid "Counts in the presence score; set before it starts, never after."
+msgstr "تُحتسب في نقطة الحضور؛ تُحدَّد قبل البداية لا بعدها."
+
+#: .\apps\meetings\models.py
+msgid "critical"
+msgstr "حاسمة"
+
+#: .\apps\meetings\models.py
+msgid "Test day, competition preparation, event: counts twice."
+msgstr "يوم تجارب، تحضير للمنافسة، فعالية: تُحتسب مرتين."
+
+#: .\apps\meetings\models.py
+msgid "reason for cancelling"
+msgstr "سبب الإلغاء"
+
+#: .\apps\meetings\models.py .\apps\reporting\models.py .\apps\tasks\models.py
+msgid "created by"
+msgstr "المُنشئ"
+
+#: .\apps\meetings\models.py
+msgid "attendance confirmed at"
+msgstr "تاريخ تأكيد الحضور"
+
+#: .\apps\meetings\models.py
+msgid "attendance confirmed by"
+msgstr "أكّد الحضورَ"
+
+#: .\apps\meetings\models.py
+msgid "minutes"
+msgstr "المحضر"
+
+#: .\apps\meetings\models.py
+msgid "minutes published at"
+msgstr "تاريخ نشر المحضر"
+
+#: .\apps\meetings\models.py .\apps\telemetry\models.py
+msgid "session"
+msgstr "جلسة"
+
+#: .\apps\meetings\models.py
+msgid "sessions"
+msgstr "جلسات"
+
+#: .\apps\meetings\models.py
+msgctxt "attendance"
+msgid "Not marked yet"
+msgstr "لم يُسجَّل بعد"
+
+#: .\apps\meetings\models.py
+msgctxt "attendance"
+msgid "Present"
+msgstr "حاضر"
+
+#: .\apps\meetings\models.py
+msgctxt "attendance"
+msgid "Late"
+msgstr "متأخر"
+
+#: .\apps\meetings\models.py
+msgctxt "attendance"
+msgid "Absent"
+msgstr "غائب"
+
+#: .\apps\meetings\models.py
+msgid "Exam"
+msgstr "امتحان"
+
+#: .\apps\meetings\models.py
+msgid "Illness"
+msgstr "مرض"
+
+#: .\apps\meetings\models.py
+msgid "Family emergency"
+msgstr "طارئ عائلي"
+
+#: .\apps\meetings\models.py
+msgid "Official team mission"
+msgstr "مهمة رسمية للفريق"
+
+#: .\apps\meetings\models.py
+msgctxt "excuse"
+msgid "None"
+msgstr "لا يوجد"
+
+#: .\apps\meetings\models.py
+msgctxt "excuse"
+msgid "Requested"
+msgstr "مطلوب"
+
+#: .\apps\meetings\models.py
+msgctxt "excuse"
+msgid "Accepted"
+msgstr "مقبول"
+
+#: .\apps\meetings\models.py
+msgctxt "excuse"
+msgid "Refused"
+msgstr "مرفوض"
+
+#: .\apps\meetings\models.py
+msgid "checked in at"
+msgstr "وقت تسجيل الحضور"
+
+#: .\apps\meetings\models.py
+msgid "marked by"
+msgstr "سجّله"
+
+#: .\apps\meetings\models.py
+msgid "marked at"
+msgstr "تاريخ التسجيل"
+
+#: .\apps\meetings\models.py
+msgid "excuse"
+msgstr "العذر"
+
+#: .\apps\meetings\models.py
+msgid "excuse requested at"
+msgstr "تاريخ طلب العذر"
+
+#: .\apps\meetings\models.py
+msgid "excuse decided by"
+msgstr "بتّ في العذر"
+
+#: .\apps\meetings\models.py
+msgid "excuse decided at"
+msgstr "تاريخ البت في العذر"
+
+#: .\apps\meetings\models.py
+msgid "attendance"
+msgstr "حضور"
+
+#: .\apps\meetings\models.py
+msgid "attendances"
+msgstr "الحضور"
+
+#: .\apps\meetings\models.py
+msgid "decision"
+msgstr "قرار"
+
+#: .\apps\meetings\models.py
+msgid "decisions"
+msgstr "قرارات"
+
+#: .\apps\meetings\models.py
+msgid "responsible"
+msgstr "المسؤول"
+
+#: .\apps\meetings\models.py
+msgid "done"
+msgstr "منجز"
+
+#: .\apps\meetings\models.py
+msgid "done at"
+msgstr "تاريخ الإنجاز"
+
+#: .\apps\meetings\models.py
+msgid "meeting action"
+msgstr "إجراء اجتماع"
+
+#: .\apps\meetings\models.py
+msgid "meeting actions"
+msgstr "إجراءات اجتماع"
+
+#: .\apps\meetings\serializers.py
+msgid "A session ends after it starts."
+msgstr "تنتهي الجلسة بعد بدايتها."
+
+#: .\apps\meetings\serializers.py
+msgid "Say why the excuse is refused."
+msgstr "اذكر سبب رفض العذر."
+
+#: .\apps\meetings\views.py
+msgid "This session is cancelled."
+msgstr "هذه الجلسة ملغاة."
+
+#: .\apps\meetings\views.py
+msgid "You are not invited to this session."
+msgstr "لست مدعوًا إلى هذه الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "Only the Executive Bureau schedules the sessions."
+msgstr "لا يبرمج الجلسات إلا المكتب التنفيذي."
+
+#: .\apps\meetings\views.py
+msgid "A session is made mandatory before it starts, never after."
+msgstr "تُجعل الجلسة إلزامية قبل بدايتها لا بعدها."
+
+#: .\apps\meetings\views.py
+msgid "Only the Executive Bureau changes the sessions."
+msgstr "لا يعدّل الجلسات إلا المكتب التنفيذي."
+
+#: .\apps\meetings\views.py
+msgid "A council's invitees are set by its warning."
+msgstr "يحدد الإنذار المدعوين إلى المجلس."
+
+#: .\apps\meetings\views.py
+msgid "Locked since the session started."
+msgstr "مقفل منذ بداية الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "Only who runs the session changes its invitees."
+msgstr "لا يعدّل المدعوين إلا من يدير الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "This session is over."
+msgstr "انتهت هذه الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "The attendance of this session is already confirmed."
+msgstr "تم تأكيد حضور هذه الجلسة بالفعل."
+
+#: .\apps\meetings\views.py
+msgid "You already checked in."
+msgstr "سجّلت حضورك بالفعل."
+
+#: .\apps\meetings\views.py
+msgid "The check-in opens 15 minutes before the start and closes at the end."
+msgstr "يُفتح تسجيل الحضور قبل البداية بـ15 دقيقة ويُغلق عند النهاية."
+
+#: .\apps\meetings\views.py
+msgid "Only who runs the session confirms its attendance."
+msgstr "لا يؤكد الحضور إلا من يدير الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "The attendance is confirmed once the session has started."
+msgstr "يُؤكَّد الحضور بعد بداية الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "Only the people invited are marked."
+msgstr "لا يُسجَّل إلا المدعوون."
+
+#: .\apps\meetings\views.py
+msgid "An excuse is asked at the latest 7 days after the session."
+msgstr "يُطلب العذر في أجل أقصاه 7 أيام بعد الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "Your excuse is already accepted."
+msgstr "عذرك مقبول بالفعل."
+
+#: .\apps\meetings\views.py
+msgid "Only who runs the session writes its minutes."
+msgstr "لا يكتب المحضر إلا من يدير الجلسة."
+
+#: .\apps\meetings\views.py
+msgid "Only its responsible and who runs the session tick an action."
+msgstr "لا يعلّم الإجراء إلا مسؤوله ومن يدير الجلسة."
+
+#: .\apps\meetings\views.py .\apps\tasks\views.py
+msgid "You cannot create tasks in this project."
+msgstr "لا يمكنك إنشاء مهام في هذا المشروع."
+
+#: .\apps\meetings\views.py
+msgid "This action is already a task."
+msgstr "هذا الإجراء مهمة بالفعل."
+
+#: .\apps\meetings\views.py
+msgid "The Team Manager decides the excuses."
+msgstr "يبتّ مدير الفريق في الأعذار."
+
+#: .\apps\meetings\views.py
+msgid "Another person decides your own excuse."
+msgstr "يبتّ شخص آخر في عذرك."
+
+#: .\apps\meetings\views.py
+msgid "You see your own presence only."
+msgstr "لا ترى إلا حضورك."
+
+#: .\apps\meetings\views.py
+msgid "A date and time is expected."
+msgstr "يُنتظر تاريخ ووقت."
+
+#: .\apps\meetings\workflow.py
+#, python-format
+msgid "From the session “%(meeting)s” of %(date)s."
+msgstr "من جلسة «%(meeting)s» بتاريخ %(date)s."
+
+#: .\apps\members\admin.py
+msgid "Role type"
+msgstr "نوع الدور"
+
+#: .\apps\members\admin.py
+msgid "Scope"
+msgstr "النطاق"
+
+#: .\apps\members\admin.py
+msgid "Personal info"
+msgstr "المعلومات الشخصية"
+
+#: .\apps\members\admin.py .\apps\members\models.py
+msgid "Club"
+msgstr "النادي"
+
+#: .\apps\members\admin.py
+msgid "Preferences"
+msgstr "التفضيلات"
+
+#: .\apps\members\admin.py
+msgid "Permissions"
+msgstr "الصلاحيات"
+
+#: .\apps\members\admin.py
+msgid "Important dates"
+msgstr "تواريخ مهمة"
+
+#: .\apps\members\admin.py .\apps\reporting\exports.py
+msgid "Status"
+msgstr "الحالة"
+
+#: .\apps\members\admin.py
+msgid "Used"
+msgstr "مستخدَم"
+
+#: .\apps\members\admin.py
+msgid "Expired"
+msgstr "منتهي الصلاحية"
+
+#: .\apps\members\admin.py
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#: .\apps\members\apps.py .\apps\reporting\exports.py
+msgid "Members"
+msgstr "الأعضاء"
+
+#: .\apps\members\authentication.py
+msgid "CSRF check failed."
+msgstr "فشل التحقق من CSRF."
+
+#: .\apps\members\models.py
+msgid "code hash"
+msgstr "بصمة الرمز"
+
+#: .\apps\members\models.py
+msgid "expires at"
+msgstr "تاريخ انتهاء الصلاحية"
+
+#: .\apps\members\models.py
+msgid "attempts"
+msgstr "المحاولات"
+
+#: .\apps\members\models.py
+msgid "used at"
+msgstr "تاريخ الاستخدام"
+
+#: .\apps\members\models.py
+msgid "requested from IP"
+msgstr "عنوان IP الطالب"
+
+#: .\apps\members\models.py
+msgid "login code"
+msgstr "رمز دخول"
+
+#: .\apps\members\models.py
+msgid "login codes"
+msgstr "رموز الدخول"
+
+#: .\apps\members\models.py
+msgid "Formula Student team"
+msgstr "فريق فورمولا ستيودنت"
+
+#: .\apps\members\models.py
+msgid "Admin"
+msgstr "مسؤول"
+
+#: .\apps\members\models.py
+msgid "Head of department"
+msgstr "رئيس قسم"
+
+#: .\apps\members\models.py .\apps\reporting\exports.py
+msgid "Member"
+msgstr "عضو"
+
+#: .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\reporting\exports.py .\apps\subsystems\models.py
+msgid "Active"
+msgstr "نشط"
+
+#: .\apps\members\models.py
+msgid "Alumni"
+msgstr "خريج"
+
+#: .\apps\members\models.py
+msgid "On leave"
+msgstr "في عطلة"
+
+#: .\apps\members\models.py
+msgid "Tasks: assignments, deadlines, validations, blockers"
+msgstr "المهام: الإسناد، المواعيد، المصادقات، العوائق"
+
+#: .\apps\members\models.py
+msgid "Purchases, stock and budgets"
+msgstr "المشتريات والمخزون والميزانيات"
+
+#: .\apps\members\models.py
+msgid "Sessions and their actions"
+msgstr "الاجتماعات وإجراءاتها"
+
+#: .\apps\members\models.py
+msgid "Workshop: loans and bookings"
+msgstr "الورشة: الإعارات والحجوزات"
+
+#: .\apps\members\models.py .\apps\ranking\apps.py
+msgid "Monthly ranking"
+msgstr "الترتيب الشهري"
+
+#: .\apps\members\models.py
+msgid "Volunteering reminders"
+msgstr "تذكيرات التطوع"
+
+#: .\apps\members\models.py
+msgid "1st year of preparatory classes"
+msgstr "السنة الأولى من الأقسام التحضيرية"
+
+#: .\apps\members\models.py
+msgid "2nd year of preparatory classes"
+msgstr "السنة الثانية من الأقسام التحضيرية"
+
+#: .\apps\members\models.py
+msgid "3rd year"
+msgstr "السنة الثالثة"
+
+#: .\apps\members\models.py
+msgid "4th year"
+msgstr "السنة الرابعة"
+
+#: .\apps\members\models.py
+msgid "5th year"
+msgstr "السنة الخامسة"
+
+#: .\apps\members\models.py
+msgid "Postgraduate"
+msgstr "ما بعد التدرج"
+
+#: .\apps\members\models.py
+msgctxt "study level"
+msgid "Other"
+msgstr "أخرى"
+
+#: .\apps\members\models.py .\apps\subsystems\models.py
+msgid "Main"
+msgstr "أساسي"
+
+#: .\apps\members\models.py .\apps\subsystems\models.py
+msgid "Junior"
+msgstr "مبتدئ"
+
+#: .\apps\members\models.py
+msgid "ENP Racing Team"
+msgstr "ENP Racing Team"
+
+#: .\apps\members\models.py
+msgid "Governing body"
+msgstr "هيئة تسيير"
+
+#: .\apps\members\models.py
+msgid "Club department"
+msgstr "قسم النادي"
+
+#: .\apps\members\models.py
+msgid "Club pole"
+msgstr "قطب النادي"
+
+#: .\apps\members\models.py
+msgid "Formula Student department"
+msgstr "قسم فورمولا ستيودنت"
+
+#: .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\subsystems\models.py
+msgid "code"
+msgstr "الرمز"
+
+#: .\apps\members\models.py
+msgid "first name"
+msgstr "الاسم"
+
+#: .\apps\members\models.py
+msgid "last name"
+msgstr "اللقب"
+
+#: .\apps\members\models.py .\apps\purchasing\models.py
+msgid "email address"
+msgstr "البريد الإلكتروني"
+
+#: .\apps\members\models.py .\apps\purchasing\models.py
+msgid "phone"
+msgstr "الهاتف"
+
+#: .\apps\members\models.py
+msgid "Facebook profile"
+msgstr "حساب فيسبوك"
+
+#: .\apps\members\models.py
+msgid "skills"
+msgstr "المهارات"
+
+#: .\apps\members\models.py
+msgid "join date"
+msgstr "تاريخ الانضمام"
+
+#: .\apps\members\models.py
+msgid "year of study"
+msgstr "سنة الدراسة"
+
+#: .\apps\members\models.py
+msgid "field of study"
+msgstr "التخصص"
+
+#: .\apps\members\models.py
+msgid "race number"
+msgstr "رقم السباق"
+
+#: .\apps\members\models.py
+msgid "language"
+msgstr "اللغة"
+
+#: .\apps\members\models.py
+msgid "e-mails turned off"
+msgstr "الرسائل المعطّلة"
+
+#: .\apps\members\models.py .\apps\projects\models.py
+msgid "active"
+msgstr "نشط"
+
+#: .\apps\members\models.py
+msgid "staff status"
+msgstr "صلاحية دخول الإدارة"
+
+#: .\apps\members\models.py
+msgid "members"
+msgstr "الأعضاء"
+
+#: .\apps\members\models.py .\apps\members\serializers.py
+#: .\apps\members\views.py
+msgid "Another member of the team already has this number."
+msgstr "هذا الرقم مسجّل لعضو آخر في الفريق."
+
+#: .\apps\members\models.py
+msgid "graduation year"
+msgstr "سنة التخرج"
+
+#: .\apps\members\models.py
+msgid "current position"
+msgstr "المنصب الحالي"
+
+#: .\apps\members\models.py
+msgid "current company"
+msgstr "الشركة الحالية"
+
+#: .\apps\members\models.py
+msgid "LinkedIn profile"
+msgstr "حساب لينكدإن"
+
+#: .\apps\members\models.py
+msgid "willing to mentor"
+msgstr "مستعد للإرشاد"
+
+#: .\apps\members\models.py
+msgid "alumni profile"
+msgstr "ملف خريج"
+
+#: .\apps\members\models.py
+msgid "alumni profiles"
+msgstr "ملفات الخريجين"
+
+#: .\apps\members\models.py
+msgid "role type"
+msgstr "نوع الدور"
+
+#: .\apps\members\models.py
+msgid "scope"
+msgstr "النطاق"
+
+#: .\apps\members\models.py
+msgid "leadership role"
+msgstr "دور قيادي"
+
+#: .\apps\members\models.py
+msgid "can be project manager"
+msgstr "يمكنه أن يكون مدير مشروع"
+
+#: .\apps\members\models.py
+msgid "roles"
+msgstr "الأدوار"
+
+#: .\apps\members\models.py
+msgid "parent unit"
+msgstr "الوحدة الأم"
+
+#: .\apps\members\models.py
+msgid "temporary"
+msgstr "مؤقتة"
+
+#: .\apps\members\models.py
+msgid "organisational units"
+msgstr "الوحدات التنظيمية"
+
+#: .\apps\members\models.py
+msgid "home subsystem"
+msgstr "النظام الفرعي الأساسي"
+
+#: .\apps\members\models.py .\apps\subsystems\models.py
+msgid "member level"
+msgstr "المستوى"
+
+#: .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "start date"
+msgstr "تاريخ البداية"
+
+#: .\apps\members\models.py .\apps\projects\models.py
+#: .\apps\subsystems\models.py
+msgid "end date"
+msgstr "تاريخ النهاية"
+
+#: .\apps\members\models.py
+msgid "primary membership"
+msgstr "العضوية الأساسية"
+
+#: .\apps\members\models.py
+msgid "exception of the Executive Bureau (art. 13)"
+msgstr "استثناء المكتب التنفيذي (المادة 13)"
+
+#: .\apps\members\models.py
+msgid ""
+"Its reason, for a student of the preparatory classes outside the Media "
+"department."
+msgstr "سببه، لطالب في الأقسام التحضيرية خارج قسم الإعلام."
+
+#: .\apps\members\models.py
+msgid "membership"
+msgstr "عضوية"
+
+#: .\apps\members\models.py
+msgid "memberships"
+msgstr "العضويات"
+
+#: .\apps\members\rules.py
+msgid ""
+"Art. 13: a student of the preparatory classes belongs only to the Media & "
+"Scientific Journalism Department, unless the Executive Bureau grants an "
+"exception (write its reason)."
+msgstr ""
+"المادة 13: لا ينتمي طالب الأقسام التحضيرية إلا إلى قسم الإعلام والصحافة "
+"العلمية، إلا باستثناء من المكتب التنفيذي (اكتب سببه)."
+
+#: .\apps\members\rules.py
+msgid ""
+"Art. 14: a member cannot belong to the Project Department and to the "
+"Business & Innovation Department at the same time: they leave one before "
+"joining the other."
+msgstr ""
+"المادة 14: لا يمكن للعضو الانتماء في الوقت نفسه إلى قسم المشروع وقسم الأعمال "
+"والابتكار: يغادر أحدهما قبل الالتحاق بالآخر."
+
+#: .\apps\members\serializers.py
+msgid "Give the year the member left the school, e.g. 2024."
+msgstr "يجب إدخال سنة مغادرة المدرسة، مثل 2024."
+
+#: .\apps\members\serializers.py
+msgid "The warnings and exclusions are always e-mailed (charter)."
+msgstr "تُرسل الإنذارات والإقصاءات دائمًا بالبريد الإلكتروني (الميثاق)."
+
+#: .\apps\members\serializers.py
+msgid "Only the Board and the Team Manager give this position."
+msgstr "لا يمنح هذا المنصبَ إلا مجلس الإدارة ومدير الفريق."
+
+#: .\apps\members\serializers.py
+msgid "You cannot put members in this project."
+msgstr "لا يمكنك إضافة أعضاء إلى هذا المشروع."
+
+#: .\apps\members\serializers.py
+msgid "A member of the ERP already has this address."
+msgstr "لدى عضو في النظام هذا العنوان بالفعل."
+
+#: .\apps\members\serializers.py
+msgid "You cannot add members to this unit."
+msgstr "لا يمكنك إضافة أعضاء إلى هذه الوحدة."
+
+#: .\apps\members\serializers.py
+msgid "This role is not one of this unit's."
+msgstr "هذا الدور ليس من أدوار هذه الوحدة."
+
+#: .\apps\members\serializers.py
+msgid "Only a club admin gives a leadership role."
+msgstr "لا يمنح دور المسؤول إلا مسؤول النادي."
+
+#: .\apps\members\serializers.py
+msgid "Choose main or junior."
+msgstr "اختر أساسيًا أو مبتدئًا."
+
+#: .\apps\members\serializers.py
+msgid "Choose a unit and a role, or a position."
+msgstr "اختر وحدة ودورًا، أو منصبًا."
+
+#: .\apps\members\serializers.py
+msgid "The member already holds this role in this unit."
+msgstr "لدى العضو هذا الدور في هذه الوحدة بالفعل."
+
+#: .\apps\members\serializers_otp.py
+msgid "Invalid code format."
+msgstr "صيغة الرمز غير صالحة."
+
+#: .\apps\members\services_otp.py
+msgid "Your ENP Racing Team login code"
+msgstr "رمز الدخول إلى ENP Racing Team"
+
+#: .\apps\members\services_otp.py
+#, python-brace-format
+msgid "Your login code is: {code}"
+msgstr "رمز الدخول الخاص بك هو: {code}"
+
+#: .\apps\members\services_otp.py
+#, python-brace-format
+msgid "It expires in {minutes} minute and can only be used once."
+msgid_plural "It expires in {minutes} minutes and can only be used once."
+msgstr[0] "تنتهي صلاحيته بعد {minutes} دقيقة ولا يمكن استخدامه إلا مرة واحدة."
+msgstr[1] "تنتهي صلاحيته بعد دقيقة واحدة ولا يمكن استخدامه إلا مرة واحدة."
+msgstr[2] "تنتهي صلاحيته بعد دقيقتين ولا يمكن استخدامه إلا مرة واحدة."
+msgstr[3] "تنتهي صلاحيته بعد {minutes} دقائق ولا يمكن استخدامه إلا مرة واحدة."
+msgstr[4] "تنتهي صلاحيته بعد {minutes} دقيقة ولا يمكن استخدامه إلا مرة واحدة."
+msgstr[5] "تنتهي صلاحيته بعد {minutes} دقيقة ولا يمكن استخدامه إلا مرة واحدة."
+
+#: .\apps\members\services_otp.py
+msgid "If you did not request this, ignore this email."
+msgstr "إذا لم تطلب هذا الرمز، فتجاهل هذه الرسالة."
+
+#: .\apps\members\views.py
+msgid "Please wait before requesting another code."
+msgstr "يرجى الانتظار قبل طلب رمز جديد."
+
+#: .\apps\members\views.py
+msgid "Too many requests. Try again later."
+msgstr "عدد كبير جدًا من الطلبات. أعد المحاولة لاحقًا."
+
+#: .\apps\members\views.py
+msgid "If this email is registered, a code has been sent."
+msgstr "إذا كان هذا البريد الإلكتروني مسجلًا، فقد أُرسل إليه رمز."
+
+#: .\apps\members\views.py
+msgid "Too many attempts. Try again later."
+msgstr "عدد كبير جدًا من المحاولات. أعد المحاولة لاحقًا."
+
+#: .\apps\members\views.py
+msgid "Invalid or expired code."
+msgstr "الرمز غير صالح أو انتهت صلاحيته."
+
+#: .\apps\members\views.py
+msgid "Logged in."
+msgstr "تم تسجيل الدخول."
+
+#: .\apps\members\views.py
+msgid "Refresh token missing."
+msgstr "رمز التجديد مفقود."
+
+#: .\apps\members\views.py
+msgid "Invalid or expired refresh token."
+msgstr "رمز التجديد غير صالح أو انتهت صلاحيته."
+
+#: .\apps\members\views.py
+msgid "Token refreshed."
+msgstr "تم تجديد الجلسة."
+
+#: .\apps\members\views.py
+msgid "Logged out."
+msgstr "تم تسجيل الخروج."
+
+#: .\apps\members\views.py
+msgid "Only a former member of the team has an alumni profile."
+msgstr "ملف العضو السابق خاص بالأعضاء السابقين في الفريق."
+
+#: .\apps\members\views.py
+msgid "Only the club admins and the department heads add members."
+msgstr "لا يضيف الأعضاءَ إلا مسؤولو النادي ورؤساء الأقسام."
+
+#: .\apps\members\views.py
+msgid "Only the Board and the Team Manager change the members."
+msgstr "لا يعدّل الأعضاءَ إلا مجلس الإدارة ومدير الفريق."
+
+#: .\apps\projects\apps.py
+msgid "Projects"
+msgstr "المشاريع"
+
+#: .\apps\projects\health.py
+msgctxt "project health"
+msgid "In preparation"
+msgstr "قيد التحضير"
+
+#: .\apps\projects\health.py
+msgctxt "project health"
+msgid "On track"
+msgstr "في الموعد"
+
+#: .\apps\projects\health.py
+msgctxt "project health"
+msgid "At risk"
+msgstr "معرّض للخطر"
+
+#: .\apps\projects\health.py
+msgctxt "project health"
+msgid "On hold"
+msgstr "متوقف مؤقتًا"
+
+#: .\apps\projects\health.py
+msgctxt "project health"
+msgid "Completed"
+msgstr "منتهٍ"
+
+#: .\apps\projects\models.py
+msgid "Internal combustion (IC)"
+msgstr "محرك حراري (IC)"
+
+#: .\apps\projects\models.py
+msgid "Electric (EV)"
+msgstr "كهربائي (EV)"
+
+#: .\apps\projects\models.py
+msgid "Complementary competition"
+msgstr "مسابقة تكميلية"
+
+#: .\apps\projects\models.py
+msgid "Club project"
+msgstr "مشروع النادي"
+
+#: .\apps\projects\models.py .\apps\subsystems\models.py
+msgid "Planned"
+msgstr "مخطط له"
+
+#: .\apps\projects\models.py
+msgid "Completed"
+msgstr "مكتمل"
+
+#: .\apps\projects\models.py
+msgid "On hold"
+msgstr "معلّق"
+
+#: .\apps\projects\models.py
+msgid "reference key"
+msgstr "بادئة المراجع"
+
+#: .\apps\projects\models.py
+msgid "project manager"
+msgstr "مدير المشروع"
+
+#: .\apps\projects\models.py
+msgid "projects"
+msgstr "المشاريع"
+
+#: .\apps\projects\models.py
+msgid "role in the project"
+msgstr "الدور في المشروع"
+
+#: .\apps\projects\models.py
+msgid "project member"
+msgstr "عضو في المشروع"
+
+#: .\apps\projects\models.py
+msgid "project members"
+msgstr "أعضاء المشاريع"
+
+#: .\apps\projects\permissions.py
+msgid "Only club admins can create projects."
+msgstr "يقتصر إنشاء المشاريع على مشرفي النادي."
+
+#: .\apps\projects\permissions.py
+msgid "You cannot change this project."
+msgstr "لا يمكنك تعديل هذا المشروع."
+
+#: .\apps\projects\serializers.py
+msgid "This member cannot be a project manager: none of their roles allows it."
+msgstr "لا يمكن لهذا العضو أن يكون مدير مشروع: لا يسمح بذلك أيٌّ من أدواره."
+
+#: .\apps\projects\serializers.py
+msgid "Give 2 to 10 capital letters or digits, e.g. EV27."
+msgstr "يجب إدخال من 2 إلى 10 أحرف كبيرة أو أرقام، مثل EV27."
+
+#: .\apps\projects\serializers.py
+msgid "P followed by digits is kept for the projects without a key."
+msgstr "الحرف P متبوعًا بأرقام محجوز للمشاريع التي ليس لها مفتاح."
+
+#: .\apps\projects\serializers.py
+msgid "Another project already has this key."
+msgstr "هذه البادئة مستخدمة في مشروع آخر."
+
+#: .\apps\projects\serializers.py
+msgid "This project's tasks are numbered with its key: an admin changes it."
+msgstr "مهام هذا المشروع مرقّمة بمفتاحه: لا يغيّره إلا مسؤول."
+
+#: .\apps\projects\serializers.py
+msgid "Only club admins can change the owning unit or the project manager."
+msgstr "يقتصر تغيير الوحدة المسؤولة أو مدير المشروع على مشرفي النادي."
+
+#: .\apps\projects\serializers.py
+msgid "The end date cannot be before the start date."
+msgstr "لا يمكن أن يسبق تاريخ الانتهاء تاريخ البدء."
+
+#: .\apps\purchasing\apps.py
+msgid "Purchasing"
+msgstr "المشتريات"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase status"
+msgid "To approve (leader)"
+msgstr "بانتظار مصادقة المسؤول"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase status"
+msgid "To approve (Operations)"
+msgstr "بانتظار مصادقة العمليات"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase status"
+msgid "To order"
+msgstr "بانتظار الطلب"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase status"
+msgid "Ordered"
+msgstr "قيد الطلب"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase status"
+msgid "Delivered"
+msgstr "تم التسليم"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase status"
+msgid "Cancelled"
+msgstr "تم الإلغاء"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "Supplier"
+msgstr "مورد"
+
+#: .\apps\purchasing\models.py
+msgid "Subcontractor"
+msgstr "مقاول من الباطن"
+
+#: .\apps\purchasing\models.py
+msgid "Mixed"
+msgstr "مختلط"
+
+#: .\apps\purchasing\models.py
+msgid "Machining"
+msgstr "تشغيل ميكانيكي"
+
+#: .\apps\purchasing\models.py
+msgid "Logistics"
+msgstr "خدمات لوجستية"
+
+#: .\apps\purchasing\models.py
+msgctxt "supplier status"
+msgid "Approved"
+msgstr "مقبول"
+
+#: .\apps\purchasing\models.py
+msgctxt "supplier status"
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#: .\apps\purchasing\models.py
+msgctxt "supplier status"
+msgid "Refused"
+msgstr "مرفوض"
+
+#: .\apps\purchasing\models.py
+msgctxt "supplier status"
+msgid "Request not sent yet"
+msgstr "لم يُرسل الطلب بعد"
+
+#: .\apps\purchasing\models.py
+msgid "Brakes"
+msgstr "المكابح"
+
+#: .\apps\purchasing\models.py
+msgid "Wheels & tyres"
+msgstr "العجلات والإطارات"
+
+#: .\apps\purchasing\models.py
+msgid "Chassis & body"
+msgstr "الهيكل والبدن"
+
+#: .\apps\purchasing\models.py
+msgid "Suspension"
+msgstr "نظام التعليق"
+
+#: .\apps\purchasing\models.py
+msgid "Steering"
+msgstr "نظام التوجيه"
+
+#: .\apps\purchasing\models.py
+msgid "Drivetrain"
+msgstr "نقل الحركة"
+
+#: .\apps\purchasing\models.py
+msgid "Engine / tractive"
+msgstr "المحرك / نظام الجر"
+
+#: .\apps\purchasing\models.py
+msgid "Workshop"
+msgstr "الورشة"
+
+#: .\apps\purchasing\models.py
+msgid "Low voltage"
+msgstr "الجهد المنخفض"
+
+#: .\apps\purchasing\models.py
+msgid "Operations"
+msgstr "العمليات"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "Other"
+msgstr "أخرى"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "Low"
+msgstr "منخفضة"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "Medium"
+msgstr "متوسطة"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "High"
+msgstr "عالية"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Requested"
+msgstr "تم الطلب"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Approved"
+msgstr "تمت المصادقة"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Refused"
+msgstr "تم الرفض"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Ordered"
+msgstr "تم الطلب من المورد"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Order cancelled"
+msgstr "أُلغي أمر الشراء"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Received"
+msgstr "تم الاستلام"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Partly received"
+msgstr "استُلمت جزئيًا"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Closed with what arrived"
+msgstr "أُغلقت بما وصل"
+
+#: .\apps\purchasing\models.py
+msgctxt "purchase action"
+msgid "Cancelled"
+msgstr "تم الإلغاء"
+
+#: .\apps\purchasing\models.py
+msgid "Algerian dinar (DA)"
+msgstr "دينار جزائري (دج)"
+
+#: .\apps\purchasing\models.py
+msgid "Euro (€)"
+msgstr "يورو (€)"
+
+#: .\apps\purchasing\models.py
+msgid "US dollar ($)"
+msgstr "دولار أمريكي ($)"
+
+#: .\apps\purchasing\models.py
+msgid "Pound sterling (£)"
+msgstr "جنيه إسترليني (£)"
+
+#: .\apps\purchasing\models.py
+msgid "Chinese yuan (¥)"
+msgstr "يوان صيني (¥)"
+
+#: .\apps\purchasing\models.py
+msgid "technical capabilities"
+msgstr "القدرات التقنية"
+
+#: .\apps\purchasing\models.py
+msgid "address"
+msgstr "العنوان"
+
+#: .\apps\purchasing\models.py
+msgid "city"
+msgstr "المدينة"
+
+#: .\apps\purchasing\models.py
+msgid "country"
+msgstr "البلد"
+
+#: .\apps\purchasing\models.py
+msgid "contact role"
+msgstr "صفة جهة الاتصال"
+
+#: .\apps\purchasing\models.py
+msgid "contacted by"
+msgstr "تم التواصل بواسطة"
+
+#: .\apps\purchasing\models.py
+msgid "average lead time (days)"
+msgstr "متوسط مدة التوريد (بالأيام)"
+
+#: .\apps\purchasing\models.py
+msgid "comments"
+msgstr "التعليقات"
+
+#: .\apps\purchasing\models.py
+msgid "supplier"
+msgstr "مورد"
+
+#: .\apps\purchasing\models.py
+msgid "suppliers"
+msgstr "الموردون"
+
+#: .\apps\purchasing\models.py
+msgid "reference"
+msgstr "المرجع"
+
+#: .\apps\purchasing\models.py
+msgid "material"
+msgstr "المادة"
+
+#: .\apps\purchasing\models.py
+msgid "manufacturing process"
+msgstr "طريقة التصنيع"
+
+#: .\apps\purchasing\models.py
+msgid "parts"
+msgstr "القطع"
+
+#: .\apps\purchasing\models.py
+msgid "requested by"
+msgstr "مقدم الطلب"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "priority"
+msgstr "الأولوية"
+
+#: .\apps\purchasing\models.py
+msgid "needed by"
+msgstr "التاريخ المطلوب"
+
+#: .\apps\purchasing\models.py
+msgid "suggested supplier"
+msgstr "المورد المقترح"
+
+#: .\apps\purchasing\models.py
+msgid "purchase request"
+msgstr "طلب شراء"
+
+#: .\apps\purchasing\models.py
+msgid "purchase requests"
+msgstr "طلبات الشراء"
+
+#: .\apps\purchasing\models.py
+msgid "action"
+msgstr "الإجراء"
+
+#: .\apps\purchasing\models.py .\apps\tasks\models.py
+msgid "comment"
+msgstr "التعليق"
+
+#: .\apps\purchasing\models.py
+msgid "purchase request step"
+msgstr "مرحلة طلب الشراء"
+
+#: .\apps\purchasing\models.py
+msgid "purchase request history"
+msgstr "سجل طلبات الشراء"
+
+#: .\apps\purchasing\models.py
+msgid "shipping address"
+msgstr "عنوان شحن"
+
+#: .\apps\purchasing\models.py
+msgid "shipping addresses"
+msgstr "عناوين الشحن"
+
+#: .\apps\purchasing\models.py
+msgid "grouped order"
+msgstr "طلبية مجمّعة"
+
+#: .\apps\purchasing\models.py
+msgid "grouped orders"
+msgstr "الطلبيات المجمّعة"
+
+#: .\apps\purchasing\models.py
+#, python-format
+msgid "Grouped order #%(number)s - %(supplier)s"
+msgstr "الطلبية المجمّعة رقم %(number)s - %(supplier)s"
+
+#: .\apps\purchasing\models.py
+msgid "quantity received"
+msgstr "الكمية المستلمة"
+
+#: .\apps\purchasing\models.py
+msgid "currency"
+msgstr "العملة"
+
+#: .\apps\purchasing\models.py
+msgid "exchange rate (DA)"
+msgstr "سعر الصرف (دج)"
+
+#: .\apps\purchasing\models.py
+msgid "unit price"
+msgstr "سعر الوحدة"
+
+#: .\apps\purchasing\models.py
+msgid "delivery cost"
+msgstr "تكلفة التوصيل"
+
+#: .\apps\purchasing\models.py
+msgid "customs cost"
+msgstr "الرسوم الجمركية"
+
+#: .\apps\purchasing\models.py
+msgid "total price"
+msgstr "السعر الإجمالي"
+
+#: .\apps\purchasing\models.py
+msgid "total price (DA)"
+msgstr "السعر الإجمالي (دج)"
+
+#: .\apps\purchasing\models.py
+msgid "order date"
+msgstr "تاريخ أمر الشراء"
+
+#: .\apps\purchasing\models.py
+msgid "estimated delivery date"
+msgstr "تاريخ التسليم المتوقع"
+
+#: .\apps\purchasing\models.py
+msgid "actual delivery date"
+msgstr "تاريخ التسليم الفعلي"
+
+#: .\apps\purchasing\models.py
+msgid "purchase orders"
+msgstr "أوامر الشراء"
+
+#: .\apps\purchasing\models.py
+#, python-format
+msgid "PO #%(number)s - %(supplier)s"
+msgstr "أمر شراء رقم %(number)s - %(supplier)s"
+
+#: .\apps\purchasing\models.py
+msgid "total amount"
+msgstr "المبلغ الإجمالي"
+
+#: .\apps\purchasing\models.py
+msgid "issue date"
+msgstr "تاريخ الإصدار"
+
+#: .\apps\purchasing\models.py
+msgid "invoices"
+msgstr "الفواتير"
+
+#: .\apps\purchasing\models.py
+msgid "invoice line"
+msgstr "سطر فاتورة"
+
+#: .\apps\purchasing\models.py
+msgid "invoice lines"
+msgstr "أسطر الفواتير"
+
+#: .\apps\purchasing\serializers.py
+msgid "A supplier with this name already exists."
+msgstr "يوجد مورد بهذا الاسم مسبقًا."
+
+#: .\apps\purchasing\serializers.py
+msgid "Choose the unit the part is for, or its subsystem."
+msgstr "اختر الوحدة التي تخصها القطعة، أو نظامها الفرعي."
+
+#: .\apps\purchasing\serializers.py
+#, python-format
+msgid "Give the rate actually paid: how many dinars for one %(currency)s."
+msgstr "أدخل السعر المدفوع فعلًا: كم دينارًا مقابل %(currency)s واحد."
+
+#: .\apps\purchasing\serializers.py
+msgid "The delivery cannot be expected before the order date."
+msgstr "لا يمكن أن يكون موعد التسليم المتوقع قبل تاريخ الطلب."
+
+#: .\apps\purchasing\serializers.py
+msgid "A request appears twice in the grouped order."
+msgstr "يظهر طلب مرتين في الطلبية المجمّعة."
+
+#: .\apps\purchasing\serializers.py
+msgid "A delivery cannot be in the future."
+msgstr "لا يمكن أن يكون تاريخ التسليم في المستقبل."
+
+#: .\apps\purchasing\views.py
+msgid ""
+"Parts of this order already arrived: receive the rest, or close the order "
+"with what arrived."
+msgstr "وصلت بعض قطع هذه الطلبية: استلم الباقي، أو أغلق الطلبية بما وصل."
+
+#: .\apps\purchasing\views.py
+msgid "The parts cannot arrive before the order date."
+msgstr "لا يمكن أن تصل القطع قبل تاريخ الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "You cannot ask for parts for this unit."
+msgstr "لا يمكنك طلب قطع لهذه الوحدة."
+
+#: .\apps\purchasing\views.py
+msgid "This request can no longer be changed: cancel it and ask again."
+msgstr "لم يعد ممكنًا تعديل هذا الطلب: ألغِه وقدّم طلبًا جديدًا."
+
+#: .\apps\purchasing\views.py
+msgid "You cannot change this request."
+msgstr "لا يمكنك تعديل هذا الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "This request is not awaiting approval any more."
+msgstr "لم يعد هذا الطلب بانتظار المصادقة."
+
+#: .\apps\purchasing\views.py
+msgid "You cannot approve this request."
+msgstr "لا يمكنك المصادقة على هذا الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "You cannot refuse this request."
+msgstr "لا يمكنك رفض هذا الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "This request can no longer be cancelled."
+msgstr "لم يعد ممكنًا إلغاء هذا الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "You cannot cancel this request."
+msgstr "لا يمكنك إلغاء هذا الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "This request is not to be ordered."
+msgstr "هذا الطلب ليس في مرحلة الطلب من المورد."
+
+#: .\apps\purchasing\views.py
+msgid "Only Operations can order."
+msgstr "لا يمكن الطلب من المورد إلا لقسم العمليات."
+
+#: .\apps\purchasing\views.py
+msgid "This request has no order in progress."
+msgstr "لا يوجد أمر شراء جارٍ لهذا الطلب."
+
+#: .\apps\purchasing\views.py
+msgid "Only Operations can manage the orders."
+msgstr "لا يمكن إدارة أوامر الشراء إلا لقسم العمليات."
+
+#: .\apps\purchasing\views.py
+msgid "None of its parts arrived: cancel the order instead."
+msgstr "لم تصل أي قطعة منها: ألغِ الطلبية بدلًا من ذلك."
+
+#: .\apps\purchasing\views.py
+#, python-format
+msgid "More parts than awaited: still to come, %(count)s."
+msgstr "قطع أكثر من المنتظر: المتبقي %(count)s."
+
+#: .\apps\purchasing\views.py
+#, python-format
+msgid "“%(part)s” is not to be ordered any more."
+msgstr "«%(part)s» لم يعد للطلب."
+
+#: .\apps\purchasing\views.py
+msgid "Every part of this grouped order already arrived."
+msgstr "وصلت كل قطع هذه الطلبية المجمّعة."
+
+#: .\apps\purchasing\views.py
+msgid "Only Operations can add or change suppliers."
+msgstr "لا يمكن إضافة الموردين أو تعديلهم إلا لقسم العمليات."
+
+#: .\apps\purchasing\views.py
+msgid "Only Operations can see the shipping addresses."
+msgstr "لا يمكن الاطلاع على عناوين الشحن إلا لقسم العمليات."
+
+#: .\apps\ranking\models.py
+msgctxt "contribution status"
+msgid "Proposed"
+msgstr "مقترحة"
+
+#: .\apps\ranking\models.py
+msgctxt "contribution status"
+msgid "Validated"
+msgstr "معتمدة"
+
+#: .\apps\ranking\models.py
+msgctxt "contribution status"
+msgid "Rejected"
+msgstr "مرفوضة"
+
+#: .\apps\ranking\models.py .\apps\tasks\models.py
+msgid "points"
+msgstr "النقاط"
+
+#: .\apps\ranking\models.py
+msgid ""
+"1: small help or idea; 2: significant help or knowledge shared; 3: major "
+"help or initiative."
+msgstr ""
+"1: مساعدة صغيرة أو فكرة؛ 2: مساعدة مهمة أو مشاركة معرفة؛ 3: مساعدة كبرى أو "
+"مبادرة."
+
+#: .\apps\ranking\models.py
+msgid "contribution point"
+msgstr "نقطة مساهمة"
+
+#: .\apps\ranking\models.py
+msgid "contribution points"
+msgstr "نقاط مساهمة"
+
+#: .\apps\ranking\models.py
+msgid "month"
+msgstr "الشهر"
+
+#: .\apps\ranking\models.py
+msgid "Its first day."
+msgstr "يومه الأول."
+
+#: .\apps\ranking\models.py
+msgid "communication of progress and blockers"
+msgstr "التواصل بشأن التقدم والعوائق"
+
+#: .\apps\ranking\models.py
+msgid "workshop contribution"
+msgstr "المساهمة في الورشة"
+
+#: .\apps\ranking\models.py
+msgid "why N/A (workshop)"
+msgstr "سبب «غير منطبق» (الورشة)"
+
+#: .\apps\ranking\models.py
+msgid "event engagement"
+msgstr "المشاركة في الفعاليات"
+
+#: .\apps\ranking\models.py
+msgid "why N/A (events)"
+msgstr "سبب «غير منطبق» (الفعاليات)"
+
+#: .\apps\ranking\models.py
+msgid "logistics support"
+msgstr "الدعم اللوجستي"
+
+#: .\apps\ranking\models.py
+msgid "exceptional effort"
+msgstr "الجهد الاستثنائي"
+
+#: .\apps\ranking\models.py
+msgid "evidence of the effort"
+msgstr "إثبات الجهد"
+
+#: .\apps\ranking\models.py
+msgid "Dates and hours: without them, the mark is 2 at most."
+msgstr "التواريخ والساعات: بدونها لا تتجاوز العلامة 2."
+
+#: .\apps\ranking\models.py
+msgid "excused weeks"
+msgstr "أسابيع معذورة"
+
+#: .\apps\ranking\models.py
+msgid ""
+"Exams, illness, family emergency, official mission: they lower the expected "
+"load."
+msgstr "امتحانات، مرض، ظرف عائلي طارئ، مهمة رسمية: تخفّض العبء المنتظر."
+
+#: .\apps\ranking\models.py
+msgid "no work available"
+msgstr "لا عمل متاح"
+
+#: .\apps\ranking\models.py
+msgid ""
+"The member asked for more work and none was given: the expected load is what "
+"they were given."
+msgstr "طلب العضو عملًا إضافيًا ولم يُكلَّف به: العبء المنتظر هو ما كُلِّف به فعلًا."
+
+#: .\apps\ranking\models.py
+msgid "monthly assessment"
+msgstr "تقييم شهري"
+
+#: .\apps\ranking\models.py
+msgid "monthly assessments"
+msgstr "تقييمات شهرية"
+
+#: .\apps\ranking\models.py
+msgid "published by"
+msgstr "نشره"
+
+#: .\apps\ranking\models.py
+msgid "published at"
+msgstr "تاريخ النشر"
+
+#: .\apps\ranking\models.py
+msgid "published ranking"
+msgstr "ترتيب منشور"
+
+#: .\apps\ranking\models.py
+msgid "published rankings"
+msgstr "ترتيبات منشورة"
+
+#: .\apps\ranking\models.py
+msgid "A — Excellent"
+msgstr "A — ممتاز"
+
+#: .\apps\ranking\models.py
+msgid "B — Very good"
+msgstr "B — جيد جدًا"
+
+#: .\apps\ranking\models.py
+msgid "C — Average"
+msgstr "C — متوسط"
+
+#: .\apps\ranking\models.py
+msgid "D — Weak"
+msgstr "D — ضعيف"
+
+#: .\apps\ranking\models.py
+msgid "E — Critical"
+msgstr "E — حرج"
+
+#: .\apps\ranking\models.py
+msgid "delivery"
+msgstr "الإنجاز"
+
+#: .\apps\ranking\models.py
+msgid "performance"
+msgstr "الأداء"
+
+#: .\apps\ranking\models.py
+msgid "load"
+msgstr "العبء"
+
+#: .\apps\ranking\models.py
+msgid "presence"
+msgstr "الحضور"
+
+#: .\apps\ranking\models.py
+msgid "reliability"
+msgstr "الموثوقية"
+
+#: .\apps\ranking\models.py
+msgid "team contribution"
+msgstr "المساهمة في الفريق"
+
+#: .\apps\ranking\models.py
+msgid "monthly score"
+msgstr "النقطة الشهرية"
+
+#: .\apps\ranking\models.py
+msgid "provisional"
+msgstr "مؤقتة"
+
+#: .\apps\ranking\models.py
+msgid "ranking score"
+msgstr "نقطة الترتيب"
+
+#: .\apps\ranking\models.py
+msgid "rank"
+msgstr "المرتبة"
+
+#: .\apps\ranking\models.py
+msgid "member's monthly score"
+msgstr "نقطة شهرية لعضو"
+
+#: .\apps\ranking\models.py
+msgid "members' monthly scores"
+msgstr "نقاط شهرية للأعضاء"
+
+#: .\apps\ranking\serializers.py .\apps\ranking\workflow.py
+msgid "Say why they are refused."
+msgstr "اذكر سبب الرفض."
+
+#: .\apps\ranking\views.py
+msgid "This member is not in the ranking: no membership in progress."
+msgstr "هذا العضو ليس في الترتيب: لا انتماء جارٍ."
+
+#: .\apps\ranking\views.py
+msgid "You are not in the ranking: no membership in progress."
+msgstr "لست في الترتيب: لا انتماء جارٍ."
+
+#: .\apps\ranking\views.py
+msgid ""
+"Only the department heads, the Board, the Team Manager and the Bureau's "
+"positions see a team's table."
+msgstr "لا يرى جدول الفريق إلا رؤساء الأقسام ومجلس الإدارة ومدير الفريق ومناصب المكتب."
+
+#: .\apps\ranking\views.py
+msgid "Only the Team Manager publishes the ranking."
+msgstr "لا ينشر الترتيب إلا مدير الفريق."
+
+#: .\apps\ranking\views.py
+msgid ""
+"Only the member, their department heads and the Team Manager see this score."
+msgstr "لا يرى هذه النقطة إلا العضو ورؤساء قسمه ومدير الفريق."
+
+#: .\apps\ranking\views.py
+msgid ""
+"Only the member's department heads and the Team Manager assess them, never "
+"themself."
+msgstr "لا يقيّم العضوَ إلا رؤساء قسمه ومدير الفريق، ولا يقيّم أحد نفسه."
+
+#: .\apps\ranking\views.py
+msgid ""
+"Only the member's department heads and the Team Manager decide their points."
+msgstr "لا يقرر في نقاط العضو إلا رؤساء قسمه ومدير الفريق."
+
+#: .\apps\ranking\workflow.py
+msgid "Give a mark or a reason for N/A, not both."
+msgstr "ضع علامة أو سببًا لـ«غير منطبق»، لا الاثنين معًا."
+
+#: .\apps\ranking\workflow.py
+msgid "This date is still to come."
+msgstr "هذا التاريخ لم يأتِ بعد."
+
+#: .\apps\ranking\workflow.py
+msgid "These points are already decided."
+msgstr "تم البت في هذه النقاط بالفعل."
+
+#: .\apps\ranking\workflow.py
+msgid "A month is published once it is over."
+msgstr "يُنشر الشهر بعد انتهائه."
+
+#: .\apps\reporting\apps.py
+msgid "Reporting"
+msgstr "التقارير"
+
+#: .\apps\reporting\exports.py .\apps\tasks\followup.py
+msgid "On track"
+msgstr "على المسار"
+
+#: .\apps\reporting\exports.py
+msgid "Attention required"
+msgstr "يتطلب الانتباه"
+
+#: .\apps\reporting\exports.py
+msgctxt "team status"
+msgid "Critical"
+msgstr "حرج"
+
+#: .\apps\reporting\exports.py .\apps\tasks\followup.py
+msgid "At risk"
+msgstr "معرض للخطر"
+
+#: .\apps\reporting\exports.py
+msgid "Inactive"
+msgstr "غير نشط"
+
+#: .\apps\reporting\exports.py
+msgid "Active members"
+msgstr "الأعضاء النشطون"
+
+#: .\apps\reporting\exports.py
+msgid "Inactive or at-risk members"
+msgstr "الأعضاء غير النشطين أو المعرضون للخطر"
+
+#: .\apps\reporting\exports.py
+msgid "Attendance rate (30 days)"
+msgstr "نسبة الحضور (30 يومًا)"
+
+#: .\apps\reporting\exports.py
+msgid "Task completion rate (30 days)"
+msgstr "نسبة إنجاز المهام (30 يومًا)"
+
+#: .\apps\reporting\exports.py
+msgid "Overdue tasks"
+msgstr "مهام متأخرة"
+
+#: .\apps\reporting\exports.py
+msgid "Blocked tasks"
+msgstr "مهام متوقفة"
+
+#: .\apps\reporting\exports.py
+msgid "Critical tasks"
+msgstr "مهام حرجة"
+
+#: .\apps\reporting\exports.py
+msgid "Members without active objectives"
+msgstr "أعضاء بلا أهداف جارية"
+
+#: .\apps\reporting\exports.py
+msgid "Unresolved blockers"
+msgstr "عوائق غير محلولة"
+
+#: .\apps\reporting\exports.py .\apps\tasks\models.py
+msgctxt "blocker severity"
+msgid "Low"
+msgstr "منخفضة"
+
+#: .\apps\reporting\exports.py .\apps\tasks\models.py
+msgctxt "blocker severity"
+msgid "Medium"
+msgstr "متوسطة"
+
+#: .\apps\reporting\exports.py .\apps\tasks\models.py
+msgctxt "blocker severity"
+msgid "High"
+msgstr "عالية"
+
+#: .\apps\reporting\exports.py .\apps\tasks\models.py
+msgctxt "blocker severity"
+msgid "Critical"
+msgstr "حرجة"
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(member)s: no activity recorded in the ERP."
+msgstr "%(member)s: لا نشاط مسجل في النظام."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(member)s: no activity for %(days)s days."
+msgstr "%(member)s: لا نشاط منذ %(days)s يومًا."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(member)s is at risk: little recent activity or overdue tasks."
+msgstr "%(member)s معرض للخطر: نشاط حديث قليل أو مهام متأخرة."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(member)s has %(count)s overdue tasks."
+msgstr "لدى %(member)s %(count)s مهام متأخرة."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(member)s is the main person on %(count)s critical tasks."
+msgstr "%(member)s هو المسؤول الرئيسي عن %(count)s مهام حرجة."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(member)s carries %(count)s open points, well above the team."
+msgstr "يحمل %(member)s %(count)s نقطة مفتوحة، أكثر بكثير من الفريق."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "Critical task blocked: %(task)s."
+msgstr "مهمة حرجة متوقفة: %(task)s."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "%(department)s has %(count)s overdue critical tasks."
+msgstr "لدى %(department)s %(count)s مهام حرجة متأخرة."
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "Due in %(days)s days and not finished: %(task)s."
+msgstr "أجلها بعد %(days)s أيام ولم تنته: %(task)s."
+
+#: .\apps\reporting\exports.py
+msgid "Achievements"
+msgstr "الإنجازات"
+
+#: .\apps\reporting\exports.py
+msgid "Task"
+msgstr "المهمة"
+
+#: .\apps\reporting\exports.py
+msgid "Project"
+msgstr "المشروع"
+
+#: .\apps\reporting\exports.py
+msgid "Department"
+msgstr "القسم"
+
+#: .\apps\reporting\exports.py
+msgid "Points"
+msgstr "النقاط"
+
+#: .\apps\reporting\exports.py
+msgid "Quality"
+msgstr "الجودة"
+
+#: .\apps\reporting\exports.py
+msgid "Delayed tasks"
+msgstr "المهام المتأخرة"
+
+#: .\apps\reporting\exports.py
+msgid "People"
+msgstr "الأشخاص"
+
+#: .\apps\reporting\exports.py
+msgid "Due date"
+msgstr "الأجل"
+
+#: .\apps\reporting\exports.py
+msgid "Days late"
+msgstr "أيام التأخر"
+
+#: .\apps\reporting\exports.py
+msgid "Critical blockers"
+msgstr "العوائق الحرجة"
+
+#: .\apps\reporting\exports.py
+msgid "Blocker"
+msgstr "العائق"
+
+#: .\apps\reporting\exports.py
+msgid "Severity"
+msgstr "الخطورة"
+
+#: .\apps\reporting\exports.py
+msgid "Declared"
+msgstr "تاريخ التصريح"
+
+#: .\apps\reporting\exports.py
+msgid "Members requiring attention"
+msgstr "أعضاء يحتاجون متابعة"
+
+#: .\apps\reporting\exports.py
+msgid "Open tasks"
+msgstr "المهام المفتوحة"
+
+#: .\apps\reporting\exports.py
+msgid "Workload problems"
+msgstr "مشاكل عبء العمل"
+
+#: .\apps\reporting\exports.py
+msgid "Warning"
+msgstr "التنبيه"
+
+#: .\apps\reporting\exports.py
+msgid "Main risks"
+msgstr "المخاطر الرئيسية"
+
+#: .\apps\reporting\exports.py
+msgid "Priorities for the following week"
+msgstr "أولويات الأسبوع القادم"
+
+#: .\apps\reporting\exports.py
+msgid "Member contribution"
+msgstr "مساهمة الأعضاء"
+
+#: .\apps\reporting\exports.py
+msgid "Departments"
+msgstr "الأقسام"
+
+#: .\apps\reporting\exports.py
+msgid "Tasks validated"
+msgstr "المهام المصادق عليها"
+
+#: .\apps\reporting\exports.py
+msgid "Points delivered"
+msgstr "النقاط المنجزة"
+
+#: .\apps\reporting\exports.py
+msgid "Presence"
+msgstr "الحضور"
+
+#: .\apps\reporting\exports.py
+msgid "Department performance"
+msgstr "أداء الأقسام"
+
+#: .\apps\reporting\exports.py
+msgid "Attendance"
+msgstr "الحضور"
+
+#: .\apps\reporting\exports.py
+msgid "Attendance and task completion trends"
+msgstr "اتجاهات الحضور والإنجاز"
+
+#: .\apps\reporting\exports.py
+msgid "Week of"
+msgstr "أسبوع"
+
+#: .\apps\reporting\exports.py
+msgid "Tasks created"
+msgstr "المهام المنشأة"
+
+#: .\apps\reporting\exports.py
+msgid "Major blockers"
+msgstr "العوائق الكبرى"
+
+#: .\apps\reporting\exports.py
+msgid "Resolved"
+msgstr "تاريخ الحل"
+
+#: .\apps\reporting\exports.py
+msgid "Development progress"
+msgstr "تقدم المشاريع"
+
+#: .\apps\reporting\exports.py .\apps\tasks\apps.py
+msgid "Tasks"
+msgstr "المهام"
+
+#: .\apps\reporting\exports.py
+msgid "Progress"
+msgstr "التقدم"
+
+#: .\apps\reporting\exports.py
+msgid "Organizational risks"
+msgstr "المخاطر التنظيمية"
+
+#: .\apps\reporting\exports.py
+msgid "Department status"
+msgstr "حالة الأقسام"
+
+#: .\apps\reporting\exports.py
+msgid "Ongoing"
+msgstr "جارية"
+
+#: .\apps\reporting\exports.py
+msgid "Blockers"
+msgstr "العوائق"
+
+#: .\apps\reporting\exports.py
+#, python-format
+msgid "From %(start)s to %(end)s"
+msgstr "من %(start)s إلى %(end)s"
+
+#: .\apps\reporting\exports.py
+msgid "weekly-report"
+msgstr "weekly-report"
+
+#: .\apps\reporting\exports.py
+msgid "monthly-report"
+msgstr "monthly-report"
+
+#: .\apps\reporting\exports.py
+msgid "Overall team status:"
+msgstr "الحالة العامة للفريق:"
+
+#: .\apps\reporting\exports.py
+msgid "Indicator"
+msgstr "المؤشر"
+
+#: .\apps\reporting\exports.py
+msgid "Value"
+msgstr "القيمة"
+
+#: .\apps\reporting\exports.py
+msgid "Nothing to report."
+msgstr "لا شيء يُذكر."
+
+#: .\apps\reporting\exports.py
+msgid "Summary"
+msgstr "الخلاصة"
+
+#: .\apps\reporting\exports.py
+msgid "Overall team status"
+msgstr "الحالة العامة للفريق"
+
+#: .\apps\reporting\management\commands\send_weekly_report.py
+#, python-format
+msgid "Weekly team report: %(status)s"
+msgstr "التقرير الأسبوعي للفريق: %(status)s"
+
+#: .\apps\reporting\management\commands\send_weekly_report.py
+#, python-format
+msgid "Overall team status: %(status)s"
+msgstr "الحالة العامة للفريق: %(status)s"
+
+#: .\apps\reporting\management\commands\send_weekly_report.py
+#, python-format
+msgid ""
+"%(delayed)s delayed tasks, %(blockers)s critical blockers, %(attention)s "
+"members requiring attention."
+msgstr ""
+"%(delayed)s مهام متأخرة، %(blockers)s عوائق حرجة، %(attention)s أعضاء "
+"يحتاجون متابعة."
+
+#: .\apps\reporting\management\commands\send_weekly_report.py
+#, python-format
+msgid "The full report is attached (PDF); the dashboard is in the ERP: %(url)s"
+msgstr "التقرير الكامل مرفق (PDF)؛ ولوحة القيادة في النظام: %(url)s"
+
+#: .\apps\reporting\models.py
+msgid "configuration"
+msgstr "الإعدادات"
+
+#: .\apps\reporting\models.py
+msgid "saved report"
+msgstr "تقرير محفوظ"
+
+#: .\apps\reporting\models.py
+msgid "saved reports"
+msgstr "التقارير المحفوظة"
+
+#: .\apps\reporting\reports.py
+msgid "Weekly team report"
+msgstr "التقرير الأسبوعي للفريق"
+
+#: .\apps\reporting\reports.py
+msgid "Monthly performance report"
+msgstr "التقرير الشهري للأداء"
+
+#: .\apps\reporting\views.py
+msgid ""
+"The dashboard is for the Board, the Team Manager, the Bureau's positions and "
+"the leaders."
+msgstr "لوحة القيادة مخصصة لمجلس الإدارة ومدير الفريق ومناصب المكتب ومسؤولي الوحدات."
+
+#: .\apps\reporting\views.py
+msgid ""
+"The team's reports are for the Board, the Team Manager and the Bureau's "
+"positions."
+msgstr "تقارير الفريق مخصصة لمجلس الإدارة ومدير الفريق ومناصب المكتب."
+
+#: .\apps\reporting\views.py
+msgid "Choose pdf or xlsx."
+msgstr "اختر pdf أو xlsx."
+
+#: .\apps\reporting\views.py
+msgid "A month is written YYYY-MM, such as 2026-10."
+msgstr "يُكتب الشهر بالشكل YYYY-MM، مثل 2026-10."
+
+#: .\apps\subsystems\apps.py
+msgid "Subsystems"
+msgstr "الأنظمة الفرعية"
+
+#: .\apps\subsystems\models.py
+msgctxt "subsystem status"
+msgid "Blocked"
+msgstr "متوقف"
+
+#: .\apps\subsystems\models.py
+msgid "Complete"
+msgstr "مكتمل"
+
+#: .\apps\subsystems\models.py
+msgid "technical department"
+msgstr "القسم التقني"
+
+#: .\apps\subsystems\models.py
+msgid "parent subsystem"
+msgstr "النظام الفرعي الأم"
+
+#: .\apps\subsystems\models.py
+msgid "subsystems"
+msgstr "الأنظمة الفرعية"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "Study & research"
+msgstr "دراسة وبحث"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "CAD design"
+msgstr "تصميم بالحاسوب (CAD)"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "Simulation"
+msgstr "محاكاة"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "Validation by the head"
+msgstr "مصادقة رئيس القسم"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "Manufacturing / purchasing"
+msgstr "تصنيع / شراء"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "Incoming inspection"
+msgstr "فحص الاستلام"
+
+#: .\apps\subsystems\models.py
+msgctxt "lifecycle step"
+msgid "Workshop integration"
+msgstr "تركيب في الورشة"
+
+#: .\apps\subsystems\models.py
+msgid "order"
+msgstr "الترتيب"
+
+#: .\apps\subsystems\models.py
+msgid "applies to IC"
+msgstr "تخص المركبة الحرارية (IC)"
+
+#: .\apps\subsystems\models.py
+msgid "applies to EV"
+msgstr "تخص المركبة الكهربائية (EV)"
+
+#: .\apps\subsystems\models.py
+msgid "validated by a unit leader"
+msgstr "بمصادقة مسؤول الوحدة"
+
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "lifecycle step"
+msgstr "مرحلة دورة الحياة"
+
+#: .\apps\subsystems\models.py
+msgid "lifecycle steps"
+msgstr "مراحل دورة الحياة"
+
+#: .\apps\subsystems\models.py
+msgid "step completed"
+msgstr "المرحلة منجزة"
+
+#: .\apps\subsystems\models.py
+msgid "completed at"
+msgstr "تاريخ الإنجاز"
+
+#: .\apps\subsystems\models.py .\apps\tasks\models.py
+msgid "validated by"
+msgstr "صادق عليها"
+
+#: .\apps\subsystems\models.py
+msgid "lifecycle progress"
+msgstr "تقدم دورة الحياة"
+
+#: .\apps\subsystems\models.py
+msgid "subsystem assignment"
+msgstr "تعيين في نظام فرعي"
+
+#: .\apps\subsystems\models.py
+msgid "subsystem assignments"
+msgstr "التعيينات في الأنظمة الفرعية"
+
+#: .\apps\subsystems\permissions.py
+msgid "You cannot change this subsystem."
+msgstr "لا يمكنك تعديل هذا النظام الفرعي."
+
+#: .\apps\subsystems\views.py .\apps\tasks\serializers.py
+msgid "This step does not apply to this project."
+msgstr "هذه المرحلة لا تنطبق على هذا المشروع."
+
+#: .\apps\subsystems\views.py
+msgid "Only a leader of the subsystem's unit can validate this step."
+msgstr "لا يصادق على هذه المرحلة إلا مسؤول وحدة النظام الفرعي."
+
+#: .\apps\subsystems\views.py
+msgid "You cannot update the steps of this subsystem."
+msgstr "لا يمكنك تحديث مراحل هذا النظام الفرعي."
+
+#: .\apps\subsystems\views.py
+#, python-format
+msgid "This step waits for the validation step “%(step)s”."
+msgstr "هذه المرحلة بانتظار مرحلة المصادقة «%(step)s»."
+
+#: .\apps\tasks\followup.py
+msgctxt "task health"
+msgid "Overdue"
+msgstr "متأخرة"
+
+#: .\apps\tasks\followup.py
+msgid "Delivered on time"
+msgstr "سُلّمت في الموعد"
+
+#: .\apps\tasks\followup.py
+msgid "Delivered late"
+msgstr "سُلّمت متأخرة"
+
+#: .\apps\tasks\followup.py
+msgid "Given by its people"
+msgstr "يحدّده المكلّفون بالمهمة"
+
+#: .\apps\tasks\followup.py
+msgid "From its subtasks"
+msgstr "محسوب من المهام الفرعية"
+
+#: .\apps\tasks\models.py
+msgctxt "task status"
+msgid "Planned"
+msgstr "مخطَّطة"
+
+#: .\apps\tasks\models.py
+msgid "In progress"
+msgstr "قيد الإنجاز"
+
+#: .\apps\tasks\models.py
+msgctxt "task status"
+msgid "Submitted"
+msgstr "مقدَّمة"
+
+#: .\apps\tasks\models.py
+msgctxt "task status"
+msgid "Needs revision"
+msgstr "للمراجعة"
+
+#: .\apps\tasks\models.py
+msgctxt "task status"
+msgid "Validated"
+msgstr "مصادَق عليها"
+
+#: .\apps\tasks\models.py
+msgid "Routine"
+msgstr "روتينية"
+
+#: .\apps\tasks\models.py
+msgctxt "task points"
+msgid "Important"
+msgstr "مهمة"
+
+#: .\apps\tasks\models.py
+msgctxt "task points"
+msgid "Complex"
+msgstr "معقدة"
+
+#: .\apps\tasks\models.py
+msgctxt "task points"
+msgid "Critical"
+msgstr "حرجة"
+
+#: .\apps\tasks\models.py
+msgctxt "task points"
+msgid "Project-critical"
+msgstr "حرجة للمشروع"
+
+#: .\apps\tasks\models.py
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#: .\apps\tasks\models.py
+msgid "GitHub"
+msgstr "GitHub"
+
+#: .\apps\tasks\models.py
+msgid "CAD file"
+msgstr "ملف تصميم (CAD)"
+
+#: .\apps\tasks\models.py
+msgid "parent task"
+msgstr "المهمة الأم"
+
+#: .\apps\tasks\models.py
+msgid "current phase"
+msgstr "المرحلة الحالية"
+
+#: .\apps\tasks\models.py
+msgid "next step"
+msgstr "الخطوة التالية"
+
+#: .\apps\tasks\models.py
+msgid "initial due date"
+msgstr "الأجل الأصلي"
+
+#: .\apps\tasks\models.py
+msgid "expected deliverable"
+msgstr "المُخرَج المنتظر"
+
+#: .\apps\tasks\models.py
+msgid "success criteria"
+msgstr "معايير النجاح"
+
+#: .\apps\tasks\models.py
+msgid "actual deliverable"
+msgstr "المُخرَج المسلَّم"
+
+#: .\apps\tasks\models.py
+msgid "quality mark"
+msgstr "تقييم الجودة"
+
+#: .\apps\tasks\models.py
+msgid "started at"
+msgstr "تاريخ البدء"
+
+#: .\apps\tasks\models.py
+msgid "validated at"
+msgstr "تاريخ المصادقة"
+
+#: .\apps\tasks\models.py
+msgid "scored"
+msgstr "مُقيَّمة"
+
+#: .\apps\tasks\models.py
+msgid "tasks"
+msgstr "المهام"
+
+#: .\apps\tasks\models.py .\apps\tasks\serializers.py
+msgid "A subtask must belong to the same project as its parent task."
+msgstr "يجب أن تنتمي المهمة الفرعية إلى نفس مشروع مهمتها الأم."
+
+#: .\apps\tasks\models.py .\apps\tasks\serializers.py
+msgid "A task cannot be its own parent."
+msgstr "لا يمكن أن تكون المهمة أمًّا لنفسها."
+
+#: .\apps\tasks\models.py
+msgid "main assignee"
+msgstr "المكلَّف الرئيسي"
+
+#: .\apps\tasks\models.py
+msgid "task assignment"
+msgstr "تكليف"
+
+#: .\apps\tasks\models.py
+msgid "task assignments"
+msgstr "التكليفات"
+
+#: .\apps\tasks\models.py
+msgid "task comment"
+msgstr "تعليق"
+
+#: .\apps\tasks\models.py
+msgid "task comments"
+msgstr "التعليقات"
+
+#: .\apps\tasks\models.py
+msgid "URL"
+msgstr "الرابط"
+
+#: .\apps\tasks\models.py
+msgid "label"
+msgstr "التسمية"
+
+#: .\apps\tasks\models.py
+msgid "link type"
+msgstr "نوع الرابط"
+
+#: .\apps\tasks\models.py
+msgid "added by"
+msgstr "أضافه"
+
+#: .\apps\tasks\models.py
+msgid "task link"
+msgstr "رابط"
+
+#: .\apps\tasks\models.py
+msgid "task links"
+msgstr "الروابط"
+
+#: .\apps\tasks\models.py
+msgid "Technical"
+msgstr "تقني"
+
+#: .\apps\tasks\models.py
+msgid "Financial"
+msgstr "مالي"
+
+#: .\apps\tasks\models.py
+msgid "Organisation"
+msgstr "تنظيمي"
+
+#: .\apps\tasks\models.py
+msgctxt "blocker origin"
+msgid "Other"
+msgstr "آخر"
+
+#: .\apps\tasks\models.py
+msgctxt "blocker status"
+msgid "Declared"
+msgstr "مصرَّح به"
+
+#: .\apps\tasks\models.py
+msgctxt "blocker status"
+msgid "Validated"
+msgstr "مصادَق عليه"
+
+#: .\apps\tasks\models.py
+msgctxt "blocker status"
+msgid "Rejected"
+msgstr "مرفوض"
+
+#: .\apps\tasks\models.py
+msgctxt "blocker status"
+msgid "Resolved"
+msgstr "محلول"
+
+#: .\apps\tasks\models.py
+msgid "origin"
+msgstr "المصدر"
+
+#: .\apps\tasks\models.py
+msgid "severity"
+msgstr "الخطورة"
+
+#: .\apps\tasks\models.py
+msgid "dependency"
+msgstr "الارتباط"
+
+#: .\apps\tasks\models.py
+msgid "required action"
+msgstr "الإجراء المطلوب"
+
+#: .\apps\tasks\models.py
+msgid "responsible for solving it"
+msgstr "المسؤول عن حله"
+
+#: .\apps\tasks\models.py
+msgid "known since"
+msgstr "معروف منذ"
+
+#: .\apps\tasks\models.py
+msgid "declared late"
+msgstr "مصرَّح به متأخرًا"
+
+#: .\apps\tasks\models.py
+msgid "reported at"
+msgstr "تاريخ التصريح"
+
+#: .\apps\tasks\models.py
+msgid "validated or rejected by"
+msgstr "صادق عليه أو رفضه"
+
+#: .\apps\tasks\models.py
+msgid "validated or rejected at"
+msgstr "تاريخ المصادقة أو الرفض"
+
+#: .\apps\tasks\models.py
+msgid "resolved at"
+msgstr "تاريخ الحل"
+
+#: .\apps\tasks\models.py
+msgid "resolution"
+msgstr "الحل"
+
+#: .\apps\tasks\models.py
+msgid "blocker"
+msgstr "عائق"
+
+#: .\apps\tasks\models.py
+msgid "blockers"
+msgstr "عوائق"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Created"
+msgstr "أُنشئت"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Started"
+msgstr "بدأت"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Submitted"
+msgstr "قُدّمت"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Validated"
+msgstr "صودق عليها"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Sent back for revision"
+msgstr "أُعيدت للمراجعة"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Points and dates set"
+msgstr "حُدّدت النقاط والتواريخ"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Due date moved"
+msgstr "أُجّل الأجل"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Blocker declared"
+msgstr "صُرّح بعائق"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Blocker validated"
+msgstr "صودق على عائق"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Blocker rejected"
+msgstr "رُفض عائق"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Blocker resolved"
+msgstr "حُلّ عائق"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Commented"
+msgstr "عُلّق عليها"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Link added"
+msgstr "أُضيف رابط"
+
+#: .\apps\tasks\models.py
+msgctxt "task event"
+msgid "Progress updated"
+msgstr "تحديث التقدّم"
+
+#: .\apps\tasks\models.py
+msgid "actor"
+msgstr "الفاعل"
+
+#: .\apps\tasks\models.py
+msgid "task event"
+msgstr "حدث مهمة"
+
+#: .\apps\tasks\models.py
+msgid "task events"
+msgstr "أحداث مهام"
+
+#: .\apps\tasks\permissions.py
+msgid "You cannot delete this task."
+msgstr "لا يمكنك حذف هذه المهمة."
+
+#: .\apps\tasks\permissions.py
+msgid ""
+"As an assignee, you move this task forward through its steps: start, submit, "
+"blockers."
+msgstr ""
+"بصفتك مكلَّفًا بها، تتقدّم هذه المهمة عبر مراحلها: البدء، التقديم، العوائق."
+
+#: .\apps\tasks\permissions.py
+msgid "You cannot change this task."
+msgstr "لا يمكنك تعديل هذه المهمة."
+
+#: .\apps\tasks\serializers.py
+msgid "Enter a web address (http or https)."
+msgstr "أدخل عنوان ويب (http أو https)."
+
+#: .\apps\tasks\serializers.py
+msgid "A problem cannot be known in the future."
+msgstr "لا يمكن أن تُعرف مشكلة في المستقبل."
+
+#: .\apps\tasks\serializers.py
+msgid "Say why the blocker is rejected."
+msgstr "اذكر سبب رفض العائق."
+
+#: .\apps\tasks\serializers.py
+msgid ""
+"The status changes through the steps of the task: start, submit, validate."
+msgstr "تتغير الحالة عبر مراحل المهمة: البدء، التقديم، المصادقة."
+
+#: .\apps\tasks\serializers.py
+msgid "A task cannot move to another project."
+msgstr "لا يمكن نقل مهمة إلى مشروع آخر."
+
+#: .\apps\tasks\serializers.py
+msgid "A subtask cannot have subtasks of its own."
+msgstr "لا يمكن أن تكون للمهمة الفرعية مهام فرعية خاصة بها."
+
+#: .\apps\tasks\serializers.py
+msgid "A task with subtasks cannot become a subtask."
+msgstr "لا يمكن لمهمة لها مهام فرعية أن تصبح مهمة فرعية."
+
+#: .\apps\tasks\serializers.py
+msgid "The subsystem must belong to the task's project."
+msgstr "يجب أن ينتمي النظام الفرعي إلى مشروع المهمة."
+
+#: .\apps\tasks\serializers.py
+msgid "The due date cannot be before the start date."
+msgstr "لا يمكن أن يسبق الأجلُ تاريخَ البدء."
+
+#: .\apps\tasks\serializers.py
+msgid "The main assignee must be one of the assignees."
+msgstr "يجب أن يكون المكلَّف الرئيسي من بين المكلَّفين."
+
+#: .\apps\tasks\views.py
+msgid "Only a leader of the task sets its points and dates."
+msgstr "لا يحدد نقاط المهمة وتواريخها إلا أحد مسؤوليها."
+
+#: .\apps\tasks\views.py
+msgid "Locked since work started: only a validated blocker moves the due date."
+msgstr "مقفل منذ بدء العمل: لا يؤجّل الأجلَ إلا عائقٌ مصادَق عليه."
+
+#: .\apps\tasks\views.py
+msgid "Only the people of this task start it."
+msgstr "لا يبدأ هذه المهمة إلا أصحابها."
+
+#: .\apps\tasks\views.py
+msgid "This task has already started."
+msgstr "بدأت هذه المهمة بالفعل."
+
+#: .\apps\tasks\views.py
+msgid "Set the points, the start date and the due date first (a leader does)."
+msgstr "يجب أولًا تحديد النقاط وتاريخ البدء والأجل (يحددها مسؤول)."
+
+#: .\apps\tasks\views.py
+msgid "Who works on this task or manages it gives its progress."
+msgstr "يحدّد التقدّمَ المكلّفون بالمهمة أو المسؤولون عنها."
+
+#: .\apps\tasks\views.py
+msgid "This task is delivered: its progress no longer moves."
+msgstr "سُلّمت هذه المهمة: لم يعد تقدّمها يتغيّر."
+
+#: .\apps\tasks\views.py
+msgid "The progress of this task follows its subtasks."
+msgstr "يتبع تقدّم هذه المهمة مهامَّها الفرعية."
+
+#: .\apps\tasks\views.py
+msgid "Nothing changed: give a new progress, phase or next step."
+msgstr "لم يتغير شيء: أدخل تقدمًا أو مرحلة أو خطوة تالية جديدة."
+
+#: .\apps\tasks\views.py
+msgid "No task has this reference."
+msgstr "لا توجد مهمة بهذا المرجع."
+
+#: .\apps\tasks\views.py
+msgid "The people assigned to this task submit it."
+msgstr "يقدّم هذه المهمةَ المكلَّفون بها."
+
+#: .\apps\tasks\views.py
+msgid "This task is not in progress."
+msgstr "هذه المهمة ليست قيد الإنجاز."
+
+#: .\apps\tasks\views.py
+msgid "A task is submitted with its evidence: add a link."
+msgstr "تُقدَّم المهمة مع إثباتها: أضف رابطًا."
+
+#: .\apps\tasks\views.py
+msgid "A leader of the task validates it, never one assigned to it."
+msgstr "يصادق على المهمة أحد مسؤوليها، لا أحد المكلَّفين بها."
+
+#: .\apps\tasks\views.py
+msgid "This task is not submitted."
+msgstr "هذه المهمة غير مقدَّمة."
+
+#: .\apps\tasks\views.py
+msgid "Only the people of this task add links to it."
+msgstr "لا يضيف الروابط إلى هذه المهمة إلا أصحابها."
+
+#: .\apps\tasks\views.py
+msgid "Only the people of this task declare its blockers."
+msgstr "لا يصرّح بعوائق هذه المهمة إلا أصحابها."
+
+#: .\apps\tasks\views.py
+msgid "This task is validated: it has nothing left to block."
+msgstr "هذه المهمة مصادَق عليها: لم يبق ما يعيقها."
+
+#: .\apps\tasks\views.py
+msgid "A leader of the task decides its blockers."
+msgstr "يقرر أحد مسؤولي المهمة في عوائقها."
+
+#: .\apps\tasks\views.py
+msgid "This blocker is already decided."
+msgstr "تم البت في هذا العائق بالفعل."
+
+#: .\apps\tasks\views.py
+msgid "You cannot resolve this blocker."
+msgstr "لا يمكنك حل هذا العائق."
+
+#: .\apps\tasks\views.py
+msgid "This blocker is not open."
+msgstr "هذا العائق غير مفتوح."
+
+#: .\apps\tasks\views.py
+msgid "You cannot delete this comment."
+msgstr "لا يمكنك حذف هذا التعليق."
+
+#: .\apps\telemetry\apps.py
+msgid "Telemetry"
+msgstr "القياس عن بُعد"
+
+#: .\apps\telemetry\models.py
+msgid "year"
+msgstr "السنة"
+
+#: .\apps\telemetry\models.py
+msgid "competition edition"
+msgstr "دورة مسابقة"
+
+#: .\apps\telemetry\models.py
+msgid "competition editions"
+msgstr "دورات المسابقات"
+
+#: .\apps\telemetry\models.py
+msgid "session date"
+msgstr "تاريخ الجلسة"
+
+#: .\apps\telemetry\models.py
+msgid "session type"
+msgstr "نوع الجلسة"
+
+#: .\apps\telemetry\models.py
+msgid "telemetry session"
+msgstr "جلسة قياس عن بُعد"
+
+#: .\apps\telemetry\models.py
+msgid "telemetry sessions"
+msgstr "جلسات القياس عن بُعد"
+
+#: .\apps\telemetry\models.py
+msgid "ID"
+msgstr "المعرّف"
+
+#: .\apps\telemetry\models.py
+msgid "timestamp (ms)"
+msgstr "الطابع الزمني (ms)"
+
+#: .\apps\telemetry\models.py
+msgid "sensor"
+msgstr "المستشعر"
+
+#: .\apps\telemetry\models.py
+msgid "value"
+msgstr "القيمة"
+
+#: .\apps\telemetry\models.py
+msgid "unit"
+msgstr "الوحدة"
+
+#: .\apps\telemetry\models.py
+msgid "data point"
+msgstr "نقطة قياس"
+
+#: .\apps\telemetry\models.py
+msgid "data points"
+msgstr "نقاط القياس"
