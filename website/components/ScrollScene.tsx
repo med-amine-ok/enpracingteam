@@ -354,12 +354,15 @@ export default function ScrollScene() {
     let suspDispose = () => {};
     let hubDispose = () => {};
 
+    let lastInput = 0;
     const onResize = () => {
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
+      if (!w || !h) return;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+      lastInput = performance.now();
     };
     const ro = new ResizeObserver(onResize);
     ro.observe(canvas);
@@ -492,7 +495,6 @@ export default function ScrollScene() {
     // ---------- interaction
     let mx = 0;
     let my = 0;
-    let lastInput = 0;
     const onMove = (e: PointerEvent) => {
       lastInput = performance.now();
       mx = e.clientX / innerWidth - 0.5;
@@ -567,7 +569,7 @@ export default function ScrollScene() {
 
       // scroll progress through the pinned section
       const r = section.getBoundingClientRect();
-      const span = r.height - innerHeight;
+      const span = r.height - (canvas.parentElement?.clientHeight || innerHeight);
       progress = remap(clamp(-r.top / (span || 1)));
       smoothP += (progress - smoothP) * (reduce ? 1 : 1 - Math.pow(0.0012, dt));
       const p = smoothP;

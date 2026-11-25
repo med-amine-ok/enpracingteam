@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "apps.projects",
     "apps.subsystems",
     "apps.tasks",
+    "apps.task_management",
     "apps.communication",
     "apps.documents",
     "apps.purchasing",
@@ -132,6 +133,26 @@ SPECTACULAR_SETTINGS = {
     "ENUM_NAME_OVERRIDES": {
         # A list of choices without a field of its own name (the e-mails a member turned off).
         "EmailTopicEnum": "apps.members.models.EmailTopic",
+        # The work module (documentation/documentation_Tasks).
+        "WorkOrderStatusEnum": "apps.task_management.models.WorkOrderStatus",
+        "DeliverableStatusEnum": "apps.task_management.models.DeliverableStatus",
+        "WorkProposalStatusEnum": "apps.task_management.models.ProposalStatus",
+        "DependencyStateEnum": "apps.task_management.models.DependencyState",
+        "ExecutionStateEnum": "apps.task_management.models.ExecutionState",
+        "DependencyTypeEnum": "apps.task_management.models.LinkType",
+        "ReleaseConditionEnum": "apps.task_management.models.ReleaseCondition",
+        "WorkBlockerOriginEnum": "apps.task_management.models.BlockerOrigin",
+        "OriginEnum": "apps.tasks.models.BlockerOrigin",
+        "WorkBlockerStatusEnum": "apps.task_management.models.BlockerStatus",
+        "BlockerImpactEnum": "apps.task_management.models.BlockerImpact",
+        "RevisionSeverityEnum": "apps.task_management.models.RevisionSeverity",
+        "ReviewDecisionEnum": "apps.task_management.models.ReviewDecision",
+        "AssignmentRoleEnum": "apps.task_management.models.AssignmentRole",
+        "ReliefStatusEnum": "apps.task_management.models.ReliefStatus",
+        "QualityDataStatusEnum": "apps.task_management.models.QualityDataStatus",
+        "RunStatusEnum": "apps.task_management.models.RunStatus",
+        "WorkEntityTypeEnum": "apps.task_management.models.EntityType",
+        "WorkActionEnum": "apps.task_management.models.Action",
         # Fields with the same name in several apps: each list of choices gets its own name.
         "CategoryEnum": "apps.projects.models.ProjectCategory",
         "ExpenseCategoryEnum": "apps.finance.models.ExpenseCategory",
@@ -348,6 +369,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Default language of the admin and of the API messages, used when the browser asks
 # for none of LANGUAGES. A per-user choice will be added on top of it.
 LANGUAGE_CODE = "fr"
+
+# The work module's scoring (documentation/documentation_Tasks) starts with this season (2026–2027): a calculation
+# is refused for an earlier one (decision of 25/11/2026).
+WORK_SCORING_FIRST_YEAR = 2026
 
 # The languages the ERP speaks. Arabic is written right to left: the frontend switches
 # direction with django.utils.translation.get_language_bidi() / the language code.

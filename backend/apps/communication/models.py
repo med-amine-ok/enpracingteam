@@ -82,6 +82,9 @@ class NotificationKind(models.TextChoices):
     VOLUNTEERING_TO_VALIDATE = "volunteering_to_validate", _("Volunteering to validate")
     VOLUNTEERING_DECIDED = "volunteering_decided", _("Volunteering decided")
     VOLUNTEERING_REMINDER = "volunteering_reminder", _("Volunteering of the month")
+    # Work Orders, Deliverables, dependencies and blockers (documentation/documentation_Tasks): `data.event`
+    # says which (apps/task_management/services/notify.py); never anything about scoring.
+    WORK_EVENT = "work_event", _("Work update")
 
 
 class Notification(models.Model):
@@ -100,7 +103,7 @@ class Notification(models.Model):
     is_read = models.BooleanField(_("read"), default=False)
     # Loose pointer to the related record (e.g. 'task', 42). Not a real FK.
     related_entity_type = models.CharField(_("related record type"), max_length=50, blank=True)
-    related_entity_id = models.IntegerField(_("related record ID"), null=True, blank=True)
+    related_entity_id = models.BigIntegerField(_("related record ID"), null=True, blank=True)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
 
     class Meta:

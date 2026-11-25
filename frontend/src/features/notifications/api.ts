@@ -81,6 +81,13 @@ export type NotificationData = {
   objective?: string;
   training?: string;
   volunteering?: string;
+  // The work module (apps/task_management/services/notify.py): which event, about which Work Order or Deliverable.
+  event?: string;
+  title?: string;
+  code?: string;
+  work_order_id?: number;
+  deliverable_id?: number;
+  blocker_id?: number;
 };
 
 /** An API call with the session renewed if needed, a network failure becoming ApiError(0). */

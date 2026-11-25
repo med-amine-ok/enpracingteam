@@ -1,0 +1,135 @@
+{
+  "title": "Work",
+  "subtitle": "Work Orders, Deliverables and Milestones: what to do, by when, and what holds it up.",
+  "tabsLabel": "Work module pages",
+  "tabs": {
+    "dashboard": "Dashboard",
+    "myWork": "My work",
+    "workOrders": "Work Orders",
+    "deliverables": "Deliverables",
+    "proposals": "Proposals",
+    "dependencies": "Dependencies",
+    "blockers": "Blockers",
+    "reports": "Reports",
+    "rankingData": "Ranking data"
+  },
+  "proposal": "Proposal",
+  "planningProgress": "Planning",
+  "progress": "Progress",
+  "noneYet": "Nothing yet.",
+  "workOrderStatus": {
+    "draft": "Draft",
+    "planning": "Planning",
+    "active": "Active",
+    "in_progress": "In progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "deliverableStatus": {
+    "draft": "Draft",
+    "ready": "Ready",
+    "in_progress": "In progress",
+    "submitted": "Submitted",
+    "revision_requested": "Revision requested",
+    "validated": "Validated",
+    "cancelled": "Cancelled"
+  },
+  "dependencyState": {
+    "no_blocking_dependencies": "No blocking dependencies",
+    "waiting": "Waiting for prerequisite",
+    "released": "Dependencies released"
+  },
+  "executionState": {
+    "normal": "Normal",
+    "partially_blocked": "Partially blocked",
+    "fully_blocked": "Fully blocked"
+  },
+  "proposalStatus": {
+    "draft": "Draft",
+    "pending_review": "Pending review",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "priority": { "high": "High", "medium": "Medium", "low": "Low" },
+  "severity": { "low": "Low", "medium": "Medium", "high": "High", "critical": "Critical" },
+  "blockerStatus": { "open": "Open", "resolved": "Resolved", "cancelled": "Cancelled" },
+  "impact": {
+    "none": "Work can continue",
+    "partial": "Some work prevented",
+    "full": "All work prevented"
+  },
+  "origin": {
+    "technical": "Technical",
+    "resource": "Resource",
+    "external": "External",
+    "dependency": "Dependency",
+    "decision": "Decision",
+    "other": "Other"
+  },
+  "reliefStatus": { "claimed": "Claimed", "approved": "Approved", "rejected": "Rejected" },
+  "dependencyType": {
+    "blocks": "Required prerequisite",
+    "follows": "Recommended sequence",
+    "relates_to": "Related work",
+    "duplicates": "Overlapping scope"
+  },
+  "releaseCondition": {
+    "validated": "Prerequisite validated",
+    "submitted": "Prerequisite submitted",
+    "milestone_completed": "Milestone completed"
+  },
+  "linkState": {
+    "waiting": "Waiting",
+    "released": "Released",
+    "informational": "Informational",
+    "cancelled": "Cancelled"
+  },
+  "revisionSeverity": { "minor": "Minor", "moderate": "Moderate", "major": "Major", "critical": "Critical" },
+  "evidenceType": { "drive": "Drive", "github": "GitHub", "cad": "CAD", "report": "Report", "other": "Other" },
+  "assignmentRole": { "member": "Member", "lead": "Lead" },
+  "entity": {
+    "season": "Season",
+    "project": "Project",
+    "work_order": "Work Order",
+    "deliverable": "Deliverable",
+    "milestone": "Milestone",
+    "submission": "Submission",
+    "review": "Review",
+    "dependency_link": "Dependency",
+    "blocker": "Blocker",
+    "assignment": "Assignment",
+    "relief_interval": "Deadline relief"
+  },
+  "action": {
+    "created": "created",
+    "updated": "updated",
+    "status_changed": "changed the status",
+    "cancelled": "cancelled",
+    "proposed": "proposed",
+    "approved": "approved",
+    "rejected": "rejected",
+    "submitted": "submitted",
+    "validated": "validated",
+    "revision_requested": "requested a revision",
+    "completed": "completed",
+    "uncompleted": "marked not completed",
+    "reopened": "reopened",
+    "assigned": "assigned",
+    "unassigned": "unassigned",
+    "weight_changed": "changed the weight",
+    "budget_changed": "changed the budget",
+    "deadline_changed": "changed the deadline",
+    "progress_updated": "updated the progress",
+    "released": "released",
+    "manual_released": "manually released",
+    "relief_claimed": "claimed deadline relief",
+    "relief_approved": "approved deadline relief",
+    "relief_rejected": "rejected deadline relief",
+    "resolved": "resolved",
+    "impact_validated": "validated the impact"
+  },
+  "system": "The system",
+  "originalDeadline": "Original deadline",
+  "effectiveDeadline": "Effective deadline",
+  "reliefDays": "{days, plural, one {# day} other {# days}} of approved relief"
+}

@@ -1,0 +1,135 @@
+{
+  "title": "الأعمال",
+  "subtitle": "أوامر العمل والمُخرَجات والمراحل: ما يجب فعله، ومتى، وما الذي يعيقه.",
+  "tabsLabel": "صفحات وحدة الأعمال",
+  "tabs": {
+    "dashboard": "لوحة القيادة",
+    "myWork": "عملي",
+    "workOrders": "أوامر العمل",
+    "deliverables": "المُخرَجات",
+    "proposals": "المقترحات",
+    "dependencies": "التبعيات",
+    "blockers": "العوائق",
+    "reports": "التقارير",
+    "rankingData": "بيانات التصنيف"
+  },
+  "proposal": "مقترح",
+  "planningProgress": "قيد التخطيط",
+  "progress": "التقدّم",
+  "noneYet": "لا شيء حاليًا.",
+  "workOrderStatus": {
+    "draft": "مسودة",
+    "planning": "تخطيط",
+    "active": "نشط",
+    "in_progress": "قيد التنفيذ",
+    "completed": "مكتمل",
+    "cancelled": "ملغى"
+  },
+  "deliverableStatus": {
+    "draft": "مسودة",
+    "ready": "جاهز",
+    "in_progress": "قيد التنفيذ",
+    "submitted": "مُقدَّم",
+    "revision_requested": "مطلوب مراجعة",
+    "validated": "مُعتمَد",
+    "cancelled": "ملغى"
+  },
+  "dependencyState": {
+    "no_blocking_dependencies": "لا تبعيات مانعة",
+    "waiting": "في انتظار متطلب سابق",
+    "released": "التبعيات مُحرَّرة"
+  },
+  "executionState": {
+    "normal": "عادي",
+    "partially_blocked": "معاق جزئيًا",
+    "fully_blocked": "معاق كليًا"
+  },
+  "proposalStatus": {
+    "draft": "مسودة",
+    "pending_review": "بانتظار القرار",
+    "approved": "مقبول",
+    "rejected": "مرفوض"
+  },
+  "priority": { "high": "عالية", "medium": "متوسطة", "low": "منخفضة" },
+  "severity": { "low": "منخفضة", "medium": "متوسطة", "high": "عالية", "critical": "حرجة" },
+  "blockerStatus": { "open": "مفتوح", "resolved": "محلول", "cancelled": "ملغى" },
+  "impact": {
+    "none": "يمكن مواصلة العمل",
+    "partial": "جزء من العمل متوقف",
+    "full": "كل العمل متوقف"
+  },
+  "origin": {
+    "technical": "تقني",
+    "resource": "موارد",
+    "external": "خارجي",
+    "dependency": "تبعية",
+    "decision": "قرار",
+    "other": "آخر"
+  },
+  "reliefStatus": { "claimed": "مطلوب", "approved": "مقبول", "rejected": "مرفوض" },
+  "dependencyType": {
+    "blocks": "متطلب سابق إلزامي",
+    "follows": "ترتيب مُوصى به",
+    "relates_to": "عمل مرتبط",
+    "duplicates": "نطاق متداخل"
+  },
+  "releaseCondition": {
+    "validated": "اعتماد المتطلب السابق",
+    "submitted": "تقديم المتطلب السابق",
+    "milestone_completed": "اكتمال مرحلة"
+  },
+  "linkState": {
+    "waiting": "في الانتظار",
+    "released": "مُحرَّرة",
+    "informational": "إعلامية",
+    "cancelled": "ملغاة"
+  },
+  "revisionSeverity": { "minor": "طفيفة", "moderate": "متوسطة", "major": "كبيرة", "critical": "حرجة" },
+  "evidenceType": { "drive": "Drive", "github": "GitHub", "cad": "تصميم CAD", "report": "تقرير", "other": "آخر" },
+  "assignmentRole": { "member": "عضو", "lead": "مسؤول" },
+  "entity": {
+    "season": "الموسم",
+    "project": "المشروع",
+    "work_order": "أمر عمل",
+    "deliverable": "مُخرَج",
+    "milestone": "مرحلة",
+    "submission": "تقديم",
+    "review": "مراجعة",
+    "dependency_link": "تبعية",
+    "blocker": "عائق",
+    "assignment": "تكليف",
+    "relief_interval": "تمديد الموعد"
+  },
+  "action": {
+    "created": "أنشأ",
+    "updated": "عدّل",
+    "status_changed": "غيّر الحالة",
+    "cancelled": "ألغى",
+    "proposed": "اقترح",
+    "approved": "وافق على",
+    "rejected": "رفض",
+    "submitted": "قدّم",
+    "validated": "اعتمد",
+    "revision_requested": "طلب مراجعة",
+    "completed": "أكمل",
+    "uncompleted": "أشار إلى عدم الاكتمال",
+    "reopened": "أعاد فتح",
+    "assigned": "كلّف",
+    "unassigned": "ألغى التكليف",
+    "weight_changed": "غيّر الوزن",
+    "budget_changed": "غيّر الميزانية",
+    "deadline_changed": "غيّر الموعد النهائي",
+    "progress_updated": "حدّث التقدّم",
+    "released": "حرّر",
+    "manual_released": "حرّر يدويًا",
+    "relief_claimed": "طلب تمديد الموعد",
+    "relief_approved": "وافق على تمديد الموعد",
+    "relief_rejected": "رفض تمديد الموعد",
+    "resolved": "حلّ",
+    "impact_validated": "أكّد الأثر"
+  },
+  "system": "النظام",
+  "originalDeadline": "الموعد النهائي الأصلي",
+  "effectiveDeadline": "الموعد النهائي الفعلي",
+  "reliefDays": "{days, plural, zero {لا أيام} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}} من التمديد المعتمد"
+}

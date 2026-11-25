@@ -100,6 +100,7 @@ const ICONS: Record<NotificationKind, LucideIcon> = {
   volunteering_to_validate: HeartHandshake,
   volunteering_decided: HeartHandshake,
   volunteering_reminder: CalendarHeart,
+  work_event: ClipboardList,
 };
 
 /** The ground of a breach or warning, or the serious behaviour of an exclusion, in the reader's language. */
@@ -156,6 +157,15 @@ export function notificationHref(notification: Notification) {
   const data = notification.data as NotificationData;
   if (target?.type === "task") {
     return `/tasks/${target.id}`;
+  }
+  if (target?.type === "work_order") {
+    return `/work/orders/${target.id}`;
+  }
+  if (target?.type === "deliverable") {
+    return `/work/deliverables/${target.id}`;
+  }
+  if (target?.type === "blocker") {
+    return "/work/blockers";
   }
   if (target?.type === "subsystem" && data.project_id) {
     return `/projects/${data.project_id}?tab=subsystems`;
@@ -342,6 +352,13 @@ export function NotificationText({ notification }: { notification: Notification 
       return data.accepted
         ? t.rich("kinds.excuse_accepted", { ...values, ...tags })
         : t.rich("kinds.excuse_refused", { ...values, ...tags });
+    case "work_event": {
+      const sentence = { ...values, title: data.title ?? "", ...tags };
+      const event = `workEvents.${data.event}`;
+      return t.has(event as "workEvents.wo_activated")
+        ? t.rich(event as "workEvents.wo_activated", sentence)
+        : t.rich("kinds.work_event", sentence);
+    }
     case "message":
       return <bdi>{notification.message}</bdi>;
     default:

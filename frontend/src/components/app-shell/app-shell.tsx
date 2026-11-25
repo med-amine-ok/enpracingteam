@@ -5,6 +5,8 @@ import {
   Bell,
   Bot,
   Boxes,
+  Calculator,
+  ClipboardList,
   CalendarDays,
   ChevronsLeft,
   ChevronsRight,
@@ -40,6 +42,7 @@ import { meQueryKey, useMe } from "@/features/auth/use-me";
 import { NotificationBell } from "@/features/notifications/notification-bell";
 import { ReferenceSearch } from "@/features/tasks/reference-search";
 import { useReportingRights } from "@/features/team/queries";
+import { useWorkMe } from "@/features/workflow/queries";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { pageWithoutLocale } from "@/i18n/routing";
 import { errorText } from "@/lib/error-text";
@@ -65,13 +68,16 @@ type NavKey =
   | "engagement"
   | "assistant"
   | "team"
+  | "work"
+  | "scoring"
   | "notifications";
 
-type NavItem = { key: NavKey; icon: LucideIcon; href: string; needs?: "dashboard" };
+type NavItem = { key: NavKey; icon: LucideIcon; href: string; needs?: "dashboard" | "scoring" };
 
 /**
  * The menu, in the groups of the team's Figma (decision D-022). `needs`: shown only to who may see it (the Team
- * Manager's dashboard: the bureau and the leaders).
+ * Manager's dashboard: the bureau and the leaders; the scoring workspace: its admins only, absent for anybody else,
+ * documentation/documentation_Tasks front guide §2.1).
  */
 const NAVIGATION: { group: "main" | "team" | "execution" | "logistics"; items: NavItem[] }[] = [
   {
@@ -89,6 +95,7 @@ const NAVIGATION: { group: "main" | "team" | "execution" | "logistics"; items: N
       { key: "orgChart", icon: Network, href: "/org-chart" },
       { key: "team", icon: Gauge, href: "/team", needs: "dashboard" },
       { key: "ranking", icon: Trophy, href: "/ranking" },
+      { key: "scoring", icon: Calculator, href: "/scoring", needs: "scoring" },
       { key: "engagement", icon: HandHeart, href: "/engagement" },
       { key: "discipline", icon: ShieldAlert, href: "/discipline" },
     ],
@@ -98,6 +105,7 @@ const NAVIGATION: { group: "main" | "team" | "execution" | "logistics"; items: N
     items: [
       { key: "projects", icon: FolderKanban, href: "/projects" },
       { key: "tasks", icon: ListChecks, href: "/tasks" },
+      { key: "work", icon: ClipboardList, href: "/work" },
       { key: "meetings", icon: CalendarDays, href: "/meetings" },
       { key: "documents", icon: FileText, href: "/documents" },
       { key: "assistant", icon: Bot, href: "/assistant" },
@@ -265,7 +273,11 @@ function useCurrentSection(): NavKey {
   const pathname = usePathname();
   // Pages reached from a section without being in the menu: a member's sheet belongs to the directory.
   const page = pathname.startsWith("/members/") ? "/directory" : pathname;
-  return ALL_ITEMS.find(({ href }) => href !== "/" && (page === href || page.startsWith(href + "/")))?.key ?? "home";
+  const work = useWorkMe();
+  const key =
+    ALL_ITEMS.find(({ href }) => href !== "/" && (page === href || page.startsWith(href + "/")))?.key ?? "home";
+  // The scoring workspace is never named to whoever may not see it, even at its address (front guide §2.1).
+  return key === "scoring" && !work.data?.scoring ? "home" : key;
 }
 
 function CurrentSectionName() {
@@ -450,11 +462,14 @@ function NavigationLinks({
   // and try to renew a session that no longer exists.
   const me = useMe();
   const rights = useReportingRights(Boolean(me.data));
+  const work = useWorkMe();
+  const allowed = (needs: NavItem["needs"]) =>
+    !needs || (needs === "scoring" ? Boolean(work.data?.scoring) : Boolean(rights.data?.[needs]));
   return (
     // The list scrolls when the window is short: the account and "log out" stay in view below it.
     <div className="relative z-10 min-h-0 flex-1 overflow-x-hidden overflow-y-auto py-3">
       {NAVIGATION.map(({ group, items }) => {
-        const shown = items.filter(({ needs }) => !needs || rights.data?.[needs]);
+        const shown = items.filter(({ needs }) => allowed(needs));
         return (
           <div key={group} className="mb-1">
             {group !== "main" && !collapsed ? (

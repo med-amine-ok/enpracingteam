@@ -37,6 +37,12 @@ class Project(models.Model):
         "members.Member", null=True, blank=True,
         on_delete=models.PROTECT, related_name="managed_projects", verbose_name=_("project manager"),
     )
+    # The season the project belongs to: its progress is the equal-weighted average of its Projects
+    # (documentation/documentation_Tasks, specification §6.4).
+    season = models.ForeignKey(
+        "task_management.Season", null=True, blank=True, on_delete=models.SET_NULL, related_name="projects",
+        verbose_name=_("season"),
+    )
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 

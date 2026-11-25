@@ -5,7 +5,9 @@ from django.db.models import Count, Q
 
 from apps.members.models import Member, MemberRoleType, Membership, OrgUnit, Role
 
-SEEDS = ["seed_org_units", "seed_roles", "seed_lifecycle_steps", "seed_members", "sync_group"]
+SEEDS = [
+    "seed_org_units", "seed_roles", "seed_lifecycle_steps", "seed_members", "sync_group", "seed_task_management",
+]
 
 
 class Command(BaseCommand):
@@ -60,4 +62,9 @@ class Command(BaseCommand):
             f"{m} is a department head but not on the Executive Bureau"
             for m in Member.objects.filter(id__in=heads - on_bureau)
         ]
+        # The work module's scoring formula (documentation/documentation_Tasks).
+        from apps.task_management.models import FormulaVersion
+
+        if not FormulaVersion.objects.filter(is_current=True).exists():
+            problems.append("No current scoring formula version (seed_task_management)")
         return problems

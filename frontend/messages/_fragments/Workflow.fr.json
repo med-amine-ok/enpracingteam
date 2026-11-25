@@ -1,0 +1,135 @@
+{
+  "title": "Travaux",
+  "subtitle": "Ordres de travail, livrables et jalons : quoi faire, pour quand, et ce qui bloque.",
+  "tabsLabel": "Pages du module Travaux",
+  "tabs": {
+    "dashboard": "Tableau de bord",
+    "myWork": "Mon travail",
+    "workOrders": "Ordres de travail",
+    "deliverables": "Livrables",
+    "proposals": "Propositions",
+    "dependencies": "Dépendances",
+    "blockers": "Blocages",
+    "reports": "Rapports",
+    "rankingData": "Données de classement"
+  },
+  "proposal": "Proposition",
+  "planningProgress": "En planification",
+  "progress": "Avancement",
+  "noneYet": "Rien pour l’instant.",
+  "workOrderStatus": {
+    "draft": "Brouillon",
+    "planning": "Planification",
+    "active": "Actif",
+    "in_progress": "En cours",
+    "completed": "Terminé",
+    "cancelled": "Annulé"
+  },
+  "deliverableStatus": {
+    "draft": "Brouillon",
+    "ready": "Prêt",
+    "in_progress": "En cours",
+    "submitted": "Soumis",
+    "revision_requested": "Révision demandée",
+    "validated": "Validé",
+    "cancelled": "Annulé"
+  },
+  "dependencyState": {
+    "no_blocking_dependencies": "Aucune dépendance bloquante",
+    "waiting": "En attente d’un prérequis",
+    "released": "Dépendances levées"
+  },
+  "executionState": {
+    "normal": "Normal",
+    "partially_blocked": "Partiellement bloqué",
+    "fully_blocked": "Totalement bloqué"
+  },
+  "proposalStatus": {
+    "draft": "Brouillon",
+    "pending_review": "En attente de décision",
+    "approved": "Approuvée",
+    "rejected": "Rejetée"
+  },
+  "priority": { "high": "Haute", "medium": "Moyenne", "low": "Basse" },
+  "severity": { "low": "Faible", "medium": "Moyenne", "high": "Élevée", "critical": "Critique" },
+  "blockerStatus": { "open": "Ouvert", "resolved": "Résolu", "cancelled": "Annulé" },
+  "impact": {
+    "none": "Le travail peut continuer",
+    "partial": "Une partie du travail empêchée",
+    "full": "Tout le travail empêché"
+  },
+  "origin": {
+    "technical": "Technique",
+    "resource": "Ressource",
+    "external": "Externe",
+    "dependency": "Dépendance",
+    "decision": "Décision",
+    "other": "Autre"
+  },
+  "reliefStatus": { "claimed": "Demandé", "approved": "Approuvé", "rejected": "Refusé" },
+  "dependencyType": {
+    "blocks": "Prérequis obligatoire",
+    "follows": "Ordre recommandé",
+    "relates_to": "Travail lié",
+    "duplicates": "Périmètre en double"
+  },
+  "releaseCondition": {
+    "validated": "Prérequis validé",
+    "submitted": "Prérequis soumis",
+    "milestone_completed": "Jalon terminé"
+  },
+  "linkState": {
+    "waiting": "En attente",
+    "released": "Levée",
+    "informational": "Informative",
+    "cancelled": "Annulée"
+  },
+  "revisionSeverity": { "minor": "Mineure", "moderate": "Modérée", "major": "Majeure", "critical": "Critique" },
+  "evidenceType": { "drive": "Drive", "github": "GitHub", "cad": "CAO", "report": "Rapport", "other": "Autre" },
+  "assignmentRole": { "member": "Membre", "lead": "Responsable" },
+  "entity": {
+    "season": "Saison",
+    "project": "Projet",
+    "work_order": "Ordre de travail",
+    "deliverable": "Livrable",
+    "milestone": "Jalon",
+    "submission": "Soumission",
+    "review": "Revue",
+    "dependency_link": "Dépendance",
+    "blocker": "Blocage",
+    "assignment": "Affectation",
+    "relief_interval": "Report d’échéance"
+  },
+  "action": {
+    "created": "a créé",
+    "updated": "a modifié",
+    "status_changed": "a changé le statut",
+    "cancelled": "a annulé",
+    "proposed": "a proposé",
+    "approved": "a approuvé",
+    "rejected": "a rejeté",
+    "submitted": "a soumis",
+    "validated": "a validé",
+    "revision_requested": "a demandé une révision",
+    "completed": "a terminé",
+    "uncompleted": "a marqué non terminé",
+    "reopened": "a rouvert",
+    "assigned": "a affecté",
+    "unassigned": "a retiré l’affectation",
+    "weight_changed": "a changé le poids",
+    "budget_changed": "a changé le budget",
+    "deadline_changed": "a changé l’échéance",
+    "progress_updated": "a mis à jour l’avancement",
+    "released": "a levé",
+    "manual_released": "a levé manuellement",
+    "relief_claimed": "a demandé un report d’échéance",
+    "relief_approved": "a approuvé un report d’échéance",
+    "relief_rejected": "a refusé un report d’échéance",
+    "resolved": "a résolu",
+    "impact_validated": "a validé l’impact"
+  },
+  "system": "Le système",
+  "originalDeadline": "Échéance initiale",
+  "effectiveDeadline": "Échéance effective",
+  "reliefDays": "{days, plural, one {# jour} other {# jours}} de report approuvé"
+}

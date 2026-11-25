@@ -2440,6 +2440,268 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/scoring/audit/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The scoring audit log (action, entity_type, entity_id, actor filters) */
+        get: operations["scoring_audit_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/dashboard/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The scoring process for a season: completeness, latest run, publication */
+        get: operations["scoring_dashboard"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/dashboard/validation/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Missing or inconsistent scoring inputs for a season (guide screen 29) */
+        get: operations["scoring_dashboard_validation_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/formula-versions/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["scoring_formula_versions_list"];
+        put?: never;
+        /** A new formula version (configuration admins) */
+        post: operations["scoring_formula_versions_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/formula-versions/{id}/set-current/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Make this version the current one (configuration admins) */
+        post: operations["scoring_formula_versions_set_current_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/quality-inputs/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Quality inputs to enter or confirm (season, department, status filters)
+         * @description The quality marks of the submitted and validated Deliverables, entered by the club admins.
+         */
+        get: operations["scoring_quality_inputs_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/quality-inputs/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Save, confirm or flag a quality input
+         * @description The quality marks of the submitted and validated Deliverables, entered by the club admins.
+         */
+        put: operations["scoring_quality_inputs_update"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/quality-inputs/{id}/history/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * The changes of a quality input
+         * @description The quality marks of the submitted and validated Deliverables, entered by the club admins.
+         */
+        get: operations["scoring_quality_inputs_history_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/runs/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["scoring_runs_list"];
+        put?: never;
+        /** Run a calculation for a season (publication admins) */
+        post: operations["scoring_runs_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/runs/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["scoring_runs_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/runs/{id}/publish/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish (finalise) a completed calculation (publication admins) */
+        post: operations["scoring_runs_publish_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/runs/{id}/rankings/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Members' and departments' rankings in this run (department filter) */
+        get: operations["scoring_runs_rankings_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/scores/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Score snapshots (run, member, deliverable, department, current=1) */
+        get: operations["scoring_scores_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/scores/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["scoring_scores_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scoring/scores/member/{member_id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A member's score in a run, traced to every Deliverable (guide §14.2) */
+        get: operations["scoring_scores_member_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/subsystems/": {
         parameters: {
             query?: never;
@@ -2908,6 +3170,1012 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/work/assignments/{id}/role/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Lead or member (Head) */
+        post: operations["work_assignments_role_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/assignments/{id}/unassign/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Unassign (Head, audited) */
+        post: operations["work_assignments_unassign_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/blockers/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Blockers (filters: status, deliverable, work_order, department, mine=1) */
+        get: operations["work_blockers_list"];
+        put?: never;
+        /** Report a blocker (anybody) */
+        post: operations["work_blockers_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/blockers/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_blockers_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["work_blockers_partial_update"];
+        trace?: never;
+    };
+    "/api/work/blockers/{id}/cancel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["work_blockers_cancel_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/blockers/{id}/resolve/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Resolve (terminal; note required) */
+        post: operations["work_blockers_resolve_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/blockers/{id}/validate-impact/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** The Head validates the blocker's real impact on delivery (before any relief) */
+        post: operations["work_blockers_validate_impact_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dashboard/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** My work, and for a Head the department's decisions and risks (guide §5) */
+        get: operations["work_dashboard_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Deliverables across Work Orders, with filters (My Work: assignee=me) */
+        get: operations["work_deliverables_list"];
+        put?: never;
+        /** A Head creates an official Deliverable; anybody else's is a proposal. Body: work_order + fields */
+        post: operations["work_deliverables_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_deliverables_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit the official details (Head; reason once its Work Order is active) */
+        patch: operations["work_deliverables_partial_update"];
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/activity/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The Deliverable's activity */
+        get: operations["work_deliverables_activity_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/approve/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve the proposal, setting its official criteria, dates, weight and members */
+        post: operations["work_deliverables_approve_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/assign/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Assign a member (Head) */
+        post: operations["work_deliverables_assign_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/cancel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel; its weight goes equally to the other active Deliverables */
+        post: operations["work_deliverables_cancel_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/mark-ready/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Draft → ready (Head) */
+        post: operations["work_deliverables_mark_ready_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/milestones/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a Milestone (assigned members, Head) */
+        post: operations["work_deliverables_milestones_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/progress/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** The progress slider, 0–100 % (assigned members, Head) */
+        post: operations["work_deliverables_progress_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/progress-log/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The progress updates of a Deliverable */
+        get: operations["work_deliverables_progress_log_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/reject/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["work_deliverables_reject_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/relief/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Claim deadline relief for a period the work was genuinely prevented */
+        post: operations["work_deliverables_relief_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/reopen/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reopen a validated Deliverable (explicit, audited) */
+        post: operations["work_deliverables_reopen_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/start/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start, or resume after a revision request (assigned members, Head) */
+        post: operations["work_deliverables_start_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/submit/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit the work with its evidence (assigned members) */
+        post: operations["work_deliverables_submit_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/deliverables/{id}/submit-proposal/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["work_deliverables_submit_proposal_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependencies/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Dependencies (filters: deliverable, work_order, department, state=waiting|released, all=1) */
+        get: operations["work_dependencies_list"];
+        put?: never;
+        /** A Head of an involved department creates an active link (members: /dependency-proposals/) */
+        post: operations["work_dependencies_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependencies/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_dependencies_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependencies/{id}/cancel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel the link */
+        post: operations["work_dependencies_cancel_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependencies/{id}/manual-release/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Permanent manual release (Head, reason required, never revoked) */
+        post: operations["work_dependencies_manual_release_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependency-proposals/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Dependency proposals: mine, and those a Head of mine may decide (status=pending_review…) */
+        get: operations["work_dependency_proposals_list"];
+        put?: never;
+        /** Propose a dependency (any member); a Head of an involved department decides */
+        post: operations["work_dependency_proposals_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependency-proposals/{id}/approve/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["work_dependency_proposals_approve_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/dependency-proposals/{id}/reject/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["work_dependency_proposals_reject_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/me/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** What the viewer may do in the work module, and the current season */
+        get: operations["work_me_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/milestones/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_milestones_retrieve"];
+        put?: never;
+        post?: never;
+        delete: operations["work_milestones_destroy"];
+        options?: never;
+        head?: never;
+        patch: operations["work_milestones_partial_update"];
+        trace?: never;
+    };
+    "/api/work/milestones/{id}/cancel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel (Head); refused when a dependency refers to it */
+        post: operations["work_milestones_cancel_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/milestones/{id}/complete/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Completed or not completed (assigned members, Head) */
+        post: operations["work_milestones_complete_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/milestones/{id}/history/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_milestones_history_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/projects/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * The projects, their season, participating departments and progress
+         * @description The projects seen through the work hierarchy (Season → Project → Department).
+         */
+        get: operations["work_projects_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/projects/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * A project's departments, their Work Orders and progress
+         * @description The projects seen through the work hierarchy (Season → Project → Department).
+         */
+        get: operations["work_projects_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/projects/{id}/setup/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Set the project's season and participating departments (club admins, its manager)
+         * @description Initialize attributes shared by all view methods.
+         */
+        post: operations["work_projects_setup_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/proposals/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Proposals: those awaiting my decision (Heads) and mine */
+        get: operations["work_proposals_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/relief/{id}/decide/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** The Head approves the verified period (all or nothing) or rejects the claim */
+        post: operations["work_relief_decide_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/reports/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Operational report: progress by level, counts, overdue work, workload. No scoring. */
+        get: operations["work_reports_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/search/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Search the accessible Work Orders, Deliverables, Milestones and blockers */
+        get: operations["work_search_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/seasons/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_seasons_list"];
+        put?: never;
+        post: operations["work_seasons_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/seasons/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_seasons_retrieve"];
+        put: operations["work_seasons_update"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: operations["work_seasons_partial_update"];
+        trace?: never;
+    };
+    "/api/work/seasons/{id}/overview/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A season's progress: the plain average of its projects, each with its departments */
+        get: operations["work_seasons_overview_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/submissions/{id}/review/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** The single review of a submission: validated, or revision requested */
+        post: operations["work_submissions_review_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Work Orders (official ones for everybody; proposals for their author and Heads) */
+        get: operations["work_work_orders_list"];
+        put?: never;
+        /** A Head creates an official Work Order; anybody else's is a proposal (submit=false: a draft) */
+        post: operations["work_work_orders_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["work_work_orders_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit (Heads; the author while the proposal is pending) */
+        patch: operations["work_work_orders_partial_update"];
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/activate/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Activate: the credit plan must be valid (budget, dates, weights = 100 %) */
+        post: operations["work_work_orders_activate_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/activity/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The Work Order's activity, its Deliverables' included */
+        get: operations["work_work_orders_activity_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/approve/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve the proposal */
+        post: operations["work_work_orders_approve_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/cancel/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel (reason required) */
+        post: operations["work_work_orders_cancel_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/dependencies/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The dependencies of its Deliverables (derived: no Work Order dependency table, §10.9) */
+        get: operations["work_work_orders_dependencies_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/reject/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reject the proposal */
+        post: operations["work_work_orders_reject_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/rubric/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** The four budget ratings; the suggested budget comes back in `rubric` */
+        post: operations["work_work_orders_rubric_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/submit-proposal/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit a draft proposal */
+        post: operations["work_work_orders_submit_proposal_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/to-planning/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Draft → planning */
+        post: operations["work_work_orders_to_planning_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/work/work-orders/{id}/weights/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Set the Deliverables' official weights (once active: total 100 % and a reason) */
+        post: operations["work_work_orders_weights_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2940,6 +4208,21 @@ export interface components {
             due_date?: string | null;
             /** Done */
             is_done?: boolean;
+        };
+        Activity: {
+            readonly id: number;
+            entity_type: components["schemas"]["WorkEntityTypeEnum"];
+            /** Format: int64 */
+            entity_id: number;
+            deliverable?: number | null;
+            work_order?: number | null;
+            action: components["schemas"]["WorkActionEnum"];
+            readonly actor: components["schemas"]["MemberSummary"];
+            old_value?: unknown;
+            new_value?: unknown;
+            reason?: string;
+            /** Format: date-time */
+            readonly occurred_at: string;
         };
         /** @description What an alumni tells the team about their life after it (decision D-022). */
         AlumniProfile: {
@@ -3026,6 +4309,29 @@ export interface components {
             no_work_available?: boolean;
             note?: string;
         };
+        AssignRequest: {
+            member: number;
+            /** @default member */
+            role: components["schemas"]["AssignmentRoleEnum"];
+            /** @default  */
+            reason: string;
+        };
+        Assignment: {
+            readonly id: number;
+            readonly member: components["schemas"]["MemberSummary"];
+            role?: components["schemas"]["AssignmentRoleEnum"];
+            is_active?: boolean;
+            /** Format: date-time */
+            readonly assigned_at: string;
+            /** Format: date-time */
+            unassigned_at?: string | null;
+        };
+        /**
+         * @description * `member` - Member
+         *     * `lead` - Lead
+         * @enum {string}
+         */
+        AssignmentRoleEnum: "member" | "lead";
         AssistantRights: {
             /** @description May add and remove the sources (the Executive Bureau). */
             manage_sources: boolean;
@@ -3077,6 +4383,19 @@ export interface components {
          * @enum {string}
          */
         AttendanceStatusEnum: "pending" | "present" | "late" | "absent";
+        Audit: {
+            readonly id: number;
+            action: string;
+            entity_type: string;
+            /** Format: int64 */
+            entity_id: number;
+            readonly actor: components["schemas"]["MemberSummary"];
+            old_value?: unknown;
+            new_value?: unknown;
+            reason?: string;
+            /** Format: date-time */
+            readonly occurred_at: string;
+        };
         /** @description Every part still to come of a grouped order arrived. */
         BatchReceptionRequest: {
             /**
@@ -3133,6 +4452,13 @@ export interface components {
             /** @description Why it is rejected (required then). */
             note?: string;
         };
+        /**
+         * @description * `none` - Work can continue
+         *     * `partial` - Some work is prevented
+         *     * `full` - All work is prevented
+         * @enum {string}
+         */
+        BlockerImpactEnum: "none" | "partial" | "full";
         BlockerPermissions: {
             /** @description May validate or reject it (a leader of the task). */
             decide: boolean;
@@ -3142,6 +4468,12 @@ export interface components {
             /** @description How it was solved. */
             resolution: string;
         };
+        BlockerRights: {
+            edit: boolean;
+            resolve: boolean;
+            cancel: boolean;
+            validate_impact: boolean;
+        };
         /**
          * @description * `open` - Declared
          *     * `validated` - Validated
@@ -3150,6 +4482,25 @@ export interface components {
          * @enum {string}
          */
         BlockerStatusEnum: "open" | "validated" | "rejected" | "resolved";
+        BlockerTarget: {
+            kind: components["schemas"]["BlockerTargetKindEnum"];
+            id: number;
+            code: string;
+            title: string;
+        };
+        /**
+         * @description * `deliverable` - deliverable
+         *     * `work_order` - work_order
+         * @enum {string}
+         */
+        BlockerTargetKindEnum: "deliverable" | "work_order";
+        BlockerValidationOut: {
+            impact_confirmed: boolean;
+            impact_note: string;
+            /** Format: date-time */
+            validated_at: string;
+            validated_by: components["schemas"]["MemberSummary"] | null;
+        };
         /** @description A blocker declared on a task: what blocks it, how badly, what must be done, by whom. */
         BlockerWriteRequest: {
             description: string;
@@ -3413,6 +4764,15 @@ export interface components {
         Count: {
             count: number;
         };
+        CreditLine: {
+            id: number;
+            code: string;
+            title: string;
+            /** Format: decimal */
+            weight: string;
+            /** Format: decimal */
+            allocated_points: string | null;
+        };
         /** @description A Team Contribution criterion: its mark, or N/A with its reason, or not given yet (missing). */
         Criterion: {
             mark: number | null;
@@ -3458,6 +4818,148 @@ export interface components {
             /** Decision */
             text: string;
         };
+        Deliverable: {
+            readonly id: number;
+            code?: string | null;
+            title: string;
+            readonly work_order: components["schemas"]["WorkOrderBrief"];
+            status?: components["schemas"]["DeliverableStatusEnum"];
+            /** Dependency state */
+            dep_state?: components["schemas"]["DependencyStateEnum"];
+            execution_state?: components["schemas"]["ExecutionStateEnum"];
+            /** Progress (%) */
+            progress?: number;
+            /** Format: date-time */
+            progress_updated_at?: string | null;
+            /** Format: date */
+            start_date?: string | null;
+            /** Format: date */
+            original_deadline?: string | null;
+            /** Format: date */
+            effective_deadline?: string | null;
+            /** Approved relief (days) */
+            relief_days?: number;
+            readonly assignees: components["schemas"]["MemberSummary"][];
+            proposal_status?: (components["schemas"]["WorkProposalStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            readonly proposed_by: components["schemas"]["MemberSummary"];
+            /**
+             * Weight (%)
+             * Format: decimal
+             */
+            weight?: string;
+            /** Format: decimal */
+            readonly allocated_points: string | null;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        DeliverableDetail: {
+            readonly id: number;
+            code?: string | null;
+            title: string;
+            readonly work_order: components["schemas"]["WorkOrderBrief"];
+            status?: components["schemas"]["DeliverableStatusEnum"];
+            /** Dependency state */
+            dep_state?: components["schemas"]["DependencyStateEnum"];
+            execution_state?: components["schemas"]["ExecutionStateEnum"];
+            /** Progress (%) */
+            progress?: number;
+            /** Format: date-time */
+            progress_updated_at?: string | null;
+            /** Format: date */
+            start_date?: string | null;
+            /** Format: date */
+            original_deadline?: string | null;
+            /** Format: date */
+            effective_deadline?: string | null;
+            /** Approved relief (days) */
+            relief_days?: number;
+            readonly assignees: components["schemas"]["MemberSummary"][];
+            proposal_status?: (components["schemas"]["WorkProposalStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            readonly proposed_by: components["schemas"]["MemberSummary"];
+            /**
+             * Weight (%)
+             * Format: decimal
+             */
+            weight?: string;
+            /** Format: decimal */
+            readonly allocated_points: string | null;
+            /** Format: date-time */
+            readonly created_at: string;
+            description?: string;
+            acceptance_criteria?: string;
+            readonly assignments: components["schemas"]["Assignment"][];
+            readonly milestones: components["schemas"]["Milestone"][];
+            readonly submissions: components["schemas"]["Submission"][];
+            readonly dependencies: components["schemas"]["DeliverableLinks"];
+            readonly blockers: components["schemas"]["WorkBlocker"][];
+            readonly relief: components["schemas"]["ReliefInterval"][];
+            /** Format: date-time */
+            readonly first_complete_submission_at: string;
+            readonly rights: components["schemas"]["DeliverableRights"];
+            /** Format: date-time */
+            proposal_submitted_at?: string | null;
+            /** Format: date-time */
+            proposal_decided_at?: string | null;
+            readonly proposal_decided_by: components["schemas"]["MemberSummary"];
+            /** Decision note */
+            proposal_note?: string;
+            /** Format: date-time */
+            readonly updated_at: string;
+        };
+        DeliverableLinks: {
+            prerequisites: components["schemas"]["DependencyLink"][];
+            dependents: components["schemas"]["DependencyLink"][];
+        };
+        DeliverableRights: {
+            edit: boolean;
+            decide: boolean;
+            submit_proposal: boolean;
+            assign: boolean;
+            mark_ready: boolean;
+            start: boolean;
+            update_progress: boolean;
+            manage_milestones: boolean;
+            cancel_milestones: boolean;
+            submit: boolean;
+            review: boolean;
+            cancel: boolean;
+            reopen: boolean;
+            add_dependency: boolean;
+            propose_dependency: boolean;
+            claim_relief: boolean;
+            decide_relief: boolean;
+            report_blocker: boolean;
+            /** @description May give the final quality mark (club admins only). */
+            enter_quality: boolean;
+        };
+        /**
+         * @description * `draft` - Draft
+         *     * `ready` - Ready
+         *     * `in_progress` - In progress
+         *     * `submitted` - Submitted
+         *     * `revision_requested` - Revision requested
+         *     * `validated` - Validated
+         *     * `cancelled` - Cancelled
+         * @enum {string}
+         */
+        DeliverableStatusEnum: "draft" | "ready" | "in_progress" | "submitted" | "revision_requested" | "validated" | "cancelled";
+        DeliverableWriteRequest: {
+            title: string;
+            description?: string;
+            acceptance_criteria?: string;
+            /** Format: date */
+            start_date?: string | null;
+            /** Format: date */
+            original_deadline?: string | null;
+            /** Format: decimal */
+            weight?: string;
+            member_ids?: number[];
+            justification?: string;
+            /** @default true */
+            submit: boolean;
+            reason?: string;
+            note?: string;
+        };
         DepartmentRow: {
             unit: components["schemas"]["UnitRef"];
             members: number;
@@ -3473,6 +4975,81 @@ export interface components {
             attendance_rate: number | null;
             status: components["schemas"]["HealthColourEnum"];
         };
+        DependencyCreateRequest: {
+            prerequisite: number;
+            dependent: number;
+            /** @default blocks */
+            link_type: components["schemas"]["DependencyTypeEnum"];
+            /** @default validated */
+            release_condition: components["schemas"]["ReleaseConditionEnum"];
+            release_milestone?: number | null;
+            /** @default  */
+            reason: string;
+        };
+        DependencyLink: {
+            readonly id: number;
+            readonly prerequisite: components["schemas"]["LinkEnd"];
+            readonly dependent: components["schemas"]["LinkEnd"];
+            /** @default blocks */
+            link_type: components["schemas"]["DependencyTypeEnum"];
+            release_condition?: components["schemas"]["ReleaseConditionEnum"];
+            readonly release_milestone: components["schemas"]["MilestoneRef"] | null;
+            /** @default active */
+            link_status: components["schemas"]["WarningStatusEnum"];
+            readonly state: components["schemas"]["StateEnum"];
+            /** Format: date-time */
+            released_at?: string | null;
+            manually_released?: boolean;
+            readonly manual_release_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            manual_release_at?: string | null;
+            manual_release_reason?: string;
+            reason?: string;
+            readonly created_by: components["schemas"]["MemberSummary"];
+            readonly approved_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            approved_at?: string | null;
+            /** Format: date-time */
+            cancelled_at?: string | null;
+            cancel_reason?: string;
+            /** Format: date-time */
+            readonly created_at: string;
+            readonly rights: components["schemas"]["LinkRights"];
+        };
+        DependencyProposal: {
+            readonly id: number;
+            readonly proposed_prerequisite: components["schemas"]["LinkEnd"];
+            readonly proposed_dependent: components["schemas"]["LinkEnd"];
+            proposed_link_type?: components["schemas"]["DependencyTypeEnum"];
+            proposed_release_condition?: components["schemas"]["ReleaseConditionEnum"];
+            proposed_milestone?: number | null;
+            justification?: string;
+            status?: components["schemas"]["WorkProposalStatusEnum"];
+            readonly proposed_by: components["schemas"]["MemberSummary"];
+            readonly decided_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            decided_at?: string | null;
+            decision_note?: string;
+            dependency_link?: number | null;
+            /** Format: date-time */
+            readonly created_at: string;
+            readonly can_decide: boolean;
+        };
+        /**
+         * @description * `no_blocking_dependencies` - No blocking dependencies
+         *     * `waiting` - Waiting for prerequisite
+         *     * `released` - Dependencies released
+         * @enum {string}
+         */
+        DependencyStateEnum: "no_blocking_dependencies" | "waiting" | "released";
+        /**
+         * @description * `blocks` - Required prerequisite
+         *     * `follows` - Recommended sequence
+         *     * `relates_to` - Related work
+         *     * `duplicates` - Overlapping scope
+         * @enum {string}
+         */
+        DependencyTypeEnum: "blocks" | "follows" | "relates_to" | "duplicates";
         Detail: {
             detail: string;
         };
@@ -3747,6 +5324,31 @@ export interface components {
             purchased_at?: string | null;
             status?: components["schemas"]["SettableEquipmentStatusEnum"];
         };
+        Evidence: {
+            /** Format: uri */
+            url: string;
+            /** @default  */
+            label: string;
+            /** @default drive */
+            link_type: components["schemas"]["EvidenceLinkTypeEnum"];
+        };
+        /**
+         * @description * `drive` - Drive
+         *     * `github` - GitHub
+         *     * `cad` - CAD
+         *     * `report` - Report
+         *     * `other` - Other
+         * @enum {string}
+         */
+        EvidenceLinkTypeEnum: "drive" | "github" | "cad" | "report" | "other";
+        EvidenceRequest: {
+            /** Format: uri */
+            url: string;
+            /** @default  */
+            label: string;
+            /** @default drive */
+            link_type: components["schemas"]["EvidenceLinkTypeEnum"];
+        };
         Exclusion: {
             readonly id: number;
             readonly member: components["schemas"]["MemberSummary"];
@@ -3841,6 +5443,13 @@ export interface components {
          * @enum {string}
          */
         ExcuseStatusEnum: "none" | "requested" | "accepted" | "refused";
+        /**
+         * @description * `normal` - Normal
+         *     * `partially_blocked` - Partially blocked
+         *     * `fully_blocked` - Fully blocked
+         * @enum {string}
+         */
+        ExecutionStateEnum: "normal" | "partially_blocked" | "fully_blocked";
         /** @description An expense: entered by hand, or the one of a delivered order (then with its part and supplier). */
         Expense: {
             readonly id: number;
@@ -3943,6 +5552,89 @@ export interface components {
             /** @description A validated volunteering this month. */
             volunteered: boolean;
         };
+        FormulaVersion: {
+            readonly id: number;
+            readonly created_by: components["schemas"]["MemberSummary"];
+            code: string;
+            description?: string;
+            /** Format: decimal */
+            penalty_minor?: string;
+            /** Format: decimal */
+            penalty_moderate?: string;
+            /** Format: decimal */
+            penalty_major?: string;
+            /** Format: decimal */
+            penalty_critical?: string;
+            /** Format: decimal */
+            escalation_base?: string;
+            /** Format: decimal */
+            penalty_round_cap?: string;
+            /** Format: decimal */
+            revision_cap?: string;
+            /** Format: decimal */
+            tf_early?: string;
+            /** Format: decimal */
+            tf_on_time?: string;
+            /** Format: decimal */
+            tf_late_25?: string;
+            /** Format: decimal */
+            tf_late_50?: string;
+            /** Format: decimal */
+            tf_late_over50?: string;
+            /** Format: decimal */
+            tf_no_submit?: string;
+            /** Format: decimal */
+            weight_effort?: string;
+            /** Format: decimal */
+            weight_complexity?: string;
+            /** Format: decimal */
+            weight_uncertainty?: string;
+            /** Format: decimal */
+            weight_responsibility?: string;
+            is_current?: boolean;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        FormulaVersionRequest: {
+            reason: string;
+            code: string;
+            description?: string;
+            /** Format: decimal */
+            penalty_minor?: string;
+            /** Format: decimal */
+            penalty_moderate?: string;
+            /** Format: decimal */
+            penalty_major?: string;
+            /** Format: decimal */
+            penalty_critical?: string;
+            /** Format: decimal */
+            escalation_base?: string;
+            /** Format: decimal */
+            penalty_round_cap?: string;
+            /** Format: decimal */
+            revision_cap?: string;
+            /** Format: decimal */
+            tf_early?: string;
+            /** Format: decimal */
+            tf_on_time?: string;
+            /** Format: decimal */
+            tf_late_25?: string;
+            /** Format: decimal */
+            tf_late_50?: string;
+            /** Format: decimal */
+            tf_late_over50?: string;
+            /** Format: decimal */
+            tf_no_submit?: string;
+            /** Format: decimal */
+            weight_effort?: string;
+            /** Format: decimal */
+            weight_complexity?: string;
+            /** Format: decimal */
+            weight_uncertainty?: string;
+            /** Format: decimal */
+            weight_responsibility?: string;
+            is_current?: boolean;
+        };
         Goal: {
             readonly id: number;
             readonly member: components["schemas"]["MemberSummary"];
@@ -4020,6 +5712,11 @@ export interface components {
             rank: number | null;
             /** Format: date-time */
             published_at: string;
+        };
+        ImpactRequest: {
+            impact_confirmed: boolean;
+            /** @default  */
+            impact_note: string;
         };
         Indicator: {
             /** Format: double */
@@ -4137,6 +5834,17 @@ export interface components {
             applies_to_ic?: boolean;
             applies_to_ev?: boolean;
         };
+        LinkEnd: {
+            readonly id: number;
+            code?: string | null;
+            title: string;
+            status?: components["schemas"]["DeliverableStatusEnum"];
+            readonly work_order: components["schemas"]["LinkWorkOrder"];
+        };
+        LinkRights: {
+            cancel: boolean;
+            manual_release: boolean;
+        };
         /**
          * @description * `drive` - Google Drive
          *     * `github` - GitHub
@@ -4146,6 +5854,11 @@ export interface components {
          * @enum {string}
          */
         LinkTypeEnum: "drive" | "github" | "cad" | "report" | "other";
+        LinkWorkOrder: {
+            id: number;
+            code: string | null;
+            department: number;
+        };
         Loan: {
             readonly id: number;
             readonly equipment: components["schemas"]["EquipmentRef"];
@@ -4708,6 +6421,53 @@ export interface components {
          * @enum {string}
          */
         MessageRoleEnum: "user" | "assistant";
+        Milestone: {
+            readonly id: number;
+            readonly deliverable: number;
+            title: string;
+            description?: string;
+            /** Completed */
+            readonly is_completed: boolean;
+            /** Format: date-time */
+            readonly completed_at: string | null;
+            readonly completed_by: components["schemas"]["MemberSummary"];
+            /** Cancelled */
+            readonly is_cancelled: boolean;
+            /** Format: date-time */
+            readonly cancelled_at: string | null;
+            readonly created_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly created_at: string;
+            /** Format: date-time */
+            readonly updated_at: string;
+            /** @description A dependency uses it: it cannot be cancelled. */
+            readonly referenced: boolean;
+        };
+        MilestoneCompleteRequest: {
+            is_completed: boolean;
+            /** @default  */
+            note: string;
+        };
+        MilestoneHistory: {
+            readonly id: number;
+            field_changed: string;
+            old_value?: string;
+            new_value?: string;
+            readonly changed_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly changed_at: string;
+            note?: string;
+        };
+        MilestoneRef: {
+            id: number;
+            title: string;
+            is_completed: boolean;
+        };
+        MilestoneWriteRequest: {
+            title: string;
+            /** @default  */
+            description: string;
+        };
         MinutesRequest: {
             minutes: string;
             /**
@@ -4887,9 +6647,10 @@ export interface components {
          *     * `volunteering_to_validate` - Volunteering to validate
          *     * `volunteering_decided` - Volunteering decided
          *     * `volunteering_reminder` - Volunteering of the month
+         *     * `work_event` - Work update
          * @enum {string}
          */
-        NotificationKindEnum: "message" | "task_assigned" | "task_commented" | "task_blocked" | "task_done" | "validation_requested" | "validation_signed" | "task_due_soon" | "task_overdue" | "purchase_approval_requested" | "purchase_to_order" | "purchase_updated" | "stock_low" | "budget_exceeded" | "task_submitted" | "task_validated" | "task_revision" | "blocker_declared" | "blocker_updated" | "meeting_scheduled" | "meeting_updated" | "meeting_reminder" | "excuse_requested" | "excuse_decided" | "action_assigned" | "minutes_published" | "document_review_requested" | "document_reviewed" | "loan_requested" | "loan_decided" | "loan_overdue" | "reservation_cancelled" | "certification_granted" | "contribution_proposed" | "contribution_decided" | "ranking_published" | "ranking_to_publish" | "warning_reported" | "warning_issued" | "exclusion_pending" | "objective_set" | "training_planned" | "volunteering_to_validate" | "volunteering_decided" | "volunteering_reminder";
+        NotificationKindEnum: "message" | "task_assigned" | "task_commented" | "task_blocked" | "task_done" | "validation_requested" | "validation_signed" | "task_due_soon" | "task_overdue" | "purchase_approval_requested" | "purchase_to_order" | "purchase_updated" | "stock_low" | "budget_exceeded" | "task_submitted" | "task_validated" | "task_revision" | "blocker_declared" | "blocker_updated" | "meeting_scheduled" | "meeting_updated" | "meeting_reminder" | "excuse_requested" | "excuse_decided" | "action_assigned" | "minutes_published" | "document_review_requested" | "document_reviewed" | "loan_requested" | "loan_decided" | "loan_overdue" | "reservation_cancelled" | "certification_granted" | "contribution_proposed" | "contribution_decided" | "ranking_published" | "ranking_to_publish" | "warning_reported" | "warning_issued" | "exclusion_pending" | "objective_set" | "training_planned" | "volunteering_to_validate" | "volunteering_decided" | "volunteering_reminder" | "work_event";
         /** @description What the notification is about: a task or a subsystem, by its id. */
         NotificationTarget: {
             type: string;
@@ -4992,6 +6753,21 @@ export interface components {
          * @enum {string}
          */
         OriginEnum: "technical" | "supplier" | "financial" | "organisation" | "other";
+        PaginatedActivityList: {
+            /** @example 123 */
+            count: number;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=4
+             */
+            next?: string | null;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=2
+             */
+            previous?: string | null;
+            results: components["schemas"]["Activity"][];
+        };
         PaginatedBreachReportList: {
             /** @example 123 */
             count: number;
@@ -5051,6 +6827,51 @@ export interface components {
              */
             previous?: string | null;
             results: components["schemas"]["Conversation"][];
+        };
+        PaginatedDeliverableList: {
+            /** @example 123 */
+            count: number;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=4
+             */
+            next?: string | null;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=2
+             */
+            previous?: string | null;
+            results: components["schemas"]["Deliverable"][];
+        };
+        PaginatedDependencyLinkList: {
+            /** @example 123 */
+            count: number;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=4
+             */
+            next?: string | null;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=2
+             */
+            previous?: string | null;
+            results: components["schemas"]["DependencyLink"][];
+        };
+        PaginatedDependencyProposalList: {
+            /** @example 123 */
+            count: number;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=4
+             */
+            next?: string | null;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=2
+             */
+            previous?: string | null;
+            results: components["schemas"]["DependencyProposal"][];
         };
         PaginatedDocumentList: {
             /** @example 123 */
@@ -5412,6 +7233,36 @@ export interface components {
             previous?: string | null;
             results: components["schemas"]["Volunteering"][];
         };
+        PaginatedWorkBlockerList: {
+            /** @example 123 */
+            count: number;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=4
+             */
+            next?: string | null;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=2
+             */
+            previous?: string | null;
+            results: components["schemas"]["WorkBlocker"][];
+        };
+        PaginatedWorkOrderList: {
+            /** @example 123 */
+            count: number;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=4
+             */
+            next?: string | null;
+            /**
+             * Format: uri
+             * @example http://api.example.org/accounts/?page=2
+             */
+            previous?: string | null;
+            results: components["schemas"]["WorkOrder"][];
+        };
         ParentTask: {
             readonly id: number;
             readonly title: string;
@@ -5462,6 +7313,23 @@ export interface components {
             /** Format: decimal */
             allocated_amount?: string;
             notes?: string;
+        };
+        PatchedDeliverableWriteRequest: {
+            title?: string;
+            description?: string;
+            acceptance_criteria?: string;
+            /** Format: date */
+            start_date?: string | null;
+            /** Format: date */
+            original_deadline?: string | null;
+            /** Format: decimal */
+            weight?: string;
+            member_ids?: number[];
+            justification?: string;
+            /** @default true */
+            submit: boolean;
+            reason?: string;
+            note?: string;
         };
         /** @description A document's information. Created with its first file (DocumentCreateSerializer). */
         PatchedDocumentWriteRequest: {
@@ -5612,6 +7480,11 @@ export interface components {
             /** @description The subjects of the e-mails to turn off; the warnings and exclusions cannot be. */
             muted_email_topics?: components["schemas"]["EmailTopicEnum"][];
         };
+        PatchedMilestoneWriteRequest: {
+            title?: string;
+            /** @default  */
+            description: string;
+        };
         PatchedProjectRequest: {
             name?: string;
             /**
@@ -5677,6 +7550,18 @@ export interface components {
             org_unit_id?: number | null;
             subsystem_id?: number | null;
             suggested_supplier_id?: number | null;
+        };
+        PatchedSeasonRequest: {
+            code?: (string) | null;
+            year?: number;
+            label?: string;
+            /** Current season */
+            is_active?: boolean;
+            /**
+             * Scoring cutoff
+             * Format: date-time
+             */
+            scoring_cutoff_at?: string | null;
         };
         /** @description Add or change a sponsor (Operations, admins). The answer is the sponsor as SponsorshipSerializer shows it. */
         PatchedSponsorshipWriteRequest: {
@@ -5761,6 +7646,29 @@ export interface components {
             assignee_ids?: number[];
             /** @description The main owner, one of the assignees (default: the current one, else the first). */
             primary_assignee_id?: number | null;
+        };
+        PatchedWorkBlockerUpdateRequest: {
+            origin?: components["schemas"]["WorkBlockerOriginEnum"];
+            severity?: components["schemas"]["SeverityEnum"];
+            impact?: components["schemas"]["BlockerImpactEnum"];
+            description?: string;
+            required_action?: string;
+            responsible_unit?: number | null;
+            resolver?: number | null;
+        };
+        PatchedWorkOrderUpdateRequest: {
+            project?: number | null;
+            title?: string;
+            description?: string;
+            /** Expected result */
+            objectives?: string;
+            justification?: string;
+            /** Format: decimal */
+            estimated_effort_units?: string | null;
+            priority?: components["schemas"]["PriorityEnum"] | components["schemas"]["BlankEnum"];
+            coordinator?: number | null;
+            budget_tier?: number | null;
+            reason?: string;
         };
         /**
          * @description * `1` - Routine
@@ -5862,6 +7770,11 @@ export interface components {
             readonly subsystems_count: number;
             readonly health: components["schemas"]["ProjectHealthEnum"];
             readonly permissions: components["schemas"]["ProjectPermissions"];
+        };
+        ProjectBrief: {
+            readonly id: number;
+            name: string;
+            code?: (string) | null;
         };
         /** @description A project a member may be put in. */
         ProjectChoice: {
@@ -6166,6 +8079,23 @@ export interface components {
             can_manage: boolean;
         };
         /**
+         * @description * `incomplete` - Incomplete
+         *     * `complete` - Complete
+         *     * `requires_correction` - Requires correction
+         *     * `submitted` - Submitted
+         * @enum {string}
+         */
+        QualityDataStatusEnum: "incomplete" | "complete" | "requires_correction" | "submitted";
+        QualityWriteRequest: {
+            /** Format: decimal */
+            raw_quality?: string | null;
+            data_status: components["schemas"]["QualityDataStatusEnum"];
+            /** @default  */
+            note: string;
+            /** @default  */
+            reason: string;
+        };
+        /**
          * @description * `A` - A — Excellent
          *     * `B` - B — Very good
          *     * `C` - C — Average
@@ -6206,6 +8136,94 @@ export interface components {
         RejectRequest: {
             note: string;
         };
+        /**
+         * @description * `submitted` - Prerequisite submitted
+         *     * `validated` - Prerequisite validated
+         *     * `milestone_completed` - Milestone completed
+         * @enum {string}
+         */
+        ReleaseConditionEnum: "submitted" | "validated" | "milestone_completed";
+        ReliefDecisionRequest: {
+            approve: boolean;
+            /** Format: date */
+            approved_start?: string;
+            /** Format: date */
+            approved_end?: string;
+            /** @default  */
+            note: string;
+        };
+        ReliefInterval: {
+            readonly id: number;
+            readonly deliverable: number;
+            dependency_link?: number | null;
+            blocker?: number | null;
+            /**
+             * Needed on
+             * Format: date
+             */
+            needed_at: string;
+            /**
+             * Work prevented from
+             * Format: date
+             */
+            waiting_started_at: string;
+            /**
+             * Released on
+             * Format: date
+             */
+            released_at?: string | null;
+            /** Impact */
+            impact_description: string;
+            /** The team had done the work it could do before */
+            team_ready?: boolean;
+            /** The missing prerequisite prevented progress */
+            directly_prevented?: boolean;
+            readonly status: components["schemas"]["ReliefStatusEnum"];
+            readonly claimed_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly claimed_at: string;
+            /** Format: date */
+            readonly approved_start: string | null;
+            /** Format: date */
+            readonly approved_end: string | null;
+            readonly approved_days: number;
+            readonly decided_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly decided_at: string | null;
+            readonly decision_note: string;
+        };
+        ReliefIntervalRequest: {
+            dependency_link?: number | null;
+            blocker?: number | null;
+            /**
+             * Needed on
+             * Format: date
+             */
+            needed_at: string;
+            /**
+             * Work prevented from
+             * Format: date
+             */
+            waiting_started_at: string;
+            /**
+             * Released on
+             * Format: date
+             */
+            released_at?: string | null;
+            /** Impact */
+            impact_description: string;
+            /** The team had done the work it could do before */
+            team_ready?: boolean;
+            /** The missing prerequisite prevented progress */
+            directly_prevented?: boolean;
+        };
+        /**
+         * @description * `claimed` - Claimed
+         *     * `approved` - Approved
+         *     * `rejected` - Rejected
+         * @enum {string}
+         */
+        ReliefStatusEnum: "claimed" | "approved" | "rejected";
         ReportBlocker: {
             task: components["schemas"]["TaskRef"];
             description: string;
@@ -6296,10 +8314,54 @@ export interface components {
             /** @default  */
             note: string;
         };
+        /**
+         * @description * `validated` - Validated
+         *     * `revision_requested` - Revision requested
+         * @enum {string}
+         */
+        ReviewDecisionEnum: "validated" | "revision_requested";
+        /** @description The review as the team sees it: decision, note, severity, issues and attribution of the round. No mark. */
+        ReviewRead: {
+            id: number;
+            decision: string;
+            reviewer: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            reviewed_at: string;
+            review_note: string;
+            readonly severity: (components["schemas"]["RevisionSeverityEnum"] | components["schemas"]["NullEnum"]) | null;
+            readonly issues_summary: string;
+            readonly is_attributable: boolean | null;
+            readonly attribution_reason: string;
+        };
+        ReviewWriteRequest: {
+            decision: components["schemas"]["ReviewDecisionEnum"];
+            /** @default  */
+            review_note: string;
+            severity?: components["schemas"]["RevisionSeverityEnum"];
+            /** @default  */
+            issues_summary: string;
+            /** @default true */
+            is_attributable: boolean;
+            /** @default  */
+            attribution_reason: string;
+            /**
+             * Format: decimal
+             * @description The Head's final quality mark (0–5) of a validated Deliverable; may be entered later.
+             */
+            raw_quality?: string | null;
+        };
         ReviseRequest: {
             /** @description What to rework. */
             comment: string;
         };
+        /**
+         * @description * `minor` - Minor
+         *     * `moderate` - Moderate
+         *     * `major` - Major
+         *     * `critical` - Critical
+         * @enum {string}
+         */
+        RevisionSeverityEnum: "minor" | "moderate" | "major" | "critical";
         Rights: {
             manage: boolean;
             certify: boolean;
@@ -6312,6 +8374,9 @@ export interface components {
             /** Leadership role */
             is_leadership?: boolean;
             can_be_project_manager?: boolean;
+        };
+        RoleRequest: {
+            role: components["schemas"]["AssignmentRoleEnum"];
         };
         /**
          * @description * `club` - Club
@@ -6326,6 +8391,48 @@ export interface components {
          * @enum {string}
          */
         RoleTypeEnum: "admin" | "head_of_department" | "member";
+        RubricOut: {
+            effort: number;
+            complexity: number;
+            uncertainty: number;
+            responsibility: number;
+            score: string;
+            suggested_tier: number;
+        };
+        RubricRequest: {
+            effort: number;
+            complexity: number;
+            uncertainty: number;
+            responsibility: number;
+        };
+        Run: {
+            readonly id: number;
+            season: number;
+            readonly season_label: string;
+            readonly formula_version: string;
+            readonly triggered_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly triggered_at: string;
+            /** Format: date-time */
+            completed_at?: string | null;
+            status?: components["schemas"]["RunStatusEnum"];
+            records_processed?: number;
+            warnings_count?: number;
+            errors_count?: number;
+            issues?: unknown;
+            notes?: string;
+            is_published?: boolean;
+            /** Format: date-time */
+            published_at?: string | null;
+            readonly published_by: components["schemas"]["MemberSummary"];
+        };
+        /**
+         * @description * `running` - Running
+         *     * `completed` - Completed
+         *     * `failed` - Failed
+         * @enum {string}
+         */
+        RunStatusEnum: "running" | "completed" | "failed";
         /** @description A member's month: its parts out of 100 (None: not calculable), its final score and where it ranks. */
         Score: {
             /** @description YYYY-MM */
@@ -6371,6 +8478,71 @@ export interface components {
             logistics_mark: number | null;
             /** @description 2 at most without evidence. */
             effort_mark: number | null;
+        };
+        ScoreSnapshot: {
+            readonly id: number;
+            readonly member: components["schemas"]["MemberSummary"];
+            readonly deliverable: {
+                [key: string]: unknown;
+            };
+            department?: number | null;
+            /** @default  */
+            readonly department_name: string;
+            readonly formula_version: string;
+            calculation_run?: number | null;
+            budget_tier: number;
+            /** Format: decimal */
+            weight: string;
+            /** Format: decimal */
+            allocated_points: string;
+            /** Format: decimal */
+            raw_quality?: string | null;
+            /** Format: decimal */
+            quality_factor?: string | null;
+            /** Format: decimal */
+            time_factor?: string | null;
+            /** Format: decimal */
+            revision_penalty?: string | null;
+            revision_rounds?: unknown;
+            /** Format: decimal */
+            delay_ratio?: string | null;
+            /** Format: date */
+            effective_deadline?: string | null;
+            /** Format: date-time */
+            first_submission_at?: string | null;
+            member_count: number;
+            /** Format: decimal */
+            earned_points: string;
+            is_superseded?: boolean;
+            superseded_by?: number | null;
+            superseded_reason?: string;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        Season: {
+            readonly id: number;
+            code?: (string) | null;
+            year: number;
+            label: string;
+            /** Current season */
+            is_active?: boolean;
+            /**
+             * Scoring cutoff
+             * Format: date-time
+             */
+            scoring_cutoff_at?: string | null;
+        };
+        SeasonRequest: {
+            code?: (string) | null;
+            year: number;
+            label: string;
+            /** Current season */
+            is_active?: boolean;
+            /**
+             * Scoring cutoff
+             * Format: date-time
+             */
+            scoring_cutoff_at?: string | null;
         };
         /**
          * @description * `violence` - Violence
@@ -6582,6 +8754,14 @@ export interface components {
              */
             confirmed_at?: string | null;
         };
+        /**
+         * @description * `waiting` - waiting
+         *     * `released` - released
+         *     * `informational` - informational
+         *     * `cancelled` - cancelled
+         * @enum {string}
+         */
+        StateEnum: "waiting" | "released" | "informational" | "cancelled";
         StatusCounts: {
             a_valider_chef: number;
             a_valider_operations: number;
@@ -6752,6 +8932,18 @@ export interface components {
          * @enum {string}
          */
         StudyLevelEnum: "prep_1" | "prep_2" | "year_3" | "year_4" | "year_5" | "postgraduate" | "other";
+        Submission: {
+            readonly id: number;
+            submission_number: number;
+            is_complete?: boolean;
+            readonly is_first_complete: boolean;
+            readonly submitted_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly submitted_at: string;
+            submission_note?: string;
+            readonly evidence: components["schemas"]["Evidence"][];
+            readonly review: components["schemas"]["ReviewRead"] | null;
+        };
         SubmitRequest: {
             /** @description What was delivered. */
             actual_deliverable: string;
@@ -7337,6 +9529,265 @@ export interface components {
             workload: components["schemas"]["Warning"][];
             risks: components["schemas"]["Warning"][];
             priorities: components["schemas"]["ReportTask"][];
+        };
+        WeightsRequest: {
+            weights: {
+                [key: string]: string;
+            };
+            reason?: string;
+        };
+        /**
+         * @description * `created` - Created
+         *     * `updated` - Updated
+         *     * `status_changed` - Status changed
+         *     * `cancelled` - Cancelled
+         *     * `proposed` - Proposed
+         *     * `approved` - Approved
+         *     * `rejected` - Rejected
+         *     * `submitted` - Submitted
+         *     * `validated` - Validated
+         *     * `revision_requested` - Revision requested
+         *     * `completed` - Completed
+         *     * `uncompleted` - Marked not completed
+         *     * `reopened` - Reopened
+         *     * `assigned` - Assigned
+         *     * `unassigned` - Unassigned
+         *     * `weight_changed` - Weight changed
+         *     * `budget_changed` - Budget changed
+         *     * `deadline_changed` - Deadline changed
+         *     * `progress_updated` - Progress updated
+         *     * `released` - Dependency released
+         *     * `manual_released` - Manually released
+         *     * `relief_claimed` - Deadline relief claimed
+         *     * `relief_approved` - Deadline relief approved
+         *     * `relief_rejected` - Deadline relief rejected
+         *     * `resolved` - Resolved
+         *     * `impact_validated` - Impact validated
+         * @enum {string}
+         */
+        WorkActionEnum: "created" | "updated" | "status_changed" | "cancelled" | "proposed" | "approved" | "rejected" | "submitted" | "validated" | "revision_requested" | "completed" | "uncompleted" | "reopened" | "assigned" | "unassigned" | "weight_changed" | "budget_changed" | "deadline_changed" | "progress_updated" | "released" | "manual_released" | "relief_claimed" | "relief_approved" | "relief_rejected" | "resolved" | "impact_validated";
+        WorkBlocker: {
+            readonly id: number;
+            deliverable?: number | null;
+            work_order?: number | null;
+            readonly target: components["schemas"]["BlockerTarget"] | null;
+            milestone?: number | null;
+            dependency_link?: number | null;
+            /** Earlier blocker */
+            previous?: number | null;
+            origin?: components["schemas"]["WorkBlockerOriginEnum"];
+            severity: components["schemas"]["SeverityEnum"];
+            impact?: components["schemas"]["BlockerImpactEnum"];
+            description: string;
+            required_action?: string;
+            readonly responsible_unit: components["schemas"]["OrgUnitSummary"];
+            readonly resolver: components["schemas"]["MemberSummary"];
+            status?: components["schemas"]["WorkBlockerStatusEnum"];
+            /** Resolution */
+            resolution_note?: string;
+            readonly reported_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly reported_at: string;
+            readonly resolved_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            resolved_at?: string | null;
+            /** Format: date-time */
+            readonly updated_at: string;
+            readonly validation: components["schemas"]["BlockerValidationOut"] | null;
+            readonly rights: components["schemas"]["BlockerRights"];
+        };
+        /**
+         * @description * `technical` - Technical
+         *     * `resource` - Resource
+         *     * `external` - External
+         *     * `dependency` - Dependency
+         *     * `decision` - Decision
+         *     * `other` - Other
+         * @enum {string}
+         */
+        WorkBlockerOriginEnum: "technical" | "resource" | "external" | "dependency" | "decision" | "other";
+        /**
+         * @description * `open` - Open
+         *     * `resolved` - Resolved
+         *     * `cancelled` - Cancelled
+         * @enum {string}
+         */
+        WorkBlockerStatusEnum: "open" | "resolved" | "cancelled";
+        WorkBlockerWriteRequest: {
+            deliverable?: number | null;
+            work_order?: number | null;
+            milestone?: number | null;
+            dependency_link?: number | null;
+            previous?: number | null;
+            /** @default other */
+            origin: components["schemas"]["WorkBlockerOriginEnum"];
+            severity: components["schemas"]["SeverityEnum"];
+            /** @default partial */
+            impact: components["schemas"]["BlockerImpactEnum"];
+            description: string;
+            /** @default  */
+            required_action: string;
+        };
+        /**
+         * @description * `season` - Season
+         *     * `project` - Project
+         *     * `work_order` - Work Order
+         *     * `deliverable` - Deliverable
+         *     * `milestone` - Milestone
+         *     * `submission` - Submission
+         *     * `review` - Review
+         *     * `dependency_link` - Dependency
+         *     * `blocker` - Blocker
+         *     * `assignment` - Assignment
+         *     * `relief_interval` - Deadline relief
+         * @enum {string}
+         */
+        WorkEntityTypeEnum: "season" | "project" | "work_order" | "deliverable" | "milestone" | "submission" | "review" | "dependency_link" | "blocker" | "assignment" | "relief_interval";
+        WorkNoteRequest: {
+            note?: string;
+        };
+        WorkOrder: {
+            readonly id: number;
+            code?: string | null;
+            title: string;
+            readonly season: number;
+            readonly department: components["schemas"]["OrgUnitSummary"];
+            readonly project: components["schemas"]["ProjectBrief"];
+            status?: components["schemas"]["WorkOrderStatusEnum"];
+            priority?: components["schemas"]["PriorityEnum"] | components["schemas"]["BlankEnum"];
+            readonly coordinator: components["schemas"]["MemberSummary"];
+            readonly proposed_by: components["schemas"]["MemberSummary"];
+            proposal_status?: (components["schemas"]["WorkProposalStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: float */
+            readonly progress: number;
+            readonly deliverable_count: number;
+            /** Format: date */
+            readonly next_deadline: string;
+            readonly execution_state: components["schemas"]["ExecutionStateEnum"];
+            /** Point budget */
+            budget_tier?: number | null;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        WorkOrderBrief: {
+            readonly id: number;
+            code?: string | null;
+            title: string;
+            status?: components["schemas"]["WorkOrderStatusEnum"];
+            readonly department: components["schemas"]["OrgUnitSummary"];
+            readonly project: components["schemas"]["ProjectBrief"];
+            season: number;
+        };
+        WorkOrderDetail: {
+            readonly id: number;
+            code?: string | null;
+            title: string;
+            readonly season: number;
+            readonly department: components["schemas"]["OrgUnitSummary"];
+            readonly project: components["schemas"]["ProjectBrief"];
+            status?: components["schemas"]["WorkOrderStatusEnum"];
+            priority?: components["schemas"]["PriorityEnum"] | components["schemas"]["BlankEnum"];
+            readonly coordinator: components["schemas"]["MemberSummary"];
+            readonly proposed_by: components["schemas"]["MemberSummary"];
+            proposal_status?: (components["schemas"]["WorkProposalStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: float */
+            readonly progress: number;
+            readonly deliverable_count: number;
+            /** Format: date */
+            readonly next_deadline: string;
+            readonly execution_state: components["schemas"]["ExecutionStateEnum"];
+            /** Point budget */
+            budget_tier?: number | null;
+            /** Format: date-time */
+            readonly created_at: string;
+            description?: string;
+            /** Expected result */
+            objectives?: string;
+            justification?: string;
+            /** Format: decimal */
+            estimated_effort_units?: string | null;
+            readonly members: components["schemas"]["MemberSummary"][];
+            readonly rights: components["schemas"]["WorkOrderRights"];
+            readonly credit_plan: components["schemas"]["CreditLine"][] | null;
+            readonly plan_problems: string[];
+            readonly rubric: components["schemas"]["RubricOut"] | null;
+            /** Format: date-time */
+            proposal_submitted_at?: string | null;
+            /** Format: date-time */
+            proposal_decided_at?: string | null;
+            readonly proposal_decided_by: components["schemas"]["MemberSummary"];
+            /** Decision note */
+            proposal_note?: string;
+            /** Proposal as submitted */
+            proposal_original?: unknown;
+            readonly created_by: components["schemas"]["MemberSummary"];
+            /** Format: date-time */
+            readonly updated_at: string;
+        };
+        WorkOrderRights: {
+            edit: boolean;
+            /** @description Approve or reject the proposal (Heads, not its author). */
+            decide: boolean;
+            submit_proposal: boolean;
+            /** @description Set the budget, the weights, create Deliverables. */
+            plan: boolean;
+            activate: boolean;
+            cancel: boolean;
+            propose_deliverable: boolean;
+        };
+        /**
+         * @description * `draft` - Draft
+         *     * `planning` - Planning
+         *     * `active` - Active
+         *     * `in_progress` - In progress
+         *     * `completed` - Completed
+         *     * `cancelled` - Cancelled
+         * @enum {string}
+         */
+        WorkOrderStatusEnum: "draft" | "planning" | "active" | "in_progress" | "completed" | "cancelled";
+        WorkOrderWriteRequest: {
+            season: number;
+            department: number;
+            project?: number | null;
+            title: string;
+            description?: string;
+            /** Expected result */
+            objectives?: string;
+            justification?: string;
+            /** Format: decimal */
+            estimated_effort_units?: string | null;
+            priority?: components["schemas"]["PriorityEnum"] | components["schemas"]["BlankEnum"];
+            coordinator?: number | null;
+            budget_tier?: number | null;
+            reason?: string;
+            /** @default true */
+            submit: boolean;
+        };
+        WorkProgressRequest: {
+            progress: number;
+            /** @default  */
+            note: string;
+        };
+        /**
+         * @description * `draft` - Draft
+         *     * `pending_review` - Pending review
+         *     * `approved` - Approved
+         *     * `rejected` - Rejected
+         * @enum {string}
+         */
+        WorkProposalStatusEnum: "draft" | "pending_review" | "approved" | "rejected";
+        WorkReasonRequest: {
+            reason?: string;
+        };
+        WorkSubmitRequest: {
+            /** @default  */
+            submission_note: string;
+            evidence?: components["schemas"]["EvidenceRequest"][];
+            /**
+             * @description The work meets the acceptance criteria (false: partial work, sent for feedback).
+             * @default true
+             */
+            declares_complete: boolean;
         };
     };
     responses: never;
@@ -11676,6 +14127,412 @@ export interface operations {
             };
         };
     };
+    scoring_audit_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Audit"][];
+                };
+            };
+        };
+    };
+    scoring_dashboard: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    scoring_dashboard_validation_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    scoring_formula_versions_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormulaVersion"][];
+                };
+            };
+        };
+    };
+    scoring_formula_versions_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FormulaVersionRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["FormulaVersionRequest"];
+                "multipart/form-data": components["schemas"]["FormulaVersionRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormulaVersion"];
+                };
+            };
+        };
+    };
+    scoring_formula_versions_set_current_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this formula version. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    [key: string]: unknown;
+                };
+                "application/x-www-form-urlencoded": {
+                    [key: string]: unknown;
+                };
+                "multipart/form-data": {
+                    [key: string]: unknown;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormulaVersion"];
+                };
+            };
+        };
+    };
+    scoring_quality_inputs_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    scoring_quality_inputs_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["QualityWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["QualityWriteRequest"];
+                "multipart/form-data": components["schemas"]["QualityWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    scoring_quality_inputs_history_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Audit"][];
+                };
+            };
+        };
+    };
+    scoring_runs_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Run"][];
+                };
+            };
+        };
+    };
+    scoring_runs_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    [key: string]: unknown;
+                };
+                "application/x-www-form-urlencoded": {
+                    [key: string]: unknown;
+                };
+                "multipart/form-data": {
+                    [key: string]: unknown;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Run"];
+                };
+            };
+        };
+    };
+    scoring_runs_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this calculation run. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Run"];
+                };
+            };
+        };
+    };
+    scoring_runs_publish_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this calculation run. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    [key: string]: unknown;
+                };
+                "application/x-www-form-urlencoded": {
+                    [key: string]: unknown;
+                };
+                "multipart/form-data": {
+                    [key: string]: unknown;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Run"];
+                };
+            };
+        };
+    };
+    scoring_runs_rankings_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this calculation run. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    scoring_scores_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ScoreSnapshot"][];
+                };
+            };
+        };
+    };
+    scoring_scores_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this score snapshot. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ScoreSnapshot"];
+                };
+            };
+        };
+    };
+    scoring_scores_member_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                member_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
     subsystems_list: {
         parameters: {
             query?: {
@@ -12518,6 +15375,1849 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["FollowedMember"][];
+                };
+            };
+        };
+    };
+    work_assignments_role_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this assignment. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RoleRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["RoleRequest"];
+                "multipart/form-data": components["schemas"]["RoleRequest"];
+            };
+        };
+        responses: {
+            /** @description No response body */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    work_assignments_unassign_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this assignment. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            /** @description No response body */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    work_blockers_list: {
+        parameters: {
+            query?: {
+                deliverable?: number;
+                department?: number;
+                mine?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                status?: string;
+                work_order?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedWorkBlockerList"];
+                };
+            };
+        };
+    };
+    work_blockers_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkBlockerWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkBlockerWriteRequest"];
+                "multipart/form-data": components["schemas"]["WorkBlockerWriteRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkBlocker"];
+                };
+            };
+        };
+    };
+    work_blockers_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this blocker. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkBlocker"];
+                };
+            };
+        };
+    };
+    work_blockers_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this blocker. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedWorkBlockerUpdateRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedWorkBlockerUpdateRequest"];
+                "multipart/form-data": components["schemas"]["PatchedWorkBlockerUpdateRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkBlocker"];
+                };
+            };
+        };
+    };
+    work_blockers_cancel_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this blocker. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkBlocker"];
+                };
+            };
+        };
+    };
+    work_blockers_resolve_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this blocker. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkNoteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkNoteRequest"];
+                "multipart/form-data": components["schemas"]["WorkNoteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkBlocker"];
+                };
+            };
+        };
+    };
+    work_blockers_validate_impact_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this blocker. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ImpactRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ImpactRequest"];
+                "multipart/form-data": components["schemas"]["ImpactRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkBlocker"];
+                };
+            };
+        };
+    };
+    work_dashboard_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_deliverables_list: {
+        parameters: {
+            query?: {
+                assignee?: string;
+                deadline_after?: string;
+                deadline_before?: string;
+                dep_state?: string;
+                department?: number;
+                execution_state?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                project?: number;
+                proposals?: string;
+                search?: string;
+                season?: number;
+                status?: string;
+                work_order?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedDeliverableList"];
+                };
+            };
+        };
+    };
+    work_deliverables_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DeliverableWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DeliverableWriteRequest"];
+                "multipart/form-data": components["schemas"]["DeliverableWriteRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedDeliverableWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedDeliverableWriteRequest"];
+                "multipart/form-data": components["schemas"]["PatchedDeliverableWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_activity_list: {
+        parameters: {
+            query?: {
+                /** @description A page number within the paginated result set. */
+                page?: number;
+            };
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedActivityList"];
+                };
+            };
+        };
+    };
+    work_deliverables_approve_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DeliverableWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DeliverableWriteRequest"];
+                "multipart/form-data": components["schemas"]["DeliverableWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_assign_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["AssignRequest"];
+                "multipart/form-data": components["schemas"]["AssignRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_cancel_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_mark_ready_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_milestones_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MilestoneWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["MilestoneWriteRequest"];
+                "multipart/form-data": components["schemas"]["MilestoneWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Milestone"];
+                };
+            };
+        };
+    };
+    work_deliverables_progress_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkProgressRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkProgressRequest"];
+                "multipart/form-data": components["schemas"]["WorkProgressRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_progress_log_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_deliverables_reject_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkNoteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkNoteRequest"];
+                "multipart/form-data": components["schemas"]["WorkNoteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_relief_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReliefIntervalRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ReliefIntervalRequest"];
+                "multipart/form-data": components["schemas"]["ReliefIntervalRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_reopen_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_start_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_submit_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkSubmitRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkSubmitRequest"];
+                "multipart/form-data": components["schemas"]["WorkSubmitRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_deliverables_submit_proposal_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deliverable. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeliverableDetail"];
+                };
+            };
+        };
+    };
+    work_dependencies_list: {
+        parameters: {
+            query?: {
+                all?: string;
+                deliverable?: number;
+                department?: number;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                state?: string;
+                work_order?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedDependencyLinkList"];
+                };
+            };
+        };
+    };
+    work_dependencies_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DependencyCreateRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DependencyCreateRequest"];
+                "multipart/form-data": components["schemas"]["DependencyCreateRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyLink"];
+                };
+            };
+        };
+    };
+    work_dependencies_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this dependency. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyLink"];
+                };
+            };
+        };
+    };
+    work_dependencies_cancel_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this dependency. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyLink"];
+                };
+            };
+        };
+    };
+    work_dependencies_manual_release_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this dependency. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyLink"];
+                };
+            };
+        };
+    };
+    work_dependency_proposals_list: {
+        parameters: {
+            query?: {
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                status?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedDependencyProposalList"];
+                };
+            };
+        };
+    };
+    work_dependency_proposals_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DependencyCreateRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DependencyCreateRequest"];
+                "multipart/form-data": components["schemas"]["DependencyCreateRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyProposal"];
+                };
+            };
+        };
+    };
+    work_dependency_proposals_approve_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this dependency proposal. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkNoteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkNoteRequest"];
+                "multipart/form-data": components["schemas"]["WorkNoteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyProposal"];
+                };
+            };
+        };
+    };
+    work_dependency_proposals_reject_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this dependency proposal. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkNoteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkNoteRequest"];
+                "multipart/form-data": components["schemas"]["WorkNoteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyProposal"];
+                };
+            };
+        };
+    };
+    work_me_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_milestones_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this milestone. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Milestone"];
+                };
+            };
+        };
+    };
+    work_milestones_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this milestone. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    work_milestones_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this milestone. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedMilestoneWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedMilestoneWriteRequest"];
+                "multipart/form-data": components["schemas"]["PatchedMilestoneWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Milestone"];
+                };
+            };
+        };
+    };
+    work_milestones_cancel_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this milestone. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Milestone"];
+                };
+            };
+        };
+    };
+    work_milestones_complete_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this milestone. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MilestoneCompleteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["MilestoneCompleteRequest"];
+                "multipart/form-data": components["schemas"]["MilestoneCompleteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Milestone"];
+                };
+            };
+        };
+    };
+    work_milestones_history_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this milestone. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MilestoneHistory"][];
+                };
+            };
+        };
+    };
+    work_projects_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_projects_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this project. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_projects_setup_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this project. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    [key: string]: unknown;
+                };
+                "application/x-www-form-urlencoded": {
+                    [key: string]: unknown;
+                };
+                "multipart/form-data": {
+                    [key: string]: unknown;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_proposals_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_relief_decide_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this deadline relief. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReliefDecisionRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ReliefDecisionRequest"];
+                "multipart/form-data": components["schemas"]["ReliefDecisionRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReliefInterval"];
+                };
+            };
+        };
+    };
+    work_reports_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_search_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_seasons_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Season"][];
+                };
+            };
+        };
+    };
+    work_seasons_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SeasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SeasonRequest"];
+                "multipart/form-data": components["schemas"]["SeasonRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Season"];
+                };
+            };
+        };
+    };
+    work_seasons_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this season. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Season"];
+                };
+            };
+        };
+    };
+    work_seasons_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this season. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SeasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SeasonRequest"];
+                "multipart/form-data": components["schemas"]["SeasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Season"];
+                };
+            };
+        };
+    };
+    work_seasons_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this season. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedSeasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedSeasonRequest"];
+                "multipart/form-data": components["schemas"]["PatchedSeasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Season"];
+                };
+            };
+        };
+    };
+    work_seasons_overview_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this season. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    work_submissions_review_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this submission. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReviewWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ReviewWriteRequest"];
+                "multipart/form-data": components["schemas"]["ReviewWriteRequest"];
+            };
+        };
+        responses: {
+            /** @description No response body */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    work_work_orders_list: {
+        parameters: {
+            query?: {
+                department?: number;
+                mine?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                project?: number;
+                proposals?: string;
+                search?: string;
+                season?: number;
+                status?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedWorkOrderList"];
+                };
+            };
+        };
+    };
+    work_work_orders_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkOrderWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkOrderWriteRequest"];
+                "multipart/form-data": components["schemas"]["WorkOrderWriteRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedWorkOrderUpdateRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedWorkOrderUpdateRequest"];
+                "multipart/form-data": components["schemas"]["PatchedWorkOrderUpdateRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_activate_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_activity_list: {
+        parameters: {
+            query?: {
+                /** @description A page number within the paginated result set. */
+                page?: number;
+            };
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedActivityList"];
+                };
+            };
+        };
+    };
+    work_work_orders_approve_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkNoteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkNoteRequest"];
+                "multipart/form-data": components["schemas"]["WorkNoteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_cancel_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkReasonRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkReasonRequest"];
+                "multipart/form-data": components["schemas"]["WorkReasonRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_dependencies_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DependencyLink"][];
+                };
+            };
+        };
+    };
+    work_work_orders_reject_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["WorkNoteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WorkNoteRequest"];
+                "multipart/form-data": components["schemas"]["WorkNoteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_rubric_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RubricRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["RubricRequest"];
+                "multipart/form-data": components["schemas"]["RubricRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_submit_proposal_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_to_planning_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
+                };
+            };
+        };
+    };
+    work_work_orders_weights_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this work order. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WeightsRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["WeightsRequest"];
+                "multipart/form-data": components["schemas"]["WeightsRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkOrderDetail"];
                 };
             };
         };

@@ -166,6 +166,8 @@ export const SECTION_LIVERIES: Record<string, LiveryKey> = {
   orgChart: "formation",
   projects: "projet",
   tasks: "si",
+  work: "projet",
+  scoring: "business",
   meetings: "formation",
   documents: "operations",
   workshop: "medias",

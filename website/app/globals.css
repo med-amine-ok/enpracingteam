@@ -38,6 +38,7 @@
 html {
   background: var(--carbon);
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 html.lenis,
 html.lenis body {
@@ -775,7 +776,7 @@ em {
   position: sticky;
   top: 0;
   height: 100vh;
-  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
 }
 .scene-canvas {
@@ -1052,13 +1053,13 @@ em {
     right: 20px;
     width: auto;
     top: auto;
-    bottom: 12vh;
+    bottom: max(96px, 12dvh);
     margin: 0;
     text-align: left;
   }
   .chapter-1 .chapter-kicker { justify-content: flex-start; }
   .chapter-1 .chapter-body { margin-left: 0; }
-  .chapter-0 { top: 14vh; bottom: auto; width: auto; }
+  .chapter-0 { top: max(92px, 14dvh); bottom: auto; width: auto; }
   .chapter-0 .line { white-space: normal; }
   .chapter-3 { left: 50%; right: auto; width: 92vw; text-align: center; }
   .chapter-title { font-size: clamp(2.8rem, 14vw, 4.6rem); }
@@ -1126,6 +1127,7 @@ em {
 .section {
   position: relative;
   padding: clamp(96px, 12vw, 160px) 0;
+  overflow-x: clip;
 }
 .sec-head {
   margin-bottom: clamp(56px, 7vw, 90px);
@@ -3034,6 +3036,7 @@ figcaption small {
   inset: 0;
   z-index: var(--z-drawer);
   pointer-events: none;
+  overflow: hidden;
 }
 .drawer.open {
   pointer-events: auto;
