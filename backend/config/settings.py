@@ -332,16 +332,36 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
-    }
-}
+def database_settings(env):
+    """The database, from DATABASE_URL when it is set (a hosted PostgreSQL such as Neon:
+    postgresql://user:password@host/name?sslmode=require), else from the DB_* variables (this PC, Docker).
+
+    - Neon's pooled address (its host contains "-pooler") goes through PgBouncer in transaction mode: Django's
+      server-side cursors do not survive it, so they are turned off (Django docs, "Transaction pooling").
+    - A hosted database closes idle connections (Neon suspends itself): with DB_CONN_MAX_AGE above 0, each
+      connection kept is checked before use.
+    - DB_SSLMODE (e.g. require) adds SSL to the DB_* form; DATABASE_URL carries its own ?sslmode=…"""
+    if env("DATABASE_URL", default=""):
+        database = env.db("DATABASE_URL")
+    else:
+        database = {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": env("DB_NAME"),
+            "USER": env("DB_USER"),
+            "PASSWORD": env("DB_PASSWORD"),
+            "HOST": env("DB_HOST"),
+            "PORT": env("DB_PORT"),
+        }
+        if env("DB_SSLMODE", default=""):
+            database["OPTIONS"] = {"sslmode": env("DB_SSLMODE")}
+    database["CONN_MAX_AGE"] = env.int("DB_CONN_MAX_AGE", default=0)
+    database["CONN_HEALTH_CHECKS"] = database["CONN_MAX_AGE"] > 0
+    if "-pooler" in (database.get("HOST") or "") or env.bool("DB_POOLED", default=False):
+        database["DISABLE_SERVER_SIDE_CURSORS"] = True
+    return database
+
+
+DATABASES = {"default": database_settings(env)}
 
 
 # Password validation
