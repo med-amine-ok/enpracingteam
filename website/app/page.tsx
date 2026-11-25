@@ -608,8 +608,9 @@ export default function Home() {
               <div className="deck-copy">
                 <h3>Sponsorship deck 2026|27</h3>
                 <p>
-                  The team, the car, Silverstone, this season&apos;s projects
-                  and partnership levels · 7 pages
+                  Dossier sponsoring: the team, our departments, the car,
+                  Silverstone and this season&apos;s projects · 11 pages · in
+                  French
                 </p>
               </div>
               <div className="deck-ctas">
