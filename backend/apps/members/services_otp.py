@@ -53,16 +53,32 @@ def request_otp(email: str, ip: str | None) -> None:
 
     try:
         _send_otp_email(member, code)
-    except Exception:
+    except Exception as error:
         # Email delivery failed: kill the OTP immediately so it can't be
         # guessed/used later, but DO NOT tell the caller — same generic
         # response either way, to avoid leaking delivery status. Log for
-        # admin visibility only (no code, no address beyond the id).
+        # admin visibility only (no code, no address beyond the id), with the
+        # mail server's answer so that the cause can be fixed.
         LoginOTP.objects.filter(pk=otp.pk).update(used_at=timezone.now())
-        logger.error("OTP email delivery failed for member_id=%s", member.id)
+        logger.error(
+            "OTP email delivery failed for member_id=%s: %s: %s",
+            member.id, type(error).__name__, delivery_detail(error),
+        )
         return
 
     logger.info("OTP issued for member_id=%s", member.id)
+
+
+def delivery_detail(error: Exception) -> str:
+    """Why an e-mail was refused, short: the HTTP body of an API (Brevo says which key or sender is wrong) or the
+    error's own text. Never contains the code, which is only in the message body."""
+    read = getattr(error, "read", None)
+    if callable(read):
+        try:
+            return read().decode(errors="replace")[:300]
+        except Exception:  # noqa: BLE001 - a log line must never fail
+            pass
+    return str(error)[:300]
 
 
 def _address_key(email: str) -> str:
