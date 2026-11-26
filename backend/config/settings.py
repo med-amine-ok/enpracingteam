@@ -264,6 +264,10 @@ EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+# Seconds before giving up on the mail server: a host that blocks SMTP (Render's free plan) must not hang the request.
+EMAIL_TIMEOUT = env.int("EMAIL_TIMEOUT", default=20)
+# Brevo's API key, for EMAIL_BACKEND=apps.communication.mail.BrevoBackend (e-mails over HTTPS, no SMTP).
+BREVO_API_KEY = env("BREVO_API_KEY", default="")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@enpracing.team")
